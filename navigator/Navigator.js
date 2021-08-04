@@ -5,7 +5,7 @@ import Search from "../components/Search";
 import Profile from "../components/Profile";
 import News from "../components/News";
 import Cart from "../components/Cart";
-import {View, Image} from "react-native";
+import {View, Image, Platform} from "react-native";
 
 export default function Navigator() {
   const Tab = createBottomTabNavigator();
@@ -20,7 +20,7 @@ export default function Navigator() {
         },
         tabBarLabelStyle: {
           color: '#fff',
-          marginBottom:-10,
+          marginBottom: Platform.OS === 'ios' ? -10 : 10,
           fontSize: 12
         },
       }}
@@ -32,7 +32,7 @@ export default function Navigator() {
           tabBarIcon: ({focused}) => (
             <View
               style={{
-                paddingTop: 10
+                paddingTop: 10,
               }}>
               <Image
                 source={require('../assets/icons/News.png')}
