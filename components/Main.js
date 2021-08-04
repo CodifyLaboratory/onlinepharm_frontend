@@ -1,10 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native'
 
 export default function Main({navigation}) {
     const goToProfile = ()=> {
         navigation.navigate('Profile')
     }
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>главная</Text>
@@ -21,5 +22,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         padding: 40
+    },
+    btn: {
+        backgroundColor: 'red',
+        padding: 10
     }
 })
