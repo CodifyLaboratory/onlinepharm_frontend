@@ -50,6 +50,7 @@ export default function Main({navigation}) {
           }}
           buttonStyle={{
             width: 130,
+            backgroundColor: 'transparent'
           }}
           rowStyle={{
             borderBottomWidth: 0,
@@ -61,6 +62,7 @@ export default function Main({navigation}) {
           }}
           dropdownStyle={{
             borderRadius: 10,
+            marginTop: -10,
           }}
           onSelect={(selectedItem, index) => {
             console.log(selectedItem, index)
