@@ -6,6 +6,17 @@ import Profile from "../components/Profile";
 import News from "../components/News";
 import Cart from "../components/Cart";
 import {View, Image, Platform} from "react-native";
+import MainSvg from '../assets/icons/main.svg'
+import SearchSvg from '../assets/icons/search.svg'
+import ProfileSvg from '../assets/icons/Profile.svg'
+import NewsSvg from '../assets/icons/news.svg'
+import CartSvg from '../assets/icons/cart.svg'
+import MainGraySvg from '../assets/icons/maingray.svg'
+import CartWhiteSvg from '../assets/icons/cartWhite.svg'
+import SearchWhiteSvg from '../assets/icons/searchWhite.svg'
+import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
+import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
+
 
 export default function Navigator() {
   const Tab = createBottomTabNavigator();
@@ -15,7 +26,7 @@ export default function Navigator() {
       initialRouteName='Main'
       screenOptions={{
         tabBarStyle: {
-          backgroundColor:'#1F8BA7',
+          backgroundColor: '#1F8BA7',
           height: 78,
         },
         tabBarLabelStyle: {
@@ -34,15 +45,7 @@ export default function Navigator() {
               style={{
                 paddingTop: 10,
               }}>
-              <Image
-                source={require('../assets/icons/News.png')}
-                resizeMode='contain'
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#FFFFFF' : '#CCCCCC'
-                }}
-              />
+              {focused ? (<NewsWhiteSvg/>) : (<NewsSvg/>)}
             </View>
           )
         }}
@@ -56,15 +59,7 @@ export default function Navigator() {
               style={{
                 paddingTop: 10
               }}>
-              <Image
-                source={require('../assets/icons/Cart.png')}
-                resizeMode='contain'
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#FFFFFF' : '#CCCCCC'
-                }}
-              />
+              {focused ? (<CartWhiteSvg/>) : (<CartSvg/>)}
             </View>
           )
         }}
@@ -78,15 +73,7 @@ export default function Navigator() {
               style={{
                 paddingTop: 10
               }}>
-              <Image
-                source={require('../assets/icons/Home.png')}
-                resizeMode='contain'
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#FFFFFF' : '#CCCCCC'
-                }}
-              />
+              {focused ? (<MainSvg/>) : (<MainGraySvg/>)}
             </View>
           )
         }}/>
@@ -99,15 +86,7 @@ export default function Navigator() {
               style={{
                 paddingTop: 10
               }}>
-              <Image
-                source={require('../assets/icons/Union.png')}
-                resizeMode='contain'
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#FFFFFF' : '#CCCCCC'
-                }}
-              />
+              {focused ? (<SearchWhiteSvg/>) : (<SearchSvg/>)}
             </View>
           )
         }}
@@ -122,15 +101,7 @@ export default function Navigator() {
               style={{
                 paddingTop: 10
               }}>
-              <Image
-                source={require('../assets/icons/Profile.png')}
-                resizeMode='contain'
-                style={{
-                  width: 25,
-                  height: 25,
-                  tintColor: focused ? '#FFFFFF' : '#CCCCCC'
-                }}
-              />
+              {focused ? (<ProfileWhiteSvg/>) : (<ProfileSvg/>)}
             </View>
           )
         }}
