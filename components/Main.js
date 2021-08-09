@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, Image} from "react-native";
+import {StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image} from "react-native";
 import Carousel from 'react-native-snap-carousel';
 import Banner from '../assets/main/baner.svg'
 import Logo from '../assets/header/logo.svg'
@@ -15,6 +15,12 @@ export default function Main({navigation}) {
     },
     {
       text: 2,
+    },
+    {
+      text: 3,
+    },
+    {
+      text: 3,
     }
   ])
 
@@ -27,6 +33,14 @@ export default function Main({navigation}) {
         <View>
           <Banner/>
         </View>
+      </View>
+    )
+  }
+
+  function farmItem() {
+    return (
+      <View style={styles.farmSliderElem}>
+        <Image source={require('./../assets/main/farmLogo.png')} />
       </View>
     )
   }
@@ -102,6 +116,32 @@ export default function Main({navigation}) {
         // autoplayDelay={1000}
         // autoplayInterval={1000}
       />
+
+      <View>
+        <View style={styles.farmSlider}>
+          <Text>Аптеки</Text>
+          <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
+            <Text>Смотреть все</Text>
+          </TouchableWithoutFeedback>
+        </View>
+
+
+        <Carousel
+          layout={'default'}
+          inactiveSlideScale={1}
+          windowSize={1}
+          data={slideElem}
+          renderItem={farmItem}
+          sliderWidth={375}
+          itemWidth={118}
+          slideStyle={{
+            // marginRight: 20,
+          }}
+          // autoplay={true}
+          // autoplayDelay={1000}
+          // autoplayInterval={1000}
+        />
+      </View>
     </View>
   );
 }
@@ -111,7 +151,6 @@ const styles = StyleSheet.create({
     color: "red",
   },
   container: {
-    flex: 1,
     paddingRight: 16,
     paddingLeft: 16,
   },
@@ -150,5 +189,16 @@ const styles = StyleSheet.create({
   },
   search: {
     marginLeft: 20,
+  },
+  farmSlider: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16
+  },
+  farmSliderElem: {
+    alignItems: 'flex-start',
+    margin: 0,
+    width: 118,
+    height: 90,
   }
 });
