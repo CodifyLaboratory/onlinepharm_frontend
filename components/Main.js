@@ -362,6 +362,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     padding: 10,
+    marginBottom: 16,
   },
   hitsDiscount: {
     backgroundColor: '#21B727',
