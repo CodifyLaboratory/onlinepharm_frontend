@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import Banner from '../assets/main/baner.svg'
 import Logo from '../assets/header/logo.svg'
@@ -85,7 +85,7 @@ export default function Main({navigation}) {
           }}
           dropdownStyle={{
             borderRadius: 10,
-            marginTop: -10,
+            marginTop: Platform.OS == 'ios' ? -10 :  -50,
           }}
           onSelect={(selectedItem, index) => {
             console.log(selectedItem, index)
@@ -227,7 +227,8 @@ const styles = StyleSheet.create({
   farmSlider: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 16
+    marginTop: 16,
+    marginBottom: 19
   },
   farmSliderElem: {
     margin: 0,
