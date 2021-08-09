@@ -40,11 +40,20 @@ export default function Main({navigation}) {
   function farmItem() {
     return (
       <View style={styles.farmSliderElem}>
-        <Image source={require('./../assets/main/farmLogo.png')} />
+        <Image style={{width: 118, height: 90}} source={require('./../assets/main/farmLogo.png')} />
+        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13}}>Новая аптека</Text>
       </View>
     )
   }
 
+  function symptomsItem() {
+    return (
+      <View style={styles.symptomsSliderElem}>
+        <Image style={{width: 36, height: 36}} source={require('./../assets/main/symptomsLogo.png')} />
+        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11,}}>Головная боль</Text>
+      </View>
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -126,17 +135,42 @@ export default function Main({navigation}) {
         </View>
 
 
+          <Carousel
+            layout={'default'}
+            inactiveSlideScale={1}
+            windowSize={1}
+            data={slideElem}
+            renderItem={farmItem}
+            sliderWidth={420}
+            itemWidth={118}
+            slideStyle={{
+              marginRight: 30,
+            }}
+            activeSlideAlignment={'start'}
+            // autoplay={true}
+            // autoplayDelay={1000}
+            // autoplayInterval={1000}
+          />
+
+        <View style={styles.farmSlider}>
+          <Text>Симптомы</Text>
+          <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
+            <Text>Смотреть все</Text>
+          </TouchableWithoutFeedback>
+        </View>
+
         <Carousel
           layout={'default'}
           inactiveSlideScale={1}
           windowSize={1}
           data={slideElem}
-          renderItem={farmItem}
-          sliderWidth={375}
-          itemWidth={118}
+          renderItem={symptomsItem}
+          sliderWidth={420}
+          itemWidth={90}
           slideStyle={{
-            // marginRight: 20,
+            marginRight: 25,
           }}
+          activeSlideAlignment={'start'}
           // autoplay={true}
           // autoplayDelay={1000}
           // autoplayInterval={1000}
@@ -196,9 +230,22 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   farmSliderElem: {
-    alignItems: 'flex-start',
     margin: 0,
-    width: 118,
-    height: 90,
+    width: 132,
+    height: 132,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  symptomsSliderElem: {
+    width: 100,
+    height: 100,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 7,
+    paddingRight: 7,
+    alignItems: "center"
   }
 });
