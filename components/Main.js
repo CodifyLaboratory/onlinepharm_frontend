@@ -1,6 +1,7 @@
 import React, {useState} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform, ImageBackground, ScrollView } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
+
 import Banner from '../assets/main/baner.svg'
 import Logo from '../assets/header/logo.svg'
 import Arrow from '../assets/header/arrow.svg'
@@ -55,7 +56,27 @@ export default function Main({navigation}) {
     )
   }
 
+  function hitsItem() {
+    return (
+      <View style={styles.hitsItem}>
+        <View style={styles.hitsDiscount}>
+          <Text style={styles.hitsDiscountText}>50% скидка</Text>
+        </View>
+        <Image style={styles.hitsImage} source={require('../assets/main/hitsLogo.png')} />
+        <Text style={styles.hitsName}>Азитромицин Вертекс</Text>
+        <View style={styles.hitsPrices}>
+          <Text style={styles.hitsOldPrice}>50с</Text>
+          <Text style={styles.hitsPrice}>25с</Text>
+        </View>
+        <TouchableOpacity style={styles.hitsBtn}>
+          <Text style={styles.hitsBtnText}>Добавить в корзину</Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
   return (
+    <ScrollView>
     <View style={styles.container}>
       <View style={styles.header}>
         <Logo/>
@@ -127,13 +148,12 @@ export default function Main({navigation}) {
       />
 
       <View>
-        <View style={styles.farmSlider}>
+        <View style={styles.title}>
           <Text>Аптеки</Text>
           <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
             <Text>Смотреть все</Text>
           </TouchableWithoutFeedback>
         </View>
-
 
           <Carousel
             layout={'default'}
@@ -152,7 +172,7 @@ export default function Main({navigation}) {
             // autoplayInterval={1000}
           />
 
-        <View style={styles.farmSlider}>
+        <View style={styles.title}>
           <Text>Симптомы</Text>
           <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
             <Text>Смотреть все</Text>
@@ -176,7 +196,67 @@ export default function Main({navigation}) {
           // autoplayInterval={1000}
         />
       </View>
+
+      <View style={styles.title}>
+        <Text>Категории</Text>
+        <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
+          <Text>Смотреть все</Text>
+        </TouchableWithoutFeedback>
+      </View>
+
+      <View style={styles.categories}>
+        <View style={styles.categoriesItem}>
+          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
+            <Image source={require('../assets/main/categoriesLogo.png')} />
+          </ImageBackground>
+          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+        </View>
+        <View style={styles.categoriesItem}>
+          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
+            <Image source={require('../assets/main/categoriesLogo.png')} />
+          </ImageBackground>
+          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+        </View>
+        <View style={styles.categoriesItem}>
+          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
+            <Image source={require('../assets/main/categoriesLogo.png')} />
+          </ImageBackground>
+          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+        </View>
+        <View style={styles.categoriesItem}>
+          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
+            <Image source={require('../assets/main/categoriesLogo.png')} />
+          </ImageBackground>
+          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+        </View>
+      </View>
+
+      <View style={styles.title}>
+        <Text>Горящие товары</Text>
+        <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
+          <Text>Смотреть все</Text>
+        </TouchableWithoutFeedback>
+      </View>
+
+      <Carousel
+        layout={'default'}
+        inactiveSlideScale={1}
+        windowSize={1}
+        data={slideElem}
+        renderItem={hitsItem}
+        sliderWidth={420}
+        itemWidth={120}
+        slideStyle={{
+          marginRight: 20,
+        }}
+        activeSlideAlignment={'start'}
+        // autoplay={true}
+        // autoplayDelay={1000}
+        // autoplayInterval={1000}
+      />
+
     </View>
+    </ScrollView>
   );
 }
 
@@ -224,7 +304,7 @@ const styles = StyleSheet.create({
   search: {
     marginLeft: 20,
   },
-  farmSlider: {
+  title: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 16,
@@ -248,5 +328,90 @@ const styles = StyleSheet.create({
     paddingLeft: 7,
     paddingRight: 7,
     alignItems: "center"
+  },
+  categories: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between'
+  },
+  categoriesItem: {
+    width: "48%",
+    height: 131,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    paddingTop: 12,
+    paddingBottom: 8,
+    paddingLeft: 22,
+    paddingRight: 22,
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  categoriesImage: {
+    width: 75,
+    height: 75,
+    borderRadius: 50,
+  },
+  categoriesItemText: {
+    textAlign: 'center',
+    marginTop: 4,
+    color: '#1F8BA7',
+    fontSize: 13,
+    lineHeight: 15,
+  },
+  hitsItem: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+  },
+  hitsDiscount: {
+    backgroundColor: '#21B727',
+    opacity: 0.7,
+    borderRadius: 5,
+    paddingLeft: 7,
+    paddingRight: 7,
+    paddingTop: 1,
+    paddingBottom: 1,
+    width: 69,
+  },
+  hitsDiscountText: {
+    color: '#fff',
+    fontSize: 9,
+  },
+  hitsImage: {
+    width: 120,
+    height: 70,
+    marginLeft: -10,
+    marginBottom: 4,
+  },
+  hitsName: {
+    fontSize: 11,
+  },
+  hitsPrices: {
+    flexDirection: 'row',
+    marginTop: 4,
+    marginBottom: 8,
+  },
+  hitsOldPrice: {
+    fontSize: 11,
+    color: '#999999',
+    textDecorationLine: 'line-through'
+  },
+  hitsPrice: {
+    fontSize: 11,
+    color: '#1F8BA7',
+    marginLeft: 16,
+  },
+  hitsBtn: {
+    backgroundColor: '#4BCCED',
+    borderRadius: 10,
+  },
+  hitsBtnText: {
+    fontSize: 9,
+    // padding: 8,
+    color: '#fff',
+    textAlign: 'center',
+    paddingTop: 8,
+    paddingBottom: 8,
+
   }
 });
