@@ -1,10 +1,10 @@
 import React from "react";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Main from "../components/Main";
-import Search from "../components/Search";
-import Profile from "../components/Profile";
-import News from "../components/News";
-import Cart from "../components/Cart";
+import Main from "../screens/Main";
+import Search from "../screens/Search";
+import Profile from "../screens/Profile";
+import News from "../screens/News";
+import Cart from "../screens/Cart";
 import {View, Image, Platform} from "react-native";
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'

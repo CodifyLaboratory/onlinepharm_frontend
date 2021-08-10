@@ -41,7 +41,7 @@ export default function Main({navigation}) {
   function farmItem() {
     return (
       <View style={styles.farmSliderElem}>
-        <Image style={{width: 118, height: 90}} source={require('./../assets/main/farmLogo.png')} />
+        <Image style={{width: 118, height: 90}} source={require('../assets/main/farmLogo.png')} />
         <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13}}>Новая аптека</Text>
       </View>
     )
@@ -50,7 +50,7 @@ export default function Main({navigation}) {
   function symptomsItem() {
     return (
       <View style={styles.symptomsSliderElem}>
-        <Image style={{width: 36, height: 36}} source={require('./../assets/main/symptomsLogo.png')} />
+        <Image style={{width: 36, height: 36}} source={require('../assets/main/symptomsLogo.png')} />
         <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11,}}>Головная боль</Text>
       </View>
     )

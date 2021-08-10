@@ -1,6 +1,6 @@
 import React from 'react'
-import Main from './components/Main'
-import Profile from './components/Profile'
+import Main from './screens/Main'
+import Profile from './screens/Profile'
 import { StyleSheet, Text, View } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { NavigationContainer } from '@react-navigation/native'
