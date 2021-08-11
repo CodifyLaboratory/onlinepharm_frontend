@@ -61,7 +61,9 @@ export default function Navigator() {
                             <SearchFarmSvg />
                           </TouchableOpacity>
                         ),
-                        title: 'Аптеки'
+                        title: 'Аптеки',
+                        headerBackTitle: 'Назад',
+                        headerStyle: { backgroundColor: '#E6EFF9'},
                       }} />
       </Stack.Navigator>
     )
