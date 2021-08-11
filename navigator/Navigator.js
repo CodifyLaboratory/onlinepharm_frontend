@@ -1,11 +1,13 @@
 import React from "react";
+import {View, Image, Platform} from "react-native";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+
 import Main from "../screens/Main";
 import Search from "../screens/Search";
-import Profile from "../screens/Profile";
 import News from "../screens/News";
 import Cart from "../screens/Cart";
-import {View, Image, Platform} from "react-native";
+import Profile from "../screens/Profile";
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
 import ProfileSvg from '../assets/icons/Profile.svg'
@@ -16,11 +18,22 @@ import CartWhiteSvg from '../assets/icons/cartWhite.svg'
 import SearchWhiteSvg from '../assets/icons/searchWhite.svg'
 import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
+import {createStackNavigator} from "@react-navigation/stack";
+import MyProfile from "../screens/MyProfile";
 
 
 export default function Navigator() {
   const Tab = createBottomTabNavigator();
+  const ProfileStack = createStackNavigator();
 
+  const ProfileNav = () => {
+    return (
+      <ProfileStack.Navigator>
+        <ProfileStack.Screen name='Profile' component={Profile} options={{headerShown: false}} />
+        <ProfileStack.Screen name='MyProfile' component={MyProfile} options={{title: 'ПРОФИЛЬ'}} />
+      </ProfileStack.Navigator>
+    )
+  }
   return (
     <Tab.Navigator
       initialRouteName='Main'
@@ -47,7 +60,8 @@ export default function Navigator() {
               }}>
               {focused ? (<NewsWhiteSvg/>) : (<NewsSvg/>)}
             </View>
-          )
+          ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -61,7 +75,8 @@ export default function Navigator() {
               }}>
               {focused ? (<CartWhiteSvg/>) : (<CartSvg/>)}
             </View>
-          )
+          ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -75,7 +90,8 @@ export default function Navigator() {
               }}>
               {focused ? (<MainSvg/>) : (<MainGraySvg/>)}
             </View>
-          )
+          ),
+          headerShown: false,
         }}/>
       <Tab.Screen
         name='Search'
@@ -88,13 +104,14 @@ export default function Navigator() {
               }}>
               {focused ? (<SearchWhiteSvg/>) : (<SearchSvg/>)}
             </View>
-          )
+          ),
+          headerShown: false,
         }}
       />
 
       <Tab.Screen
         name='Profile'
-        component={Profile}
+        component={ProfileNav}
         options={{
           tabBarIcon: ({focused}) => (
             <View
@@ -103,7 +120,8 @@ export default function Navigator() {
               }}>
               {focused ? (<ProfileWhiteSvg/>) : (<ProfileSvg/>)}
             </View>
-          )
+          ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

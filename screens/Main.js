@@ -1,5 +1,8 @@
 import React, {useState} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform, ImageBackground, ScrollView } from 'react-native';
+import {
+  StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform, ImageBackground, ScrollView,
+  SafeAreaView
+} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
 import Banner from '../assets/main/baner.svg'
@@ -41,7 +44,7 @@ export default function Main({navigation}) {
   function farmItem() {
     return (
       <View style={styles.farmSliderElem}>
-        <Image style={{width: 118, height: 90}} source={require('../assets/main/farmLogo.png')} />
+        <Image style={{width: 118, height: 90}} source={require('../assets/main/farmLogo.png')}/>
         <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13}}>Новая аптека</Text>
       </View>
     )
@@ -50,7 +53,7 @@ export default function Main({navigation}) {
   function symptomsItem() {
     return (
       <View style={styles.symptomsSliderElem}>
-        <Image style={{width: 36, height: 36}} source={require('../assets/main/symptomsLogo.png')} />
+        <Image style={{width: 36, height: 36}} source={require('../assets/main/symptomsLogo.png')}/>
         <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11,}}>Головная боль</Text>
       </View>
     )
@@ -62,7 +65,7 @@ export default function Main({navigation}) {
         <View style={styles.hitsDiscount}>
           <Text style={styles.hitsDiscountText}>50% скидка</Text>
         </View>
-        <Image style={styles.hitsImage} source={require('../assets/main/hitsLogo.png')} />
+        <Image style={styles.hitsImage} source={require('../assets/main/hitsLogo.png')}/>
         <Text style={styles.hitsName}>Азитромицин Вертекс</Text>
         <View style={styles.hitsPrices}>
           <Text style={styles.hitsOldPrice}>50с</Text>
@@ -77,185 +80,190 @@ export default function Main({navigation}) {
 
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <View style={styles.header}>
-        <Logo/>
-        <SelectDropdown
-          data={countries}
-          defaultValueByIndex={0}
-          buttonTextStyle={{
-            color: '#1F8BA7',
-            fontSize: 17,
-          }}
-          renderDropdownIcon={() => {
-            return (
-              <Arrow/>
-            )
-          }}
-          buttonStyle={{
-            width: 130,
-            backgroundColor: 'transparent'
-          }}
-          rowStyle={{
-            borderBottomWidth: 0,
-            textAlign: 'center'
-          }}
-          rowTextStyle={{
-            color: '#1F8BA7',
-            fontSize: 17,
-          }}
-          dropdownStyle={{
-            borderRadius: 10,
-            marginTop: Platform.OS == 'ios' ? -10 :  -50,
-          }}
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index)
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem
-          }}
-          rowTextForSelection={(item, index) => {
-            return item
-          }}
-        />
-        <View style={styles.headerRight}>
-          <TouchableOpacity style={styles.cart}>
-            <View style={styles.cartNumber}>
-              <Text style={styles.cartNumberText}>1</Text>
+      <SafeAreaView>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Logo/>
+            <SelectDropdown
+              data={countries}
+              defaultValueByIndex={0}
+              buttonTextStyle={{
+                color: '#1F8BA7',
+                fontSize: 17,
+              }}
+              renderDropdownIcon={() => {
+                return (
+                  <Arrow/>
+                )
+              }}
+              buttonStyle={{
+                width: 130,
+                backgroundColor: 'transparent'
+              }}
+              rowStyle={{
+                borderBottomWidth: 0,
+                textAlign: 'center'
+              }}
+              rowTextStyle={{
+                color: '#1F8BA7',
+                fontSize: 17,
+              }}
+              dropdownStyle={{
+                borderRadius: 10,
+                marginTop: Platform.OS == 'ios' ? -10 : -50,
+              }}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index)
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                return selectedItem
+              }}
+              rowTextForSelection={(item, index) => {
+                return item
+              }}
+            />
+            <View style={styles.headerRight}>
+              <TouchableOpacity style={styles.cart}>
+                <View style={styles.cartNumber}>
+                  <Text style={styles.cartNumberText}>1</Text>
+                </View>
+                <CartHeader/>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.search}>
+                <SearchHeader/>
+              </TouchableOpacity>
             </View>
-            <CartHeader/>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.search}>
-            <SearchHeader/>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <Carousel
-        layout={'default'}
-        inactiveSlideScale={1}
-        windowSize={1}
-        data={slideElem}
-        renderItem={_renderItem}
-        sliderWidth={430}
-        itemWidth={343}
-        slideStyle={{
-          marginRight: 20,
-        }}
-        // autoplay={true}
-        // autoplayDelay={1000}
-        // autoplayInterval={1000}
-      />
-
-      <View>
-        <View style={styles.title}>
-          <Text>Аптеки</Text>
-          <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
-            <Text>Смотреть все</Text>
-          </TouchableWithoutFeedback>
-        </View>
+          </View>
 
           <Carousel
             layout={'default'}
             inactiveSlideScale={1}
             windowSize={1}
             data={slideElem}
-            renderItem={farmItem}
-            sliderWidth={420}
-            itemWidth={118}
+            renderItem={_renderItem}
+            sliderWidth={430}
+            itemWidth={343}
             slideStyle={{
-              marginRight: 30,
+              marginRight: 20,
+            }}
+            // autoplay={true}
+            // autoplayDelay={1000}
+            // autoplayInterval={1000}
+          />
+
+          <View>
+            <View style={styles.title}>
+              <Text>Аптеки</Text>
+              <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+                <Text>Смотреть все</Text>
+              </TouchableWithoutFeedback>
+            </View>
+
+            <Carousel
+              layout={'default'}
+              inactiveSlideScale={1}
+              windowSize={1}
+              data={slideElem}
+              renderItem={farmItem}
+              sliderWidth={420}
+              itemWidth={118}
+              slideStyle={{
+                marginRight: 30,
+              }}
+              activeSlideAlignment={'start'}
+              // autoplay={true}
+              // autoplayDelay={1000}
+              // autoplayInterval={1000}
+            />
+
+            <View style={styles.title}>
+              <Text>Симптомы</Text>
+              <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+                <Text>Смотреть все</Text>
+              </TouchableWithoutFeedback>
+            </View>
+
+            <Carousel
+              layout={'default'}
+              inactiveSlideScale={1}
+              windowSize={1}
+              data={slideElem}
+              renderItem={symptomsItem}
+              sliderWidth={420}
+              itemWidth={90}
+              slideStyle={{
+                marginRight: 25,
+              }}
+              activeSlideAlignment={'start'}
+              // autoplay={true}
+              // autoplayDelay={1000}
+              // autoplayInterval={1000}
+            />
+          </View>
+
+          <View style={styles.title}>
+            <Text>Категории</Text>
+            <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+              <Text>Смотреть все</Text>
+            </TouchableWithoutFeedback>
+          </View>
+
+          <View style={styles.categories}>
+            <View style={styles.categoriesItem}>
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+                               source={require('../assets/main/categoriisCircle.png')}>
+                <Image source={require('../assets/main/categoriesLogo.png')}/>
+              </ImageBackground>
+              <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+            </View>
+            <View style={styles.categoriesItem}>
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+                               source={require('../assets/main/categoriisCircle.png')}>
+                <Image source={require('../assets/main/categoriesLogo.png')}/>
+              </ImageBackground>
+              <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+            </View>
+            <View style={styles.categoriesItem}>
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+                               source={require('../assets/main/categoriisCircle.png')}>
+                <Image source={require('../assets/main/categoriesLogo.png')}/>
+              </ImageBackground>
+              <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+            </View>
+            <View style={styles.categoriesItem}>
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+                               source={require('../assets/main/categoriisCircle.png')}>
+                <Image source={require('../assets/main/categoriesLogo.png')}/>
+              </ImageBackground>
+              <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
+            </View>
+          </View>
+
+          <View style={styles.title}>
+            <Text>Горящие товары</Text>
+            <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+              <Text>Смотреть все</Text>
+            </TouchableWithoutFeedback>
+          </View>
+
+          <Carousel
+            layout={'default'}
+            inactiveSlideScale={1}
+            windowSize={1}
+            data={slideElem}
+            renderItem={hitsItem}
+            sliderWidth={420}
+            itemWidth={120}
+            slideStyle={{
+              marginRight: 20,
             }}
             activeSlideAlignment={'start'}
             // autoplay={true}
             // autoplayDelay={1000}
             // autoplayInterval={1000}
           />
-
-        <View style={styles.title}>
-          <Text>Симптомы</Text>
-          <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
-            <Text>Смотреть все</Text>
-          </TouchableWithoutFeedback>
         </View>
-
-        <Carousel
-          layout={'default'}
-          inactiveSlideScale={1}
-          windowSize={1}
-          data={slideElem}
-          renderItem={symptomsItem}
-          sliderWidth={420}
-          itemWidth={90}
-          slideStyle={{
-            marginRight: 25,
-          }}
-          activeSlideAlignment={'start'}
-          // autoplay={true}
-          // autoplayDelay={1000}
-          // autoplayInterval={1000}
-        />
-      </View>
-
-      <View style={styles.title}>
-        <Text>Категории</Text>
-        <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
-          <Text>Смотреть все</Text>
-        </TouchableWithoutFeedback>
-      </View>
-
-      <View style={styles.categories}>
-        <View style={styles.categoriesItem}>
-          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
-            <Image source={require('../assets/main/categoriesLogo.png')} />
-          </ImageBackground>
-          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
-        </View>
-        <View style={styles.categoriesItem}>
-          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
-            <Image source={require('../assets/main/categoriesLogo.png')} />
-          </ImageBackground>
-          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
-        </View>
-        <View style={styles.categoriesItem}>
-          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
-            <Image source={require('../assets/main/categoriesLogo.png')} />
-          </ImageBackground>
-          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
-        </View>
-        <View style={styles.categoriesItem}>
-          <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}} source={require('../assets/main/categoriisCircle.png')}>
-            <Image source={require('../assets/main/categoriesLogo.png')} />
-          </ImageBackground>
-          <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
-        </View>
-      </View>
-
-      <View style={styles.title}>
-        <Text>Горящие товары</Text>
-        <TouchableWithoutFeedback onPress={()=> alert('heh zdarova')}>
-          <Text>Смотреть все</Text>
-        </TouchableWithoutFeedback>
-      </View>
-
-      <Carousel
-        layout={'default'}
-        inactiveSlideScale={1}
-        windowSize={1}
-        data={slideElem}
-        renderItem={hitsItem}
-        sliderWidth={420}
-        itemWidth={120}
-        slideStyle={{
-          marginRight: 20,
-        }}
-        activeSlideAlignment={'start'}
-        // autoplay={true}
-        // autoplayDelay={1000}
-        // autoplayInterval={1000}
-      />
-
-    </View>
+      </SafeAreaView>
     </ScrollView>
   );
 }
@@ -283,7 +291,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  cart : {
+  cart: {
     marginLeft: 30,
   },
   cartNumber: {
