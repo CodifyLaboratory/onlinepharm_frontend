@@ -1,15 +1,14 @@
 import React from "react";
-import {View, Image, Platform, Button} from "react-native";
+import { View, Image, Platform, Button, TouchableOpacity } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from "@react-navigation/stack";
-
 import Main from "../screens/Main";
 import Search from "../screens/Search";
 import News from "../screens/News";
 import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
+import Farms from '../screens/Farms';
 import MyProfile from "../screens/MyProfile";
-
+import {createStackNavigator} from "@react-navigation/stack";
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
 import ProfileSvg from '../assets/icons/Profile.svg'
@@ -21,7 +20,7 @@ import SearchWhiteSvg from '../assets/icons/searchWhite.svg'
 import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
 import BackArrows from '../assets/profile/backArrow.svg'
-
+import SearchFarmSvg from '../assets/farms/search.svg'
 
 
 export default function Navigator() {
@@ -47,6 +46,24 @@ export default function Navigator() {
           headerTitleStyle: {color: '#1F8BA7'},
 
         }} />
+        <Stack.Screen name='MyProfile' component={MyProfile} options={{title: 'ПРОФИЛЬ'}} />
+      </Stack.Navigator>
+    )
+  }
+
+  const MainNav =()=> {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Main" component={Main} options={{headerShown: false}} />
+        <Stack.Screen name="Farms" component={Farms}
+                      options={{
+                        headerRight: () => (
+                          <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+                            <SearchFarmSvg />
+                          </TouchableOpacity>
+                        ),
+                        title: 'Аптеки'
+                      }} />
       </Stack.Navigator>
     )
   }
@@ -97,7 +114,7 @@ export default function Navigator() {
       />
       <Tab.Screen
         name='Main'
-        component={Main}
+        component={MainNav}
         options={{
           tabBarIcon: ({focused}) => (
             <View

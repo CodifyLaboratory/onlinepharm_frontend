@@ -146,15 +146,12 @@ export default function Main({ navigation }) {
             slideStyle={{
               marginRight: 20,
             }}
-            // autoplay={true}
-            // autoplayDelay={1000}
-            // autoplayInterval={1000}
           />
 
           <View>
             <View style={styles.title}>
               <Text>Аптеки</Text>
-              <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+              <TouchableWithoutFeedback onPress={() => navigation.push('Farms')}>
                 <Text>Смотреть все</Text>
               </TouchableWithoutFeedback>
             </View>
