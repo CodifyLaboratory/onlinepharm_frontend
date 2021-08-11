@@ -1,19 +1,19 @@
-import React, {useState} from "react";
+import React, { useState } from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform, ImageBackground, ScrollView,
   SafeAreaView
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 
-import Banner from '../assets/main/baner.svg'
-import Logo from '../assets/header/logo.svg'
-import Arrow from '../assets/header/arrow.svg'
-import SelectDropdown from 'react-native-select-dropdown'
-import CartHeader from '../assets/header/Cart.svg'
-import SearchHeader from '../assets/header/search.svg'
+import Banner from '../assets/main/baner.svg';
+import Logo from '../assets/header/logo.svg';
+import Arrow from '../assets/header/arrow.svg';
+import SelectDropdown from 'react-native-select-dropdown';
+import CartHeader from '../assets/header/Cart.svg';
+import SearchHeader from '../assets/header/search.svg';
 
-export default function Main({navigation}) {
-  const [slideElem, setSlideElem] = useState([
+export default function Main({ navigation }) {
+  const [ slideElem, setSlideElem ] = useState([
     {
       text: 1,
     },
@@ -26,37 +26,37 @@ export default function Main({navigation}) {
     {
       text: 3,
     }
-  ])
+  ]);
 
-  const countries = ["Бишкек", "Ош", "Кант", "Токмок"]
+  const countries = [ 'Бишкек', 'Ош', 'Кант', 'Токмок' ];
 
 
-  function _renderItem({item, index}) {
+  function _renderItem({ item, index }) {
     return (
       <View style={styles.banner}>
         <View>
           <Banner/>
         </View>
       </View>
-    )
+    );
   }
 
   function farmItem() {
     return (
       <View style={styles.farmSliderElem}>
-        <Image style={{width: 118, height: 90}} source={require('../assets/main/farmLogo.png')}/>
-        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13}}>Новая аптека</Text>
+        <Image style={{ width: 118, height: 90 }} source={require('../assets/main/farmLogo.png')}/>
+        <Text style={{ color: '#1F8BA7', fontSize: 11, lineHeight: 13 }}>Новая аптека</Text>
       </View>
-    )
+    );
   }
 
   function symptomsItem() {
     return (
       <View style={styles.symptomsSliderElem}>
-        <Image style={{width: 36, height: 36}} source={require('../assets/main/symptomsLogo.png')}/>
-        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11,}}>Головная боль</Text>
+        <Image style={{ width: 36, height: 36 }} source={require('../assets/main/symptomsLogo.png')}/>
+        <Text style={{ color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11, }}>Головная боль</Text>
       </View>
-    )
+    );
   }
 
   function hitsItem() {
@@ -75,7 +75,7 @@ export default function Main({navigation}) {
           <Text style={styles.hitsBtnText}>Добавить в корзину</Text>
         </TouchableOpacity>
       </View>
-    )
+    );
   }
 
   return (
@@ -94,7 +94,7 @@ export default function Main({navigation}) {
               renderDropdownIcon={() => {
                 return (
                   <Arrow/>
-                )
+                );
               }}
               buttonStyle={{
                 width: 130,
@@ -113,13 +113,13 @@ export default function Main({navigation}) {
                 marginTop: Platform.OS == 'ios' ? -10 : -50,
               }}
               onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index)
+                console.log(selectedItem, index);
               }}
               buttonTextAfterSelection={(selectedItem, index) => {
-                return selectedItem
+                return selectedItem;
               }}
               rowTextForSelection={(item, index) => {
-                return item
+                return item;
               }}
             />
             <View style={styles.headerRight}>
@@ -210,28 +210,28 @@ export default function Main({navigation}) {
 
           <View style={styles.categories}>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
               <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
             </View>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
               <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
             </View>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
               <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
             </View>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
@@ -270,11 +270,12 @@ export default function Main({navigation}) {
 
 const styles = StyleSheet.create({
   text: {
-    color: "red",
+    color: 'red',
   },
   container: {
     paddingRight: 16,
     paddingLeft: 16,
+    paddingTop: Platform.OS == 'android' ? 40 : 0
   },
   banner: {
     borderRadius: 20,
@@ -335,7 +336,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     paddingLeft: 7,
     paddingRight: 7,
-    alignItems: "center"
+    alignItems: 'center'
   },
   categories: {
     flexDirection: 'row',
@@ -343,7 +344,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   categoriesItem: {
-    width: "48%",
+    width: '48%',
     height: 131,
     backgroundColor: '#fff',
     borderRadius: 12,
