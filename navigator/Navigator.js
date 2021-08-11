@@ -64,6 +64,7 @@ export default function Navigator() {
                         title: 'Аптеки',
                         headerBackTitle: 'Назад',
                         headerStyle: { backgroundColor: '#E6EFF9'},
+                        headerTitleStyle: {color: '#1F8BA7'},
                       }} />
       </Stack.Navigator>
     )
