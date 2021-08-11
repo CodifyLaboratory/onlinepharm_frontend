@@ -46,7 +46,6 @@ export default function Navigator() {
           headerTitleStyle: {color: '#1F8BA7'},
 
         }} />
-        <Stack.Screen name='MyProfile' component={MyProfile} options={{title: 'ПРОФИЛЬ'}} />
       </Stack.Navigator>
     )
   }
