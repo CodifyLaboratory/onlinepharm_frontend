@@ -16,7 +16,7 @@ export default function Profile({navigation, route}) {
     <ScrollView style={{backgroundColor: '#E6EFF9'}}>
       <SafeAreaView>
         <View style={styles.container}>
-          <Image source={require('../assets/profile/avatar.png')}/>
+          <Image style={styles.profileAvatar} source={require('../assets/profile/avatar.png')}/>
           <Text style={styles.profileName}>Керим Абдылдаев</Text>
           <Text style={styles.profileNumber}>+996 700 123 456</Text>
           <View style={styles.profilePersonalityBlocks}>
@@ -97,6 +97,11 @@ const styles = StyleSheet.create({
     paddingRight: 37,
     justifyContent: 'center',
     paddingTop: 96,
+  },
+  profileAvatar: {
+    width: 88,
+    height: 88,
+    borderRadius: 50,
   },
   profileName: {
     fontSize: 18,

@@ -1,13 +1,15 @@
 import React from "react";
-import {View, Image, Platform} from "react-native";
+import {View, Image, Platform, Button} from "react-native";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
+import {createStackNavigator} from "@react-navigation/stack";
 
 import Main from "../screens/Main";
 import Search from "../screens/Search";
 import News from "../screens/News";
 import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
+import MyProfile from "../screens/MyProfile";
+
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
 import ProfileSvg from '../assets/icons/Profile.svg'
@@ -18,20 +20,34 @@ import CartWhiteSvg from '../assets/icons/cartWhite.svg'
 import SearchWhiteSvg from '../assets/icons/searchWhite.svg'
 import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
-import {createStackNavigator} from "@react-navigation/stack";
-import MyProfile from "../screens/MyProfile";
+import BackArrows from '../assets/profile/backArrow.svg'
+
 
 
 export default function Navigator() {
   const Tab = createBottomTabNavigator();
-  const ProfileStack = createStackNavigator();
+  const Stack = createStackNavigator();
 
   const ProfileNav = () => {
     return (
-      <ProfileStack.Navigator>
-        <ProfileStack.Screen name='Profile' component={Profile} options={{headerShown: false}} />
-        <ProfileStack.Screen name='MyProfile' component={MyProfile} options={{title: 'ПРОФИЛЬ'}} />
-      </ProfileStack.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen name='Profile' component={Profile} options={{headerShown: false}} />
+        <Stack.Screen name='MyProfile' component={MyProfile} options={{
+          title: 'ПРОФИЛЬ',
+          headerRight: () => (
+            <Button
+              onPress={() => alert('Save!')}
+              title="Сохранить"
+              color="#1F8BA7"
+            />
+          ),
+          headerBackTitle: 'Назад',
+          headerStyle: { backgroundColor: '#E6EFF9'},
+          headerBackTitleStyle: {fontSize: 15},
+          headerTitleStyle: {color: '#1F8BA7'},
+
+        }} />
+      </Stack.Navigator>
     )
   }
   return (
