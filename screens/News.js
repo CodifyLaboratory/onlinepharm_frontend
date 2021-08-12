@@ -106,10 +106,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingLeft: 16,
     marginBottom: 24,
+    paddingTop: Platform.OS == 'android' ? 45 : 0,
+    marginLeft: Platform.OS == 'android' ? 20 : 0
   },
   newsNavText: {
     fontSize: 18,
-    marginRight: 40,
+    marginRight: Platform.OS == 'android' ? 20 : 40,
     color: '#999999'
   },
   farmCard: {
