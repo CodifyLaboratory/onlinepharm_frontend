@@ -1,86 +1,88 @@
 import React from "react";
-import {View, Text, StyleSheet, Image} from "react-native";
+import {View, Text, StyleSheet, Image, ScrollView} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Input } from 'react-native-elements';
 
 export default function MyProfile() {
 
   return (
-    <View style={styles.container}>
-      <View style={{alignItems: 'center'}}>
-        <Image style={styles.profileAvatar} source={require('../assets/profile/avatar.png')} />
-        <Input
-          keyboardType='default'
-          label={'Имя'}
-          labelStyle={styles.label}
-          rightIcon={
-            <Icon
-              name='pen'
-              size={14}
-              color='#cccccc'
-            />
-          }
-          inputStyle={{fontSize: 14,}}
-          inputContainerStyle={styles.input}
-        />
-        <Input
-          keyboardType='default'
-          label={'Фамилия'}
-          labelStyle={styles.label}
-          rightIcon={
-            <Icon
-              name='pen'
-              size={14}
-              color='#cccccc'
-            />
-          }
-          inputStyle={{fontSize: 14,}}
-          inputContainerStyle={styles.input}
-        />
-        <Input
-          keyboardType='email-address'
-          label={'Email'}
-          labelStyle={styles.label}
-          rightIcon={
-            <Icon
-              name='pen'
-              size={14}
-              color='#cccccc'
-            />
-          }
-          inputStyle={{fontSize: 14,}}
-          inputContainerStyle={styles.input}
-        />
-        <Input
-          keyboardType='numeric'
-          label={'Телефон'}
-          labelStyle={styles.label}
-          rightIcon={
-            <Icon
-              name='pen'
-              size={14}
-              color='#cccccc'
-            />
-          }
-          inputStyle={{fontSize: 14,}}
-          inputContainerStyle={styles.input}
-        />
-        <Input
-          keyboardType='default'
-          label={'Адрес'}
-          labelStyle={styles.label}
-          rightIcon={
-            <Icon
-              name='pen'
-              size={14}
-              color='#cccccc'
-            />
-          }
-          inputStyle={{fontSize: 14,}}
-          inputContainerStyle={styles.input}
-        />
+    <ScrollView style={{backgroundColor: '#E6EFF9',}}>
+      <View style={styles.container}>
+        <View style={{alignItems: 'center'}}>
+          <Image style={styles.profileAvatar} source={require('../assets/profile/avatar.png')} />
+          <Input
+            keyboardType='default'
+            label={'Имя'}
+            labelStyle={styles.label}
+            rightIcon={
+              <Icon
+                name='pen'
+                size={14}
+                color='#cccccc'
+              />
+            }
+            inputStyle={{fontSize: 14,}}
+            inputContainerStyle={styles.input}
+          />
+          <Input
+            keyboardType='default'
+            label={'Фамилия'}
+            labelStyle={styles.label}
+            rightIcon={
+              <Icon
+                name='pen'
+                size={14}
+                color='#cccccc'
+              />
+            }
+            inputStyle={{fontSize: 14,}}
+            inputContainerStyle={styles.input}
+          />
+          <Input
+            keyboardType='email-address'
+            label={'Email'}
+            labelStyle={styles.label}
+            rightIcon={
+              <Icon
+                name='pen'
+                size={14}
+                color='#cccccc'
+              />
+            }
+            inputStyle={{fontSize: 14,}}
+            inputContainerStyle={styles.input}
+          />
+          <Input
+            keyboardType='numeric'
+            label={'Телефон'}
+            labelStyle={styles.label}
+            rightIcon={
+              <Icon
+                name='pen'
+                size={14}
+                color='#cccccc'
+              />
+            }
+            inputStyle={{fontSize: 14,}}
+            inputContainerStyle={styles.input}
+          />
+          <Input
+            keyboardType='default'
+            label={'Адрес'}
+            labelStyle={styles.label}
+            rightIcon={
+              <Icon
+                name='pen'
+                size={14}
+                color='#cccccc'
+              />
+            }
+            inputStyle={{fontSize: 14,}}
+            inputContainerStyle={styles.input}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -88,10 +90,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#E6EFF9',
     paddingLeft: 22,
     paddingRight: 22,
     justifyContent: 'center',
+    paddingTop: 20,
   },
   profileAvatar: {
     width: 120,

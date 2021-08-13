@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
     paddingLeft: 37,
     paddingRight: 37,
     justifyContent: 'center',
-    paddingTop: 96,
+    paddingTop: 20,
+    paddingBottom: 20,
   },
   profileAvatar: {
     width: 88,
