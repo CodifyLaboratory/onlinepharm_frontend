@@ -12,7 +12,7 @@ import {
 import Carousel from "react-native-snap-carousel";
 
 
-export default function News() {
+export default function News({navigation}) {
 
   const [slideElem, setSlideElem] = useState([
     {
@@ -41,26 +41,44 @@ export default function News() {
   }
 
   return (
-    <ScrollView>
-      <SafeAreaView>
+
+    <SafeAreaView>
+
+      <Carousel
+        layout={'default'}
+        inactiveSlideScale={1}
+        windowSize={1}
+        data={slideElem}
+        renderItem={NewsItem}
+        sliderWidth={420}
+        itemWidth={420}
+        slideStyle={{
+          marginRight: 20,
+        }}
+        activeSlideAlignment={'start'}
+        enableSnap={false}
+        // autoplay={true}
+        // autoplayDelay={1000}
+        // autoplayInterval={1000}
+      />
+      <ScrollView>
         <View style={styles.container}>
-          <Carousel
-            layout={'default'}
-            inactiveSlideScale={1}
-            windowSize={1}
-            data={slideElem}
-            renderItem={NewsItem}
-            sliderWidth={420}
-            itemWidth={420}
-            slideStyle={{
-              marginRight: 20,
-            }}
-            activeSlideAlignment={'start'}
-            enableSnap={false}
-            // autoplay={true}
-            // autoplayDelay={1000}
-            // autoplayInterval={1000}
-          />
+            <TouchableOpacity onPress={() => {
+              navigation.push('NewsInfo')
+            }} style={styles.farmCard}>
+              <View style={styles.farmCardInfo}>
+                <View style={styles.nameFarm}>
+                  <Text style={styles.title}>Аптека:</Text>
+                  <Text style={styles.farmName}>Неман</Text>
+                </View>
+                <Text style={styles.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
+                <Text style={styles.farmDate}>31 марта</Text>
+                <TouchableOpacity style={styles.farmCardBtn}>
+                  <Text style={styles.farmCardBtnText}>Подробнее</Text>
+                </TouchableOpacity>
+              </View>
+              <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
+            </TouchableOpacity>
           <TouchableOpacity style={styles.farmCard}>
             <View style={styles.farmCardInfo}>
               <View style={styles.nameFarm}>
@@ -73,7 +91,7 @@ export default function News() {
                 <Text style={styles.farmCardBtnText}>Подробнее</Text>
               </TouchableOpacity>
             </View>
-            <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')} />
+            <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
           </TouchableOpacity>
           <TouchableOpacity style={styles.farmCard}>
             <View style={styles.farmCardInfo}>
@@ -87,20 +105,62 @@ export default function News() {
                 <Text style={styles.farmCardBtnText}>Подробнее</Text>
               </TouchableOpacity>
             </View>
-            <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')} />
+            <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.farmCard}>
+            <View style={styles.farmCardInfo}>
+              <View style={styles.nameFarm}>
+                <Text style={styles.title}>Аптека:</Text>
+                <Text style={styles.farmName}>Неман</Text>
+              </View>
+              <Text style={styles.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
+              <Text style={styles.farmDate}>31 марта</Text>
+              <TouchableOpacity style={styles.farmCardBtn}>
+                <Text style={styles.farmCardBtnText}>Подробнее</Text>
+              </TouchableOpacity>
+            </View>
+            <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.farmCard}>
+            <View style={styles.farmCardInfo}>
+              <View style={styles.nameFarm}>
+                <Text style={styles.title}>Аптека:</Text>
+                <Text style={styles.farmName}>Неман</Text>
+              </View>
+              <Text style={styles.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
+              <Text style={styles.farmDate}>31 марта</Text>
+              <TouchableOpacity style={styles.farmCardBtn}>
+                <Text style={styles.farmCardBtnText}>Подробнее</Text>
+              </TouchableOpacity>
+            </View>
+            <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.farmCard}>
+            <View style={styles.farmCardInfo}>
+              <View style={styles.nameFarm}>
+                <Text style={styles.title}>Аптека:</Text>
+                <Text style={styles.farmName}>Неман</Text>
+              </View>
+              <Text style={styles.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
+              <Text style={styles.farmDate}>31 марта</Text>
+              <TouchableOpacity style={styles.farmCardBtn}>
+                <Text style={styles.farmCardBtnText}>Подробнее</Text>
+              </TouchableOpacity>
+            </View>
+            <Image style={styles.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    </ScrollView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingLeft: 16,
     paddingRight: 16,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingBottom: 40,
   },
   newsNav: {
     flexDirection: 'row',

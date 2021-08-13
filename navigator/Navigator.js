@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, Platform, Button, TouchableOpacity } from 'react-native';
+import {View, Image, Platform, Button, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Main from "../screens/Main";
 import Search from "../screens/Search";
@@ -21,6 +21,7 @@ import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
 import BackArrows from '../assets/profile/backArrow.svg'
 import SearchFarmSvg from '../assets/farms/search.svg'
+import NewsInfo from "../screens/NewsInfo";
 
 
 export default function Navigator() {
@@ -30,7 +31,7 @@ export default function Navigator() {
   const ProfileNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name='Profile' component={Profile} options={{headerShown: false}} />
+        <Stack.Screen name='Profile' component={Profile} options={{headerShown: false}}/>
         <Stack.Screen name='MyProfile' component={MyProfile} options={{
           title: 'ПРОФИЛЬ',
           headerRight: () => (
@@ -41,31 +42,40 @@ export default function Navigator() {
             />
           ),
           headerBackTitle: 'Назад',
-          headerStyle: { backgroundColor: '#E6EFF9'},
+          headerStyle: {backgroundColor: '#E6EFF9'},
           headerBackTitleStyle: {fontSize: 15},
           headerTitleStyle: {color: '#1F8BA7'},
 
-        }} />
+        }}/>
       </Stack.Navigator>
     )
   }
 
-  const MainNav =()=> {
+  const MainNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={Main} options={{headerShown: false}} />
+        <Stack.Screen name="Main" component={Main} options={{headerShown: false}}/>
         <Stack.Screen name="Farms" component={Farms}
                       options={{
                         headerRight: () => (
                           <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
-                            <SearchFarmSvg />
+                            <SearchFarmSvg/>
                           </TouchableOpacity>
                         ),
                         title: 'Аптеки',
                         headerBackTitle: 'Назад',
-                        headerStyle: { backgroundColor: '#E6EFF9'},
+                        headerStyle: {backgroundColor: '#E6EFF9'},
                         headerTitleStyle: {color: '#1F8BA7'},
-                      }} />
+                      }}/>
+      </Stack.Navigator>
+    )
+  }
+
+  const NewsNav = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="News" component={News} options={{headerShown: false}}/>
+        <Stack.Screen name='NewsInfo' component={NewsInfo}/>
       </Stack.Navigator>
     )
   }
@@ -86,7 +96,7 @@ export default function Navigator() {
     >
       <Tab.Screen
         name='News'
-        component={News}
+        component={NewsNav}
         options={{
           tabBarIcon: ({focused}) => (
             <View
