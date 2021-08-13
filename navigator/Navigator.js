@@ -82,7 +82,6 @@ export default function Navigator() {
             </TouchableOpacity>
           ),
           title: 'Фармамир',
-          headerBackTitle: 'Назад',
           headerStyle: { backgroundColor: '#E6EFF9'},
           headerTitleStyle: {color: '#1F8BA7'},
         }} />
@@ -93,7 +92,6 @@ export default function Navigator() {
             </TouchableOpacity>
           ),
           title: 'О продукте',
-          headerBackTitle: 'Назад',
           headerStyle: { backgroundColor: '#F4F5F6'},
           headerTitleStyle: {color: '#1F8BA7'},
         }} />
@@ -108,6 +106,7 @@ export default function Navigator() {
 
           ),
           title: 'Лекарственные препараты',
+          headerBackTitle: 'Назад',
           headerStyle: {
             backgroundColor: '#E6EFF9',
           },
@@ -127,6 +126,7 @@ export default function Navigator() {
 
           ),
           title: 'Антибиотики',
+          headerBackTitle: 'Назад',
           headerStyle: {
             backgroundColor: '#E6EFF9',
           },
