@@ -99,7 +99,7 @@ export default function Navigator() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="News" component={News} options={{headerShown: false}}/>
-        <Stack.Screen name='NewsInfo' component={NewsInfo}/>
+        <Stack.Screen name='NewsInfo' component={NewsInfo} options={{headerBackTitle: 'Назад'}}/>
 
       </Stack.Navigator>
     )
