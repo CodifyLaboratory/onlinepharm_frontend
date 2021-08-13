@@ -1,5 +1,5 @@
 import React from "react";
-import {View, StyleSheet, Text, SafeAreaView} from "react-native";
+import {View, StyleSheet, Text, SafeAreaView, Platform} from "react-native";
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {Input} from 'react-native-elements';
 import SearchImg from '../assets/search/search.svg'
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 16,
     paddingRight: 16,
+    paddingTop: Platform.OS == 'android' ? 60 : 0,
     height: '100%'
   },
   input: {
