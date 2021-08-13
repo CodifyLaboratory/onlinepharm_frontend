@@ -3,13 +3,13 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, TouchableW
 import { Touchable } from 'react-native-web';
 
 
-const Farms = () => {
+const Farms = ({navigation}) => {
 
   return (
     <ScrollView style={{backgroundColor: '#E6EFF9'}}>
       <View style={styles.container}>
 
-        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard}>
+        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard} onPress={()=> navigation.navigate('Farm') }>
             <Image style={styles.farmImg} source={require('./../assets/farms/farmLogo.png')}/>
             <View>
               <Text style={styles.farmName}>Аптека 103</Text>
@@ -20,7 +20,7 @@ const Farms = () => {
               <Text style={styles.farmFindText}>Найти</Text>
             </TouchableOpacity>
           </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard}>
+        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard} onPress={()=> navigation.navigate('Farm') }>
           <Image style={styles.farmImg} source={require('./../assets/farms/farmLogo.png')}/>
           <View>
             <Text style={styles.farmName}>Аптека 103</Text>
@@ -31,7 +31,7 @@ const Farms = () => {
             <Text style={styles.farmFindText}>Найти</Text>
           </TouchableOpacity>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard}>
+        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard} onPress={()=> navigation.navigate('Farm') }>
           <Image style={styles.farmImg} source={require('./../assets/farms/farmLogo.png')}/>
           <View>
             <Text style={styles.farmName}>Аптека 103</Text>
@@ -42,7 +42,7 @@ const Farms = () => {
             <Text style={styles.farmFindText}>Найти</Text>
           </TouchableOpacity>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard}>
+        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard} onPress={()=> navigation.navigate('Farm') }>
           <Image style={styles.farmImg} source={require('./../assets/farms/farmLogo.png')}/>
           <View>
             <Text style={styles.farmName}>Аптека 103</Text>
@@ -53,7 +53,7 @@ const Farms = () => {
             <Text style={styles.farmFindText}>Найти</Text>
           </TouchableOpacity>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard}>
+        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard} onPress={()=> navigation.navigate('Farm') }>
           <Image style={styles.farmImg} source={require('./../assets/farms/farmLogo.png')}/>
           <View>
             <Text style={styles.farmName}>Аптека 103</Text>
@@ -64,18 +64,7 @@ const Farms = () => {
             <Text style={styles.farmFindText}>Найти</Text>
           </TouchableOpacity>
         </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard}>
-          <Image style={styles.farmImg} source={require('./../assets/farms/farmLogo.png')}/>
-          <View>
-            <Text style={styles.farmName}>Аптека 103</Text>
-            <Text style={styles.farmCount}>Кол-во аптек: 8</Text>
-            <Text style={styles.farmClose}>Аптеки рядом с вами</Text>
-          </View>
-          <TouchableOpacity activeOpacity={0.6} style={styles.farmFind}>
-            <Text style={styles.farmFindText}>Найти</Text>
-          </TouchableOpacity>
-        </TouchableOpacity>
-        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard}>
+        <TouchableOpacity activeOpacity={0.85} style={styles.farmCard} onPress={()=> navigation.navigate('Farm') }>
           <Image style={styles.farmImg} source={require('./../assets/farms/farmLogo.png')}/>
           <View>
             <Text style={styles.farmName}>Аптека 103</Text>
