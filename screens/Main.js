@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform, ImageBackground, ScrollView,
   SafeAreaView
@@ -12,8 +12,8 @@ import SelectDropdown from 'react-native-select-dropdown';
 import CartHeader from '../assets/header/Cart.svg';
 import SearchHeader from '../assets/header/search.svg';
 
-export default function Main({ navigation }) {
-  const [ slideElem, setSlideElem ] = useState([
+export default function Main({navigation}) {
+  const [slideElem, setSlideElem] = useState([
     {
       text: 1,
     },
@@ -28,10 +28,10 @@ export default function Main({ navigation }) {
     }
   ]);
 
-  const countries = [ 'Бишкек', 'Ош', 'Кант', 'Токмок' ];
+  const countries = ['Бишкек', 'Ош', 'Кант', 'Токмок'];
 
 
-  function _renderItem({ item, index }) {
+  function _renderItem({item, index}) {
     return (
       <View style={styles.banner}>
         <View>
@@ -44,8 +44,8 @@ export default function Main({ navigation }) {
   function farmItem() {
     return (
       <View style={styles.farmSliderElem}>
-        <Image style={{ width: 118, height: 90 }} source={require('../assets/main/farmLogo.png')}/>
-        <Text style={{ color: '#1F8BA7', fontSize: 11, lineHeight: 13 }}>Новая аптека</Text>
+        <Image style={{width: 118, height: 90}} source={require('../assets/main/farmLogo.png')}/>
+        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13}}>Новая аптека</Text>
       </View>
     );
   }
@@ -53,8 +53,8 @@ export default function Main({ navigation }) {
   function symptomsItem() {
     return (
       <View style={styles.symptomsSliderElem}>
-        <Image style={{ width: 36, height: 36 }} source={require('../assets/main/symptomsLogo.png')}/>
-        <Text style={{ color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11, }}>Головная боль</Text>
+        <Image style={{width: 36, height: 36}} source={require('../assets/main/symptomsLogo.png')}/>
+        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11,}}>Головная боль</Text>
       </View>
     );
   }
@@ -207,28 +207,28 @@ export default function Main({ navigation }) {
 
           <View style={styles.categories}>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
               <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
             </View>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
               <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
             </View>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
               <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
             </View>
             <View style={styles.categoriesItem}>
-              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
+              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
@@ -255,10 +255,15 @@ export default function Main({ navigation }) {
               marginRight: 20,
             }}
             activeSlideAlignment={'start'}
-            // autoplay={true}
-            // autoplayDelay={1000}
-            // autoplayInterval={1000}
           />
+        </View>
+        <View style={styles.appInfo}>
+          <Logo style={{marginBottom: 16}}/>
+          <Text style={styles.appInfoText}>MyMed— знак качества, который обеспечивает высокое качество, безопасность
+            лекарств и оптимальные цены</Text>
+          <Text style={styles.appInfoText}>Это значит, что покупатели могут получить отличное обслуживание в аптеке и
+            приобрести качественные лекарства по доступным ценам.
+            Вы можете быть уверены в профессионализме аптек, входящих в союз MyMed</Text>
         </View>
       </SafeAreaView>
     </ScrollView>
@@ -414,11 +419,20 @@ const styles = StyleSheet.create({
   },
   hitsBtnText: {
     fontSize: 9,
-    // padding: 8,
     color: '#fff',
     textAlign: 'center',
     paddingTop: 8,
     paddingBottom: 8,
-
+  },
+  appInfo: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingTop: 5,
+    marginTop: 10
+  },
+  appInfoText: {
+    fontSize: 15,
+    lineHeight: 17,
+    marginBottom: 24,
   }
 });

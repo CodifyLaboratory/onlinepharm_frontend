@@ -24,6 +24,20 @@ export default function MyProfile() {
           inputContainerStyle={styles.input}
         />
         <Input
+          keyboardType='default'
+          label={'Фамилия'}
+          labelStyle={styles.label}
+          rightIcon={
+            <Icon
+              name='pen'
+              size={14}
+              color='#cccccc'
+            />
+          }
+          inputStyle={{fontSize: 14,}}
+          inputContainerStyle={styles.input}
+        />
+        <Input
           keyboardType='email-address'
           label={'Email'}
           labelStyle={styles.label}
