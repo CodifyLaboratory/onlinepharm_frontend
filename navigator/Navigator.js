@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Image, Platform, Button, TouchableOpacity} from 'react-native';
+import { View, Image, Platform, Button, TouchableOpacity, StyleSheet } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Main from "../screens/Main";
 import Search from "../screens/Search";
@@ -10,6 +10,9 @@ import Farms from '../screens/Farms';
 import Farm from "../screens/Farm"
 import FarmInfo from '../screens/FarmInfo';
 import MyProfile from "../screens/MyProfile";
+import Categories from '../screens/Categories';
+import CategoriesMedicines from '../screens/CategoriesMedicines';
+import NewsInfo from "../screens/NewsInfo";
 import {createStackNavigator} from "@react-navigation/stack";
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
@@ -23,8 +26,9 @@ import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
 import BackArrows from '../assets/profile/backArrow.svg'
 import SearchFarmSvg from '../assets/farms/search.svg'
-import NewsInfo from "../screens/NewsInfo";
 import FarmFavorite from '../assets/farms/FarmFavorite.svg'
+import CartFarmSvg from '../assets/farms/cart.svg'
+
 
 
 export default function Navigator() {
@@ -90,6 +94,50 @@ export default function Navigator() {
           title: 'О продукте',
           headerStyle: { backgroundColor: '#F4F5F6'},
           headerTitleStyle: {color: '#1F8BA7'},
+        }} />
+
+        <Stack.Screen name="Categories" component={Categories} options={{
+          headerRight: () => (
+            <View style={styles.flexRow}>
+              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 12}}>
+                <CartFarmSvg />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+                <SearchFarmSvg />
+              </TouchableOpacity>
+            </View>
+
+          ),
+          title: 'Лекарственные препараты',
+          headerStyle: {
+            backgroundColor: '#E6EFF9',
+          },
+          headerTitleStyle: {
+            color: '#1F8BA7',
+            fontSize: 17
+          },
+        }} />
+
+        <Stack.Screen name="CategoriesMedicines" component={CategoriesMedicines} options={{
+          headerRight: () => (
+            <View style={styles.flexRow}>
+              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 12}}>
+                <CartFarmSvg />
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+                <SearchFarmSvg />
+              </TouchableOpacity>
+            </View>
+
+          ),
+          title: 'Антибиотики',
+          headerStyle: {
+            backgroundColor: '#E6EFF9',
+          },
+          headerTitleStyle: {
+            color: '#1F8BA7',
+            fontSize: 17
+          },
         }} />
       </Stack.Navigator>
     )
@@ -198,3 +246,10 @@ export default function Navigator() {
     </Tab.Navigator>
   );
 }
+
+
+const styles = StyleSheet.create({
+  flexRow: {
+    flexDirection: 'row'
+  }
+})

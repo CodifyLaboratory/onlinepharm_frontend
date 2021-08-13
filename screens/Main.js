@@ -206,13 +206,13 @@ export default function Main({navigation}) {
           </View>
 
           <View style={styles.categories}>
-            <View style={styles.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
+            <TouchableOpacity style={styles.categoriesItem} activeOpacity={0.8} onPress={()=> navigation.push('Categories')}>
+              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
                                source={require('../assets/main/categoriisCircle.png')}>
                 <Image source={require('../assets/main/categoriesLogo.png')}/>
               </ImageBackground>
               <Text style={styles.categoriesItemText}>Лекарственные препараты</Text>
-            </View>
+            </TouchableOpacity>
             <View style={styles.categoriesItem}>
               <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
                                source={require('../assets/main/categoriisCircle.png')}>
