@@ -82,6 +82,7 @@ export default function Navigator() {
             </TouchableOpacity>
           ),
           title: 'Фармамир',
+          headerBackTitle: 'Назад',
           headerStyle: { backgroundColor: '#E6EFF9'},
           headerTitleStyle: {color: '#1F8BA7'},
         }} />
@@ -92,6 +93,7 @@ export default function Navigator() {
             </TouchableOpacity>
           ),
           title: 'О продукте',
+          headerBackTitle: 'Назад',
           headerStyle: { backgroundColor: '#F4F5F6'},
           headerTitleStyle: {color: '#1F8BA7'},
         }} />
@@ -99,9 +101,6 @@ export default function Navigator() {
         <Stack.Screen name="Categories" component={Categories} options={{
           headerRight: () => (
             <View style={styles.flexRow}>
-              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 12}}>
-                <CartFarmSvg />
-              </TouchableOpacity>
               <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
                 <SearchFarmSvg />
               </TouchableOpacity>
@@ -121,9 +120,6 @@ export default function Navigator() {
         <Stack.Screen name="CategoriesMedicines" component={CategoriesMedicines} options={{
           headerRight: () => (
             <View style={styles.flexRow}>
-              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 12}}>
-                <CartFarmSvg />
-              </TouchableOpacity>
               <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
                 <SearchFarmSvg />
               </TouchableOpacity>
