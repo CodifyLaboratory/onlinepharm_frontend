@@ -43,7 +43,7 @@ export default function News({navigation}) {
   return (
 
     <SafeAreaView style={{backgroundColor: '#E6EFF9'}}>
-      <View style={{backgroundColor: '#E6EFF9'}}>
+      <View style={styles.newsInner}>
         <Carousel
           layout={'default'}
           inactiveSlideScale={1}
@@ -162,6 +162,9 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     alignItems: 'center',
     paddingBottom: 40,
+  },
+  newsInner: {
+    paddingTop: Platform.OS === 'ios' ? 10 : 0,
   },
   newsNav: {
     flexDirection: 'row',

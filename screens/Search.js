@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingLeft: 16,
     paddingRight: 16,
-    paddingTop: Platform.OS == 'android' ? 60 : 0,
+    paddingTop: Platform.OS == 'android' ? 60 : 20,
     height: '100%'
   },
   input: {

@@ -112,10 +112,12 @@ export default function Navigator() {
         tabBarStyle: {
           backgroundColor: '#1F8BA7',
           height: 78,
+          paddingBottom: Platform.OS === 'ios' ? 30 : 0,
         },
         tabBarLabelStyle: {
           color: '#fff',
-          marginBottom: Platform.OS === 'ios' ? -10 : 10,
+          marginBottom: Platform.OS === 'ios' ? -20 : 10,
+          paddingBottom: Platform.OS === 'ios' ? 10 : 0,
           fontSize: 12
         },
       }}
