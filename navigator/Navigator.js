@@ -7,6 +7,8 @@ import News from "../screens/News";
 import Cart from "../screens/Cart";
 import Profile from "../screens/Profile";
 import Farms from '../screens/Farms';
+import Farm from "../screens/Farm"
+import FarmInfo from '../screens/FarmInfo';
 import MyProfile from "../screens/MyProfile";
 import {createStackNavigator} from "@react-navigation/stack";
 import MainSvg from '../assets/icons/main.svg'
@@ -22,6 +24,7 @@ import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
 import BackArrows from '../assets/profile/backArrow.svg'
 import SearchFarmSvg from '../assets/farms/search.svg'
 import NewsInfo from "../screens/NewsInfo";
+import FarmFavorite from '../assets/farms/FarmFavorite.svg'
 
 
 export default function Navigator() {
@@ -66,7 +69,28 @@ export default function Navigator() {
                         headerBackTitle: 'Назад',
                         headerStyle: {backgroundColor: '#E6EFF9'},
                         headerTitleStyle: {color: '#1F8BA7'},
-                      }}/>
+
+                      }} />
+        <Stack.Screen name="Farm" component={Farm} options={{
+          headerRight: () => (
+            <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+              <SearchFarmSvg />
+            </TouchableOpacity>
+          ),
+          title: 'Фармамир',
+          headerStyle: { backgroundColor: '#E6EFF9'},
+          headerTitleStyle: {color: '#1F8BA7'},
+        }} />
+        <Stack.Screen name="FarmInfo" component={FarmInfo} options={{
+          headerRight: () => (
+            <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+              <FarmFavorite />
+            </TouchableOpacity>
+          ),
+          title: 'О продукте',
+          headerStyle: { backgroundColor: '#F4F5F6'},
+          headerTitleStyle: {color: '#1F8BA7'},
+        }} />
       </Stack.Navigator>
     )
   }
@@ -76,9 +100,11 @@ export default function Navigator() {
       <Stack.Navigator>
         <Stack.Screen name="News" component={News} options={{headerShown: false}}/>
         <Stack.Screen name='NewsInfo' component={NewsInfo}/>
+
       </Stack.Navigator>
     )
   }
+
   return (
     <Tab.Navigator
       initialRouteName='Main'
