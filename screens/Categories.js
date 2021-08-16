@@ -13,6 +13,8 @@ import {
 import Carousel from 'react-native-snap-carousel';
 import Banner from '../assets/main/baner.svg';
 
+import {categories} from "../styles/categories";
+
 function Categories({ navigation }) {
   const [ slideElem, setSlideElem ] = useState([
     {
@@ -31,7 +33,7 @@ function Categories({ navigation }) {
 
   function _renderItem({ item, index }) {
     return (
-      <View style={styles.banner}>
+      <View style={categories.banner}>
         <View>
           <Banner/>
         </View>
@@ -41,7 +43,7 @@ function Categories({ navigation }) {
 
   function symptomsItem() {
     return (
-      <View style={styles.symptomsSliderElem}>
+      <View style={categories.symptomsSliderElem}>
         <Image style={{ width: 36, height: 36 }} source={require('../assets/main/symptomsLogo.png')}/>
         <Text style={{ color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11, }}>Головная боль</Text>
       </View>
@@ -50,7 +52,7 @@ function Categories({ navigation }) {
 
   return (
     <ScrollView style={{backgroundColor: '#E6EFF9'}}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={categories.container}>
         <Carousel
           layout={'default'}
           inactiveSlideScale={1}
@@ -64,7 +66,7 @@ function Categories({ navigation }) {
           }}
         />
 
-        <View style={styles.title}>
+        <View style={categories.title}>
           <Text>Симптомы</Text>
           <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
             <Text>Смотреть все</Text>
@@ -85,37 +87,37 @@ function Categories({ navigation }) {
           activeSlideAlignment={'start'}
         />
 
-        <View style={styles.pillsContainer}>
+        <View style={categories.pillsContainer}>
           <Text style={{marginBottom: 16}}>Препараты:</Text>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8} onPress={()=> navigation.push('CategoriesMedicines')}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8} onPress={()=> navigation.push('CategoriesMedicines')}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.pillsListElem} activeOpacity={0.8}>
-            <Text style={styles.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
+            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
 
         </View>
@@ -125,57 +127,3 @@ function Categories({ navigation }) {
 }
 
 export default Categories;
-
-const styles = StyleSheet.create({
-  text: {
-    color: 'red',
-  },
-  container: {
-    backgroundColor: '#E6EFF9',
-    paddingRight: 16,
-    paddingLeft: 16,
-    paddingTop: Platform.OS == 'android' ? 21 : 0
-  },
-  banner: {
-    borderRadius: 20,
-    marginLeft: -45,
-  },
-  symptomsSliderElem: {
-    width: 100,
-    height: 100,
-    backgroundColor: '#fff',
-    borderRadius: 8,
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 7,
-    paddingRight: 7,
-    alignItems: 'center'
-  },
-  title: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 16,
-    marginBottom: 19
-  },
-  pillsContainer: {
-    marginTop: 16,
-  },
-  pillsListElem: {
-    backgroundColor: '#ffffff',
-    padding: 16,
-    borderRadius: 8,
-    marginBottom: 8,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.20,
-    shadowRadius: 1.41,
-    elevation: 2,
-  },
-  pillsListElemText: {
-    color: '#1F8BA7',
-    fontSize: 13,
-  }
-});

@@ -2,18 +2,19 @@ import React from "react";
 import {View, Text, StyleSheet, Image, ScrollView} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Input } from 'react-native-elements';
+import {myProfile} from "../styles/myProfile";
 
 export default function MyProfile() {
 
   return (
-    <ScrollView style={{backgroundColor: '#E6EFF9',}}>
-      <View style={styles.container}>
+    <ScrollView style={{backgroundColor: '#E6EFF9'}}>
+      <View style={myProfile.container}>
         <View style={{alignItems: 'center'}}>
-          <Image style={styles.profileAvatar} source={require('../assets/profile/avatar.png')} />
+          <Image style={myProfile.profileAvatar} source={require('../assets/profile/avatar.png')} />
           <Input
             keyboardType='default'
             label={'Имя'}
-            labelStyle={styles.label}
+            labelStyle={myProfile.label}
             rightIcon={
               <Icon
                 name='pen'
@@ -22,12 +23,12 @@ export default function MyProfile() {
               />
             }
             inputStyle={{fontSize: 14,}}
-            inputContainerStyle={styles.input}
+            inputContainerStyle={myProfile.input}
           />
           <Input
             keyboardType='default'
             label={'Фамилия'}
-            labelStyle={styles.label}
+            labelStyle={myProfile.label}
             rightIcon={
               <Icon
                 name='pen'
@@ -36,12 +37,12 @@ export default function MyProfile() {
               />
             }
             inputStyle={{fontSize: 14,}}
-            inputContainerStyle={styles.input}
+            inputContainerStyle={myProfile.input}
           />
           <Input
             keyboardType='email-address'
             label={'Email'}
-            labelStyle={styles.label}
+            labelStyle={myProfile.label}
             rightIcon={
               <Icon
                 name='pen'
@@ -50,12 +51,12 @@ export default function MyProfile() {
               />
             }
             inputStyle={{fontSize: 14,}}
-            inputContainerStyle={styles.input}
+            inputContainerStyle={myProfile.input}
           />
           <Input
             keyboardType='numeric'
             label={'Телефон'}
-            labelStyle={styles.label}
+            labelStyle={myProfile.label}
             rightIcon={
               <Icon
                 name='pen'
@@ -64,12 +65,12 @@ export default function MyProfile() {
               />
             }
             inputStyle={{fontSize: 14,}}
-            inputContainerStyle={styles.input}
+            inputContainerStyle={myProfile.input}
           />
           <Input
             keyboardType='default'
             label={'Адрес'}
-            labelStyle={styles.label}
+            labelStyle={myProfile.label}
             rightIcon={
               <Icon
                 name='pen'
@@ -78,44 +79,10 @@ export default function MyProfile() {
               />
             }
             inputStyle={{fontSize: 14,}}
-            inputContainerStyle={styles.input}
+            inputContainerStyle={myProfile.input}
           />
         </View>
       </View>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    paddingLeft: 22,
-    paddingRight: 22,
-    justifyContent: 'center',
-    paddingTop: 20,
-  },
-  profileAvatar: {
-    width: 120,
-    height: 120,
-    borderRadius: 50,
-    marginBottom: 32,
-  },
-  input: {
-    borderBottomWidth: 0,
-    width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 16,
-    paddingRight: 23,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: 'normal',
-    marginBottom: 6,
-    color: '#35364F',
-    opacity: 0.6,
-  }
-});

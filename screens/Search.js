@@ -3,11 +3,12 @@ import {View, StyleSheet, Text, SafeAreaView, Platform} from "react-native";
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {Input} from 'react-native-elements';
 import SearchImg from '../assets/search/search.svg'
+import {search} from "../styles/search";
 
 const Search = () => {
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <View style={search.container}>
         <Input
           keyboardType='default'
           rightIcon={
@@ -18,44 +19,16 @@ const Search = () => {
             />
           }
           inputStyle={{fontSize: 15,}}
-          inputContainerStyle={styles.input}
+          inputContainerStyle={search.input}
         />
-        <View style={styles.searchLogo}>
+        <View style={search.searchLogo}>
           <SearchImg style/>
-          <Text style={styles.searchLogoText}> Найдите желаемый продукт</Text>
+          <Text style={search.searchLogoText}> Найдите желаемый продукт</Text>
         </View>
       </View>
     </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    paddingLeft: 16,
-    paddingRight: 16,
-    paddingTop: Platform.OS == 'android' ? 60 : 20,
-    height: '100%'
-  },
-  input: {
-    width: '100%',
-    borderWidth: 1,
-    borderColor: '#999999',
-    height: 50,
-    paddingLeft: 20,
-    paddingRight: 15,
-    borderRadius: 9,
-  },
-  searchLogo: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-  },
-  searchLogoText: {
-    fontSize: 18,
-    marginTop: 45,
-    color: '#999999',
-  }
-});
 
 export default Search;
