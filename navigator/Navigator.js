@@ -13,6 +13,7 @@ import MyProfile from "../screens/MyProfile";
 import Categories from '../screens/Categories';
 import CategoriesMedicines from '../screens/CategoriesMedicines';
 import NewsInfo from "../screens/NewsInfo";
+import Login from '../screens/Login';
 import {createStackNavigator} from "@react-navigation/stack";
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
@@ -156,7 +157,7 @@ export default function Navigator() {
       <Stack.Navigator>
         <Stack.Screen name="Registration" component={Registration} options={{
           headerTitle: 'Регистрация',
-          headerTitleStyle: {color: '#1F8BA7'},
+          headerTitleStyle: { color: '#1F8BA7' }
         }}/>
         <Stack.Screen name="RegistrationData" options={{
           headerBackTitle: 'Назад',
@@ -165,13 +166,18 @@ export default function Navigator() {
         }}>
           {props => <RegistrationData {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn}/>}
         </Stack.Screen>
+        <Stack.Screen name="Login" options={{
+          headerTitle: 'Войти',
+          headerTitleStyle: { color: '#1F8BA7' }
+        }}>
+          {props => <Login {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn}/>}
+        </Stack.Screen>
       </Stack.Navigator>
       )
 
   }
 
   return (
-
       isSignIn ? (
         <Tab.Navigator
           initialRouteName='Main'

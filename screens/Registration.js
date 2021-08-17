@@ -6,7 +6,7 @@ import Logo from "../assets/header/logo.svg";
 function Registration({navigation}) {
   return (
     <View style={registration.container}>
-      <Logo style={{marginTop: 65, marginBottom: 92}} />
+      <Logo style={{marginTop: 65, marginBottom: 60}} />
       <View>
         <TextInput
           placeholder={'Email'}
@@ -23,6 +23,13 @@ function Registration({navigation}) {
           placeholderTextColor={'#333333'}
           style={registration.input}
         />
+      </View>
+
+      <View style={registration.forgotContainer}>
+        <Text style={registration.forgotAccount}>Уже есть аккаунт?</Text>
+        <TouchableOpacity style={registration.forgot} onPress={()=>navigation.push('Login')}>
+          <Text style={registration.forgotText}>Войти</Text>
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity

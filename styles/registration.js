@@ -20,13 +20,37 @@ export const registration = StyleSheet.create({
     marginBottom: 35,
     fontSize: 15
   },
+  forgotContainer: {
+    flexDirection: 'row',
+    marginTop: 10
+  },
+  forgotAccount: {
+    color: '#828282',
+    fontSize: 14
+  },
+  forgot: {
+    marginLeft: 76,
+  },
+  forgotTextContainer: {
+    marginLeft: 32,
+  },
+  forgotText: {
+    color: '#00A0B6',
+    fontSize: 14
+  },
+  forgotPassword: {
+    color: '#00A0B6',
+    fontSize: 14,
+    marginBottom: 70,
+    marginTop: 14
+  },
   next: {
     backgroundColor: '#1F8BA7',
     padding: 10,
     width: 345,
     alignItems: 'center',
     borderRadius: 23,
-    marginTop: 120
+    marginTop: 100
   },
   nextText: {
     color: '#ffffff',
