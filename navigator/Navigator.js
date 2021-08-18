@@ -25,10 +25,8 @@ import CartWhiteSvg from '../assets/icons/cartWhite.svg'
 import SearchWhiteSvg from '../assets/icons/searchWhite.svg'
 import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
-import BackArrows from '../assets/profile/backArrow.svg'
 import SearchFarmSvg from '../assets/farms/search.svg'
 import FarmFavorite from '../assets/farms/FarmFavorite.svg'
-import CartFarmSvg from '../assets/farms/cart.svg'
 import Registration from "../screens/Registration";
 import RegistrationData from "../screens/RegistrationData";
 import MyMedicine from "../screens/MyMedicine";
@@ -57,10 +55,21 @@ export default function Navigator() {
           headerStyle: {backgroundColor: '#E6EFF9'},
           headerBackTitleStyle: {fontSize: 15},
           headerTitleStyle: {color: '#1F8BA7'},
-
         }}/>
-        <Stack.Screen name='MyMedicine' component={MyMedicine} />
-        <Stack.Screen name='MyFarms' component={MyFarms} options={{}}/>
+        <Stack.Screen name='MyMedicine' component={MyMedicine} options={{
+          headerBackTitle: 'Назад',
+          headerStyle: {backgroundColor: '#E6EFF9'},
+          headerBackTitleStyle: {fontSize: 15},
+          headerTitleStyle: {color: '#1F8BA7'},
+          title: 'Мои лекарства',
+        }} />
+        <Stack.Screen name='MyFarms' component={MyFarms} options={{
+          headerBackTitle: 'Назад',
+          headerStyle: {backgroundColor: '#E6EFF9'},
+          headerBackTitleStyle: {fontSize: 15},
+          headerTitleStyle: {color: '#1F8BA7'},
+          title: 'Мои аптеки',
+        }}/>
 
       </Stack.Navigator>
     )

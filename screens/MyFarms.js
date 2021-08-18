@@ -1,11 +1,20 @@
 import React from 'react';
+import FarmCard from "../components/FarmCard";
 import {View, ScrollView, Text} from 'react-native';
+import {myFarms} from "../styles/components/myFarms";
 
-function MyFarms(props) {
+function MyFarms({navigation}) {
   return (
-    <View>
-      <Text>1234</Text>
-    </View>
+    <ScrollView>
+      <View style={myFarms.container}>
+        <FarmCard navigation={navigation}/>
+        <FarmCard navigation={navigation}/>
+        <FarmCard navigation={navigation}/>
+        <FarmCard navigation={navigation}/>
+
+      </View>
+    </ScrollView>
+
   );
 }
 

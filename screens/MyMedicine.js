@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, Text} from "react-native";
+import {View, Text, ScrollView} from "react-native";
+import MedicineCard from "../components/MedicineCard";
 
 function MyMedicine(props) {
   return (
-    <View>
-      <Text>1325435</Text>
-    </View>
+    <ScrollView style={{backgroundColor: '#e6eff9'}}>
+      <View style={{paddingHorizontal: 16, marginTop: 25 }}>
+        <MedicineCard/>
+        <MedicineCard/>
+      </View>
+    </ScrollView>
   );
 }
 
