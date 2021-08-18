@@ -45,7 +45,7 @@ export default function Navigator() {
       <Stack.Navigator>
         <Stack.Screen name='Profile' component={Profile} options={{headerShown: false}}/>
         <Stack.Screen name='MyProfile' component={MyProfile} options={{
-          title: 'ПРОФИЛЬ',
+          title: 'Профиль',
           headerRight: () => (
             <TouchableOpacity onPress={() => alert('Save!')}>
               <Text style={{color: "#1F8BA7", marginRight: 10, fontSize: 15}}>Сохранить</Text>

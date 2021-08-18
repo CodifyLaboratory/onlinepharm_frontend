@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import {StyleSheet, Platform} from "react-native";
 
 export const myProfile = StyleSheet.create({
   container: {
@@ -20,8 +20,7 @@ export const myProfile = StyleSheet.create({
     width: '100%',
     backgroundColor: '#fff',
     borderRadius: 10,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingVertical: 5,
     paddingLeft: 16,
     paddingRight: 23,
   },
