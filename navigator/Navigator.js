@@ -32,6 +32,7 @@ import CartFarmSvg from '../assets/farms/cart.svg'
 import Registration from "../screens/Registration";
 import RegistrationData from "../screens/RegistrationData";
 import MyMedicine from "../screens/MyMedicine";
+import MyFarms from '../screens/MyFarms';
 
 
 
@@ -59,6 +60,8 @@ export default function Navigator() {
 
         }}/>
         <Stack.Screen name='MyMedicine' component={MyMedicine} />
+        <Stack.Screen name='MyFarms' component={MyFarms} options={{}}/>
+
       </Stack.Navigator>
     )
   }

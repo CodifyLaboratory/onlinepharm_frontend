@@ -66,7 +66,9 @@ export default function Profile({navigation, route}) {
               </View>
               <Arrow/>
             </TouchableOpacity>
-            <TouchableOpacity style={profile.profileLink}>
+            <TouchableOpacity style={profile.profileLink} onPress={()=> {
+              navigation.push('MyFarms');
+            }}>
               <View style={profile.profileLinkInner}>
                 <Doctor style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Мои аптеки</Text>
