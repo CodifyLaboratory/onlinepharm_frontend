@@ -31,6 +31,7 @@ import FarmFavorite from '../assets/farms/FarmFavorite.svg'
 import CartFarmSvg from '../assets/farms/cart.svg'
 import Registration from "../screens/Registration";
 import RegistrationData from "../screens/RegistrationData";
+import MyMedicine from "../screens/MyMedicine";
 
 
 
@@ -57,6 +58,7 @@ export default function Navigator() {
           headerTitleStyle: {color: '#1F8BA7'},
 
         }}/>
+        <Stack.Screen name='MyMedicine' component={MyMedicine} />
       </Stack.Navigator>
     )
   }

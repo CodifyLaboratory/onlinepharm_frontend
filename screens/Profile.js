@@ -54,7 +54,12 @@ export default function Profile({navigation, route}) {
               </View>
               <Arrow/>
             </TouchableOpacity>
-            <TouchableOpacity style={profile.profileLink}>
+            <TouchableOpacity
+              style={profile.profileLink}
+              onPress={() => {
+                navigation.push('MyMedicine')
+              }}
+            >
               <View style={profile.profileLinkInner}>
                 <Pill style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Мои лекарства</Text>
