@@ -55,7 +55,7 @@ export const profile = StyleSheet.create({
   },
   profileLinks: {
     width: 302,
-    height: 192,
+    height: 240,
     backgroundColor: '#fff',
     borderRadius: 18,
   },

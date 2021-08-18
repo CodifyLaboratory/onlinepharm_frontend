@@ -9,6 +9,7 @@ import Pill from '../assets/profile/pill.svg'
 import Doctor from '../assets/profile/doctor.svg'
 import Pencil from '../assets/profile/pencil.svg'
 import Arrow from '../assets/profile/arrow.svg'
+import Logout from '../assets/profile/logout.svg'
 
 import {profile} from "../styles/profile";
 
@@ -75,18 +76,17 @@ export default function Profile({navigation, route}) {
               </View>
               <Arrow/>
             </TouchableOpacity>
-            <TouchableOpacity style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              width: '100%',
-              justifyContent: 'space-between',
-              height: 48,
-              paddingLeft: 24,
-              paddingRight: 34,
-            }}>
+            <TouchableOpacity style={profile.profileLink}>
               <View style={profile.profileLinkInner}>
                 <Pencil style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Мои заказы</Text>
+              </View>
+              <Arrow/>
+            </TouchableOpacity>
+            <TouchableOpacity style={[profile.profileLink, {borderBottomWidth: 0}]}>
+              <View style={profile.profileLinkInner}>
+                <Logout style={{width: 24, height: 24}}/>
+                <Text style={profile.profileLinkText}>Выйти</Text>
               </View>
               <Arrow/>
             </TouchableOpacity>
