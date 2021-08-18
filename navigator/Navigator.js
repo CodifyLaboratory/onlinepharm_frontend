@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, Image, Platform, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Image, Platform, Button, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Main from "../screens/Main";
 import Search from "../screens/Search";
@@ -47,11 +47,9 @@ export default function Navigator() {
         <Stack.Screen name='MyProfile' component={MyProfile} options={{
           title: 'ПРОФИЛЬ',
           headerRight: () => (
-            <Button
-              onPress={() => alert('Save!')}
-              title="Сохранить"
-              color="#1F8BA7"
-            />
+            <TouchableOpacity onPress={() => alert('Save!')}>
+              <Text style={{color: "#1F8BA7", marginRight: 10, fontSize: 15}}>Сохранить</Text>
+            </TouchableOpacity>
           ),
           headerBackTitle: 'Назад',
           headerStyle: {backgroundColor: '#E6EFF9'},
