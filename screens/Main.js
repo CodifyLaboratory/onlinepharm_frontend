@@ -73,7 +73,7 @@ export default function Main({navigation}) {
           <Text style={main.hitsOldPrice}>50с</Text>
           <Text style={main.hitsPrice}>25с</Text>
         </View>
-        <TouchableOpacity style={main.hitsBtn}>
+        <TouchableOpacity style={main.hitsBtn} activeOpacity={0.8}>
           <Text style={main.hitsBtnText}>Добавить в корзину</Text>
         </TouchableOpacity>
       </View>

@@ -21,11 +21,11 @@ function CartItem(props) {
     </View>
         <View style={cartItem.right}>
           <View style={cartItem.counter}>
-            <TouchableOpacity style={cartItem.counterBtn}>
+            <TouchableOpacity style={cartItem.counterBtn} activeOpacity={0.5}>
               <Minus/>
             </TouchableOpacity>
             <Text style={cartItem.counterText}>2</Text>
-            <TouchableOpacity style={cartItem.counterBtn}>
+            <TouchableOpacity style={cartItem.counterBtn} activeOpacity={0.5}>
               <Plus/>
             </TouchableOpacity>
           </View>

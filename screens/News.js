@@ -54,7 +54,7 @@ export default function News({navigation}) {
           sliderWidth={420}
           itemWidth={420}
           slideStyle={{
-            marginRight: 20,
+            marginRight: 85,
           }}
           activeSlideAlignment={'start'}
           enableSnap={false}
@@ -66,7 +66,9 @@ export default function News({navigation}) {
           <View style={news.container}>
             <TouchableOpacity onPress={() => {
               navigation.push('NewsInfo')
-            }} style={news.farmCard}>
+            }} style={news.farmCard}
+              activeOpacity={0.85}
+            >
               <View style={news.farmCardInfo}>
                 <View style={news.nameFarm}>
                   <Text style={news.title}>Аптека:</Text>

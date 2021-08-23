@@ -1,10 +1,11 @@
-import {StyleSheet} from "react-native";
+import {StyleSheet, Platform} from "react-native";
 
 
 export const cart = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: Platform.OS == "android" ? 50 : 0
   },
   btn: {
     marginHorizontal: 16,

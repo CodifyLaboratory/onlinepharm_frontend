@@ -20,7 +20,9 @@ const Cart = ({navigation}) => {
         onPress={() => {
           navigation.push('Ordering')
         }}
-        style={cart.btn}>
+        style={cart.btn}
+        activeOpacity={0.8}
+        >
         <Text style={cart.btnText}>Оформить заказ</Text>
       </TouchableOpacity>
     </View>

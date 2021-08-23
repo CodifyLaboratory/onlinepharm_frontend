@@ -23,21 +23,21 @@ export default function Profile({navigation, route}) {
           <Text style={profile.profileName}>Керим Абдылдаев</Text>
           <Text style={profile.profileNumber}>+996 700 123 456</Text>
           <View style={profile.profilePersonalityBlocks}>
-            <TouchableOpacity style={profile.profilePersonalityBlock}>
+            <TouchableOpacity style={profile.profilePersonalityBlock} activeOpacity={0.6}>
               <View style={profile.profilePersonalityIcon}>
                 <Cart/>
               </View>
               <Text style={profile.profilePersonalityText}>Мои аптеки</Text>
               <Text style={profile.profilePersonalityText}>(4)</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={profile.profilePersonalityBlock}>
+            <TouchableOpacity style={profile.profilePersonalityBlock} activeOpacity={0.6}>
               <View style={profile.profilePersonalityIcon}>
                 <List/>
               </View>
               <Text style={profile.profilePersonalityText}>Мои заказы</Text>
               <Text style={profile.profilePersonalityText}>(7)</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={profile.profilePersonalityBlock}>
+            <TouchableOpacity style={profile.profilePersonalityBlock} activeOpacity={0.6}>
               <View style={profile.profilePersonalityIcon}>
                 <Medicine/>
               </View>
@@ -48,7 +48,9 @@ export default function Profile({navigation, route}) {
           <View style={profile.profileLinks}>
             <TouchableOpacity onPress={() => {
               navigation.push('MyProfile')
-            }} style={profile.profileLink}>
+            }} style={profile.profileLink}
+            activeOpacity={0.6}
+            >
               <View style={profile.profileLinkInner}>
                 <User style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Мои аккаунт</Text>
@@ -60,6 +62,7 @@ export default function Profile({navigation, route}) {
               onPress={() => {
                 navigation.push('MyMedicine')
               }}
+              activeOpacity={0.6}
             >
               <View style={profile.profileLinkInner}>
                 <Pill style={{width: 24, height: 24}}/>
@@ -69,21 +72,23 @@ export default function Profile({navigation, route}) {
             </TouchableOpacity>
             <TouchableOpacity style={profile.profileLink} onPress={()=> {
               navigation.push('MyFarms');
-            }}>
+            }}
+            activeOpacity={0.6}
+            >
               <View style={profile.profileLinkInner}>
                 <Doctor style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Мои аптеки</Text>
               </View>
               <Arrow/>
             </TouchableOpacity>
-            <TouchableOpacity style={profile.profileLink}>
+            <TouchableOpacity style={profile.profileLink} activeOpacity={0.6}>
               <View style={profile.profileLinkInner}>
                 <Pencil style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Мои заказы</Text>
               </View>
               <Arrow/>
             </TouchableOpacity>
-            <TouchableOpacity style={[profile.profileLink, {borderBottomWidth: 0}]}>
+            <TouchableOpacity style={[profile.profileLink, {borderBottomWidth: 0}]} activeOpacity={0.6}>
               <View style={profile.profileLinkInner}>
                 <Logout style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Выйти</Text>
