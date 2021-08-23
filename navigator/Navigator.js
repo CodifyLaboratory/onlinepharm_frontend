@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import { View, Image, Platform, Button, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from "@react-navigation/stack";
+
 import Main from "../screens/Main";
 import Search from "../screens/Search";
 import News from "../screens/News";
@@ -14,7 +16,8 @@ import Categories from '../screens/Categories';
 import CategoriesMedicines from '../screens/CategoriesMedicines';
 import NewsInfo from "../screens/NewsInfo";
 import Login from '../screens/Login';
-import {createStackNavigator} from "@react-navigation/stack";
+import Ordering from "../screens/Ordering";
+
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
 import ProfileSvg from '../assets/icons/Profile.svg'
@@ -27,6 +30,7 @@ import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
 import SearchFarmSvg from '../assets/farms/search.svg'
 import FarmFavorite from '../assets/farms/FarmFavorite.svg'
+
 import Registration from "../screens/Registration";
 import RegistrationData from "../screens/RegistrationData";
 import MyMedicine from "../screens/MyMedicine";
@@ -163,6 +167,18 @@ export default function Navigator() {
     )
   }
 
+  const CartNav = () => {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="Cart" component={Cart} options={{headerShown: false}}/>
+        <Stack.Screen name="Ordering" component={Ordering} options={{
+          title: 'Оформление заказа',
+          headerBackTitle: 'Назад',
+          headerTitleStyle: {color: '#1F8BA7'},
+        }}/>
+      </Stack.Navigator>
+    )
+  }
 
   const AuthNav = () => {
     return (
@@ -224,7 +240,7 @@ export default function Navigator() {
           />
           <Tab.Screen
             name='Cart'
-            component={Cart}
+            component={CartNav}
             options={{
               tabBarIcon: ({focused}) => (
                 <View

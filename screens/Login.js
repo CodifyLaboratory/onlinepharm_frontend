@@ -3,11 +3,11 @@ import {View, ScrollView, Text, TouchableOpacity, TextInput} from 'react-native'
 import { registration } from '../styles/registration';
 import Logo from '../assets/header/logo.svg';
 
-function Login({navigation, setIsSignIn, isSignIn}) {
+function Login({navigation, setIsSignIn}) {
   return (
     <View style={registration.container}>
       <Logo style={{marginTop: 65, marginBottom: 60}} />
-      <View>
+      <View style={{width: '100%'}}>
         <TextInput
           placeholder={'Email'}
           placeholderTextColor={'#333333'}
@@ -18,11 +18,10 @@ function Login({navigation, setIsSignIn, isSignIn}) {
           placeholderTextColor={'#333333'}
           style={registration.input}
         />
+        <TouchableOpacity onPress={()=>navigation.push('Login')}>
+          <Text style={[registration.forgotPassword, {textAlign: 'center'}]}>Забыли пароль?</Text>
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity onPress={()=>navigation.push('Login')}>
-        <Text style={registration.forgotPassword}>Забыли пароль?</Text>
-      </TouchableOpacity>
 
       <View style={registration.forgotContainer}>
         <Text style={registration.forgotAccount}>Еще нет аккаунта?</Text>

@@ -2,37 +2,32 @@ import {StyleSheet} from "react-native";
 
 export const registration = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
   },
   title: {
     fontSize: 20,
     color: '#00A0B6',
-    marginTop: 55,
-    marginBottom: 100
   },
   input: {
-    width: 345,
+    width: '100%',
     padding: 17,
     paddingBottom: 22,
     borderBottomWidth: 1,
     borderBottomColor: '#BCBCBC',
     marginBottom: 35,
-    fontSize: 15
+    fontSize: 15,
   },
   forgotContainer: {
     flexDirection: 'row',
-    marginTop: 10
+    width: '100%',
+    justifyContent: 'space-around',
   },
   forgotAccount: {
     color: '#828282',
-    fontSize: 14
-  },
-  forgot: {
-    marginLeft: 76,
-  },
-  forgotTextContainer: {
-    marginLeft: 32,
+    fontSize: 14,
   },
   forgotText: {
     color: '#00A0B6',
@@ -41,8 +36,6 @@ export const registration = StyleSheet.create({
   forgotPassword: {
     color: '#00A0B6',
     fontSize: 14,
-    marginBottom: 70,
-    marginTop: 14
   },
   next: {
     backgroundColor: '#1F8BA7',
@@ -50,10 +43,10 @@ export const registration = StyleSheet.create({
     width: 345,
     alignItems: 'center',
     borderRadius: 23,
-    marginTop: 100
+    marginBottom: 80,
   },
   nextText: {
     color: '#ffffff',
-    fontSize: 20
+    fontSize: 20,
   }
 })

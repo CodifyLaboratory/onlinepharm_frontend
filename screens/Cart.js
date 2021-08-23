@@ -1,13 +1,30 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import {View, StyleSheet, Text, SafeAreaView, ScrollView, TouchableOpacity} from "react-native";
 import {cart} from "../styles/cart";
+import CartItem from "../components/CartItem";
 
-const Cart = () => {
-    return (
-        <View style={cart.container}>
-            <Text>Корзина</Text>
-        </View>
-    );
+const Cart = ({navigation}) => {
+  return (
+    <View style={cart.container}>
+      <ScrollView>
+        <SafeAreaView>
+          <CartItem/>
+          <CartItem/>
+          <CartItem/>
+          <CartItem/>
+          <CartItem/>
+          <CartItem/>
+        </SafeAreaView>
+      </ScrollView>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.push('Ordering')
+        }}
+        style={cart.btn}>
+        <Text style={cart.btnText}>Оформить заказ</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
 export default Cart;

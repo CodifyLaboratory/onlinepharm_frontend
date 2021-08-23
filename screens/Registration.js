@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from "react-native";
 import {registration} from "../styles/registration";
-import {Formik} from "formik";
 import Logo from "../assets/header/logo.svg";
 
 function Registration({navigation}) {
@@ -14,26 +13,26 @@ function Registration({navigation}) {
   console.log(initialState)
 
 
-  const handleChangeEmail =(text)=> {
+  const handleChangeEmail = (text) => {
     setInitialState({...initialState, email: text})
   }
-  const handleChangePassword =(text)=> {
+  const handleChangePassword = (text) => {
     setInitialState({...initialState, password: text})
     setPasswordCheck(false)
   }
-  const handleChangeConfirm =(text)=> {
+  const handleChangeConfirm = (text) => {
     setInitialState({...initialState, confirm_password: text})
     setPasswordCheck(false)
   }
 
   const validatePasswords = () => {
-    if(initialState.password !== initialState.confirm_password){
+    if (initialState.password !== initialState.confirm_password) {
       setPasswordCheck(true)
     }
   }
 
 
-  const handleSubmit =()=> {
+  const handleSubmit = () => {
     validatePasswords()
     console.log('submitted')
   }
@@ -41,61 +40,63 @@ function Registration({navigation}) {
 
   return (
     <View style={registration.container}>
-      <Logo style={{marginTop: 65, marginBottom: 60}} />
+      <Logo style={{marginTop: 30}}/>
 
-          <View>
-            <TextInput
-              placeholder={'Email'}
-              placeholderTextColor={'#333333'}
-              style={registration.input}
-              textContentType={'emailAddress'}
-              onChangeText={handleChangeEmail}
-            />
-            <TextInput
-              placeholder={'Пароль'}
-              placeholderTextColor={'#333333'}
-              style={registration.input}
-              secureTextEntry={true}
-              onChangeText={handleChangePassword}
-              autoCorrect={false}
-            />
-            {
-              passwordCheck ?
-              <Text style={{marginLeft: 15 ,marginTop: -27, color: 'red'}}>Пароли не совпадают</Text>
+      <View style={{width: '100%'}}>
+        <View>
+          <TextInput
+            placeholder={'Email'}
+            placeholderTextColor={'#333333'}
+            style={registration.input}
+            textContentType={'emailAddress'}
+            onChangeText={handleChangeEmail}
+          />
+          <TextInput
+            placeholder={'Пароль'}
+            placeholderTextColor={'#333333'}
+            style={registration.input}
+            secureTextEntry={true}
+            onChangeText={handleChangePassword}
+            autoCorrect={false}
+          />
+          {
+            passwordCheck ?
+              <Text style={{marginLeft: 15, marginTop: -27, color: 'red'}}>Пароли не совпадают</Text>
               : null
-            }
-            <TextInput
-              placeholder={'Подтвердите пароль'}
-              placeholderTextColor={'#333333'}
-              style={registration.input}
-              secureTextEntry={true}
-              onChangeText={handleChangeConfirm}
-              autoCorrect={false}
-            />
+          }
+          <TextInput
+            placeholder={'Подтвердите пароль'}
+            placeholderTextColor={'#333333'}
+            style={registration.input}
+            secureTextEntry={true}
+            onChangeText={handleChangeConfirm}
+            autoCorrect={false}
+          />
 
-            {
-              passwordCheck ?
-              <Text style={{marginLeft: 15 ,marginTop: -27, color: 'red'}}>Пароли не совпадают</Text>
+          {
+            passwordCheck ?
+              <Text style={{marginLeft: 15, marginTop: -27, color: 'red'}}>Пароли не совпадают</Text>
               : null
-            }
-          </View>
+          }
+        </View>
 
 
-  <View style={registration.forgotContainer}>
-        <Text style={registration.forgotAccount}>Уже есть аккаунт?</Text>
-        <TouchableOpacity
-          style={registration.forgot}
-          onPress={()=>navigation.push('Login')}
-        >
-          <Text style={registration.forgotText}>Войти</Text>
-        </TouchableOpacity>
+        <View style={registration.forgotContainer}>
+          <Text style={registration.forgotAccount}>Уже есть аккаунт?</Text>
+          <TouchableOpacity
+            style={registration.forgot}
+            onPress={() => navigation.push('Login')}
+          >
+            <Text style={registration.forgotText}>Войти</Text>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <TouchableOpacity
         style={registration.next}
         onPress={() => {
           handleSubmit()
-          // navigation.push('RegistrationData')
+          navigation.push('RegistrationData')
         }}
         activeOpacity={0.8}
       >
@@ -107,3 +108,4 @@ function Registration({navigation}) {
 }
 
 export default Registration;
+
