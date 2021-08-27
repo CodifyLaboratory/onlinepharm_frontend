@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   StyleSheet,
@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import {news} from './../styles/news'
+import axios from "axios";
+import NewsCard from "../components/NewsCard";
 
 
 export default function News({navigation}) {
@@ -20,6 +22,15 @@ export default function News({navigation}) {
       text: 1,
     }
   ]);
+  const [newsItems, setNewsItems] = useState([])
+
+  useEffect(() => {
+    axios
+      .get('http://164.90.192.245/news/')
+      .then(res => setNewsItems(res.data))
+  }, [])
+
+  console.log(newsItems);
 
 
   function NewsItem() {
@@ -43,7 +54,7 @@ export default function News({navigation}) {
 
   return (
 
-    <SafeAreaView style={{backgroundColor: '#E6EFF9'}}>
+    <SafeAreaView style={{backgroundColor: '#E6EFF9',flex: 1,}}>
       <View style={news.newsInner}>
         <Carousel
           layout={'default'}
@@ -58,100 +69,15 @@ export default function News({navigation}) {
           }}
           activeSlideAlignment={'start'}
           enableSnap={false}
-          // autoplay={true}
-          // autoplayDelay={1000}
-          // autoplayInterval={1000}
         />
-        <ScrollView style={{backgroundColor: '#E6EFF9'}}>
+        <ScrollView style={{backgroundColor: '#E6EFF9', height: '100%'}}>
           <View style={news.container}>
-            <TouchableOpacity onPress={() => {
-              navigation.push('NewsInfo')
-            }} style={news.farmCard}
-              activeOpacity={0.85}
-            >
-              <View style={news.farmCardInfo}>
-                <View style={news.nameFarm}>
-                  <Text style={news.title}>Аптека:</Text>
-                  <Text style={news.farmName}>Неман</Text>
-                </View>
-                <Text style={news.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
-                <Text style={news.farmDate}>31 марта</Text>
-                <TouchableOpacity style={news.farmCardBtn}>
-                  <Text style={news.farmCardBtnText}>Подробнее</Text>
-                </TouchableOpacity>
-              </View>
-              <Image style={news.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={news.farmCard}>
-              <View style={news.farmCardInfo}>
-                <View style={news.nameFarm}>
-                  <Text style={news.title}>Аптека:</Text>
-                  <Text style={news.farmName}>Неман</Text>
-                </View>
-                <Text style={news.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
-                <Text style={news.farmDate}>31 марта</Text>
-                <TouchableOpacity style={news.farmCardBtn}>
-                  <Text style={news.farmCardBtnText}>Подробнее</Text>
-                </TouchableOpacity>
-              </View>
-              <Image style={news.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={news.farmCard}>
-              <View style={news.farmCardInfo}>
-                <View style={news.nameFarm}>
-                  <Text style={news.title}>Аптека:</Text>
-                  <Text style={news.farmName}>Неман</Text>
-                </View>
-                <Text style={news.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
-                <Text style={news.farmDate}>31 марта</Text>
-                <TouchableOpacity style={news.farmCardBtn}>
-                  <Text style={news.farmCardBtnText}>Подробнее</Text>
-                </TouchableOpacity>
-              </View>
-              <Image style={news.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={news.farmCard}>
-              <View style={news.farmCardInfo}>
-                <View style={news.nameFarm}>
-                  <Text style={news.title}>Аптека:</Text>
-                  <Text style={news.farmName}>Неман</Text>
-                </View>
-                <Text style={news.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
-                <Text style={news.farmDate}>31 марта</Text>
-                <TouchableOpacity style={news.farmCardBtn}>
-                  <Text style={news.farmCardBtnText}>Подробнее</Text>
-                </TouchableOpacity>
-              </View>
-              <Image style={news.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={news.farmCard}>
-              <View style={news.farmCardInfo}>
-                <View style={news.nameFarm}>
-                  <Text style={news.title}>Аптека:</Text>
-                  <Text style={news.farmName}>Неман</Text>
-                </View>
-                <Text style={news.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
-                <Text style={news.farmDate}>31 марта</Text>
-                <TouchableOpacity style={news.farmCardBtn}>
-                  <Text style={news.farmCardBtnText}>Подробнее</Text>
-                </TouchableOpacity>
-              </View>
-              <Image style={news.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={news.farmCard}>
-              <View style={news.farmCardInfo}>
-                <View style={news.nameFarm}>
-                  <Text style={news.title}>Аптека:</Text>
-                  <Text style={news.farmName}>Неман</Text>
-                </View>
-                <Text style={news.farmDesc}>В день пожилых людей Скидка 15% на весь товар</Text>
-                <Text style={news.farmDate}>31 марта</Text>
-                <TouchableOpacity style={news.farmCardBtn}>
-                  <Text style={news.farmCardBtnText}>Подробнее</Text>
-                </TouchableOpacity>
-              </View>
-              <Image style={news.farmCardImage} source={require('../assets/news/cardLogo.png')}/>
-            </TouchableOpacity>
+            {
+              newsItems.map((item, id) => (
+                <NewsCard navigation={navigation} data={item} key={item.id}/>
+                )
+              )
+            }
           </View>
         </ScrollView>
       </View>

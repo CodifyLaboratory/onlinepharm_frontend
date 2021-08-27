@@ -29,5 +29,18 @@ export const newsInfo = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
     color: '#1F8BA7',
+  },
+  preview: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+    borderWidth: 1,
+    borderColor: '#ECEEEF',
+    borderRadius: 13,
+  },
+
+  previewImg: {
+    width: 343,
+    height: 210,
   }
 })

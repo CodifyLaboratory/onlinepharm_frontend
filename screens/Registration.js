@@ -13,6 +13,7 @@ function Registration({navigation}) {
   console.log(initialState)
 
 
+
   const handleChangeEmail = (text) => {
     setInitialState({...initialState, email: text})
   }
@@ -51,14 +52,14 @@ function Registration({navigation}) {
             textContentType={'emailAddress'}
             onChangeText={handleChangeEmail}
           />
-          <TextInput
-            placeholder={'Пароль'}
-            placeholderTextColor={'#333333'}
-            style={registration.input}
-            secureTextEntry={true}
-            onChangeText={handleChangePassword}
-            autoCorrect={false}
-          />
+              <TextInput
+                placeholder={'Пароль'}
+                placeholderTextColor={'#333333'}
+                style={registration.input}
+                secureTextEntry={true}
+                onChangeText={handleChangePassword}
+                autoCorrect={false}
+              />
           {
             passwordCheck ?
               <Text style={{marginLeft: 15, marginTop: -27, color: 'red'}}>Пароли не совпадают</Text>

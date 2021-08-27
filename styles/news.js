@@ -6,6 +6,7 @@ export const news = StyleSheet.create({
     paddingRight: 16,
     alignItems: 'center',
     paddingBottom: 40,
+
   },
   newsInner: {
     paddingTop: Platform.OS === 'ios' ? 10 : 0,
@@ -79,5 +80,7 @@ export const news = StyleSheet.create({
   farmCardImage: {
     width: 140,
     height: 150,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
   }
 })
