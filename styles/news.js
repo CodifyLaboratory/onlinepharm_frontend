@@ -11,30 +11,31 @@ export const news = StyleSheet.create({
   newsInner: {
     paddingTop: Platform.OS === 'ios' ? 10 : 0,
   },
-  newsNav: {
-    flexDirection: 'row',
-    paddingLeft: 16,
-    marginBottom: 24,
-    paddingTop: Platform.OS == 'android' ? 45 : 0,
-    marginLeft: Platform.OS == 'android' ? 20 : 0
+  newsItem: {
+    marginRight: 20,
+    marginLeft: 20,
+  },
+  newsItemActive: {
+    marginRight: 20,
+    marginLeft: 20,
+    borderBottomWidth: 3,
+    borderBottomColor: "#FFC90A",
+    paddingBottom: 8,
+    color: 'red',
   },
   newsNavText: {
     fontSize: 18,
-    marginRight: Platform.OS == 'android' ? 20 : 40,
     color: '#999999'
   },
   newsNavTextActive: {
     fontSize: 18,
-    marginRight: Platform.OS == 'android' ? 20 : 40,
     color: '#1F8BA7',
-    borderBottomWidth: 3,
-    borderBottomColor: "#FFC90A",
-    paddingBottom: 8,
   },
   farmCard: {
-    width: 343,
+    width: '100%',
     borderRadius: 20,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     backgroundColor: '#1F8BA7',
     marginBottom: 16,
   },
