@@ -13,6 +13,9 @@ import CartHeader from '../assets/header/Cart.svg';
 import SearchHeader from '../assets/header/search.svg';
 
 import {main} from "../styles/main";
+import MainFarmCard from "../styles/components/MainFarmCard";
+import MainSymptomsCard from "../styles/components/MainSymptomsCard";
+import MainHitsCard from "../styles/components/MainHitsCard";
 
 export default function Main({navigation}) {
   const [slideElem, setSlideElem] = useState([
@@ -43,45 +46,10 @@ export default function Main({navigation}) {
     );
   }
 
-  function farmItem() {
-    return (
-      <View style={main.farmSliderElem}>
-        <Image style={{width: 118, height: 90}} source={require('../assets/main/farmLogo.png')}/>
-        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13}}>Новая аптека</Text>
-      </View>
-    );
-  }
-
-  function symptomsItem() {
-    return (
-      <View style={main.symptomsSliderElem}>
-        <Image style={{width: 36, height: 36}} source={require('../assets/main/symptomsLogo.png')}/>
-        <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13, marginTop: 11,}}>Головная боль</Text>
-      </View>
-    );
-  }
-
-  function hitsItem() {
-    return (
-      <View style={main.hitsItem}>
-        <View style={main.hitsDiscount}>
-          <Text style={main.hitsDiscountText}>50% скидка</Text>
-        </View>
-        <Image style={main.hitsImage} source={require('../assets/main/hitsLogo.png')}/>
-        <Text style={main.hitsName}>Азитромицин Вертекс</Text>
-        <View style={main.hitsPrices}>
-          <Text style={main.hitsOldPrice}>50с</Text>
-          <Text style={main.hitsPrice}>25с</Text>
-        </View>
-        <TouchableOpacity style={main.hitsBtn} activeOpacity={0.8}>
-          <Text style={main.hitsBtnText}>Добавить в корзину</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
   return (
-    <ScrollView>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+    >
       <SafeAreaView>
         <View style={main.container}>
           <View style={main.header}>
@@ -158,22 +126,20 @@ export default function Main({navigation}) {
               </TouchableWithoutFeedback>
             </View>
 
-            <Carousel
-              layout={'default'}
-              inactiveSlideScale={1}
-              windowSize={1}
-              data={slideElem}
-              renderItem={farmItem}
-              sliderWidth={420}
-              itemWidth={118}
-              slideStyle={{
-                marginRight: 30,
-              }}
-              activeSlideAlignment={'start'}
-              // autoplay={true}
-              // autoplayDelay={1000}
-              // autoplayInterval={1000}
-            />
+            <View style={{height: 132}}>
+              <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              >
+                <MainFarmCard/>
+                <MainFarmCard/>
+                <MainFarmCard/>
+                <MainFarmCard/>
+                <MainFarmCard/>
+                <MainFarmCard/>
+                <MainFarmCard/>
+              </ScrollView>
+            </View>
 
             <View style={main.title}>
               <Text>Симптомы</Text>
@@ -182,22 +148,19 @@ export default function Main({navigation}) {
               </TouchableWithoutFeedback>
             </View>
 
-            <Carousel
-              layout={'default'}
-              inactiveSlideScale={1}
-              windowSize={1}
-              data={slideElem}
-              renderItem={symptomsItem}
-              sliderWidth={420}
-              itemWidth={90}
-              slideStyle={{
-                marginRight: 25,
-              }}
-              activeSlideAlignment={'start'}
-              // autoplay={true}
-              // autoplayDelay={1000}
-              // autoplayInterval={1000}
-            />
+            <View style={{height: 100, }}>
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+              >
+                <MainSymptomsCard/>
+                <MainSymptomsCard/>
+                <MainSymptomsCard/>
+                <MainSymptomsCard/>
+                <MainSymptomsCard/>
+              </ScrollView>
+            </View>
+
           </View>
 
           <View style={main.title}>
@@ -245,19 +208,19 @@ export default function Main({navigation}) {
             </TouchableWithoutFeedback>
           </View>
 
-          <Carousel
-            layout={'default'}
-            inactiveSlideScale={1}
-            windowSize={1}
-            data={slideElem}
-            renderItem={hitsItem}
-            sliderWidth={420}
-            itemWidth={120}
-            slideStyle={{
-              marginRight: 20,
-            }}
-            activeSlideAlignment={'start'}
-          />
+          <View style={{height: 190, }}>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              <MainHitsCard/>
+              <MainHitsCard/>
+              <MainHitsCard/>
+              <MainHitsCard/>
+              <MainHitsCard/>
+            </ScrollView>
+          </View>
+
         </View>
         <View style={main.appInfo}>
           <Logo style={{marginBottom: 16}}/>

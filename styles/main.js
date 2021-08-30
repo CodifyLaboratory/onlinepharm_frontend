@@ -5,8 +5,6 @@ export const main = StyleSheet.create({
     color: 'red',
   },
   container: {
-    paddingRight: 16,
-    paddingLeft: 16,
     paddingTop: Platform.OS == 'android' ? 40 : 0
   },
   banner: {
@@ -19,6 +17,8 @@ export const main = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 20,
     paddingTop: 8,
+    paddingRight: 8,
+    paddingLeft: 8,
   },
   headerRight: {
     flexDirection: 'row',
@@ -49,12 +49,16 @@ export const main = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 16,
-    marginBottom: 19
+    marginBottom: 19,
+    paddingRight: 8,
+    paddingLeft: 8,
   },
   farmSliderElem: {
     margin: 0,
     width: 132,
     height: 132,
+    marginLeft: 8,
+    marginRight: 8,
     backgroundColor: '#fff',
     borderRadius: 10,
     alignItems: 'center',
@@ -68,12 +72,16 @@ export const main = StyleSheet.create({
     paddingBottom: 15,
     paddingLeft: 7,
     paddingRight: 7,
+    marginLeft: 8,
+    marginRight: 8,
     alignItems: 'center'
   },
   categories: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingRight: 8,
+    paddingLeft: 8,
   },
   categoriesItem: {
     width: '48%',
@@ -104,6 +112,8 @@ export const main = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginBottom: 16,
+    marginLeft: 8,
+    marginRight: 8,
   },
   hitsDiscount: {
     backgroundColor: '#21B727',
