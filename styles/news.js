@@ -2,14 +2,14 @@ import {Platform, StyleSheet} from "react-native";
 
 export const news = StyleSheet.create({
   container: {
-    paddingLeft: 16,
+    paddingLeft: Platform.OS === 'ios' ? 16 : 8,
     paddingRight: 16,
     alignItems: 'center',
     paddingBottom: 40,
 
   },
   newsInner: {
-    paddingTop: Platform.OS === 'ios' ? 10 : 0,
+    paddingTop: Platform.OS === 'ios' ? 10 : 45,
   },
   newsItem: {
     marginRight: 20,
