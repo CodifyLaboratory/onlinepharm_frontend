@@ -7,9 +7,10 @@ export const farms = StyleSheet.create({
     borderRadius: 10,
     paddingTop: 30,
     paddingBottom: 16,
+    paddingHorizontal: 16,
   },
   farmCard: {
-    width: 327,
+    width: '100%',
     height: 115,
     backgroundColor: '#fff',
     flexDirection: 'row',

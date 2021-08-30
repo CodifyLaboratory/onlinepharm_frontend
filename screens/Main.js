@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform, ImageBackground, ScrollView,
   SafeAreaView
@@ -18,6 +18,7 @@ import MainSymptomsCard from "../styles/components/MainSymptomsCard";
 import MainHitsCard from "../styles/components/MainHitsCard";
 
 export default function Main({navigation}) {
+
   const [slideElem, setSlideElem] = useState([
     {
       text: 1,

@@ -5,7 +5,6 @@ import {Image, Text, TouchableOpacity, View} from "react-native";
 const NewsCard = ({navigation, data}) => {
   return (
     <TouchableOpacity onPress={() => {
-      // navigation.push('NewsInfo')
       navigation.navigate('NewsInfo', data)
     }} style={news.farmCard}
                       activeOpacity={0.85}
