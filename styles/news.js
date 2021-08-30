@@ -23,6 +23,14 @@ export const news = StyleSheet.create({
     marginRight: Platform.OS == 'android' ? 20 : 40,
     color: '#999999'
   },
+  newsNavTextActive: {
+    fontSize: 18,
+    marginRight: Platform.OS == 'android' ? 20 : 40,
+    color: '#1F8BA7',
+    borderBottomWidth: 3,
+    borderBottomColor: "#FFC90A",
+    paddingBottom: 8,
+  },
   farmCard: {
     width: 343,
     borderRadius: 20,

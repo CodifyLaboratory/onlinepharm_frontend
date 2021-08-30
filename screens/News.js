@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useMemo, useEffect} from "react";
 import {
   View,
   StyleSheet,
@@ -22,32 +22,61 @@ export default function News({navigation}) {
       text: 1,
     }
   ]);
+  const [category, setCategory] = useState(1)
+  const [categoryDataId, setCategoryDataId] = useState([])
   const [newsItems, setNewsItems] = useState([])
 
   useEffect(() => {
     axios
       .get('http://164.90.192.245/news/')
       .then(res => setNewsItems(res.data))
+    axios
+      .get('http://164.90.192.245/news-categories/')
+      .then(res => setCategoryDataId(res.data))
   }, [])
 
-  console.log(newsItems);
+  // console.log(categoryDataId);
+
+  const changeCategory =(id) => {
+    setCategory(id)
+  }
+
+  const newsList = useMemo(
+    () =>
+      newsItems
+        .filter((item) => item.category.id === category)
+        .map((item) => (
+            <NewsCard navigation={navigation} data={item} key={item.id}/>
+          )
+        )
+    ,[newsItems, category]
+  )
+
+
+  const categoryList = useMemo(
+    () =>
+      categoryDataId.map((item) => (
+        <TouchableOpacity
+          onPress={()=> changeCategory(item.id)}
+          activeOpacity={0.5}
+          key={item.id}
+        >
+          <Text style={
+            category == item.id ?
+              news.newsNavTextActive
+              :
+              news.newsNavText
+          }>{item.title}</Text>
+        </TouchableOpacity>
+      ))
+    ,[categoryDataId, category]
+  )
 
 
   function NewsItem() {
     return (
       <View style={news.newsNav}>
-        <TouchableOpacity>
-          <Text style={news.newsNavText}>Акции</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={news.newsNavText}>Скидки</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={news.newsNavText}>Новинки</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={news.newsNavText}>Предложения</Text>
-        </TouchableOpacity>
+        {categoryList}
       </View>
     );
   }
@@ -65,18 +94,16 @@ export default function News({navigation}) {
           sliderWidth={420}
           itemWidth={420}
           slideStyle={{
-            marginRight: 85,
+            marginRight: categoryDataId.length < 6 ? categoryDataId.length * 20 : categoryDataId.length * 30,
           }}
-          activeSlideAlignment={'start'}
+          activeSlideAlignment={'center'}
           enableSnap={false}
         />
+
         <ScrollView style={{backgroundColor: '#E6EFF9', height: '100%'}}>
           <View style={news.container}>
             {
-              newsItems.map((item, id) => (
-                <NewsCard navigation={navigation} data={item} key={item.id}/>
-                )
-              )
+              newsList
             }
           </View>
         </ScrollView>
