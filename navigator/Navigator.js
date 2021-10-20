@@ -1,7 +1,7 @@
-import React, {useState} from "react";
-import { View, Image, Platform, Button, TouchableOpacity, StyleSheet, Text } from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from "@react-navigation/stack";
+import React, { useState } from "react";
+import { View, Platform, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from "@react-navigation/stack";
 
 import Main from "../screens/Main";
 import Search from "../screens/Search";
@@ -38,6 +38,7 @@ import RegistrationData from "../screens/RegistrationData";
 import MyMedicine from "../screens/MyMedicine";
 import MyFarms from '../screens/MyFarms';
 
+import { mainBgColor, mainTextColor } from "../constants"
 
 
 export default function Navigator() {
@@ -49,33 +50,33 @@ export default function Navigator() {
   const ProfileNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name='Profile' component={Profile} options={{headerShown: false}}/>
+        <Stack.Screen name='Profile' component={Profile} options={{ headerShown: false }} />
         <Stack.Screen name='MyProfile' component={MyProfile} options={{
           title: 'Профиль',
           headerRight: () => (
             <TouchableOpacity onPress={() => alert('Save!')}>
-              <Text style={{color: "#1F8BA7", marginRight: 10, fontSize: 15}}>Сохранить</Text>
+              <Text style={{ color: mainTextColor, marginRight: 10, fontSize: 15 }}>Сохранить</Text>
             </TouchableOpacity>
           ),
           headerBackTitle: 'Назад',
-          headerStyle: {backgroundColor: '#E6EFF9'},
-          headerBackTitleStyle: {fontSize: 15},
-          headerTitleStyle: {color: '#1F8BA7'},
-        }}/>
+          headerStyle: { backgroundColor: mainBgColor },
+          headerBackTitleStyle: { fontSize: 15 },
+          headerTitleStyle: { color: mainTextColor },
+        }} />
         <Stack.Screen name='MyMedicine' component={MyMedicine} options={{
           headerBackTitle: 'Назад',
-          headerStyle: {backgroundColor: '#E6EFF9'},
-          headerBackTitleStyle: {fontSize: 15},
-          headerTitleStyle: {color: '#1F8BA7'},
+          headerStyle: { backgroundColor: mainBgColor },
+          headerBackTitleStyle: { fontSize: 15 },
+          headerTitleStyle: { color: mainTextColor },
           title: 'Мои лекарства',
         }} />
         <Stack.Screen name='MyFarms' component={MyFarms} options={{
           headerBackTitle: 'Назад',
-          headerStyle: {backgroundColor: '#E6EFF9'},
-          headerBackTitleStyle: {fontSize: 15},
-          headerTitleStyle: {color: '#1F8BA7'},
+          headerStyle: { backgroundColor: mainBgColor },
+          headerBackTitleStyle: { fontSize: 15 },
+          headerTitleStyle: { color: mainTextColor },
           title: 'Мои аптеки',
-        }}/>
+        }} />
 
       </Stack.Navigator>
     )
@@ -84,45 +85,45 @@ export default function Navigator() {
   const MainNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={Main} options={{headerShown: false}}/>
+        <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
         <Stack.Screen name="Farms" component={Farms}
-                      options={{
-                        headerRight: () => (
-                          <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
-                            <SearchFarmSvg/>
-                          </TouchableOpacity>
-                        ),
-                        title: 'Аптеки',
-                        headerBackTitle: 'Назад',
-                        headerStyle: {backgroundColor: '#E6EFF9'},
-                        headerTitleStyle: {color: '#1F8BA7'},
+          options={{
+            headerRight: () => (
+              <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
+                <SearchFarmSvg />
+              </TouchableOpacity>
+            ),
+            title: 'Аптеки',
+            headerBackTitle: 'Назад',
+            headerStyle: { backgroundColor: mainBgColor },
+            headerTitleStyle: { color: mainTextColor },
 
-                      }} />
+          }} />
         <Stack.Screen name="Farm" component={Farm} options={{
           headerRight: () => (
-            <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+            <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
               <SearchFarmSvg />
             </TouchableOpacity>
           ),
           title: 'Фармамир',
-          headerStyle: { backgroundColor: '#E6EFF9'},
-          headerTitleStyle: {color: '#1F8BA7'},
+          headerStyle: { backgroundColor: mainBgColor },
+          headerTitleStyle: { color: mainTextColor },
         }} />
         <Stack.Screen name="FarmInfo" component={FarmInfo} options={{
           headerRight: () => (
-            <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+            <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
               <FarmFavorite />
             </TouchableOpacity>
           ),
           title: 'О продукте',
-          headerStyle: { backgroundColor: '#F4F5F6'},
-          headerTitleStyle: {color: '#1F8BA7'},
+          headerStyle: { backgroundColor: '#F4F5F6' },
+          headerTitleStyle: { color: mainTextColor },
         }} />
         <Stack.Screen name="Map" component={Map} options={{headerShown: false}}/>
         <Stack.Screen name="Categories" component={Categories} options={{
           headerRight: () => (
             <View style={styles.flexRow}>
-              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+              <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
                 <SearchFarmSvg />
               </TouchableOpacity>
             </View>
@@ -130,17 +131,17 @@ export default function Navigator() {
           title: 'Лекарственные препараты',
           headerBackTitle: 'Назад',
           headerStyle: {
-            backgroundColor: '#E6EFF9',
+            backgroundColor: mainBgColor,
           },
           headerTitleStyle: {
-            color: '#1F8BA7',
+            color: mainTextColor,
             fontSize: 17
           },
         }} />
         <Stack.Screen name="CategoriesMedicines" component={CategoriesMedicines} options={{
           headerRight: () => (
             <View style={styles.flexRow}>
-              <TouchableOpacity activeOpacity={0.5} style={{marginRight: 15}}>
+              <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
                 <SearchFarmSvg />
               </TouchableOpacity>
             </View>
@@ -149,10 +150,10 @@ export default function Navigator() {
           title: 'Антибиотики',
           headerBackTitle: 'Назад',
           headerStyle: {
-            backgroundColor: '#E6EFF9',
+            backgroundColor: mainBgColor,
           },
           headerTitleStyle: {
-            color: '#1F8BA7',
+            color: mainTextColor,
             fontSize: 17
           },
         }} />
@@ -163,8 +164,8 @@ export default function Navigator() {
   const NewsNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="News" component={News} options={{headerShown: false}}/>
-        <Stack.Screen name='NewsInfo' component={NewsInfo} options={{headerBackTitle: 'Назад'}}/>
+        <Stack.Screen name="News" component={News} options={{ headerShown: false }} />
+        <Stack.Screen name='NewsInfo' component={NewsInfo} options={{ headerBackTitle: 'Назад' }} />
 
       </Stack.Navigator>
     )
@@ -173,12 +174,12 @@ export default function Navigator() {
   const CartNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Cart" component={Cart} options={{headerShown: false}}/>
+        <Stack.Screen name="Cart" component={Cart} options={{ headerShown: false }} />
         <Stack.Screen name="Ordering" component={Ordering} options={{
           title: 'Оформление заказа',
           headerBackTitle: 'Назад',
-          headerTitleStyle: {color: '#1F8BA7'},
-        }}/>
+          headerTitleStyle: { color: mainTextColor },
+        }} />
       </Stack.Navigator>
     )
   }
@@ -193,123 +194,123 @@ export default function Navigator() {
       </Stack.Screen>
         <Stack.Screen name="Registration" component={Registration} options={{
           headerTitle: 'Регистрация',
-          headerTitleStyle: { color: '#1F8BA7' }
-        }}/>
+          headerTitleStyle: { color: mainTextColor }
+        }} />
         <Stack.Screen name="RegistrationData" options={{
           headerBackTitle: 'Назад',
           headerTitle: 'Регистрация',
-          headerTitleStyle: {color: '#1F8BA7'},
+          headerTitleStyle: { color: mainTextColor },
         }}>
-          {props => <RegistrationData {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn}/>}
+          {props => <RegistrationData {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn} />}
         </Stack.Screen>
         <Stack.Screen name="Login" options={{
           headerTitle: 'Войти',
-          headerTitleStyle: { color: '#1F8BA7' }
+          headerTitleStyle: { color: mainTextColor }
         }}>
-          {props => <Login {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn}/>}
+          {props => <Login {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn} />}
         </Stack.Screen>
       </Stack.Navigator>
-      )
+    )
 
   }
 
   return (
-      isSignIn ? (
-        <Tab.Navigator
-          initialRouteName='Main'
-          screenOptions={{
-            tabBarStyle: {
-              backgroundColor: '#1F8BA7',
-              height: 78,
-              paddingBottom: Platform.OS === 'ios' ? 30 : 0,
-            },
-            tabBarLabelStyle: {
-              color: '#fff',
-              marginBottom: Platform.OS === 'ios' ? -20 : 10,
-              paddingBottom: Platform.OS === 'ios' ? 10 : 0,
-              fontSize: 12
-            },
+    isSignIn ? (
+      <Tab.Navigator
+        initialRouteName='Main'
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: mainTextColor,
+            height: 78,
+            paddingBottom: Platform.OS === 'ios' ? 30 : 0,
+          },
+          tabBarLabelStyle: {
+            color: '#fff',
+            marginBottom: Platform.OS === 'ios' ? -20 : 10,
+            paddingBottom: Platform.OS === 'ios' ? 10 : 0,
+            fontSize: 12
+          },
+        }}
+      >
+        <Tab.Screen
+          name='News'
+          component={NewsNav}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View
+                style={{
+                  paddingTop: 10,
+                }}>
+                {focused ? (<NewsWhiteSvg />) : (<NewsSvg />)}
+              </View>
+            ),
+            headerShown: false,
           }}
-        >
-          <Tab.Screen
-            name='News'
-            component={NewsNav}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={{
-                    paddingTop: 10,
-                  }}>
-                  {focused ? (<NewsWhiteSvg/>) : (<NewsSvg/>)}
-                </View>
-              ),
-              headerShown: false,
-            }}
-          />
-          <Tab.Screen
-            name='Cart'
-            component={CartNav}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={{
-                    paddingTop: 10
-                  }}>
-                  {focused ? (<CartWhiteSvg/>) : (<CartSvg/>)}
-                </View>
-              ),
-              headerShown: false,
-            }}
-          />
-          <Tab.Screen
-            name='Main'
-            component={MainNav}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={{
-                    paddingTop: 10
-                  }}>
-                  {focused ? (<MainSvg/>) : (<MainGraySvg/>)}
-                </View>
-              ),
-              headerShown: false,
-            }}/>
-          <Tab.Screen
-            name='Search'
-            component={Search}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={{
-                    paddingTop: 10
-                  }}>
-                  {focused ? (<SearchWhiteSvg/>) : (<SearchSvg/>)}
-                </View>
-              ),
-              headerShown: false,
-            }}
-          />
+        />
+        <Tab.Screen
+          name='Cart'
+          component={CartNav}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View
+                style={{
+                  paddingTop: 10
+                }}>
+                {focused ? (<CartWhiteSvg />) : (<CartSvg />)}
+              </View>
+            ),
+            headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name='Main'
+          component={MainNav}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View
+                style={{
+                  paddingTop: 10
+                }}>
+                {focused ? (<MainSvg />) : (<MainGraySvg />)}
+              </View>
+            ),
+            headerShown: false,
+          }} />
+        <Tab.Screen
+          name='Search'
+          component={Search}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View
+                style={{
+                  paddingTop: 10
+                }}>
+                {focused ? (<SearchWhiteSvg />) : (<SearchSvg />)}
+              </View>
+            ),
+            headerShown: false,
+          }}
+        />
 
-          <Tab.Screen
-            name='Profile'
-            component={ProfileNav}
-            options={{
-              tabBarIcon: ({focused}) => (
-                <View
-                  style={{
-                    paddingTop: 10
-                  }}>
-                  {focused ? (<ProfileWhiteSvg/>) : (<ProfileSvg/>)}
-                </View>
-              ),
-              headerShown: false,
-            }}
-          />
-        </Tab.Navigator>
-      ) : (
-        AuthNav()
-      )
+        <Tab.Screen
+          name='Profile'
+          component={ProfileNav}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View
+                style={{
+                  paddingTop: 10
+                }}>
+                {focused ? (<ProfileWhiteSvg />) : (<ProfileSvg />)}
+              </View>
+            ),
+            headerShown: false,
+          }}
+        />
+      </Tab.Navigator>
+    ) : (
+      AuthNav()
+    )
 
 
   );
