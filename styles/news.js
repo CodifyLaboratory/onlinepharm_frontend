@@ -3,7 +3,6 @@ import {Platform, StyleSheet} from "react-native";
 export const news = StyleSheet.create({
   container: {
     paddingLeft: Platform.OS === 'ios' ? 16 : 8,
-    paddingRight: 16,
     alignItems: 'center',
     paddingBottom: 40,
 
@@ -32,15 +31,17 @@ export const news = StyleSheet.create({
     color: '#1F8BA7',
   },
   farmCard: {
-    width: '100%',
+    flex: 1,
     borderRadius: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: '#1F8BA7',
     marginBottom: 16,
+    marginRight: 16,
+    marginLeft: 8
   },
   farmCardInfo: {
-    width: 203,
+    flex: 0.5,
     paddingTop: 16,
     paddingLeft: 16,
     paddingBottom: 8,
@@ -65,15 +66,16 @@ export const news = StyleSheet.create({
     lineHeight: 16,
     color: '#fff',
     marginBottom: 8,
+    width: 171
   },
   farmDate: {
     fontSize: 11,
     fontWeight: '500',
-    color: '#F3F3F3',
-    marginBottom: 25,
+    color: '#CCCCCC',
+    marginBottom: 20,
   },
   farmCardBtn: {
-    backgroundColor: '#FFD60A',
+    backgroundColor: '#4BCCED',
     borderRadius: 8,
     width: 82,
     paddingTop: 4,
@@ -84,9 +86,10 @@ export const news = StyleSheet.create({
   },
   farmCardBtnText: {
     fontSize: 11,
-    color: '#4B4747',
+    color: '#ffffff',
   },
   farmCardImage: {
+    flex: 0.5,
     width: 140,
     height: 150,
     borderTopRightRadius: 20,

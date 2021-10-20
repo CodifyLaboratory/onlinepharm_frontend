@@ -3,7 +3,7 @@ import { Text, View, ScrollView, TouchableOpacity, Image, StyleSheet } from 'rea
 import {farmInfo} from "../styles/farmInfo";
 
 
-function FarmInfo(props) {
+function FarmInfo({navigation}) {
   return (
     <ScrollView>
 
@@ -15,7 +15,7 @@ function FarmInfo(props) {
         <Text style={farmInfo.contacts}>+996 555 323 145</Text>
         <Text style={farmInfo.contacts}>+996 700 122 478</Text>
         <Text style={farmInfo.date}>Адрес:</Text>
-        <Text style={farmInfo.time}>ул.Советская 233 / 9 мкрн д.10</Text>
+        <Text style={farmInfo.time} onPress={() => navigation.navigate('Map')}>ул.Советская 233 / 9 мкрн д.10</Text>
       </View>
 
     </ScrollView>

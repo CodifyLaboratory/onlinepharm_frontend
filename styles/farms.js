@@ -9,6 +9,33 @@ export const farms = StyleSheet.create({
     paddingBottom: 16,
     paddingHorizontal: 16,
   },
+  type: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 24
+  },
+  typeElem: {
+    width: 150,
+    alignItems: 'center',
+    paddingBottom: 7,
+  },
+  typeElemActive: {
+    width: 150,
+    alignItems: 'center',
+    paddingBottom: 7,
+    borderBottomWidth: 2,
+    borderBottomColor: '#FFC90A'
+  },
+  typeText: {
+    color: '#999999',
+    fontSize: 18
+  },
+  typeTextActive: {
+    color: '#1F8BA7',
+    fontSize: 18,
+
+  },
   farmCard: {
     width: '100%',
     height: 115,
@@ -34,6 +61,7 @@ export const farms = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#F3F3F3',
+    resizeMode: 'contain'
   },
   farmName: {
     color: '#1F8BA7',

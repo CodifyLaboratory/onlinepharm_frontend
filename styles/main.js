@@ -8,13 +8,15 @@ export const main = StyleSheet.create({
     paddingTop: Platform.OS == 'android' ? 40 : 0
   },
   banner: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
     borderRadius: 20,
-    marginLeft: -45,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: 20,
     paddingTop: 8,
     paddingRight: 8,
@@ -53,6 +55,11 @@ export const main = StyleSheet.create({
     paddingRight: 8,
     paddingLeft: 8,
   },
+  watchAll: {
+    color: '#1F8BA7',
+    fontSize: 13,
+    textDecorationLine: 'underline'
+  },
   farmSliderElem: {
     margin: 0,
     width: 132,
@@ -62,6 +69,7 @@ export const main = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 10,
     alignItems: 'center',
+
   },
   symptomsSliderElem: {
     width: 100,

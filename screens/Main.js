@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import {
   StyleSheet, Text, View, TouchableOpacity, TouchableWithoutFeedback, Image, Platform, ImageBackground, ScrollView,
   SafeAreaView
@@ -11,11 +11,14 @@ import Arrow from '../assets/header/arrow.svg';
 import SelectDropdown from 'react-native-select-dropdown';
 import CartHeader from '../assets/header/Cart.svg';
 import SearchHeader from '../assets/header/search.svg';
-
+import Api from '../API';
 import {main} from "../styles/main";
 import MainFarmCard from "../styles/components/MainFarmCard";
 import MainSymptomsCard from "../styles/components/MainSymptomsCard";
 import MainHitsCard from "../styles/components/MainHitsCard";
+import BannerCard from '../components/BannerCard';
+import CategoryCard from '../components/CategoryCard';
+import NewsCard from '../components/NewsCard';
 
 export default function Main({navigation}) {
 
@@ -33,19 +36,56 @@ export default function Main({navigation}) {
       text: 3,
     }
   ]);
+  const [farmCardData, setFarmCardData] = useState([])
+  const [bannerData, setBannerData] = useState([])
+  const [categoryData, setCategoryData] = useState([])
+  const [selectionsData, setSelectionsData] = useState([])
+  const [newsData, setNewsData] = useState([])
 
   const countries = ['Бишкек', 'Ош', 'Кант', 'Токмок'];
 
+  useEffect(()=> {
+    Api.getData('pharm-brands/')
+      .then(res => setFarmCardData(res.data))
+    Api.getData('banners/')
+      .then(res => setBannerData(res.data))
+    Api.getData('categories/')
+      .then(res => setCategoryData(res.data))
+    Api.getData('selections/')
+      .then(res => setSelectionsData(res.data))
+    Api.getData('news/')
+      .then(res => setNewsData(res.data))
+  },[])
 
-  function _renderItem({item, index}) {
-    return (
-      <View style={main.banner}>
-        <View>
-          <Banner/>
-        </View>
-      </View>
-    );
-  }
+  console.log(newsData);
+
+
+  const farmCardList = useMemo(
+    ()=> (
+    farmCardData
+      .map((item)=> <MainFarmCard navigation={navigation} data={item} key={item.id} />)
+  ),[farmCardData])
+
+  const bannerList = useMemo(
+    () => (
+      bannerData.map((item) => <BannerCard data={item} key={item.id} navigation={navigation} />)
+    ),[bannerData])
+
+  const categoryList = useMemo(
+    () => (
+      categoryData.map((item) => <CategoryCard data={item} key={item.id} navigation={navigation} />)
+    ),[categoryData])
+
+  const selectionsList = useMemo(
+    () => (
+      selectionsData.map((item) => <MainSymptomsCard data={item} key={item.id} navigation={navigation} />)
+    ),[selectionsData])
+
+
+  const newsList = useMemo(
+    () => (
+      newsData.map((item) => <NewsCard data={item} key={item.id} navigation={navigation} />)
+    ),[newsData])
 
   return (
     <ScrollView
@@ -93,144 +133,87 @@ export default function Main({navigation}) {
                 return item;
               }}
             />
-            <View style={main.headerRight}>
-              <TouchableOpacity style={main.cart}>
-                <View style={main.cartNumber}>
-                  <Text style={main.cartNumberText}>1</Text>
-                </View>
-                <CartHeader/>
-              </TouchableOpacity>
-              <TouchableOpacity style={main.search}>
-                <SearchHeader/>
-              </TouchableOpacity>
-            </View>
           </View>
 
-          <Carousel
-            layout={'default'}
-            inactiveSlideScale={1}
-            windowSize={1}
-            data={slideElem}
-            renderItem={_renderItem}
-            sliderWidth={430}
-            itemWidth={343}
-            slideStyle={{
-              marginRight: 20,
-            }}
-          />
+          <View style={main.banner}>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+
+              {bannerList}
+            </ScrollView>
+          </View>
 
           <View>
             <View style={main.title}>
-              <Text>Аптеки</Text>
+              <Text style={{fontSize: 15}}>Аптеки</Text>
               <TouchableWithoutFeedback onPress={() => navigation.push('Farms')}>
-                <Text>Смотреть все</Text>
+                <Text style={main.watchAll}>Смотреть все</Text>
               </TouchableWithoutFeedback>
             </View>
-
             <View style={{height: 132}}>
               <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               >
-                <MainFarmCard/>
-                <MainFarmCard/>
-                <MainFarmCard/>
-                <MainFarmCard/>
-                <MainFarmCard/>
-                <MainFarmCard/>
-                <MainFarmCard/>
+                {farmCardList}
               </ScrollView>
             </View>
 
+
             <View style={main.title}>
-              <Text>Симптомы</Text>
+              <Text style={{fontSize: 15}}>Категории</Text>
               <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
-                <Text>Смотреть все</Text>
+                <Text style={main.watchAll}>Смотреть все</Text>
               </TouchableWithoutFeedback>
             </View>
+            <View style={main.categories}>
+              {categoryList}
+            </View>
 
+
+            <View style={main.title}>
+              <Text style={{fontSize: 15}}>Подборки</Text>
+              <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+                <Text style={main.watchAll}>Смотреть все</Text>
+              </TouchableWithoutFeedback>
+            </View>
             <View style={{height: 100, }}>
               <ScrollView
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
               >
-                <MainSymptomsCard/>
-                <MainSymptomsCard/>
-                <MainSymptomsCard/>
-                <MainSymptomsCard/>
-                <MainSymptomsCard/>
+                {selectionsList}
               </ScrollView>
             </View>
 
-          </View>
 
-          <View style={main.title}>
-            <Text>Категории</Text>
-            <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
-              <Text>Смотреть все</Text>
-            </TouchableWithoutFeedback>
-          </View>
-
-          <View style={main.categories}>
-            <TouchableOpacity style={main.categoriesItem} activeOpacity={0.8} onPress={()=> navigation.push('Categories')}>
-              <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
-                               source={require('../assets/main/categoriisCircle.png')}>
-                <Image source={require('../assets/main/categoriesLogo.png')}/>
-              </ImageBackground>
-              <Text style={main.categoriesItemText}>Лекарственные препараты</Text>
-            </TouchableOpacity>
-            <View style={main.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
-                               source={require('../assets/main/categoriisCircle.png')}>
-                <Image source={require('../assets/main/categoriesLogo.png')}/>
-              </ImageBackground>
-              <Text style={main.categoriesItemText}>Лекарственные препараты</Text>
+            <View style={main.title}>
+              <Text style={{fontSize: 15}}>Новости</Text>
+              <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+                <Text style={main.watchAll}>Смотреть все</Text>
+              </TouchableWithoutFeedback>
             </View>
-            <View style={main.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
-                               source={require('../assets/main/categoriisCircle.png')}>
-                <Image source={require('../assets/main/categoriesLogo.png')}/>
-              </ImageBackground>
-              <Text style={main.categoriesItemText}>Лекарственные препараты</Text>
-            </View>
-            <View style={main.categoriesItem}>
-              <ImageBackground style={{width: 75, height: 75, alignItems: 'center', justifyContent: 'center'}}
-                               source={require('../assets/main/categoriisCircle.png')}>
-                <Image source={require('../assets/main/categoriesLogo.png')}/>
-              </ImageBackground>
-              <Text style={main.categoriesItemText}>Лекарственные препараты</Text>
-            </View>
-          </View>
-
-          <View style={main.title}>
-            <Text>Горящие товары</Text>
-            <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
-              <Text>Смотреть все</Text>
-            </TouchableWithoutFeedback>
-          </View>
-
-          <View style={{height: 190, }}>
+            <View style={main.banner}>
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-              <MainHitsCard/>
-              <MainHitsCard/>
-              <MainHitsCard/>
-              <MainHitsCard/>
-              <MainHitsCard/>
+              {newsList}
             </ScrollView>
+            </View>
           </View>
 
         </View>
-        <View style={main.appInfo}>
-          <Logo style={{marginBottom: 16}}/>
-          <Text style={main.appInfoText}>MyMed— знак качества, который обеспечивает высокое качество, безопасность
-            лекарств и оптимальные цены</Text>
-          <Text style={main.appInfoText}>Это значит, что покупатели могут получить отличное обслуживание в аптеке и
-            приобрести качественные лекарства по доступным ценам.
-            Вы можете быть уверены в профессионализме аптек, входящих в союз MyMed</Text>
-        </View>
+        {/*<View style={main.appInfo}>*/}
+        {/*  <Logo style={{marginBottom: 16}}/>*/}
+        {/*  <Text style={main.appInfoText}>MyMed— знак качества, который обеспечивает высокое качество, безопасность*/}
+        {/*    лекарств и оптимальные цены</Text>*/}
+        {/*  <Text style={main.appInfoText}>Это значит, что покупатели могут получить отличное обслуживание в аптеке и*/}
+        {/*    приобрести качественные лекарства по доступным ценам.*/}
+        {/*    Вы можете быть уверены в профессионализме аптек, входящих в союз MyMed</Text>*/}
+        {/*</View>*/}
       </SafeAreaView>
     </ScrollView>
   );

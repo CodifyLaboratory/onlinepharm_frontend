@@ -7,7 +7,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import {news} from './../styles/news'
-import axios from "axios";
+import Api from '../API';
 import NewsCard from "../components/NewsCard";
 
 
@@ -18,13 +18,12 @@ export default function News({navigation}) {
   const [newsItems, setNewsItems] = useState([])
 
   useEffect(() => {
-    axios
-      .get('http://164.90.192.245/news/')
+    Api.getData('news/')
       .then(res => setNewsItems(res.data))
-    axios
-      .get('http://164.90.192.245/news-categories/')
+    Api.getData('news-categories/')
       .then(res => setCategoryDataId(res.data))
   }, [])
+
 
   const changeCategory =(id) => {
     setCategory(id)
@@ -33,13 +32,15 @@ export default function News({navigation}) {
   const newsList = useMemo(
     () =>
       newsItems
-        .filter((item) => item.category.id === category)
+        .filter((item) => item.category === category)
         .map((item) => (
             <NewsCard navigation={navigation} data={item} key={item.id}/>
           )
         )
     ,[newsItems, category]
   )
+
+  console.log(category);
 
 
   const categoryList = useMemo(
@@ -49,10 +50,10 @@ export default function News({navigation}) {
           onPress={()=> changeCategory(item.id)}
           activeOpacity={0.5}
           key={item.id}
-          style={category == item.id ? news.newsItemActive :news.newsItem}
+          style={category === item.id ? news.newsItemActive :news.newsItem}
         >
           <Text style={
-            category == item.id ?
+            category === item.id ?
               news.newsNavTextActive
               :
               news.newsNavText

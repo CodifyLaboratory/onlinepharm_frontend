@@ -17,6 +17,8 @@ import CategoriesMedicines from '../screens/CategoriesMedicines';
 import NewsInfo from "../screens/NewsInfo";
 import Login from '../screens/Login';
 import Ordering from "../screens/Ordering";
+import OnBoarding from '../screens/OnBoarding';
+import Map from "../screens/Map"
 
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
@@ -116,6 +118,7 @@ export default function Navigator() {
           headerStyle: { backgroundColor: '#F4F5F6'},
           headerTitleStyle: {color: '#1F8BA7'},
         }} />
+        <Stack.Screen name="Map" component={Map} options={{headerShown: false}}/>
         <Stack.Screen name="Categories" component={Categories} options={{
           headerRight: () => (
             <View style={styles.flexRow}>
@@ -183,6 +186,11 @@ export default function Navigator() {
   const AuthNav = () => {
     return (
       <Stack.Navigator>
+        <Stack.Screen name="OnBoarding" options={{
+          headerShown: false,
+        }}>
+        {props => <OnBoarding {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn}/>}
+      </Stack.Screen>
         <Stack.Screen name="Registration" component={Registration} options={{
           headerTitle: 'Регистрация',
           headerTitleStyle: { color: '#1F8BA7' }

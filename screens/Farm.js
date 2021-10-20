@@ -1,15 +1,14 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import FarmCard from '../components/FarmCard';
+import Api from '../API';
 import {farm} from "../styles/farm";
-import axios from "axios";
 
 function Farm({navigation, route}) {
   const [branchData, setBranchData] = useState([])
 
   useEffect(()=> {
-    axios
-      .get(`http://164.90.192.245/pharmacies/${route.params}`)
+    Api.getData(`pharmacies/${route.params}`)
       .then(res => setBranchData(res.data))
   }, [])
 

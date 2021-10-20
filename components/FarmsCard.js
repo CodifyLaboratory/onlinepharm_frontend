@@ -9,11 +9,11 @@ const FarmsCard = ({navigation, data}) => {
       style={farms.farmCard}
       onPress={()=> navigation.navigate('Farm', data.id) }
     >
-      <Image style={farms.farmImg} source={{uri: data.logo}}/>
+      <Image style={farms.farmImg} source={{uri: data.pharmacy_profile.brand.logo}}/>
       <View>
-        <Text style={farms.farmName}>{data.title}</Text>
-        <Text style={farms.farmCount}>Кол-во аптек: {data.branch_number}</Text>
-        <Text style={farms.farmClose}>Аптеки рядом с вами</Text>
+        <Text style={farms.farmName}>{data.pharmacy_profile.title}</Text>
+        {/*<Text style={farms.farmCount}>Кол-во аптек: {data.branch_number}</Text>*/}
+        {/*<Text style={farms.farmClose}>Аптеки рядом с вами</Text>*/}
       </View>
       <TouchableOpacity activeOpacity={0.6} style={farms.farmFind}>
         <Text style={farms.farmFindText}>Найти</Text>

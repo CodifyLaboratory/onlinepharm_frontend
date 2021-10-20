@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {registration} from "../styles/registration";
+import Api from '../API';
 import Logo from "../assets/header/logo.svg";
 
 function Registration({navigation}) {
@@ -10,8 +12,6 @@ function Registration({navigation}) {
     confirm_password: '',
   })
   const [passwordCheck, setPasswordCheck] = useState(false)
-  console.log(initialState)
-
 
 
   const handleChangeEmail = (text) => {
@@ -33,11 +33,26 @@ function Registration({navigation}) {
   }
 
 
-  const handleSubmit = () => {
-    validatePasswords()
-    console.log('submitted')
+  const saveData = async(data) => {
+    try {
+      const jsonValue = JSON.stringify(data)
+      await AsyncStorage.setItem('user', jsonValue)
+    } catch(err) {
+      console.log(err);
+    }
   }
 
+  const handleSubmit = () => {
+    validatePasswords()
+    Api.postData('/auth/users/create/', initialState)
+      .then(res => {
+        if (res.status === 201) {
+          navigation.push('RegistrationData')
+          saveData(res.data)
+        }
+      })
+      .catch(e => console.log(e))
+  }
 
   return (
     <View style={registration.container}>
@@ -86,7 +101,7 @@ function Registration({navigation}) {
           <Text style={registration.forgotAccount}>Уже есть аккаунт?</Text>
           <TouchableOpacity
             style={registration.forgot}
-            onPress={() => navigation.push('Login')}
+            onPress={()=> navigation.push('Login')}
           >
             <Text style={registration.forgotText}>Войти</Text>
           </TouchableOpacity>
@@ -97,7 +112,7 @@ function Registration({navigation}) {
         style={registration.next}
         onPress={() => {
           handleSubmit()
-          navigation.push('RegistrationData')
+          // navigation.push('RegistrationData')
         }}
         activeOpacity={0.8}
       >
