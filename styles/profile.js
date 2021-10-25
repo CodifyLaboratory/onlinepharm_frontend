@@ -29,35 +29,12 @@ export const profile = StyleSheet.create({
     lineHeight: 18,
     color: '#4B4747',
   },
-  profilePersonalityBlocks: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 280,
-    marginTop: 43,
-    marginBottom: 62,
-  },
-  profilePersonalityBlock: {
-    alignItems: 'center',
-  },
-  profilePersonalityIcon: {
-    width: 58,
-    height: 58,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 50,
-  },
-  profilePersonalityText: {
-    textAlign: 'center',
-    fontSize: 10,
-    lineHeight: 15,
-    color: '#4B4747',
-  },
   profileLinks: {
     width: 302,
-    height: 240,
+    height: 290,
     backgroundColor: '#fff',
     borderRadius: 18,
+    marginTop: 80,
   },
   profileLink: {
     flexDirection: 'row',

@@ -2,16 +2,18 @@ import {StyleSheet} from "react-native";
 
 export const cartItem = StyleSheet.create({
   card: {
-    width: '100%',
-    height: 86,
+    height: 130,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 16,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(198, 198, 198, 0.25)'
   },
   left: {
-    flexDirection: 'row'
+    flex: .3
   },
   img: {
     width: 70,
@@ -22,19 +24,7 @@ export const cartItem = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 8,
-  },
-  title: {
-    fontSize: 16,
-    color: '#000',
-  },
-  desc: {
-    fontSize: 12,
-    color: '#000',
-    lineHeight: 20,
-    marginTop: 5,
-  },
-  descBox: {
-    width: 160,
+    resizeMode: 'contain'
   },
   counter: {
     flexDirection: 'row',
@@ -52,16 +42,53 @@ export const cartItem = StyleSheet.create({
     justifyContent: 'center',
   },
   right: {
-    alignItems: 'center'
+    flex: .7,
+  },
+  title: {
+    color: '#1F8BA7',
   },
   priceText: {
-    fontSize: 10,
+    fontSize: 14,
     color: '#999999',
-    marginTop: 4,
+    marginTop: 8,
   },
   price: {
-    fontSize: 13,
-    color: '#000',
-    marginTop: 4,
+    fontSize: 14,
+    color: '#1F8BA7',
+  },
+  button: {
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 93,
+    borderWidth: 1,
+    borderColor: '#4BCCED',
+    borderRadius: 8,
+    marginRight: 13,
+  },
+  buttonText: {
+    color: '#4BCCED',
+    fontWeight: 'bold',
+  },
+  counter: {
+    width: 100,
+    flexDirection: 'row',
+    backgroundColor: '#F3F3F3',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderRadius: 14,
+  },
+  counterText: {
+    color: '#4B4747'
+  },
+  counterImg: {
+    width: 27,
+    height: 27,
+    borderRadius: 50
+  },
+  heart: {
+    width: 21,
+    height: 18,
+    marginLeft: 94
   }
 })

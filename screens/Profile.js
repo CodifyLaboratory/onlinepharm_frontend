@@ -10,6 +10,7 @@ import Doctor from '../assets/profile/doctor.svg'
 import Pencil from '../assets/profile/pencil.svg'
 import Arrow from '../assets/profile/arrow.svg'
 import Logout from '../assets/profile/logout.svg'
+import BlackLogo from '../assets/icons/blackLogo.svg'
 
 import {profile} from "../styles/profile";
 
@@ -22,29 +23,6 @@ export default function Profile({navigation, route}) {
           <Image style={profile.profileAvatar} source={require('../assets/profile/avatar.png')}/>
           <Text style={profile.profileName}>Керим Абдылдаев</Text>
           <Text style={profile.profileNumber}>+996 700 123 456</Text>
-          <View style={profile.profilePersonalityBlocks}>
-            <TouchableOpacity style={profile.profilePersonalityBlock} activeOpacity={0.6}>
-              <View style={profile.profilePersonalityIcon}>
-                <Cart/>
-              </View>
-              <Text style={profile.profilePersonalityText}>Мои аптеки</Text>
-              <Text style={profile.profilePersonalityText}>(4)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={profile.profilePersonalityBlock} activeOpacity={0.6}>
-              <View style={profile.profilePersonalityIcon}>
-                <List/>
-              </View>
-              <Text style={profile.profilePersonalityText}>Мои заказы</Text>
-              <Text style={profile.profilePersonalityText}>(7)</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={profile.profilePersonalityBlock} activeOpacity={0.6}>
-              <View style={profile.profilePersonalityIcon}>
-                <Medicine/>
-              </View>
-              <Text style={profile.profilePersonalityText}>Мои лекарства</Text>
-              <Text style={profile.profilePersonalityText}>(28)</Text>
-            </TouchableOpacity>
-          </View>
           <View style={profile.profileLinks}>
             <TouchableOpacity onPress={() => {
               navigation.push('MyProfile')
@@ -88,12 +66,17 @@ export default function Profile({navigation, route}) {
               </View>
               <Arrow/>
             </TouchableOpacity>
+            <TouchableOpacity style={profile.profileLink} activeOpacity={0.6}>
+              <View style={profile.profileLinkInner}>
+                <BlackLogo style={{width: 24, height: 24}}/>
+                <Text style={profile.profileLinkText}>О приложении</Text>
+              </View>
+            </TouchableOpacity>
             <TouchableOpacity style={[profile.profileLink, {borderBottomWidth: 0}]} activeOpacity={0.6}>
               <View style={profile.profileLinkInner}>
                 <Logout style={{width: 24, height: 24}}/>
                 <Text style={profile.profileLinkText}>Выйти</Text>
               </View>
-              <Arrow/>
             </TouchableOpacity>
           </View>
         </View>

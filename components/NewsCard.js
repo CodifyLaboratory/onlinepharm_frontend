@@ -7,7 +7,7 @@ const NewsCard = ({navigation, data}) => {
   var re = /-/gi;
   return (
     <TouchableOpacity onPress={() => {
-      navigation.navigate('NewsInfo', data)
+      navigation.navigate('NewsInfo', data.id)
     }} style={news.farmCard}
                       activeOpacity={0.85}
                       key={data.id}

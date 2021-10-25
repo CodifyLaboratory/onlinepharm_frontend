@@ -20,13 +20,10 @@ const Farms = ({navigation}) => {
       .then(res => setBrands(res.data))
   }, [])
 
-  console.log(pharmacies)
   const pickerRef = useRef();
-
   function open() {
     pickerRef.current.focus();
   }
-
   function close() {
     pickerRef.current.blur();
   }
@@ -38,7 +35,7 @@ const Farms = ({navigation}) => {
         if(selectedFarm === 0) {
           return item
         }
-        else return item?.pharmacy_profile?.brand?.id === selectedFarm;
+        else return item?.pharmacy_profile?.brand === selectedFarm;
       })
       .map((item) => (
       <FarmsCard

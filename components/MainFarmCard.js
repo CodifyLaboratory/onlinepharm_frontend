@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import {main} from "../main";
+import {main} from "../styles/main";
 
 const MainFarmCard = ({navigation, data}) => {
   return (
@@ -21,7 +21,7 @@ const MainFarmCard = ({navigation, data}) => {
           data.logo ?
             {uri: data.logo}
             :
-          require('../../assets/main/farmLogo.png')
+          require('../assets/main/farmLogo.png')
 
         }/>
       <Text style={{color: '#1F8BA7', fontSize: 11, lineHeight: 13}}>{data.title}</Text>

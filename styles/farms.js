@@ -38,13 +38,14 @@ export const farms = StyleSheet.create({
   },
   farmCard: {
     width: '100%',
-    height: 115,
+    height: 135,
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
     borderRadius: 10,
     marginBottom: 16,
+    padding: 16,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -52,7 +53,6 @@ export const farms = StyleSheet.create({
     },
     shadowOpacity: 0.20,
     shadowRadius: 1.41,
-
     elevation: 2,
   },
   farmImg: {
@@ -65,19 +65,27 @@ export const farms = StyleSheet.create({
   },
   farmName: {
     color: '#1F8BA7',
-    fontSize: 15,
+    fontSize: 13,
     fontWeight: '500',
-    marginBottom: 9,
-
+    marginBottom: 8,
+    width: 140
   },
-  farmCount: {
-    color: '#999',
+  farmAdress: {
+    color: '#1F8BA7',
     fontSize: 11,
-    marginBottom: 10
+    marginBottom: 10,
+    width: 90,
   },
   farmClose: {
     color: '#999',
     fontSize: 13,
+  },
+  farmImage: {
+    width: 21,
+    height: 18,
+    marginTop: 7,
+    marginRight: 2,
+    marginBottom: 52
   },
   farmFind: {
     backgroundColor: '#4BCCED',
@@ -86,7 +94,6 @@ export const farms = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 8,
-    marginBottom: -54
   },
   farmFindText: {
     color: '#fff',

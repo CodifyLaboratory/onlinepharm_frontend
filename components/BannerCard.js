@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
+
+var replacedStr = /-/gi;
+
 function BannerCard({data, navigation}) {
-  var re = /-/gi;
 
   return (
     <View style={styles.container}>
       <View style={styles.left}>
         <Text style={styles.title}>{data.title}</Text>
-        <Text style={styles.date}>с {data.start_date.replace(re, '.')} по {data.end_date.replace(re, '.')}</Text>
-        <TouchableOpacity style={styles.btn}>
+        <Text style={styles.date}>с {data.start_date.replace(replacedStr, '.')} по {data.end_date.replace(replacedStr, '.')}</Text>
+        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('BannerInfo', data.id)}>
           <Text style={styles.btnTitle}>Подробнее</Text>
         </TouchableOpacity>
       </View>

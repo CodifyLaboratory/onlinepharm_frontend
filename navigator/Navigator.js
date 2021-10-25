@@ -37,6 +37,9 @@ import Registration from "../screens/Registration";
 import RegistrationData from "../screens/RegistrationData";
 import MyMedicine from "../screens/MyMedicine";
 import MyFarms from '../screens/MyFarms';
+import BannerInfo from '../screens/BannerInfo'
+import SelectionInfo from '../screens/SelectionInfo'
+import LeaveReview from '../screens/LeaveReview'
 
 import { mainBgColor, mainTextColor } from "../constants"
 
@@ -110,12 +113,7 @@ export default function Navigator() {
           headerTitleStyle: { color: mainTextColor },
         }} />
         <Stack.Screen name="FarmInfo" component={FarmInfo} options={{
-          headerRight: () => (
-            <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
-              <FarmFavorite />
-            </TouchableOpacity>
-          ),
-          title: 'О продукте',
+          title: 'Об аптеке',
           headerStyle: { backgroundColor: '#F4F5F6' },
           headerTitleStyle: { color: mainTextColor },
         }} />
@@ -157,15 +155,45 @@ export default function Navigator() {
             fontSize: 17
           },
         }} />
+        <Stack.Screen
+          name="BannerInfo"
+          component={BannerInfo}
+          options={{
+            title: "Подробнее",
+            headerBackTitle: 'Назад'
+          }} />
+        <Stack.Screen
+          name="NewsInfo"
+          component={NewsInfo}
+          options={{
+            headerBackTitle: 'Назад',
+            title: 'Подробнее'
+          }} />
+        <Stack.Screen
+          name="SelectionInfo"
+          component={SelectionInfo}
+          options={{
+            headerBackTitle: 'Назад',
+            title: 'Подборки'
+          }} />
+
+        <Stack.Screen
+          name="LeaveReview"
+          component={LeaveReview}
+          options={{
+            headerBackTitle: 'Назад',
+            title: 'Новый отзыв'
+          }} />
+
       </Stack.Navigator>
-    )
+  )
   }
 
   const NewsNav = () => {
     return (
       <Stack.Navigator>
         <Stack.Screen name="News" component={News} options={{ headerShown: false }} />
-        <Stack.Screen name='NewsInfo' component={NewsInfo} options={{ headerBackTitle: 'Назад' }} />
+        <Stack.Screen name="NewsInfo" component={NewsInfo} options={{ headerBackTitle: 'Назад' }} />
 
       </Stack.Navigator>
     )
@@ -174,7 +202,11 @@ export default function Navigator() {
   const CartNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Cart" component={Cart} options={{ headerShown: false }} />
+        <Stack.Screen name="Cart" component={Cart} options={{
+          title: 'Корзина',
+          headerBackTitle: 'Назад',
+          headerTitleStyle: { color: mainTextColor },
+        }}  />
         <Stack.Screen name="Ordering" component={Ordering} options={{
           title: 'Оформление заказа',
           headerBackTitle: 'Назад',

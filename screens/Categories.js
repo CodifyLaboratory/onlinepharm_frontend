@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import {
   View,
   Text,
@@ -10,26 +10,26 @@ import {
   Platform,
   TouchableWithoutFeedback
 } from 'react-native';
+import Api from '../API';
 import Carousel from 'react-native-snap-carousel';
 import Banner from '../assets/main/baner.svg';
+import BannerCard from '../components/BannerCard';
 
-import {categories} from "../styles/categories";
+import {main} from "../styles/main";
+import { categories } from '../styles/categories';
 
 function Categories({ navigation }) {
-  const [ slideElem, setSlideElem ] = useState([
-    {
-      text: 1,
-    },
-    {
-      text: 2,
-    },
-    {
-      text: 3,
-    },
-    {
-      text: 3,
-    }
-  ]);
+  const [ bannerData, setBannerData ] = useState([]);
+
+  useEffect(() => {
+    Api.getData('banners/')
+      .then(res => setBannerData(res.data));
+  }, []);
+
+  const bannerList = useMemo(
+    () => (
+      bannerData.map((item) => <BannerCard data={item} key={item.id} navigation={navigation}/>)
+    ), [ bannerData ]);
 
   function _renderItem({ item, index }) {
     return (
@@ -51,45 +51,21 @@ function Categories({ navigation }) {
   }
 
   return (
-    <ScrollView style={{backgroundColor: '#E6EFF9'}}>
+    <ScrollView style={{ backgroundColor: '#E6EFF9' }}>
       <SafeAreaView style={categories.container}>
-        <Carousel
-          layout={'default'}
-          inactiveSlideScale={1}
-          windowSize={1}
-          data={slideElem}
-          renderItem={_renderItem}
-          sliderWidth={430}
-          itemWidth={343}
-          slideStyle={{
-            marginRight: 20,
-          }}
-        />
+        <View style={main.banner}>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
 
-        <View style={categories.title}>
-          <Text>Симптомы</Text>
-          <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
-            <Text>Смотреть все</Text>
-          </TouchableWithoutFeedback>
+            {bannerList}
+          </ScrollView>
         </View>
-
-        <Carousel
-          layout={'default'}
-          inactiveSlideScale={1}
-          windowSize={1}
-          data={slideElem}
-          renderItem={symptomsItem}
-          sliderWidth={420}
-          itemWidth={90}
-          slideStyle={{
-            marginRight: 25,
-          }}
-          activeSlideAlignment={'start'}
-        />
-
         <View style={categories.pillsContainer}>
-          <Text style={{marginBottom: 16}}>Препараты:</Text>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8} onPress={()=> navigation.push('CategoriesMedicines')}>
+          <Text style={{ marginBottom: 16 }}>Препараты:</Text>
+          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}
+                            onPress={() => navigation.push('CategoriesMedicines')}>
             <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
           <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>

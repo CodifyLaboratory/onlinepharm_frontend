@@ -10,12 +10,12 @@ export const myMedicine = StyleSheet.create({
   },
   medicineCard: {
     width: '100%',
-    height: 109,
+    height: 120,
     backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     borderRadius: 10,
-    marginBottom: 8,
+    marginBottom: 16,
     shadowColor: "#000",
     paddingTop: 16,
     shadowOffset: {
@@ -34,32 +34,56 @@ export const myMedicine = StyleSheet.create({
     borderColor: '#F3F3F3',
   },
   name: {
-    color: '#1f8ba7',
+    color: '#1F8BA7',
     fontSize: 13,
     fontWeight: '500',
-    marginBottom: 8,
+    marginBottom: 6,
 
   },
-  desc: {
-    fontSize: 11,
-    marginBottom: 4,
-    color: '#999999',
-  },
   category: {
-    color: '#4bcced',
-    fontSize: 11,
+    color: '#999999',
+    fontSize: 14,
+    marginBottom: 20,
+  },
+  price: {
+    color: '#1F8BA7',
+    fontWeight: 'bold'
   },
   find: {
-    backgroundColor: '#4BCCED',
+    backgroundColor: '#FFFF',
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 8,
-    marginTop: 55,
-    height: 30,
+    height: 27,
+    borderWidth: 2,
+    borderColor: '#4BCCED',
+    justifyContent: 'center',
+    marginRight: 13
   },
   findText: {
-    color: '#fff',
+    color: '#4BCCED',
+  },
+  favorite: {
+    backgroundColor: '#4BCCED',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 8,
+    height: 27,
+    flexDirection: 'row'
+  },
+  favoriteText: {
+    color: '#ffffff',
+    marginRight: 10
+  },
+  heart: {
+    width: 21,
+    height: 18,
+    marginLeft: 65
   }
 })

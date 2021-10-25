@@ -1,37 +1,75 @@
-import React from 'react';
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import Minus from '../assets/cart/minus.svg';
+import Plus from '../assets/cart/plus.svg';
+import { myMedicine } from '../styles/components/myMedicine';
+import { cartItem } from '../styles/components/cartItem';
 
-import Minus from '../assets/cart/minus.svg'
-import Plus from '../assets/cart/plus.svg'
+function CartItem({ data }) {
+  const [favorite, setFavorite] = useState(false)
+  const [count, setCount] = useState(1)
 
-import {cartItem} from "../styles/components/cartItem";
+  const counter = (type) => type === 'minus' ? setCount(count - 1) : setCount(count + 1)
 
-function CartItem(props) {
+  const changeFavorite = () => {
+    setFavorite(!favorite);
+  }
   return (
 
-      <View style={cartItem.card}>
-        <View style={cartItem.left}>
+    <View style={cartItem.card}>
+      <View style={cartItem.left}>
         <View style={cartItem.img}>
-          <Image style={{width: 50, height: 36}} source={require('../assets/cart/logo.png')}/>
+          <Image style={{ width: 50, height: 36 }} source={require('../assets/cart/logo.png')}/>
         </View>
-        <View style={cartItem.descBox}>
-          <Text style={cartItem.title}>Тримол</Text>
-          <Text style={cartItem.desc}>Антибиотики</Text>
-        </View>
-    </View>
-        <View style={cartItem.right}>
-          <View style={cartItem.counter}>
-            <TouchableOpacity style={cartItem.counterBtn} activeOpacity={0.5}>
-              <Minus/>
-            </TouchableOpacity>
-            <Text style={cartItem.counterText}>2</Text>
-            <TouchableOpacity style={cartItem.counterBtn} activeOpacity={0.5}>
-              <Plus/>
-            </TouchableOpacity>
+      </View>
+      <View style={cartItem.right}>
+        <View style={{flexDirection: 'row'}}>
+          <View>
+            <Text style={cartItem.title}>{data.name}</Text>
+            <Text style={cartItem.priceText}>Цена от: <Text style={cartItem.price}>200c</Text></Text>
           </View>
-          <Text style={cartItem.priceText}>Стоимость:</Text>
-          <Text style={cartItem.price}>от 335 с</Text>
+          <TouchableOpacity onPress={changeFavorite}>
+            <Image
+              style={cartItem.heart}
+              source={
+                favorite ?
+                  require('./../assets/icons/fullHeart.png')
+                  :
+                  require('./../assets/icons/emptyHeart.png')
+              }
+            />
+          </TouchableOpacity>
         </View>
+        <View style={{marginTop: 20, flexDirection: 'row'}}>
+          <TouchableOpacity style={cartItem.button}>
+            <Text style={cartItem.buttonText}>Подробнее</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={cartItem.counter}>
+            <TouchableOpacity
+              style={cartItem.btn}
+              onPress={() => counter('minus')}
+              disabled={count === 1 ? true : false}
+              activeOpacity={0.7}
+            >
+              <Image style={cartItem.counterImg} source={require('./../assets/icons/minus.png')} />
+            </TouchableOpacity>
+
+            <Text style={cartItem.counterText}>
+              {count} шт
+            </Text>
+
+            <TouchableOpacity
+              style={cartItem.btn}
+              onPress={() => counter('plus')}
+              activeOpacity={0.7}
+            >
+              <Image style={cartItem.counterImg} source={require('./../assets/icons/plus.png')} />
+            </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
+
+      </View>
     </View>
   );
 }

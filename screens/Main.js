@@ -13,9 +13,9 @@ import CartHeader from '../assets/header/Cart.svg';
 import SearchHeader from '../assets/header/search.svg';
 import Api from '../API';
 import {main} from "../styles/main";
-import MainFarmCard from "../styles/components/MainFarmCard";
-import MainSymptomsCard from "../styles/components/MainSymptomsCard";
-import MainHitsCard from "../styles/components/MainHitsCard";
+import MainFarmCard from "../components/MainFarmCard";
+import MainSymptomsCard from "../components/MainSymptomsCard";
+import MainHitsCard from "../components/MainHitsCard";
 import BannerCard from '../components/BannerCard';
 import CategoryCard from '../components/CategoryCard';
 import NewsCard from '../components/NewsCard';
@@ -175,9 +175,6 @@ export default function Main({navigation}) {
 
             <View style={main.title}>
               <Text style={{fontSize: 15}}>Подборки</Text>
-              <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
-                <Text style={main.watchAll}>Смотреть все</Text>
-              </TouchableWithoutFeedback>
             </View>
             <View style={{height: 100, }}>
               <ScrollView

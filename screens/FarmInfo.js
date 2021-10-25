@@ -1,21 +1,91 @@
-import React from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import { Text, View, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import Api from './../API/index'
+import Stars from 'react-native-stars';
+import ReviewCard from './../components/ReviewCard'
 import {farmInfo} from "../styles/farmInfo";
+import Marker from './../assets/icons/marker.svg'
+import Clock from './../assets/icons/clock.svg'
+import Phone from './../assets/icons/phone.svg'
 
 
-function FarmInfo({navigation}) {
+function FarmInfo({navigation, route}) {
+  const [farmData, setFarmData] = useState({})
+
+  const id = route.params
+
+  useEffect(() => {
+    Api.getData(`pharms/${id}`)
+      .then(res => setFarmData(res.data))
+      .catch(e => console.log(e))
+  }, [ ]);
+
+  console.log(farmData);
+
+  const reviewList = useMemo(() => (
+    farmData?.feedbacks?.map((item) => (
+      <ReviewCard data={item} key={item.id} />
+    ))
+  ), [farmData])
+
   return (
     <ScrollView>
 
       <View style={farmInfo.container}>
-        <Image height={46} width={205} style={farmInfo.logo} source={require('./../assets/farms/FarmInfoLogo.png')}/>
-        <Text style={farmInfo.date}>График работы:</Text>
-        <Text style={farmInfo.time}>Круглосуточно 24/7</Text>
-        <Text style={farmInfo.date}>Контакты:</Text>
-        <Text style={farmInfo.contacts}>+996 555 323 145</Text>
-        <Text style={farmInfo.contacts}>+996 700 122 478</Text>
-        <Text style={farmInfo.date}>Адрес:</Text>
-        <Text style={farmInfo.time} onPress={() => navigation.navigate('Map')}>ул.Советская 233 / 9 мкрн д.10</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image
+            height={61} width={100}
+            style={farmInfo.logo}
+            source={{uri: farmData?.pharmacy_profile?.brand?.logo}}
+          />
+          <Text style={farmInfo.title}>{farmData?.pharmacy_profile?.brand?.title}</Text>
+        </View>
+
+        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 28}}>
+          <Marker />
+          <Text style={farmInfo.time} onPress={() => navigation.navigate('Map')}>
+            ул.Советская 233 / 9 мкрн д.10
+          {/*  add adress from back */}
+          </Text>
+        </View>
+        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 28}}>
+          <Clock />
+          <Text style={farmInfo.time}>{farmData?.pharmacy_profile?.schedule}</Text>
+        </View>
+        <View style={{flexDirection: 'row', marginBottom: 25}}>
+          <Phone />
+          <View>
+            <Text style={farmInfo.time}>+996 555 323 145</Text>
+            <Text style={farmInfo.time}>+996 700 122 478</Text>
+
+          {/*  add numbers from back */}
+          </View>
+        </View>
+
+        <View style={farmInfo.starBox}>
+          <Stars
+            display={farmData.middle_star}
+            spacing={8}
+            count={5}
+            starSize={20}
+            fullStar={require('./../assets/icons/fullStar.png')}
+            emptyStar={require('./../assets/icons/emptyStar.png')}
+          />
+          <Text style={farmInfo.starCount}>{farmData?.feedbacks_count} отзыва</Text>
+        </View>
+
+        <View style={farmInfo.reviewsBox}>
+          <Text style={farmInfo.reviewsTitle}>Отзывы</Text>
+          <TouchableOpacity
+            style={farmInfo.reviewBtn}
+            activeOpacity={0.7}
+            onPress={() => navigation.navigate('LeaveReview', farmData)}
+          >
+            <Text style={farmInfo.reviewBtnText}>Оставить отзыв</Text>
+          </TouchableOpacity>
+
+          {reviewList}
+        </View>
       </View>
 
     </ScrollView>

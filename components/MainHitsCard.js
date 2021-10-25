@@ -1,5 +1,5 @@
 import React from 'react';
-import {main} from "../main";
+import {main} from "../styles/main";
 import {Image, Text, TouchableOpacity, View} from "react-native";
 
 const MainHitsCard = () => {
@@ -8,7 +8,7 @@ const MainHitsCard = () => {
       <View style={main.hitsDiscount}>
         <Text style={main.hitsDiscountText}>50% скидка</Text>
       </View>
-      <Image style={main.hitsImage} source={require('../../assets/main/hitsLogo.png')}/>
+      <Image style={main.hitsImage} source={require('../assets/main/hitsLogo.png')}/>
       <Text style={main.hitsName}>Азитромицин Вертекс</Text>
       <View style={main.hitsPrices}>
         <Text style={main.hitsOldPrice}>50с</Text>

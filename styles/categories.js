@@ -6,8 +6,6 @@ export const categories = StyleSheet.create({
   },
   container: {
     backgroundColor: '#E6EFF9',
-    paddingRight: 16,
-    paddingLeft: 16,
     paddingTop: Platform.OS == 'android' ? 21 : 0
   },
   banner: {
@@ -33,6 +31,8 @@ export const categories = StyleSheet.create({
   },
   pillsContainer: {
     marginTop: 16,
+    paddingRight: 16,
+    paddingLeft: 16,
   },
   pillsListElem: {
     backgroundColor: '#ffffff',

@@ -14,9 +14,10 @@ const setHeaders = (token) => {
   }
 };
 
+
 const Api = {
   getData: (url) => http.get(url),
-  postData: (url, body) => http.post(url, body),
+  postData: (url, body, token) => http.post(url, body, setHeaders(token)),
   putData: (url, article, token) => http.put(url, article, setHeaders(token)),
 }
 
