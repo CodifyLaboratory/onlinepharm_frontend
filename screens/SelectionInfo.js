@@ -17,11 +17,10 @@ const MyComponent = ({navigation, route}) => {
 
   const medicationList = useMemo(() => (
     selectionData?.medications?.map((item) => (
-      <MedicineCard key={item.id} />
+      <MedicineCard key={item.id} data={item} navigation={navigation} />
     ))
   ), [selectionData]);
 
-  console.log(selectionData);
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{selectionData?.title}</Text>

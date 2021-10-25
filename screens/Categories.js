@@ -14,6 +14,7 @@ import Api from '../API';
 import Carousel from 'react-native-snap-carousel';
 import Banner from '../assets/main/baner.svg';
 import BannerCard from '../components/BannerCard';
+import PopularMedicine from '../components/PopularMedicine'
 
 import {main} from "../styles/main";
 import { categories } from '../styles/categories';
@@ -63,39 +64,26 @@ function Categories({ navigation }) {
           </ScrollView>
         </View>
         <View style={categories.pillsContainer}>
-          <Text style={{ marginBottom: 16 }}>Препараты:</Text>
           <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}
                             onPress={() => navigation.push('CategoriesMedicines')}>
             <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
 
+        </View>
+
+
+        <View style={categories.popular}>
+          <Text style={{ marginBottom: 24 }}>Популярные</Text>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+
+            <PopularMedicine />
+            <PopularMedicine />
+            <PopularMedicine />
+
+          </ScrollView>
         </View>
       </SafeAreaView>
     </ScrollView>

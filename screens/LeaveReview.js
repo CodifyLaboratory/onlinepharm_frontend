@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -10,31 +10,31 @@ import {
   StyleSheet,
   Alert,
   Modal,
-  Pressable
-} from 'react-native';
-import Api from './../API/index';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Stars from 'react-native-stars';
-import Success from './../assets/icons/success.svg'
-import Close from './../assets/icons/close.svg'
+  Pressable,
+} from "react-native";
+import Api from "./../API/index";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Stars from "react-native-stars";
+import Success from "./../assets/icons/success.svg";
+import Close from "./../assets/icons/close.svg";
 
 const LeaveReview = ({ route, navigation }) => {
-  const [ formData, setFormData ] = useState({
+  const [formData, setFormData] = useState({
     star: null,
     text: null,
   });
   const [modalVisible, setModalVisible] = useState(false);
-  const [ userData, setUserData ] = useState(null);
+  const [userData, setUserData] = useState(null);
   const id = route.params.id;
 
   useEffect(() => {
     loadData();
+    
   }, []);
-
 
   const loadData = async () => {
     try {
-      let data = await AsyncStorage.getItem('user');
+      let data = await AsyncStorage.getItem("userData");
       if (data !== null) {
         setUserData(JSON.parse(data));
       }
@@ -43,27 +43,28 @@ const LeaveReview = ({ route, navigation }) => {
     }
   };
 
+
+
   const handleChange = (str) => {
     setFormData({ ...formData, text: str });
   };
 
   const handleSubmit = () => {
     Api.postData(`pharmacy-feedbacks/create/${id}/`, formData, userData?.access)
-      .then(res => {
+      .then((res) => {
         if (res.status === 201) {
-          setModalVisible(true)
+          setModalVisible(true);
           setTimeout(() => {
-            navigation.navigate('FarmInfo', id);
+            navigation.navigate("FarmInfo", id);
           }, 5000);
         }
       })
-      .catch(e => console.log(e));
+      .catch((e) => console.log(e));
   };
-
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ alignItems: 'center', marginTop: 36, marginBottom: 30 }}>
+      <View style={{ alignItems: "center", marginTop: 36, marginBottom: 30 }}>
         <Stars
           half={false}
           default={1}
@@ -73,8 +74,8 @@ const LeaveReview = ({ route, navigation }) => {
           spacing={24}
           starSize={40}
           count={5}
-          fullStar={require('./../assets/icons/fullStar.png')}
-          emptyStar={require('./../assets/icons/emptyStar.png')}
+          fullStar={require("./../assets/icons/fullStar.png")}
+          emptyStar={require("./../assets/icons/emptyStar.png")}
         />
       </View>
 
@@ -86,10 +87,7 @@ const LeaveReview = ({ route, navigation }) => {
         onChangeText={handleChange}
       />
 
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={() => handleSubmit()}
-      >
+      <TouchableOpacity style={styles.btn} onPress={() => handleSubmit()}>
         <Text style={styles.btnText}>Отправить отзыв</Text>
       </TouchableOpacity>
 
@@ -108,9 +106,8 @@ const LeaveReview = ({ route, navigation }) => {
                 style={styles.modalViewClose}
                 onPress={() => {
                   setModalVisible(!modalVisible);
-                  navigation.navigate('FarmInfo', id);
+                  navigation.navigate("FarmInfo", id);
                 }}
-
               >
                 <Close />
               </TouchableOpacity>
@@ -119,7 +116,6 @@ const LeaveReview = ({ route, navigation }) => {
             </View>
           </View>
         </Modal>
-
       </View>
     </SafeAreaView>
   );
@@ -127,40 +123,39 @@ const LeaveReview = ({ route, navigation }) => {
 
 export default LeaveReview;
 
-
 const styles = StyleSheet.create({
   container: {
-    padding: 16
+    padding: 16,
   },
   input: {
     borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC',
+    borderBottomColor: "#CCCCCC",
     paddingBottom: 16,
     lineHeight: 24,
     fontSize: 16,
-    marginBottom: 300
+    marginBottom: 300,
   },
   btn: {
     width: 320,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#4BCCED',
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#4BCCED",
     padding: 13,
     borderRadius: 20,
   },
   btnText: {
-    color: '#ffffff',
+    color: "#ffffff",
     fontSize: 17,
   },
   centeredView: {
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   centeredView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
   modalView: {
     margin: 20,
@@ -170,20 +165,20 @@ const styles = StyleSheet.create({
     width: 340,
     height: 249,
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   button: {
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
   },
   buttonClose: {
     backgroundColor: "#2196F3",
@@ -191,15 +186,15 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   modalText: {
     textAlign: "center",
-    color: '#4B4747',
+    color: "#4B4747",
     fontSize: 15,
-    marginTop: 18
+    marginTop: 18,
   },
   modalViewClose: {
-    transform: [{translateX: 145},{translateY: -60}]
-  }
+    transform: [{ translateX: 145 }, { translateY: -60 }],
+  },
 });

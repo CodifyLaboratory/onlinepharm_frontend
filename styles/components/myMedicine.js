@@ -57,7 +57,7 @@ export const myMedicine = StyleSheet.create({
     paddingRight: 10,
     borderRadius: 8,
     height: 27,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#4BCCED',
     justifyContent: 'center',
     marginRight: 13
@@ -75,11 +75,11 @@ export const myMedicine = StyleSheet.create({
     paddingRight: 10,
     borderRadius: 8,
     height: 27,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    width: 110,
   },
   favoriteText: {
     color: '#ffffff',
-    marginRight: 10
   },
   heart: {
     width: 21,

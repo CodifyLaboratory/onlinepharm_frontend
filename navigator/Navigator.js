@@ -40,6 +40,7 @@ import MyFarms from '../screens/MyFarms';
 import BannerInfo from '../screens/BannerInfo'
 import SelectionInfo from '../screens/SelectionInfo'
 import LeaveReview from '../screens/LeaveReview'
+import MedicineInfo from "../screens/MedicineInfo";
 
 import { mainBgColor, mainTextColor } from "../constants"
 
@@ -183,6 +184,14 @@ export default function Navigator() {
           options={{
             headerBackTitle: 'Назад',
             title: 'Новый отзыв'
+          }} />
+
+          <Stack.Screen
+          name="MedicineInfo"
+          component={MedicineInfo}
+          options={{
+            headerBackTitle: 'Назад',
+            title: 'О продукте'
           }} />
 
       </Stack.Navigator>

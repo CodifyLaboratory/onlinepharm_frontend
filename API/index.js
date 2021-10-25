@@ -16,9 +16,10 @@ const setHeaders = (token) => {
 
 
 const Api = {
-  getData: (url) => http.get(url),
+  getData: (url, token) => http.get(url, setHeaders(token)),
   postData: (url, body, token) => http.post(url, body, setHeaders(token)),
   putData: (url, article, token) => http.put(url, article, setHeaders(token)),
+  deleteData: (url, token, options) => http.delete(url, setHeaders(token), options)
 }
 
 export default Api;

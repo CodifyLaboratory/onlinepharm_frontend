@@ -30,9 +30,10 @@ export const categories = StyleSheet.create({
     marginBottom: 19
   },
   pillsContainer: {
-    marginTop: 16,
+    marginTop: 30,
     paddingRight: 16,
     paddingLeft: 16,
+    marginBottom: 24,
   },
   pillsListElem: {
     backgroundColor: '#ffffff',
@@ -51,5 +52,9 @@ export const categories = StyleSheet.create({
   pillsListElemText: {
     color: '#1F8BA7',
     fontSize: 13,
+  },
+  popular: {
+    marginRight: 16,
+    marginLeft: 16,
   }
 })
