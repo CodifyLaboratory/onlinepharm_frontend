@@ -6,16 +6,14 @@ import CartWhite from "./../assets/icons/cartWhiteSmall.svg";
 import Api from "./../API/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function MedicineCard({ navigation, data }) {
+function MedicineCard({ navigation, data, type }) {
   const [count, setCount] = useState(1);
 
   const [favorite, setFavorite] = useState(false);
   const [favId, setFavId] = useState({})
 
-
-
-  const [inBasketStatus, setInBasketStatus] = useState(false);
-  const [basketRes, setBasketRes] = useState({})
+  const [inBasketStatus, setInBasketStatus] = useState(type ? true : false);
+  const [basketId, setBasketId] = useState({})
   const [allFav, setAllFav] = useState([])
   const [userData, setUserData] = useState(null);
 
@@ -36,7 +34,6 @@ function MedicineCard({ navigation, data }) {
 
   useEffect(() => {
     loadData()
-    console.log(userData)
 
     // Api.getData('basket-medications/', userData?.access)
     //   .then(res => setAllFav(res.data))
@@ -54,47 +51,69 @@ function MedicineCard({ navigation, data }) {
   //   setFav(result)
   // }, [allFav])
 
-
+// ADD TO YOUR FAVORITE LIST////////////////////////////////
   const addFavorite = () => {
     Api.postData(
       `favorite-medications/create/${data.id}/`,
-      null,
+      {status: true},
       userData?.access
     )
       .then((res) => {
         res.status === 201 ? setFavorite(true) : null
         setFavId(res.data)
-        console.log(res.status)
+        console.log(res)
       })
       .catch((e) => console.log(e));
   };
-  console.log(favId.id);
-
-
+//DELETE FROM FAVORITE LIST
   const deleteFavorite = () => {
     Api.deleteData(
       `favorite-medications/delete/${favId?.id}/`,
       userData?.access
     )
       .then((res) => {
-        // res.status === 201 ? setFavorite(false) : null
+        res.status === 204 ? setFavorite(false) : null
         console.log('dsdadas',res);
       })
       .catch((e) => console.log(e));
   };
+///////////////////////////////////////////////////
+
+
 
   const addToBasket = () => {
     Api.postData(
       `basket-medications/create/${data.id}/`,
-      1,
+      {count: 1},
       userData?.access
     )
       .then((res) => {
         res.status === 201 ? setInBasketStatus(true) : setInBasketStatus(false)
-        setBasketRes(res.data)
+        setBasketId(res.data)
+        console.log(res)
       })
       .catch((e) => console.log(e));
   };
+
+  console.log(basketId.id);
+
+  const deleteFromBasket = () => {
+    Api.deleteData(
+      `basket-medications/delete/${basketId?.id}/`,
+      userData?.access,
+    )
+      .then((res) => {
+        res.status === 204 ? setInBasketStatus(false) : setInBasketStatus(true)
+        console.log(res)
+      })
+      .catch((e) => console.log(e));
+  };
+
+  if(count < 1){
+    deleteFromBasket()
+    setCount(1)
+  }
+
 
 
 
@@ -141,7 +160,7 @@ function MedicineCard({ navigation, data }) {
               <TouchableOpacity
                 style={cartItem.btn}
                 onPress={() => counter("minus")}
-                disabled={count === 1 ? true : false}
+                // disabled={count === 1 ? true : false}
                 activeOpacity={0.7}
               >
                 <Image
@@ -167,7 +186,7 @@ function MedicineCard({ navigation, data }) {
             <TouchableOpacity
               activeOpacity={0.6}
               style={myMedicine.favorite}
-              onPress={addToBasket}
+              onPress={() => addToBasket()}
             >
               <Text style={myMedicine.favoriteText}>В корзину</Text>
             </TouchableOpacity>

@@ -30,15 +30,14 @@ const Cart = ({ navigation }) => {
   };
 
   useEffect(() => {
-
+    loadData()
       Api.getData("basket-medications/", userData?.access)
       .then((res) => setCartItems(res.data))
       .catch((e) => console.log(e));
 
   }, []);
 
-  console.log(userData);
-
+  console.log(cartItems);
   return (
     <View style={cart.container}>
       {cartItems.length ? (
@@ -53,7 +52,7 @@ const Cart = ({ navigation }) => {
       <ScrollView>
         <SafeAreaView>
           {cartItems.length ? (
-            cartItems.map((item) => <MedicineCard key={item.id} data={item} />)
+            cartItems.map((item) => <MedicineCard key={item.id} data={item.medication} type="inBusket" />)
           ) : (
             <View style={cart.emptyCart}>
               <Text style={cart.emptyCartText}>Корзина пуста</Text>
@@ -66,7 +65,7 @@ const Cart = ({ navigation }) => {
       {cartItems.length ? (
         <View style={cart.result}>
           <Text>Итого</Text>
-          <Text>от 1330 с</Text>
+          <Text>от 0 с</Text>
         </View>
       ) : null}
 
