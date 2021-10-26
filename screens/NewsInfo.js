@@ -9,6 +9,7 @@ var replacedStr = /-/gi;
 function NewsInfo({route}) {
   const [newsData, setNewsData] = useState({})
   let id = route.params
+  console.log(id)
 
   useEffect(() => {
     Api.getData(`news/${id}`)

@@ -11,11 +11,21 @@ import Pencil from '../assets/profile/pencil.svg'
 import Arrow from '../assets/profile/arrow.svg'
 import Logout from '../assets/profile/logout.svg'
 import BlackLogo from '../assets/icons/blackLogo.svg'
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {profile} from "../styles/profile";
 
 
 export default function Profile({navigation, route}) {
+    const loadData = async () => {
+    try {
+      let data = await AsyncStorage.getItem("userData");
+      if (data !== null) {
+        setUserData(JSON.parse(data));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <ScrollView style={{backgroundColor: '#E6EFF9'}}>
       <SafeAreaView>

@@ -57,9 +57,6 @@ export default function Main({navigation}) {
       .then(res => setNewsData(res.data))
   },[])
 
-  console.log(newsData);
-
-
   const farmCardList = useMemo(
     ()=> (
     farmCardData
@@ -95,44 +92,44 @@ export default function Main({navigation}) {
         <View style={main.container}>
           <View style={main.header}>
             <Logo/>
-            <SelectDropdown
-              data={countries}
-              defaultValueByIndex={0}
-              buttonTextStyle={{
-                color: '#1F8BA7',
-                fontSize: 17,
-              }}
-              renderDropdownIcon={() => {
-                return (
-                  <Arrow/>
-                );
-              }}
-              buttonStyle={{
-                width: 130,
-                backgroundColor: 'transparent'
-              }}
-              rowStyle={{
-                borderBottomWidth: 0,
-                textAlign: 'center'
-              }}
-              rowTextStyle={{
-                color: '#1F8BA7',
-                fontSize: 17,
-              }}
-              dropdownStyle={{
-                borderRadius: 10,
-                marginTop: Platform.OS == 'ios' ? -10 : -50,
-              }}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
-              }}
-              buttonTextAfterSelection={(selectedItem, index) => {
-                return selectedItem;
-              }}
-              rowTextForSelection={(item, index) => {
-                return item;
-              }}
-            />
+            {/*<SelectDropdown*/}
+            {/*  data={countries}*/}
+            {/*  defaultValueByIndex={0}*/}
+            {/*  buttonTextStyle={{*/}
+            {/*    color: '#1F8BA7',*/}
+            {/*    fontSize: 17,*/}
+            {/*  }}*/}
+            {/*  renderDropdownIcon={() => {*/}
+            {/*    return (*/}
+            {/*      <Arrow/>*/}
+            {/*    );*/}
+            {/*  }}*/}
+            {/*  buttonStyle={{*/}
+            {/*    width: 130,*/}
+            {/*    backgroundColor: 'transparent'*/}
+            {/*  }}*/}
+            {/*  rowStyle={{*/}
+            {/*    borderBottomWidth: 0,*/}
+            {/*    textAlign: 'center'*/}
+            {/*  }}*/}
+            {/*  rowTextStyle={{*/}
+            {/*    color: '#1F8BA7',*/}
+            {/*    fontSize: 17,*/}
+            {/*  }}*/}
+            {/*  dropdownStyle={{*/}
+            {/*    borderRadius: 10,*/}
+            {/*    marginTop: Platform.OS == 'ios' ? -10 : -50,*/}
+            {/*  }}*/}
+            {/*  onSelect={(selectedItem, index) => {*/}
+            {/*    console.log(selectedItem, index);*/}
+            {/*  }}*/}
+            {/*  buttonTextAfterSelection={(selectedItem, index) => {*/}
+            {/*    return selectedItem;*/}
+            {/*  }}*/}
+            {/*  rowTextForSelection={(item, index) => {*/}
+            {/*    return item;*/}
+            {/*  }}*/}
+            {/*/>*/}
           </View>
 
           <View style={main.banner}>
@@ -140,7 +137,6 @@ export default function Main({navigation}) {
               horizontal={true}
               showsHorizontalScrollIndicator={false}
             >
-
               {bannerList}
             </ScrollView>
           </View>
@@ -148,7 +144,7 @@ export default function Main({navigation}) {
           <View>
             <View style={main.title}>
               <Text style={{fontSize: 15}}>Аптеки</Text>
-              <TouchableWithoutFeedback onPress={() => navigation.push('Farms')}>
+              <TouchableWithoutFeedback onPress={() => navigation.push('Farm')}>
                 <Text style={main.watchAll}>Смотреть все</Text>
               </TouchableWithoutFeedback>
             </View>
@@ -163,7 +159,7 @@ export default function Main({navigation}) {
 
 
             <View style={main.title}>
-              <Text style={{fontSize: 15}}>Категории</Text>
+              <Text style={{fontSize: 15}}>Категории товаров</Text>
               <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
                 <Text style={main.watchAll}>Смотреть все</Text>
               </TouchableWithoutFeedback>

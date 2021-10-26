@@ -29,7 +29,6 @@ const Cart = ({ navigation }) => {
     }
   };
 
-
   useEffect(() => {
 
       Api.getData("basket-medications/", userData?.access)
@@ -38,6 +37,7 @@ const Cart = ({ navigation }) => {
 
   }, []);
 
+  console.log(userData);
 
   return (
     <View style={cart.container}>

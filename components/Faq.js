@@ -5,7 +5,7 @@ import Arrow from './../assets/icons/arrow.svg'
 
 
 
-export default function Faq() {
+export default function Faq({title, data}) {
 const [faqStatus, setFaqStatus] = useState(false)
 
   return (
@@ -15,19 +15,14 @@ const [faqStatus, setFaqStatus] = useState(false)
     onPress={() => setFaqStatus(!faqStatus)}
     >
       <View style={faqStatus ? styles.infoOpened : styles.infoClosed}> 
-        <Text style={styles.infoTitle}>Форма выпуска, упаковка и состав</Text>  
+        <Text style={styles.infoTitle}>{title}</Text>
         <Arrow />
       </View> 
       {
         faqStatus ?
         <View>
           <Text>
-            [гипромеллоза - 7.5 мг, гипролоза (гидроксипропилцеллюлоза) - 
-            2.91 мг, тальк - 2.89 мг, титана диоксид - 1.63 мг, краситель
-            железа оксид желтый (оксид желтый) - 0.07 мг] или [сухая смесь
-            для пленочного покрытия, содержащая гипромеллозу - 50%, гипролозу
-            (гидроксипропилцеллюлозу) - 19.4%, тальк - 19.26%, титана диоксид
-            - 10.87%, краситель железа оксид желтый (оксид желтый) - 0.47%] - 15 мг.
+            {data}
           </Text>
         </View>
         : null

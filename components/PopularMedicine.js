@@ -2,17 +2,17 @@ import React from 'react';
 import {View, Image, TouchableOpacity, StyleSheet, Text} from 'react-native'
 import Stars from 'react-native-stars';
 
-const PopularMedicine = () => {
+const PopularMedicine = ({data}) => {
   return (
     <View style={styles.container}>
       <View style={styles.top}>
-        <Image style={styles.image} source={require('./../assets/main/hitsLogo.png')}/>
+        <Image style={styles.image} source={{uri: data?.image}}/>
       </View>
       <View style={styles.bottom}>
-        <Text style={styles.title}>Цефтриаксон</Text>
+        <Text style={styles.title}>{data?.title}</Text>
         <View style={{alignItems: 'flex-start', marginLeft: -5, marginBottom: 8}}>
           <Stars
-            display={4}
+            display={data?.middle_star}
             spacing={8}
             count={5}
             starSize={15}
@@ -20,7 +20,8 @@ const PopularMedicine = () => {
             emptyStar={require('./../assets/icons/emptyStar.png')}
           />
         </View>
-        <Text style={styles.price}>Цена от: <Text style={styles.soms}>200c</Text></Text>
+        <Text style={styles.price}>Цена от: <Text style={styles.soms}>{data?.price} c</Text></Text>
+
         <TouchableOpacity style={styles.detailsBtn}>
           <Text style={styles.detailsBtnText}>Подробнее</Text>
         </TouchableOpacity>

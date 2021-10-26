@@ -21,26 +21,22 @@ import { categories } from '../styles/categories';
 
 function Categories({ navigation }) {
   const [ bannerData, setBannerData ] = useState([]);
+  const [ popularData, setPopularData ] = useState([]);
 
   useEffect(() => {
     Api.getData('banners/')
       .then(res => setBannerData(res.data));
+    Api.getData('popular-medications/')
+      .then(res => setPopularData(res.data));
   }, []);
+
+  console.log(popularData)
 
   const bannerList = useMemo(
     () => (
       bannerData.map((item) => <BannerCard data={item} key={item.id} navigation={navigation}/>)
     ), [ bannerData ]);
 
-  function _renderItem({ item, index }) {
-    return (
-      <View style={categories.banner}>
-        <View>
-          <Banner/>
-        </View>
-      </View>
-    );
-  }
 
   function symptomsItem() {
     return (
@@ -78,10 +74,11 @@ function Categories({ navigation }) {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-
-            <PopularMedicine />
-            <PopularMedicine />
-            <PopularMedicine />
+            {
+              popularData.map((item) => (
+                <PopularMedicine key={item.id} data={item} />
+              ))
+            }
 
           </ScrollView>
         </View>

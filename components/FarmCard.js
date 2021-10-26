@@ -8,7 +8,7 @@ function FarmCard({navigation, data}) {
     <TouchableOpacity
       activeOpacity={0.85}
       style={farm.farmCard}
-      onPress={()=> navigation.navigate('FarmInfo') }>
+      onPress={()=> navigation.navigate('FarmInfo')}>
       <Image
         style={farm.farmImg}
         source={

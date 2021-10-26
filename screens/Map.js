@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, StyleSheet, Dimensions, View, Text, Image } from 'react-native';
 import MapView, { Marker, CalloutSubview, Callout } from 'react-native-maps';
+import CustomMarker from './../components/CustomMarker'
 import MarkerSvg from './../assets/marker2.svg'
 import PhoneSvg from './../assets/phoneIcon.svg'
 import ClockIcon from './../assets/clockIcon.svg'
 
 
-function Map() {
-  const [descStatus, setDescStatus] = useState()
-  const changeStatus = () => setDescStatus(!descStatus)
+function Map({pharmacies, selectedFarm, navigation}) {
+  const [pharmaData, setPharmaData] = useState([])
+
+  useEffect(() => {
+    setPharmaData(pharmacies.filter((item) => {
+      if (item.location?.latitude !== null && item.location?.longitude !== null) {
+        return item
+      }
+    }))
+  }, [])
+
+  console.log(pharmaData)
+
   return (
     <SafeAreaView>
       <MapView
@@ -22,34 +33,19 @@ function Map() {
         }}
 
       >
-        <Marker
-          coordinate={{
-            latitude: 42.87337485103548,
-            longitude:  74.58667559756323,
-          }}
-          onPress={changeStatus}
-          style={styles.marker}
-        >
-          {
-            descStatus ?
-              <View style={styles.description}>
-                <View style={styles.box}>
-                  <MarkerSvg />
-                  <Text style={styles.text}>ул. 8 марта, 62</Text>
-                </View>
-                <View style={styles.box}>
-                  <PhoneSvg />
-                  <Text style={styles.text}>+996 755 65 43 57</Text>
-                </View>
-                <View style={styles.box}>
-                  <ClockIcon />
-                  <Text style={styles.text}>Сегодня 08:00 - 18:00</Text>
-                </View>
-              </View>
-              :
-              <Image source={require('./../assets/marker.png')} style={{height: 35, width:35 }} />
-          }
-        </Marker>
+        {
+          pharmaData?.filter((item) => {
+            if(selectedFarm === 0) {
+              return item
+            }
+            else if(item?.pharmacy_profile?.brand) {
+              return item?.pharmacy_profile?.brand === selectedFarm;
+            }
+          }).map((item) => (
+            <CustomMarker item={item} key={item.id} navigation={navigation} />
+          ))
+        }
+
       </MapView>
     </SafeAreaView>
   )

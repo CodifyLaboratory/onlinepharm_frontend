@@ -92,11 +92,6 @@ export default function Navigator() {
         <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
         <Stack.Screen name="Farms" component={Farms}
           options={{
-            headerRight: () => (
-              <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
-                <SearchFarmSvg />
-              </TouchableOpacity>
-            ),
             title: 'Аптеки',
             headerBackTitle: 'Назад',
             headerStyle: { backgroundColor: mainBgColor },
@@ -104,12 +99,7 @@ export default function Navigator() {
 
           }} />
         <Stack.Screen name="Farm" component={Farm} options={{
-          headerRight: () => (
-            <TouchableOpacity activeOpacity={0.5} style={{ marginRight: 15 }}>
-              <SearchFarmSvg />
-            </TouchableOpacity>
-          ),
-          title: 'Фармамир',
+          title: 'Аптеки',
           headerStyle: { backgroundColor: mainBgColor },
           headerTitleStyle: { color: mainTextColor },
         }} />

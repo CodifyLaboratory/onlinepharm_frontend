@@ -33,7 +33,7 @@ const ReviewCard = ({data}) => {
             display={data.star}
             spacing={8}
             count={5}
-            starSize={20}
+            starSize={14}
             fullStar= {require('./../assets/icons/fullStar.png')}
             emptyStar= {require('./../assets/icons/emptyStar.png')}
           />

@@ -28,6 +28,7 @@ const Farms = ({navigation}) => {
     pickerRef.current.blur();
   }
 
+
   const farmsList = useMemo(
     () =>
     pharmacies
@@ -35,7 +36,9 @@ const Farms = ({navigation}) => {
         if(selectedFarm === 0) {
           return item
         }
-        else return item?.pharmacy_profile?.brand === selectedFarm;
+        else if(item?.pharmacy_profile?.brand) {
+          return item?.pharmacy_profile?.brand === selectedFarm;
+        }
       })
       .map((item) => (
       <FarmsCard
@@ -81,8 +84,7 @@ const Farms = ({navigation}) => {
           type
             ?
             farmsList
-            : <Map />
-
+            : <Map pharmacies={pharmacies} selectedFarm={selectedFarm} navigation={navigation} />
         }
 
       </View>

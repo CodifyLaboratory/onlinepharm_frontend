@@ -7,6 +7,8 @@ export const farm = StyleSheet.create({
     borderRadius: 10,
     paddingTop: 30,
     paddingBottom: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
   },
   farmCard: {
     width: 327,

@@ -5,14 +5,16 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 const FarmsCard = ({ navigation, data }) => {
   const [favorite, setFavorite] = useState(false)
   const changeFavorite = () => setFavorite(!favorite)
+
+
   return (
     <View
       style={farms.farmCard}
     >
-      <Image style={farms.farmImg} source={{ uri: data.pharmacy_profile.brand.logo }}/>
+      <Image style={farms.farmImg} source={{ uri: data?.pharmacy_profile?.logo }}/>
       <View style={{ marginLeft: 16 }}>
-        <Text style={farms.farmName}>{data.pharmacy_profile.title}</Text>
-        <Text style={farms.farmAdress}>ул.Советская 233 9 мкрн д.10 </Text>
+        <Text style={farms.farmName}>{data?.pharmacy_profile?.title}</Text>
+        <Text style={farms.farmAdress}>{data?.location?.address}</Text>
         <Text style={farms.farmClose}>4 км от вас</Text>
       </View>
       <View style={{alignItems: 'space-between', height: '100%'}}>

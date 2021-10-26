@@ -7,18 +7,18 @@ import Api from "./../API/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function MedicineCard({ navigation, data }) {
-  
-  const [favorite, setFavorite] = useState(false);
-  const [inBasketStatus, setInBasketStatus] = useState(false);
   const [count, setCount] = useState(1);
-  const [userData, setUserData] = useState(null);
+
+  const [favorite, setFavorite] = useState(false);
+  const [favId, setFavId] = useState({})
+
+
+
+  const [inBasketStatus, setInBasketStatus] = useState(false);
   const [basketRes, setBasketRes] = useState({})
   const [allFav, setAllFav] = useState([])
-  const [fav, setFav] = useState(null)
+  const [userData, setUserData] = useState(null);
 
-  const changeFavorite = () => {
-    setFavorite(!favorite);
-  };
 
   const counter = (type) =>
     type === "minus" ? setCount(count - 1) : setCount(count + 1);
@@ -36,22 +36,23 @@ function MedicineCard({ navigation, data }) {
 
   useEffect(() => {
     loadData()
+    console.log(userData)
 
-    Api.getData('basket-medications/', userData?.access)
-      .then(res => setAllFav(res.data))
-      .catch(e => console.log(e))
+    // Api.getData('basket-medications/', userData?.access)
+    //   .then(res => setAllFav(res.data))
+    //   .catch(e => console.log(e))
+
   }, []);
-  console.log(allFav);
-
-  useEffect(() => {
-    const result = allFav.find((el) => {
-      if(el.id === basketRes.id) {
-        return el;
-      }
-    })
-    setInBasketStatus(!!result)
-    setFav(result)
-  }, [allFav])
+  //
+  // useEffect(() => {
+  //   const result = allFav.find((el) => {
+  //     if(el.id === basketRes.id) {
+  //       return el;
+  //     }
+  //   })
+  //   setInBasketStatus(!!result)
+  //   setFav(result)
+  // }, [allFav])
 
 
   const addFavorite = () => {
@@ -61,8 +62,23 @@ function MedicineCard({ navigation, data }) {
       userData?.access
     )
       .then((res) => {
-        // res.status === 201 ? setFavorite(true) : null
-        console.log(res);
+        res.status === 201 ? setFavorite(true) : null
+        setFavId(res.data)
+        console.log(res.status)
+      })
+      .catch((e) => console.log(e));
+  };
+  console.log(favId.id);
+
+
+  const deleteFavorite = () => {
+    Api.deleteData(
+      `favorite-medications/delete/${favId?.id}/`,
+      userData?.access
+    )
+      .then((res) => {
+        // res.status === 201 ? setFavorite(false) : null
+        console.log('dsdadas',res);
       })
       .catch((e) => console.log(e));
   };
@@ -81,7 +97,6 @@ function MedicineCard({ navigation, data }) {
   };
 
 
-  console.log(basketRes);
 
   return (
     <View activeOpacity={0.85} style={myMedicine.medicineCard}>
@@ -96,6 +111,9 @@ function MedicineCard({ navigation, data }) {
           </View>
           <TouchableOpacity 
           onPress={() => {
+            favorite ?
+              deleteFavorite()
+              :
             addFavorite()
           }}
           >
@@ -113,7 +131,7 @@ function MedicineCard({ navigation, data }) {
           <TouchableOpacity 
           activeOpacity={0.6} 
           style={myMedicine.find}
-          onPress={() => navigation.push('MedicineInfo')}
+          onPress={() => navigation.navigate('MedicineInfo', data.id)}
           >
             <Text style={myMedicine.findText}>Подробнее</Text>
           </TouchableOpacity>

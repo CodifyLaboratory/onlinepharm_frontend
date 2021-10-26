@@ -20,8 +20,6 @@ function FarmInfo({navigation, route}) {
       .catch(e => console.log(e))
   }, [ ]);
 
-  console.log(farmData);
-
   const reviewList = useMemo(() => (
     farmData?.feedbacks?.map((item) => (
       <ReviewCard data={item} key={item.id} />
@@ -56,20 +54,18 @@ function FarmInfo({navigation, route}) {
           <Phone />
           <View>
             <Text style={farmInfo.time}>+996 555 323 145</Text>
-            <Text style={farmInfo.time}>+996 700 122 478</Text>
-
           {/*  add numbers from back */}
           </View>
         </View>
 
         <View style={farmInfo.starBox}>
           <Stars
-            display={farmData.middle_star}
+            display={farmData?.middle_star}
             spacing={8}
             count={5}
             starSize={20}
-            fullStar={require('./../assets/icons/fullStar.png')}
-            emptyStar={require('./../assets/icons/emptyStar.png')}
+            fullStar= {require('./../assets/icons/fullStar.png')}
+            emptyStar= {require('./../assets/icons/emptyStar.png')}
           />
           <Text style={farmInfo.starCount}>{farmData?.feedbacks_count} отзыва</Text>
         </View>

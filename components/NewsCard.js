@@ -6,11 +6,12 @@ import NewsIcon from './../assets/icons/newsFarmIcon.svg'
 const NewsCard = ({navigation, data}) => {
   var re = /-/gi;
   return (
-    <TouchableOpacity onPress={() => {
+    <TouchableOpacity
+      onPress={() => {
       navigation.navigate('NewsInfo', data.id)
     }} style={news.farmCard}
-                      activeOpacity={0.85}
-                      key={data.id}
+      activeOpacity={0.85}
+      key={data.id}
     >
       <View style={news.farmCardInfo}>
         <View style={news.nameFarm}>
@@ -19,7 +20,14 @@ const NewsCard = ({navigation, data}) => {
         </View>
         <Text style={news.farmDesc}>{data.title}</Text>
         <Text style={news.farmDate}>с {data.start_date.replace(re, '.')} по {data.end_date.replace(re, '.')}</Text>
-        <TouchableOpacity style={news.farmCardBtn}>
+        <TouchableOpacity
+          style={news.farmCardBtn}
+          onPress={() => {
+            navigation.navigate('NewsInfo', data.id)
+          }}
+          activeOpacity={0.85}
+          key={data.id}
+        >
           <Text style={news.farmCardBtnText}>Подробнее</Text>
         </TouchableOpacity>
       </View>

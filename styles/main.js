@@ -5,7 +5,8 @@ export const main = StyleSheet.create({
     color: 'red',
   },
   container: {
-    paddingTop: Platform.OS == 'android' ? 40 : 0
+    paddingTop: Platform.OS == 'android' ? 40 : 0,
+    paddingBottom: 30,
   },
   banner: {
     display: 'flex',
