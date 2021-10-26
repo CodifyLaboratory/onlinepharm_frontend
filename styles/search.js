@@ -2,7 +2,7 @@ import {Platform, StyleSheet} from "react-native";
 
 export const search = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    // alignItems: 'center',
     paddingLeft: 16,
     paddingRight: 16,
     paddingTop: Platform.OS == 'android' ? 60 : 20,
@@ -26,5 +26,17 @@ export const search = StyleSheet.create({
     fontSize: 18,
     marginTop: 45,
     color: '#999999',
+  },
+  searchItem: {
+    marginBottom: 16,
+  },
+  itemText: {
+    fontSize: 15,
+    fontWeight: '400',
+    lineHeight: 22,
+    color: '#1F8BA7',
+  },
+  searchBlock: {
+    marginLeft: 37,
   }
 })
