@@ -20,6 +20,8 @@ function FarmInfo({navigation, route}) {
       .catch(e => console.log(e))
   }, [ ]);
 
+  console.log(farmData);
+
   const reviewList = useMemo(() => (
     farmData?.feedbacks?.map((item) => (
       <ReviewCard data={item} key={item.id} />
@@ -34,7 +36,7 @@ function FarmInfo({navigation, route}) {
           <Image
             height={61} width={100}
             style={farmInfo.logo}
-            source={{uri: farmData?.pharmacy_profile?.brand?.logo}}
+            source={{uri: farmData?.pharmacy_profile?.logo}}
           />
           <Text style={farmInfo.title}>{farmData?.pharmacy_profile?.brand?.title}</Text>
         </View>
@@ -42,7 +44,7 @@ function FarmInfo({navigation, route}) {
         <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 28}}>
           <Marker />
           <Text style={farmInfo.time} onPress={() => navigation.navigate('Map')}>
-            ул.Советская 233 / 9 мкрн д.10
+            {farmData?.location?.address}
           {/*  add adress from back */}
           </Text>
         </View>
@@ -60,12 +62,12 @@ function FarmInfo({navigation, route}) {
 
         <View style={farmInfo.starBox}>
           <Stars
-            display={farmData?.middle_star}
+            display={Number(farmData.middle_star)}
             spacing={8}
             count={5}
             starSize={20}
-            fullStar= {require('./../assets/icons/fullStar.png')}
-            emptyStar= {require('./../assets/icons/emptyStar.png')}
+            fullStar={require('./../assets/icons/fullStar.png')}
+            emptyStar={require('./../assets/icons/emptyStar.png')}
           />
           <Text style={farmInfo.starCount}>{farmData?.feedbacks_count} отзыва</Text>
         </View>

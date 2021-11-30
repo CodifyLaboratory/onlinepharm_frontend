@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import {StyleSheet, Text, View, Button, SafeAreaView, ScrollView, Image, TouchableOpacity} from 'react-native'
-
+import Api from "./../API/index";
 import Cart from '../assets/profile/cart.svg'
 import List from '../assets/profile/list.svg'
 import Medicine from '../assets/profile/medicine.svg'
@@ -16,7 +16,10 @@ import {profile} from "../styles/profile";
 
 
 export default function Profile({navigation, route}) {
-    const loadData = async () => {
+  const [userData, setUserData] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
+  const loadData = async () => {
     try {
       let data = await AsyncStorage.getItem("userData");
       if (data !== null) {
@@ -26,18 +29,31 @@ export default function Profile({navigation, route}) {
       console.log(err);
     }
   };
+
+  useEffect(() => {
+    loadData()
+        Api.getData(`auth/users/${userData?.user_id}/`, userData?.access)
+          .then(res => setUserInfo(res.data))
+          .catch(e => console.log(e))
+
+
+  }, [userData?.access]);
+
+  console.log(userData);
+
   return (
     <ScrollView style={{backgroundColor: '#E6EFF9'}}>
       <SafeAreaView>
         <View style={profile.container}>
-          <Image style={profile.profileAvatar} source={require('../assets/profile/avatar.png')}/>
-          <Text style={profile.profileName}>Керим Абдылдаев</Text>
-          <Text style={profile.profileNumber}>+996 700 123 456</Text>
+          <Image style={profile.profileAvatar} source={require('../assets/auth/defaultPhoto.png')}/>
+          <Text
+            style={profile.profileName}>{userInfo?.user_profile?.first_name + " " + userInfo?.user_profile?.last_name} </Text>
+          <Text style={profile.profileNumber}>{userInfo?.user_profile?.phone}</Text>
           <View style={profile.profileLinks}>
             <TouchableOpacity onPress={() => {
-              navigation.push('MyProfile')
+              navigation.navigate('MyProfile', userInfo)
             }} style={profile.profileLink}
-            activeOpacity={0.6}
+                              activeOpacity={0.6}
             >
               <View style={profile.profileLinkInner}>
                 <User style={{width: 24, height: 24}}/>
@@ -58,10 +74,10 @@ export default function Profile({navigation, route}) {
               </View>
               <Arrow/>
             </TouchableOpacity>
-            <TouchableOpacity style={profile.profileLink} onPress={()=> {
+            <TouchableOpacity style={profile.profileLink} onPress={() => {
               navigation.push('MyFarms');
             }}
-            activeOpacity={0.6}
+                              activeOpacity={0.6}
             >
               <View style={profile.profileLinkInner}>
                 <Doctor style={{width: 24, height: 24}}/>

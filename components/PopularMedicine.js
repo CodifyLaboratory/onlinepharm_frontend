@@ -2,7 +2,9 @@ import React from 'react';
 import {View, Image, TouchableOpacity, StyleSheet, Text} from 'react-native'
 import Stars from 'react-native-stars';
 
-const PopularMedicine = ({data}) => {
+const PopularMedicine = ({data, navigation}) => {
+
+  console.log(data)
   return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -22,7 +24,12 @@ const PopularMedicine = ({data}) => {
         </View>
         <Text style={styles.price}>Цена от: <Text style={styles.soms}>{data?.price} c</Text></Text>
 
-        <TouchableOpacity style={styles.detailsBtn}>
+        <TouchableOpacity
+          style={styles.detailsBtn}
+          onPress={() => {
+            navigation.navigate('MedicineInfo', data.id)
+          }}
+        >
           <Text style={styles.detailsBtnText}>Подробнее</Text>
         </TouchableOpacity>
 

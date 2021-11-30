@@ -56,6 +56,7 @@ function Login({navigation, setIsSignIn}) {
           placeholderTextColor={'#333333'}
           style={registration.input}
           onChangeText={handleChangePassword}
+          secureTextEntry={true}
         />
         <TouchableOpacity onPress={()=>navigation.push('Login')}>
           <Text style={[registration.forgotPassword, {textAlign: 'center'}]}>Забыли пароль?</Text>

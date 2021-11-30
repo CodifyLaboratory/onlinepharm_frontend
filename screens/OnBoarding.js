@@ -1,11 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, Animated } from 'react-native';
 import OnBoardingItem from '../components/OnBoardingItem';
 import Paginator from '../components/Paginator';
 import slidesData from '../data/slidesData';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OnBoarding = ({ navigation, isSignIn, setIsSignIn }) => {
   const [ currentIndex, setCurrentIndex ] = useState(0);
+  const [userData, setUserData] = useState();
+
+  const loadData = async () => {
+    try {
+      let data = await AsyncStorage.getItem("userData");
+      if (data !== null) {
+        setUserData(JSON.parse(data));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  console.log(userData)
+
+
+
   const item = useRef(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
@@ -14,6 +36,11 @@ const OnBoarding = ({ navigation, isSignIn, setIsSignIn }) => {
   }).current;
 
   const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current;
+
+
+  if(userData) {
+    setIsSignIn(true)
+  }
 
   return (
     <SafeAreaView style={styles.container}>

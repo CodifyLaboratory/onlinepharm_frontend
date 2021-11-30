@@ -6,7 +6,7 @@ import PhoneSvg from './../assets/phoneIcon.svg'
 import ClockIcon from './../assets/clockIcon.svg'
 
 const CustomMarker = ({item, navigation}) => {
-  const [descStatus, setDescStatus] = useState(true)
+  const [descStatus, setDescStatus] = useState(false)
 
   const changeStatus = () => setDescStatus(!descStatus)
 
@@ -16,7 +16,7 @@ const CustomMarker = ({item, navigation}) => {
         latitude: item?.location?.latitude,
         longitude: item?.location?.longitude,
       }}
-      // onPress={changeStatus}
+      onPress={changeStatus}
       style={styles.marker}
       key={item.id}
     >

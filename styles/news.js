@@ -91,7 +91,7 @@ export const news = StyleSheet.create({
   farmCardImage: {
     flex: 0.5,
     width: 140,
-    height: 150,
+    height: '100%',
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
   }

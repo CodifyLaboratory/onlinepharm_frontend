@@ -31,13 +31,12 @@ const Cart = ({ navigation }) => {
 
   useEffect(() => {
     loadData()
-      Api.getData("basket-medications/", userData?.access)
-      .then((res) => setCartItems(res.data))
-      .catch((e) => console.log(e));
+          Api.getData("basket-medications/", userData?.access)
+            .then((res) => setCartItems(res.data))
+            .catch((e) => console.log(e));
 
-  }, []);
+  }, [userData?.access]);
 
-  console.log(cartItems);
   return (
     <View style={cart.container}>
       {cartItems.length ? (
@@ -65,7 +64,7 @@ const Cart = ({ navigation }) => {
       {cartItems.length ? (
         <View style={cart.result}>
           <Text>Итого</Text>
-          <Text>от 0 с</Text>
+          <Text>от 1 с</Text>
         </View>
       ) : null}
 

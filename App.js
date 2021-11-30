@@ -7,6 +7,10 @@ import Navigator from "./navigator/Navigator";
 export default function App() {
   const [location, setLocation] = useState(null)
 
+  const [isSignIn, setIsSignIn] = useState(false)
+
+
+
   useEffect(() => {
     _getLocation()
   }, [])
@@ -22,11 +26,10 @@ export default function App() {
     setLocation(location);
   }
 
-  console.log(location)
 
   return (
       <NavigationContainer>
-        <Navigator />
+        <Navigator isSignIn={isSignIn} setIsSignIn={setIsSignIn} />
       </NavigationContainer>
   );
 }

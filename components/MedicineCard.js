@@ -6,17 +6,16 @@ import CartWhite from "./../assets/icons/cartWhiteSmall.svg";
 import Api from "./../API/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-function MedicineCard({ navigation, data, type }) {
+function MedicineCard({ navigation, data, type, isFavorite }) {
   const [count, setCount] = useState(1);
 
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(isFavorite);
   const [favId, setFavId] = useState({})
 
   const [inBasketStatus, setInBasketStatus] = useState(type ? true : false);
   const [basketId, setBasketId] = useState({})
   const [allFav, setAllFav] = useState([])
   const [userData, setUserData] = useState(null);
-
 
   const counter = (type) =>
     type === "minus" ? setCount(count - 1) : setCount(count + 1);

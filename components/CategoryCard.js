@@ -4,7 +4,7 @@ import { Image, ImageBackground, Text, TouchableOpacity } from 'react-native';
 
 const CategoryCard = ({data, navigation}) => {
   return (
-    <TouchableOpacity style={main.categoriesItem} activeOpacity={0.8} onPress={()=> navigation.push('Categories')}>
+    <TouchableOpacity style={main.categoriesItem} activeOpacity={0.8} onPress={()=> navigation.navigate('Categories', data.id)}>
       <ImageBackground style={{ width: 75, height: 75, alignItems: 'center', justifyContent: 'center' }}
                        source={require('../assets/main/categoriisCircle.png')}>
         <Image style={{resizeMode: 'contain'}} source={{uri: data.image}}/>

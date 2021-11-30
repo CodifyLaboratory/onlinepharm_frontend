@@ -84,6 +84,9 @@ export default function Main({navigation}) {
       newsData.map((item) => <NewsCard data={item} key={item.id} navigation={navigation} />)
     ),[newsData])
 
+
+  console.log(categoryData)
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}

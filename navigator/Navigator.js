@@ -45,8 +45,7 @@ import MedicineInfo from "../screens/MedicineInfo";
 import { mainBgColor, mainTextColor } from "../constants"
 
 
-export default function Navigator() {
-  const [isSignIn, setIsSignIn] = useState(false)
+export default function Navigator({ isSignIn, setIsSignIn }) {
 
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();

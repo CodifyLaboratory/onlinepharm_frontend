@@ -6,7 +6,7 @@ import SearchImg from '../assets/search/search.svg'
 import {search} from "../styles/search";
 import Api from "../API";
 
-const Search = () => {
+const Search = ({navigation}) => {
 
   const [searchValue, setSearchValue] = useState('')
   const [searchData, setSearchData] = useState([])
@@ -34,7 +34,11 @@ const Search = () => {
         />
         {searchData.length > 0 ? <View style={search.searchBlock}>
           {searchData?.map(item => (
-            <TouchableOpacity style={search.searchItem} key={item.id}>
+            <TouchableOpacity
+              style={search.searchItem}
+              key={item.id}
+              onPress={() => navigation.navigate('MedicineInfo', item.id)}
+            >
               <Text style={search.itemText}>{item?.title}</Text>
             </TouchableOpacity>
           ))}

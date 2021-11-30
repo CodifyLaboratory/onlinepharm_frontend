@@ -19,18 +19,20 @@ import PopularMedicine from '../components/PopularMedicine'
 import {main} from "../styles/main";
 import { categories } from '../styles/categories';
 
-function Categories({ navigation }) {
+function Categories({ navigation, route }) {
+  const id = route.params
   const [ bannerData, setBannerData ] = useState([]);
   const [ popularData, setPopularData ] = useState([]);
+  const [ subCategory, setSubCategory ] = useState([]);
 
   useEffect(() => {
     Api.getData('banners/')
       .then(res => setBannerData(res.data));
     Api.getData('popular-medications/')
       .then(res => setPopularData(res.data));
+    Api.getData('subcategories/')
+      .then(res => setSubCategory(res.data));
   }, []);
-
-  console.log(popularData)
 
   const bannerList = useMemo(
     () => (
@@ -55,15 +57,22 @@ function Categories({ navigation }) {
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           >
-
             {bannerList}
           </ScrollView>
         </View>
         <View style={categories.pillsContainer}>
-          <TouchableOpacity style={categories.pillsListElem} activeOpacity={0.8}
-                            onPress={() => navigation.push('CategoriesMedicines')}>
-            <Text style={categories.pillsListElemText}>Антибактериальные(Антибиотики)</Text>
-          </TouchableOpacity>
+          {
+            subCategory?.map((item) => (
+              <TouchableOpacity
+                key={item.id}
+                style={categories.pillsListElem}
+                activeOpacity={0.8}
+                onPress={() => navigation.navigate('CategoriesMedicines', item)}>
+                <Text style={categories.pillsListElemText}>{item.title}</Text>
+              </TouchableOpacity>
+            ))
+          }
+
 
         </View>
 
@@ -76,7 +85,7 @@ function Categories({ navigation }) {
           >
             {
               popularData.map((item) => (
-                <PopularMedicine key={item.id} data={item} />
+                <PopularMedicine navigation={navigation} key={item.id} data={item} />
               ))
             }
 

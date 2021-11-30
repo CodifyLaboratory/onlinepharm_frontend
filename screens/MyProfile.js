@@ -4,13 +4,15 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { Input } from 'react-native-elements';
 import {myProfile} from "../styles/myProfile";
 
-export default function MyProfile() {
+export default function MyProfile({route}) {
+  const data = route.params
+  // console.log(route.params)
 
   return (
     <ScrollView style={{backgroundColor: '#E6EFF9'}}>
       <View style={myProfile.container}>
         <View style={{alignItems: 'center'}}>
-          <Image style={myProfile.profileAvatar} source={require('../assets/profile/avatar.png')} />
+          <Image style={myProfile.profileAvatar} source={require('../assets/auth/defaultPhoto.png')} />
           <Input
             keyboardType='default'
             label={'Имя'}
@@ -22,6 +24,7 @@ export default function MyProfile() {
                 color='#cccccc'
               />
             }
+            defaultValue={data?.user_profile?.first_name}
             inputStyle={{fontSize: 14,}}
             inputContainerStyle={myProfile.input}
           />
@@ -36,6 +39,7 @@ export default function MyProfile() {
                 color='#cccccc'
               />
             }
+            defaultValue={data?.user_profile?.last_name}
             inputStyle={{fontSize: 14,}}
             inputContainerStyle={myProfile.input}
           />
@@ -50,6 +54,7 @@ export default function MyProfile() {
                 color='#cccccc'
               />
             }
+            defaultValue={data?.email}
             inputStyle={{fontSize: 14,}}
             inputContainerStyle={myProfile.input}
           />
@@ -64,6 +69,7 @@ export default function MyProfile() {
                 color='#cccccc'
               />
             }
+            defaultValue={data?.user_profile?.phone}
             inputStyle={{fontSize: 14,}}
             inputContainerStyle={myProfile.input}
           />
@@ -78,6 +84,7 @@ export default function MyProfile() {
                 color='#cccccc'
               />
             }
+            defaultValue={data?.location === null ? '' : data?.location}
             inputStyle={{fontSize: 14,}}
             inputContainerStyle={myProfile.input}
           />

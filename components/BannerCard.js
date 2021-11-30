@@ -9,14 +9,14 @@ function BannerCard({data, navigation}) {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Text style={styles.title}>{data.title}</Text>
-        <Text style={styles.date}>с {data.start_date.replace(replacedStr, '.')} по {data.end_date.replace(replacedStr, '.')}</Text>
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('BannerInfo', data.id)}>
+        <Text style={styles.title}>{data?.title}</Text>
+        <Text style={styles.date}>с {data?.start_date?.replace(replacedStr, '.')} по {data?.end_date?.replace(replacedStr, '.')}</Text>
+        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('BannerInfo', data?.id)}>
           <Text style={styles.btnTitle}>Подробнее</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.right}>
-        <Image source={{ uri: data.image }} style={styles.image}/>
+        <Image source={{ uri: data?.image }} style={styles.image}/>
       </View>
     </View>
   );

@@ -7,11 +7,10 @@ function MyFarms({navigation}) {
   return (
     <ScrollView>
       <View style={myFarms.container}>
-        <FarmCard navigation={navigation}/>
-        <FarmCard navigation={navigation}/>
-        <FarmCard navigation={navigation}/>
-        <FarmCard navigation={navigation}/>
-
+        {/*<FarmCard navigation={navigation}/>*/}
+        {/*<FarmCard navigation={navigation}/>*/}
+        {/*<FarmCard navigation={navigation}/>*/}
+        {/*<FarmCard navigation={navigation}/>*/}
       </View>
     </ScrollView>
 

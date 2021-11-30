@@ -14,6 +14,7 @@ export const myProfile = StyleSheet.create({
     height: 120,
     borderRadius: 50,
     marginBottom: 32,
+    resizeMode: 'cover'
   },
   input: {
     borderBottomWidth: 0,
