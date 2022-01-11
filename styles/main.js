@@ -7,21 +7,49 @@ export const main = StyleSheet.create({
   container: {
     paddingTop: Platform.OS == 'android' ? 40 : 0,
     paddingBottom: 30,
+
   },
   banner: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     width: '100%',
-    borderRadius: 20,
+    paddingTop: 24,
+    backgroundColor: "#FFFFFF"
+  },
+  bannerBulletsWrap: {
+    display: 'flex',
+    width: '100%',
+    height: 10,
+    justifyContent: 'center',
+    // alignItems: 'center',
+  },
+  bannerBullet: {
+    width: 5,
+    height: 5,
+    borderRadius: 5,
+    backgroundColor: "#1F8BA7"
+  },
+  inactiveBullet: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: '#F3F3F3'
+  },
+  dotStyle: {
+    width: 5,
+    height: 5,
+    borderRadius: 5,
+    backgroundColor: '#1F8BA7'
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    // marginBottom: 20,
     paddingTop: 8,
     paddingRight: 8,
     paddingLeft: 8,
+    backgroundColor: "#FFFFFF"
   },
   headerRight: {
     flexDirection: 'row',

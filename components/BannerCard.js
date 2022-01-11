@@ -6,17 +6,19 @@ var replacedStr = /-/gi;
 
 function BannerCard({data, navigation}) {
 
+  const { image, title, start_date, end_date } = data.item
+
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Text style={styles.title}>{data?.title}</Text>
-        <Text style={styles.date}>с {data?.start_date?.replace(replacedStr, '.')} по {data?.end_date?.replace(replacedStr, '.')}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.date}>с {start_date?.replace(replacedStr, '.')} по {end_date?.replace(replacedStr, '.')}</Text>
         <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('BannerInfo', data?.id)}>
           <Text style={styles.btnTitle}>Подробнее</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.right}>
-        <Image source={{ uri: data?.image }} style={styles.image}/>
+        <Image source={{ uri: image }} style={styles.image}/>
       </View>
     </View>
   );
@@ -36,9 +38,11 @@ const styles = StyleSheet.create({
     // },
     // shadowOpacity: 0.22,
     // shadowRadius: 2.22,
-    // elevation: 3,
+    elevation: 3,
     borderRadius: 20,
     marginRight: 16,
+    marginTop: 2,
+    marginBottom: 2,
     marginLeft: 16
   },
   left: {
