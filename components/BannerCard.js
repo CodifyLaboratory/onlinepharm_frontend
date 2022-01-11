@@ -6,14 +6,16 @@ var replacedStr = /-/gi;
 
 function BannerCard({data, navigation}) {
 
-  const { image, title, start_date, end_date } = data.item
+  console.log('data', data)
+
+  const { image, title, start_date, end_date, id } = data.item
 
   return (
     <View style={styles.container}>
       <View style={styles.left}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.date}>с {start_date?.replace(replacedStr, '.')} по {end_date?.replace(replacedStr, '.')}</Text>
-        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('BannerInfo', data?.id)}>
+        <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('BannerInfo', id)}>
           <Text style={styles.btnTitle}>Подробнее</Text>
         </TouchableOpacity>
       </View>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView, StyleSheet, ScrollView } from 'react-native'
+import { Text, StyleSheet, ScrollView } from 'react-native'
 import Api from './../API/index'
 import MedicineCard from './../components/MedicineCard'
 
 var replacedStr = /-/gi;
 
-
-const MyComponent = ({route}) => {
+const MyComponent = ({route, navigation}) => {
   const [bannerData, setBannerData] = useState({})
 
   useEffect(() => {
@@ -15,11 +14,10 @@ const MyComponent = ({route}) => {
       .catch(e => console.log(e))
   }, [])
 
-  console.log(bannerData);
-
+  //
   const medicationList = useMemo(() => (
     bannerData?.medications?.map((item) => (
-      <MedicineCard key={item.id} />
+      <MedicineCard key={item.id} data={item} navigation={navigation} />
     ))
   ), [bannerData]);
 

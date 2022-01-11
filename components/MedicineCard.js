@@ -6,7 +6,11 @@ import CartWhite from "./../assets/icons/cartWhiteSmall.svg";
 import Api from "./../API/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 function MedicineCard({ navigation, data, type, isFavorite }) {
+
+  console.log('DATA', data)
+
   const [count, setCount] = useState(1);
 
   const [favorite, setFavorite] = useState(isFavorite);
@@ -127,7 +131,7 @@ function MedicineCard({ navigation, data, type, isFavorite }) {
               Цена от: <Text style={myMedicine.price}>{data.price} с</Text>{" "}
             </Text>
           </View>
-          <TouchableOpacity 
+          <TouchableOpacity
           onPress={() => {
             favorite ?
               deleteFavorite()
@@ -146,8 +150,8 @@ function MedicineCard({ navigation, data, type, isFavorite }) {
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity 
-          activeOpacity={0.6} 
+          <TouchableOpacity
+          activeOpacity={0.6}
           style={myMedicine.find}
           onPress={() => navigation.navigate('MedicineInfo', data.id)}
           >
