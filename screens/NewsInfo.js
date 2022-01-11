@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useMemo} from 'react';
-import {View, Text, ScrollView, SafeAreaView, Image, StyleSheet, Platform} from "react-native";
+import {View, Text, ScrollView, SafeAreaView, Image, StyleSheet, Platform, Dimensions} from "react-native";
 import Api from './../API/index'
 import {newsInfo} from '../styles/newsInfo'
 import MedicineCard from './../components/MedicineCard'
@@ -25,7 +25,7 @@ function NewsInfo({route}) {
 
   return (
     <ScrollView style={styles.container}>
-      <Image style={styles.image} source={{ uri: newsData?.image}} />
+      <Image resizeMode="contain" style={styles.image} source={{ uri: newsData?.image}} />
       <Text style={styles.title}>{newsData?.title}</Text>
       <Text style={styles.date}>
         с {newsData?.start_date?.replace(replacedStr, '.')} по {newsData?.end_date?.replace(replacedStr, '.')}
@@ -39,12 +39,15 @@ export default NewsInfo;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16
+    padding: 16,
+    backgroundColor: '#FFFFFF'
   },
   image: {
-    width: 100,
-    height: 61,
-    marginBottom: 15
+    width: Dimensions.get('window').width-77,
+    height: 200,
+    marginBottom: 15,
+    alignSelf: 'center',
+    borderRadius: 20,
   },
   title: {
     fontSize: 20,

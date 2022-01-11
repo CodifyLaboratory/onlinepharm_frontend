@@ -1,14 +1,17 @@
 import {Platform, StyleSheet} from "react-native";
+import {Colors} from "../constants/colors";
 
 export const news = StyleSheet.create({
   container: {
     paddingLeft: Platform.OS === 'ios' ? 16 : 8,
     alignItems: 'center',
     paddingBottom: 40,
+    backgroundColor: Colors.background
 
   },
   newsInner: {
-    paddingTop: Platform.OS === 'ios' ? 10 : 45,
+    paddingTop: Platform.OS === 'ios' ? 10 : 10,
+    backgroundColor: Colors.background
   },
   newsItem: {
     marginRight: 20,
@@ -18,7 +21,7 @@ export const news = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
     borderBottomWidth: 3,
-    borderBottomColor: "#FFC90A",
+    borderBottomColor: Colors.yellow,
     paddingBottom: 8,
     color: 'red',
   },
@@ -28,7 +31,7 @@ export const news = StyleSheet.create({
   },
   newsNavTextActive: {
     fontSize: 18,
-    color: '#1F8BA7',
+    color: Colors.primary,
   },
   farmCard: {
     flex: 1,
