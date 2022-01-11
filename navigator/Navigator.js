@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Platform, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import {View, Platform, TouchableOpacity, StyleSheet, Text, Button, Image} from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -43,6 +43,7 @@ import LeaveReview from '../screens/LeaveReview'
 import MedicineInfo from "../screens/MedicineInfo";
 
 import { mainBgColor, mainTextColor } from "../constants"
+import HeaderBackButton from "../components/Header";
 
 
 export default function Navigator({ isSignIn, setIsSignIn }) {
@@ -191,9 +192,13 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
   const NewsNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="News" component={News} options={{ headerShown: false }} />
-        <Stack.Screen name="NewsInfo" component={NewsInfo} options={{ headerBackTitle: 'Назад' }} />
-
+        <Stack.Screen name="News" component={News}
+                      options={{ headerShown: true, headerTitle: 'Новости', }} />
+        <Stack.Screen name="NewsInfo" component={NewsInfo} options={{
+            headerTitle: 'Подробнее',
+            // headerLeft: () => ( <HeaderBackButton />
+            // ),
+            headerTitleStyle: { color: mainTextColor }}} />
       </Stack.Navigator>
     )
   }
@@ -346,7 +351,6 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
 
   );
 }
-
 
 const styles = StyleSheet.create({
   flexRow: {

@@ -6,9 +6,10 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import {news} from './../styles/news'
+import {news} from '../styles/news'
 import Api from '../API';
 import NewsCard from "../components/NewsCard";
+import {Colors} from "../constants/colors";
 
 
 export default function News({navigation}) {
@@ -23,6 +24,8 @@ export default function News({navigation}) {
     Api.getData('news-categories/')
       .then(res => setCategoryDataId(res.data))
   }, [])
+
+
 
 
   const changeCategory =(id) => {
@@ -40,7 +43,7 @@ export default function News({navigation}) {
     ,[newsItems, category]
   )
 
-  console.log(category);
+  console.log("+++++++++++++++++++", newsItems);
 
 
   const categoryList = useMemo(
@@ -50,7 +53,7 @@ export default function News({navigation}) {
           onPress={()=> changeCategory(item.id)}
           activeOpacity={0.5}
           key={item.id}
-          style={category === item.id ? news.newsItemActive :news.newsItem}
+          style={category === item.id ? news.newsItemActive : news.newsItem}
         >
           <Text style={
             category === item.id ?
@@ -77,7 +80,7 @@ export default function News({navigation}) {
           </ScrollView>
         </View>
 
-        <ScrollView style={{backgroundColor: '#E6EFF9', height: '100%', marginTop: 24}}>
+        <ScrollView style={{backgroundColor: Colors.background, height: '100%', marginTop: 24}}>
           <View style={news.container}>
             {
               newsList
