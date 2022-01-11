@@ -4,6 +4,7 @@ import FarmCard from '../components/FarmCard';
 import BrandCard from './../components/BrandCard'
 import Api from '../API';
 import {farm} from "../styles/farm";
+import {Colors} from "../constants/colors";
 
 function Farm({navigation}) {
   const [branchData, setBranchData] = useState([])
@@ -14,8 +15,6 @@ function Farm({navigation}) {
       .catch(e => console.log(e))
   }, [])
 
-  console.log(branchData)
-
   const branchList = useMemo(() => (
     branchData?.map((item) => (
       <BrandCard navigation={navigation} key={item.id} data={item} />
@@ -24,7 +23,7 @@ function Farm({navigation}) {
   ), [branchData])
 
   return (
-    <ScrollView style={{backgroundColor: '#E6EFF9'}}>
+    <ScrollView style={{backgroundColor: Colors.background}}>
       <View style={farm.container}>
         {branchList}
       </View>

@@ -1,17 +1,18 @@
 import React, {useEffect, useMemo, useState, useRef} from 'react';
-import { View, ScrollView, Text, TouchableOpacity } from 'react-native';
+import {View, ScrollView, Text, TouchableOpacity, Image} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Map from './Map';
 import {farms} from "../styles/farms";
 import Api from '../API';
 import FarmsCard from "../components/FarmsCard";
+import {Colors} from "../constants/colors";
 
 
-const Farms = ({navigation}) => {
+const Farms = ({navigation, route}) => {
   const [type, setType] = useState(true)
   const [pharmacies, setPharmacies] = useState([])
   const [brands, setBrands] = useState([])
-  const [selectedFarm, setSelectedFarm] = useState(1);
+  const [selectedFarm, setSelectedFarm] = useState(route.params);
 
   useEffect(() => {
     Api.getData('pharms/')
@@ -52,7 +53,7 @@ const Farms = ({navigation}) => {
 )
 
   return (
-    <ScrollView style={{backgroundColor: '#E6EFF9'}}>
+    <ScrollView style={{backgroundColor: Colors.background}}>
       <View style={farms.container}>
         <View style={farms.type}>
           <TouchableOpacity
@@ -68,17 +69,20 @@ const Farms = ({navigation}) => {
             <Text  style={!type ? farms.typeTextActive : farms.typeText}>На карте</Text>
           </TouchableOpacity>
         </View>
+      <View style={farms.picker_container}>
+          <Image style={farms.picker_icon} source={require('../assets/farms/picker_arrow.png')} />
+          <Picker
+              style={{width: '100%',height: 40, backgroundColor: '#fff', borderRadius: 20, marginBottom: 24}}
+              ref={pickerRef}
+              selectedValue={selectedFarm}
+              onValueChange={(itemValue, itemIndex) =>
+                  setSelectedFarm(itemValue)
+              }>
+              <Picker.Item mode={'dropdown'} label="Выберите аптеку" value={0}/>
+              {brands.map((item) => <Picker.Item label={item.title} value={item.id} key={item.id}/> )}
+          </Picker>
 
-        <Picker
-          style={{width: '94%',height: 40, backgroundColor: '#fff', borderRadius: 5, marginBottom: 24}}
-          ref={pickerRef}
-          selectedValue={selectedFarm}
-          onValueChange={(itemValue, itemIndex) =>
-            setSelectedFarm(itemValue)
-          }>
-          <Picker.Item label="Все аптеки" value={0}/>
-          {brands.map((item) => <Picker.Item label={item.title} value={item.id} key={item.id}/> )}
-        </Picker>
+      </View>
 
         {
           type

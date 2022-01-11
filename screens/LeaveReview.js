@@ -29,7 +29,7 @@ const LeaveReview = ({ route, navigation }) => {
 
   useEffect(() => {
     loadData();
-    
+
   }, []);
 
   const loadData = async () => {
@@ -146,10 +146,6 @@ const styles = StyleSheet.create({
   btnText: {
     color: "#ffffff",
     fontSize: 17,
-  },
-  centeredView: {
-    justifyContent: "center",
-    alignItems: "center",
   },
   centeredView: {
     flex: 1,

@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function MedicineCard({ navigation, data, type, isFavorite }) {
 
-  console.log('DATA', data)
+  // console.log('DATA', data)
 
   const [count, setCount] = useState(1);
 
@@ -76,7 +76,7 @@ function MedicineCard({ navigation, data, type, isFavorite }) {
     )
       .then((res) => {
         res.status === 204 ? setFavorite(false) : null
-        console.log('dsdadas',res);
+        // console.log('dsdadas',res);
       })
       .catch((e) => console.log(e));
   };
@@ -98,7 +98,7 @@ function MedicineCard({ navigation, data, type, isFavorite }) {
       .catch((e) => console.log(e));
   };
 
-  console.log(basketId.id);
+  // console.log(basketId.id);
 
   const deleteFromBasket = () => {
     Api.deleteData(

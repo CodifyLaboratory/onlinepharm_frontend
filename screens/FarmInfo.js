@@ -20,8 +20,6 @@ function FarmInfo({navigation, route}) {
       .catch(e => console.log(e))
   }, [ ]);
 
-  console.log(farmData);
-
   const reviewList = useMemo(() => (
     farmData?.feedbacks?.map((item) => (
       <ReviewCard data={item} key={item.id} />

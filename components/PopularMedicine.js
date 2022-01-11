@@ -4,7 +4,6 @@ import Stars from 'react-native-stars';
 
 const PopularMedicine = ({data, navigation}) => {
 
-  console.log(data)
   return (
     <View style={styles.container}>
       <View style={styles.top}>

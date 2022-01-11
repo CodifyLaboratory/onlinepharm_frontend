@@ -6,8 +6,6 @@ var replacedStr = /-/gi;
 
 function BannerCard({data, navigation}) {
 
-  console.log('data', data)
-
   const { image, title, start_date, end_date, id } = data.item
 
   return (

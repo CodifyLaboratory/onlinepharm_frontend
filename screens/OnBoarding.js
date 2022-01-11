@@ -24,7 +24,7 @@ const OnBoarding = ({ navigation, isSignIn, setIsSignIn }) => {
     loadData()
   }, [])
 
-  console.log(userData)
+  // console.log(userData)
 
 
 
