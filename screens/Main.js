@@ -19,6 +19,7 @@ import MainHitsCard from "../components/MainHitsCard";
 import BannerCard from '../components/BannerCard';
 import CategoryCard from '../components/CategoryCard';
 import NewsCard from '../components/NewsCard';
+import Pagination from "react-native-snap-carousel/src/pagination/Pagination";
 
 export default function Main({navigation}) {
 
@@ -38,6 +39,7 @@ export default function Main({navigation}) {
   ]);
   const [farmCardData, setFarmCardData] = useState([])
   const [bannerData, setBannerData] = useState([])
+  const [current, setCurrent] = useState(0)
   const [categoryData, setCategoryData] = useState([])
   const [selectionsData, setSelectionsData] = useState([])
   const [newsData, setNewsData] = useState([])
@@ -62,11 +64,6 @@ export default function Main({navigation}) {
     farmCardData
       .map((item)=> <MainFarmCard navigation={navigation} data={item} key={item.id} />)
   ),[farmCardData])
-
-  const bannerList = useMemo(
-    () => (
-      bannerData.map((item) => <BannerCard data={item} key={item.id} navigation={navigation} />)
-    ),[bannerData])
 
   const categoryList = useMemo(
     () => (
@@ -136,14 +133,16 @@ export default function Main({navigation}) {
           </View>
 
           <View style={main.banner}>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {bannerList}
-            </ScrollView>
+            <Carousel
+                onBeforeSnapToItem={(e)=>setCurrent(e)}
+                sliderWidth={800} itemWidth={323}
+                data={bannerData}
+                renderItem={(item)=><BannerCard data={item} key={item.id} navigation={navigation} />}
+                layout={'default'} />
+            <Pagination
+                inactiveDotStyle={main.inactiveBullet}
+                dotStyle={main.dotStyle} dotsLength={bannerData.length} activeDotIndex={current} />
           </View>
-
           <View>
             <View style={main.title}>
               <Text style={{fontSize: 15}}>Аптеки</Text>
@@ -187,7 +186,7 @@ export default function Main({navigation}) {
 
             <View style={main.title}>
               <Text style={{fontSize: 15}}>Новости</Text>
-              <TouchableWithoutFeedback onPress={() => alert('heh zdarova')}>
+              <TouchableWithoutFeedback onPress={() => navigation.push("News")}>
                 <Text style={main.watchAll}>Смотреть все</Text>
               </TouchableWithoutFeedback>
             </View>

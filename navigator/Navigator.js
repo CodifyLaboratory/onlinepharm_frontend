@@ -97,6 +97,7 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
             headerTitleStyle: { color: mainTextColor },
 
           }} />
+          <Stack.Screen name="News" component={News} options={{ headerShown: false }} />
         <Stack.Screen name="Farm" component={Farm} options={{
           title: 'Аптеки',
           headerStyle: { backgroundColor: mainBgColor },
