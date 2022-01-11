@@ -1,12 +1,16 @@
 {
   "expo": {
-    "name": "MyMed",
-    "slug": "MyMed",
+    "name": "mymed",
+    "slug": "mymed",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "mdpi": "assets/splash/mdpi/splash.png",
+      "hdpi": "assets/splash/hdpi/splash.png",
+      "xhdpi": "assets/splash/xhdpi/splash.png",
+      "xxhdpi": "assets/splash/xxhdpi/splash.png",
+      "xxxhdpi": "assets/splash/xxxhdpi/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF"
     },
@@ -23,7 +27,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.codify.mymed"
     },
     "web": {
       "favicon": "./assets/favicon.png"
