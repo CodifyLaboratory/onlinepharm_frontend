@@ -15,7 +15,7 @@ const BrandCard = ({navigation, data}) => {
         <Text style={styles.count}>Количество аптек: <Text style={styles.number}> {data?.pharmacy_count}</Text> </Text>
         <TouchableOpacity
           style={styles.see}
-          onPress={() => navigation.navigate('Farms')}
+          onPress={() => navigation.navigate('Farms', data.id)}
         >
           <Text style={styles.seeText}>Смотреть все</Text>
         </TouchableOpacity>

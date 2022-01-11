@@ -1,8 +1,9 @@
 import {StyleSheet} from "react-native";
+import {Colors} from "../constants/colors";
 
 export const farms = StyleSheet.create({
   container: {
-    backgroundColor: '#E6EFF9',
+    backgroundColor: Colors.background,
     alignItems: 'center',
     borderRadius: 10,
     paddingTop: 30,
@@ -54,6 +55,21 @@ export const farms = StyleSheet.create({
     shadowOpacity: 0.20,
     shadowRadius: 1.41,
     elevation: 2,
+  },
+  picker_container: {
+    width: '100%',
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 42,
+    marginBottom: 24,
+    borderColor: Colors.white,
+    elevation: 2
+  },
+  picker_icon: {
+    position: "absolute",
+    bottom: 15,
+    right: 10,
+    zIndex: 2
   },
   farmImg: {
     height: 70,

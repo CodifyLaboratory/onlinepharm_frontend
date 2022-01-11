@@ -82,8 +82,6 @@ export default function Main({navigation}) {
     ),[newsData])
 
 
-  console.log(categoryData)
-
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}

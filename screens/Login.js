@@ -38,7 +38,6 @@ function Login({navigation, setIsSignIn}) {
       })
       .catch(e => console.log(e))
 
-    console.log(formData);
   }
 
   return (

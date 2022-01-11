@@ -43,9 +43,6 @@ export default function News({navigation}) {
     ,[newsItems, category]
   )
 
-  console.log("+++++++++++++++++++", newsItems);
-
-
   const categoryList = useMemo(
     () =>
       categoryDataId.map((item) => (
