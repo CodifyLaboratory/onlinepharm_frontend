@@ -7,6 +7,8 @@ export const myFarms = StyleSheet.create({
     borderRadius: 10,
     paddingTop: 30,
     paddingBottom: 16,
-    height: '100%'
+    paddingLeft: 16,
+    paddingRight: 16,
+    flex: 1
   },
 })

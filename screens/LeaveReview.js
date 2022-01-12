@@ -17,6 +17,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Stars from "react-native-stars";
 import Success from "./../assets/icons/success.svg";
 import Close from "./../assets/icons/close.svg";
+import { createFeedback } from "../api";
+import { bottom } from "styled-system";
 
 const LeaveReview = ({ route, navigation }) => {
   const [formData, setFormData] = useState({
@@ -24,47 +26,34 @@ const LeaveReview = ({ route, navigation }) => {
     text: null,
   });
   const [modalVisible, setModalVisible] = useState(false);
-  const [userData, setUserData] = useState(null);
+
   const id = route.params.id;
-
-  useEffect(() => {
-    loadData();
-
-  }, []);
-
-  const loadData = async () => {
-    try {
-      let data = await AsyncStorage.getItem("userData");
-      if (data !== null) {
-        setUserData(JSON.parse(data));
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
-
+  const isValid = formData.star || formData.text
   const handleChange = (str) => {
     setFormData({ ...formData, text: str });
   };
 
-  const handleSubmit = () => {
-    Api.postData(`pharmacy-feedbacks/create/${id}/`, formData, userData?.access)
-      .then((res) => {
-        if (res.status === 201) {
-          setModalVisible(true);
+  const handleSubmit = async() => {
+    const data  = {
+      "star": formData.star,
+      "text": formData.text,
+      "pub_date": new Date().toISOString().slice(0, 10)
+  }
+  try {
+   await createFeedback(id, data)
+  } catch(e) {
+    console.log(e)
+  } finally {
+    setModalVisible(true);
           setTimeout(() => {
             navigation.navigate("FarmInfo", id);
           }, 5000);
         }
-      })
-      .catch((e) => console.log(e));
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ alignItems: "center", marginTop: 36, marginBottom: 30 }}>
+      <View style={{ alignItems: "center", marginTop: 36, marginBottom: 100 }}>
         <Stars
           half={false}
           default={1}
@@ -87,7 +76,7 @@ const LeaveReview = ({ route, navigation }) => {
         onChangeText={handleChange}
       />
 
-      <TouchableOpacity style={styles.btn} onPress={() => handleSubmit()}>
+      <TouchableOpacity disabled={!isValid} style={{...styles.btn, backgroundColor: !isValid ? '#CCCCCC' : "#4BCCED"}} onPress={() => handleSubmit()}>
         <Text style={styles.btnText}>Отправить отзыв</Text>
       </TouchableOpacity>
 
@@ -136,16 +125,23 @@ const styles = StyleSheet.create({
     marginBottom: 300,
   },
   btn: {
-    width: 320,
+    width: '100%',
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#4BCCED",
     padding: 13,
     borderRadius: 20,
+    position: 'absolute',
+    bottom: 0,
+    alignSelf: 'center'
+  },
+  disabled_btn: {
+    backgroundColor: "#CCCCCC"
   },
   btnText: {
     color: "#ffffff",
     fontSize: 17,
+    alignSelf: 'center'
   },
   centeredView: {
     flex: 1,

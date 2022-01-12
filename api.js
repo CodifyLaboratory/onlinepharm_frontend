@@ -6,6 +6,7 @@ export const request = async (url, method, payload) => {
 
     const test = JSON.parse(data)
     const token = test?.access
+    // console.log(token)
     const api = 'http://164.90.192.245'
     try {
         const res = await axios({
@@ -41,10 +42,17 @@ export async function updatePharmFavorite(data) {
     return request(`/api/favorite-pharms/update/${data}/`, 'PUT', {"status": false})
 }
 
+export async function createFeedback(id, data) {
+    return request(`/api/pharmacy-feedbacks/create/${id}/`, 'POST', data)
+}
+
 export async function getFavorites() {
     return request('/api/favorite-pharms/', 'GET')
 }
 
+export async function getFarmInformation(id) {
+    return request(`/api/pharms/${id}`, 'GET')
+}
 
 export async function getDoctorProfile() {
     return request('/doctor/profile', 'GET')

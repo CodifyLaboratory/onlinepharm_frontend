@@ -7,24 +7,44 @@ import {farmInfo} from "../styles/farmInfo";
 import Marker from './../assets/icons/marker.svg'
 import Clock from './../assets/icons/clock.svg'
 import Phone from './../assets/icons/phone.svg'
+import { getFarmInformation } from '../api';
+import Loader from '../components/Loader';
 
 
 function FarmInfo({navigation, route}) {
-  const [farmData, setFarmData] = useState({})
+
+  const [farmData, setFarmData] = useState(null)
 
   const id = route.params
 
   useEffect(() => {
-    Api.getData(`pharms/${id}`)
-      .then(res => setFarmData(res.data))
-      .catch(e => console.log(e))
-  }, [ ]);
+    // Api.getData(`pharms/${id}`)
+    //   .then(res => setFarmData(res.data))
+    //   .catch(e => console.log(e))
+      loadFarmInfo()
+  }, []);
+
+  
+
+
+  const loadFarmInfo = async() => {
+    try {
+        const res = await getFarmInformation(id)
+        console.log('RES++++++', res)
+        setFarmData(res)
+    } catch(e) {
+      console.log(e)
+    } 
+  }
 
   const reviewList = useMemo(() => (
     farmData?.feedbacks?.map((item) => (
       <ReviewCard data={item} key={item.id} />
     ))
   ), [farmData])
+
+
+  if(!farmData) return <Loader />
 
   return (
     <ScrollView>
@@ -60,9 +80,10 @@ function FarmInfo({navigation, route}) {
 
         <View style={farmInfo.starBox}>
           <Stars
-            display={Number(farmData.middle_star)}
+            display={farmData.middle_star}
             spacing={8}
             count={5}
+            disabled={true}
             starSize={20}
             fullStar={require('./../assets/icons/fullStar.png')}
             emptyStar={require('./../assets/icons/emptyStar.png')}
