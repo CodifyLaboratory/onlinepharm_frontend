@@ -150,6 +150,31 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
                         />
                     )}
                 </Stack.Screen>
+                <Stack.Screen
+                    name="MedicineInfo"
+                    component={MedicineInfo}
+                    options={{
+                        headerBackTitle: 'Назад',
+                        title: 'О продукте',
+                    }}
+                />
+                <Stack.Screen
+                    name="FarmInfo"
+                    component={FarmInfo}
+                    options={{
+                        title: 'Об аптеке',
+                        headerStyle: { backgroundColor: '#F4F5F6' },
+                        headerTitleStyle: { color: mainTextColor },
+                    }}
+                />
+                <Stack.Screen
+                    name="LeaveReview"
+                    component={LeaveReview}
+                    options={{
+                        headerBackTitle: 'Назад',
+                        title: 'Новый отзыв',
+                    }}
+                />
             </Stack.Navigator>
         )
     }

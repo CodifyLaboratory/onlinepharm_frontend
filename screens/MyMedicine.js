@@ -15,7 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from "../components/Loader";
 import {Colors} from "../constants/colors";
 
-function MyMedicine() {
+function MyMedicine({navigation}) {
     const [userData, setUserData] = useState(null)
     const [myMedicine, setMyMedicine] = useState(null)
 
@@ -45,6 +45,7 @@ function MyMedicine() {
             <View style={{ paddingHorizontal: 16, marginTop: 25 }}>
                 {myMedicine?.map((item) => (
                     <MedicineCard
+                        navigation={navigation}
                         key={item.id}
                         data={item.medication}
                         type="s"
