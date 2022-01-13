@@ -12,6 +12,8 @@ import {
 import Api from './../API/index'
 import MedicineCard from '../components/MedicineCard'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import Loader from "../components/Loader";
+import {Colors} from "../constants/colors";
 
 function MyMedicine() {
     const [userData, setUserData] = useState(null)
@@ -31,26 +33,23 @@ function MyMedicine() {
     useEffect(() => {
         loadData()
 
-        Api.getData(`basket-medications/`, userData?.access)
+        Api.getData(`favorite-medications/`, userData?.access)
             .then((res) => setMyMedicine(res.data))
             .catch((e) => console.log(e))
     }, [userData?.access])
 
-    console.log(myMedicine)
+    if(!myMedicine) return <Loader />
 
     return (
-        <ScrollView style={{ backgroundColor: '#e6eff9' }}>
+        <ScrollView style={{ backgroundColor: Colors.background }}>
             <View style={{ paddingHorizontal: 16, marginTop: 25 }}>
                 {myMedicine?.map((item) => (
                     <MedicineCard
                         key={item.id}
                         data={item.medication}
                         type="s"
-                        isFavorite={true}
                     />
                 ))}
-                {/*<MedicineCard/>*/}
-                {/*<MedicineCard/>*/}
             </View>
         </ScrollView>
     )

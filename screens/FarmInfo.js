@@ -32,7 +32,6 @@ function FarmInfo({ navigation, route }) {
     const loadFarmInfo = async () => {
         try {
             const res = await getFarmInformation(id)
-            console.log('RES++++++', res)
             setFarmData(res)
         } catch (e) {
             console.log(e)

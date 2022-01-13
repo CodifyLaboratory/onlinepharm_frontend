@@ -11,6 +11,8 @@ import {
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 
+import IconBadge from 'react-native-icon-badge';
+
 import Main from '../screens/Main'
 import Search from '../screens/Search'
 import News from '../screens/News'
@@ -59,7 +61,11 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
 
     const ProfileNav = () => {
         return (
-            <Stack.Navigator>
+            <Stack.Navigator
+                initialRouteName="Profile"
+                detachInactiveScreens={false}
+                detachPreviousScreen={true}
+            >
                 <Stack.Screen name="Profile" options={{ headerShown: false }}>
                     {(props) => (
                         <Profile
@@ -213,16 +219,6 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
                     name="CategoriesMedicines"
                     component={CategoriesMedicines}
                     options={{
-                        headerRight: () => (
-                            <View style={styles.flexRow}>
-                                <TouchableOpacity
-                                    activeOpacity={0.5}
-                                    style={{ marginRight: 15 }}
-                                >
-                                    <SearchFarmSvg />
-                                </TouchableOpacity>
-                            </View>
-                        ),
                         title: 'Антибиотики',
                         headerBackTitle: 'Назад',
                         headerStyle: {
@@ -430,7 +426,20 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
                                 paddingTop: 10,
                             }}
                         >
-                            {focused ? <CartWhiteSvg /> : <CartSvg />}
+                            <IconBadge
+                                MainElement={
+                                    focused ? <CartWhiteSvg /> : <CartSvg />
+                                }
+                                BadgeElement={
+                                    <Text style={{color:'#FFFFFF'}}>{2}</Text>
+                                }
+                                IconBadgeStyle={
+                                    {width:16,
+                                        height:16,
+                                        backgroundColor: 'red', top: -5, right: -8}
+                                }
+                                Hidden={false}
+                            />
                         </View>
                     ),
                     headerShown: false,
@@ -440,6 +449,7 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
                 name="Main"
                 component={MainNav}
                 options={{
+                    unmountOnBlur: true,
                     tabBarIcon: ({ focused }) => (
                         <View
                             style={{
@@ -473,6 +483,7 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
                 name="Profile"
                 component={ProfileNav}
                 options={{
+                    unmountOnBlur: true,
                     tabBarIcon: ({ focused }) => (
                         <View
                             style={{

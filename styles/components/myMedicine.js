@@ -13,7 +13,7 @@ export const myMedicine = StyleSheet.create({
         height: 120,
         backgroundColor: '#fff',
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
+        justifyContent: 'space-between',
         borderRadius: 10,
         marginBottom: 16,
         shadowColor: '#000',
@@ -25,6 +25,7 @@ export const myMedicine = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 1.41,
         elevation: 2,
+        padding: 16
     },
     img: {
         height: 70,
@@ -83,6 +84,5 @@ export const myMedicine = StyleSheet.create({
     heart: {
         width: 21,
         height: 18,
-        marginLeft: 65,
     },
 })

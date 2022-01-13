@@ -52,13 +52,13 @@ const PopularMedicine = ({ data, navigation }) => {
                     </TouchableOpacity>
                 ) : (
                     <View style={styles.counter_btn_wrap}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>setCount(count-1)}>
                             <CountDecrement />
                         </TouchableOpacity>
                         <View>
-                            <Text>1 шт</Text>
+                            <Text>{count} шт</Text>
                         </View>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>setCount(count+1)}>
                             <CountIncrement />
                         </TouchableOpacity>
                     </View>

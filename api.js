@@ -29,6 +29,18 @@ export const request = async (url, method, payload) => {
     }
 }
 
+export async function createProductFavorite(id) {
+    return request(`/api/favorite-medications/create/${id}/`, 'POST', {
+        status: true,
+    })
+}
+
+export async function deleteProductFavorite(id) {
+    return request(`/api/favorite-medications/delete/${id}/`, 'DELETE', {
+        status: false,
+    })
+}
+
 export async function createPharmFavorite(data) {
     return request(`/api/favorite-pharms/create/${data}/`, 'POST', {
         status: true,
@@ -53,6 +65,10 @@ export async function createFeedback(id, data) {
 
 export async function getFavorites() {
     return request('/api/favorite-pharms/', 'GET')
+}
+
+export async function getFavoritesProducts() {
+    return request('/api/favorite-medications/', 'GET')
 }
 
 export async function getFarmInformation(id) {

@@ -16,7 +16,6 @@ function MyFarms({ navigation }) {
         try {
             const res = await getFavorites()
             setData(res)
-            console.log('RES', res)
         } catch (e) {
             console.log(e)
         }

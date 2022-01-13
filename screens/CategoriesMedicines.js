@@ -12,14 +12,17 @@ import {
 import { categoriesMedicines } from '../styles/categoriesMedicines'
 import MedicineCard from './../components/MedicineCard'
 import Api from '../API'
+import Loader from "../components/Loader";
 
 function CategoriesMedicines({ navigation, route }) {
     const category = route.params
-    const [medicines, setMedicines] = useState([])
+    const [medicines, setMedicines] = useState(null)
 
     useEffect(() => {
         Api.getData('medications/').then((res) => setMedicines(res.data))
     }, [])
+
+    if (!medicines) return <Loader />
 
     return (
         <ScrollView style={{ backgroundColor: '#E6EFF9' }}>
@@ -31,7 +34,7 @@ function CategoriesMedicines({ navigation, route }) {
                         }
                     })
                     .map((item) => (
-                        <MedicineCard key={item.id} data={item} type="" />
+                        <MedicineCard key={item.id} data={item} type="" navigation={navigation} />
                     ))}
             </SafeAreaView>
         </ScrollView>
