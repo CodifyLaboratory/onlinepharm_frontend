@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
-import {farms} from '../styles/farms';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
-import {createPharmFavorite, getFavorites, deletePharmFavorite} from "../api";
+import React, { useEffect, useState } from 'react'
+import { farms } from '../styles/farms'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { createPharmFavorite, getFavorites, deletePharmFavorite } from '../api'
 
-const FarmsCard = ({navigation, data}) => {
-
+const FarmsCard = ({ navigation, data }) => {
     const [favorite, setFavorite] = useState([])
     const [isChecked, setChecked] = useState(null)
 
@@ -23,10 +22,10 @@ const FarmsCard = ({navigation, data}) => {
     }
 
     const isSelected = () => {
-        return favorite.some(item => item.pharmacy.id === data.id)
+        return favorite.some((item) => item.pharmacy.id === data.id)
     }
 
-    const findId = favorite.find(item => item.pharmacy.id === data.id)
+    const findId = favorite.find((item) => item.pharmacy.id === data.id)
 
     const handleChange = async () => {
         if (isChecked) {
@@ -39,25 +38,28 @@ const FarmsCard = ({navigation, data}) => {
     }
 
     return (
-        <View
-            style={farms.farmCard}
-        >
-            <Image style={farms.farmImg} source={{uri: data?.pharmacy_profile?.logo}}/>
-            <View style={{marginLeft: 16}}>
-                <Text style={farms.farmName}>{data?.pharmacy_profile?.title}</Text>
+        <View style={farms.farmCard}>
+            <Image
+                style={farms.farmImg}
+                source={{ uri: data?.pharmacy_profile?.logo }}
+            />
+            <View style={{ marginLeft: 16 }}>
+                <Text style={farms.farmName}>
+                    {data?.pharmacy_profile?.title}
+                </Text>
                 <Text style={farms.farmAdress}>{data?.location?.address}</Text>
                 <Text style={farms.farmClose}>4 км от вас</Text>
             </View>
-            <View style={{alignItems: 'space-between', height: '100%'}}>
+            <View style={{ alignItems: 'space-between', height: '100%' }}>
                 <TouchableOpacity onPress={() => handleChange()}>
                     <Image
                         style={farms.farmImage}
                         source={
-                            isSelected() ?
-                                require('./../assets/icons/fullHeart.png')
-                                :
-                                require('./../assets/icons/emptyHeart.png')
-                        }/>
+                            isSelected()
+                                ? require('./../assets/icons/fullHeart.png')
+                                : require('./../assets/icons/emptyHeart.png')
+                        }
+                    />
                 </TouchableOpacity>
                 <TouchableOpacity
                     activeOpacity={0.6}
@@ -67,10 +69,8 @@ const FarmsCard = ({navigation, data}) => {
                     <Text style={farms.farmFindText}>Подробнее</Text>
                 </TouchableOpacity>
             </View>
-
-
         </View>
-    );
-};
+    )
+}
 
-export default FarmsCard;
+export default FarmsCard
