@@ -10,7 +10,7 @@ import {
   StyleSheet,
   Alert,
   Modal,
-  Pressable,
+  Pressable, Dimensions,
 } from "react-native";
 import Api from "./../API/index";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -28,7 +28,7 @@ const LeaveReview = ({ route, navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const id = route.params.id;
-  const isValid = formData.star || formData.text
+  const isValid = formData.star && formData.text
   const handleChange = (str) => {
     setFormData({ ...formData, text: str });
   };
@@ -52,8 +52,8 @@ const LeaveReview = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ alignItems: "center", marginTop: 36, marginBottom: 100 }}>
+    <ScrollView style={styles.container}>
+      <View style={{ alignItems: "center", marginBottom: 40, marginTop: 40 }}>
         <Stars
           half={false}
           default={1}
@@ -106,7 +106,7 @@ const LeaveReview = ({ route, navigation }) => {
           </View>
         </Modal>
       </View>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 

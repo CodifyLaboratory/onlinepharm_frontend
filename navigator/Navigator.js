@@ -46,7 +46,7 @@ import { mainBgColor, mainTextColor } from "../constants"
 import HeaderBackButton from "../components/Header";
 
 
-export default function Navigator({ isSignIn, setIsSignIn }) {
+export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
 
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
@@ -54,7 +54,9 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
   const ProfileNav = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen name='Profile' component={Profile} options={{ headerShown: false }} />
+          <Stack.Screen name='Profile' options={{ headerShown: false }}>
+              {props => <Profile {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn} />}
+          </Stack.Screen>
         <Stack.Screen name='MyProfile' component={MyProfile} options={{
           title: 'Профиль',
           headerRight: () => (
@@ -81,6 +83,17 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
           headerTitleStyle: { color: mainTextColor },
           title: 'Мои аптеки',
         }} />
+          <Stack.Screen name="Login" options={{
+              headerTitle: 'Войти',
+              headerTitleStyle: { color: mainTextColor }
+          }}>
+              {props => <Login {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn} />}
+          </Stack.Screen>
+              <Stack.Screen name="OnBoarding" options={{
+                  headerShown: false,
+              }}>
+                  {props => <OnBoarding {...props} isSignIn={isSignIn} setIsSignIn={setIsSignIn}/>}
+              </Stack.Screen>
 
       </Stack.Navigator>
     )
@@ -88,7 +101,7 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
 
   const MainNav = () => {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator >
         <Stack.Screen name="Main" component={Main} options={{ headerShown: false }} />
         <Stack.Screen name="Farms" component={Farms}
           options={{

@@ -1,9 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {StyleSheet, Text, View, Button, SafeAreaView, Modal, ScrollView, Image, TouchableOpacity} from 'react-native'
 import Api from "./../API/index";
-import Cart from '../assets/profile/cart.svg'
-import List from '../assets/profile/list.svg'
-import Medicine from '../assets/profile/medicine.svg'
 import User from '../assets/profile/user.svg'
 import Pill from '../assets/profile/pill.svg'
 import Doctor from '../assets/profile/doctor.svg'
@@ -13,13 +10,12 @@ import Logout from '../assets/profile/logout.svg'
 import BlackLogo from '../assets/icons/blackLogo.svg'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {profile} from "../styles/profile";
-import Success from "./../assets/icons/success.svg";
+
 import Close from "./../assets/icons/close.svg";
 import { Colors } from "../constants/colors";
-import { justifyContent } from "styled-system";
+import Loader from "../components/Loader";
 
-
-export default function Profile({navigation, route}) {
+export default function Profile({navigation, route, setIsSignIn}) {
   const [userData, setUserData] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   const [modalVisible, setModalVisible] = useState(false)
@@ -29,7 +25,10 @@ export default function Profile({navigation, route}) {
       let data = await AsyncStorage.getItem("userData");
       if (data !== null) {
         setUserData(JSON.parse(data));
+      } else {
+        setIsSignIn(false)
       }
+
     } catch (err) {
       console.log(err);
     }
@@ -44,8 +43,7 @@ export default function Profile({navigation, route}) {
 
   }, [userData?.access]);
 
-  console.log(userData);
-
+    if (!userData) return <Loader />
 
   return (
     <ScrollView style={{backgroundColor: '#E6EFF9'}}>
@@ -113,22 +111,30 @@ export default function Profile({navigation, route}) {
           </View>
         </View>
       </SafeAreaView>
-      <LeaveModal visible={modalVisible} setVisible={(e)=>setModalVisible(e)} />
+      <LeaveModal navigation={navigation} visible={modalVisible} setVisible={(e)=>setModalVisible(e)} setIsSignIn={setIsSignIn}/>
     </ScrollView>
   )
 }
 
 
-const LeaveModal = ({navigation, visible, setVisible}) => {
+const LeaveModal = ({navigation, visible, setVisible, setIsSignIn}) => {
+
+  const leave = async () => {
+    setVisible(false)
+    navigation.push('Login')
+    setIsSignIn(false)
+    await AsyncStorage.removeItem("userData");
+  }
+
  return (
-   
+
   <View style={styles.centeredView}>
   <Modal
     animationType="slide"
     transparent={true}
     visible={visible}
     onRequestClose={() => {
-      setModalVisible(!modalVisible);
+      setVisible(false)
     }}
   >
     <View style={styles.centeredView}>
@@ -144,11 +150,11 @@ const LeaveModal = ({navigation, visible, setVisible}) => {
         {/* <Success /> */}
         <Text style={styles.modalText}>Вы точно хотите выйти?</Text>
         <View style={styles.leave_btn_wrap}>
-          <TouchableOpacity style={styles.btn_cancel}>
-            <Text>Отмена</Text>
+          <TouchableOpacity onPress={()=>setVisible(false)} style={styles.btn_cancel}>
+            <Text style={styles.btn_cancel_text}>Отмена</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.btn_leave}>
-            <Text>Выход</Text>
+            <TouchableOpacity onPress={leave} style={styles.btn_leave}>
+            <Text style={styles.btn_leave_text}>Выход</Text>
             </TouchableOpacity>
         </View>
       </View>
@@ -163,20 +169,26 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    // marginTop: 32
   },
   btn_cancel: {
     width: 128,
     height: 36,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#4BCCED",
+    backgroundColor: Colors.white,
+    borderWidth: 1,
+    borderColor: Colors.light,
     padding: 13,
     borderRadius: 20,
     margin: 8,
   },
   btn_cancel_text: {
-
+    color: Colors.primary,
+    fontSize: 14,
+    fontWeight: "500",
+    lineHeight: 20,
   },
   btn_leave: {
     width: 128,
@@ -185,12 +197,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#4BCCED",
     padding: 13,
-    borderRadius: 20, 
+    borderRadius: 20,
     margin: 8,
 
   },
   btn_leave_text: {
-
+     color: Colors.white,
+     fontSize: 14,
+     fontWeight: "500",
+    lineHeight: 20,
+    textShadowColor: 'rgba(0, 0, 0, 0.25)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 9
   },
   centeredView: {
     flex: 1,
@@ -230,11 +248,13 @@ const styles = StyleSheet.create({
   },
   modalText: {
     textAlign: "center",
-    color: "#4B4747",
+    color: Colors.gray,
     fontSize: 15,
-    marginTop: 18,
+    fontWeight: '500',
+    marginBottom: 32,
   },
   modalViewClose: {
+    marginTop: 20,
     transform: [{ translateX: 145 }, { translateY: -60 }],
   },
 })
