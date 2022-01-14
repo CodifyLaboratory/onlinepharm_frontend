@@ -31,20 +31,7 @@ import NewsCard from '../components/NewsCard'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 
 export default function Main({ navigation }) {
-    const [slideElem, setSlideElem] = useState([
-        {
-            text: 1,
-        },
-        {
-            text: 2,
-        },
-        {
-            text: 3,
-        },
-        {
-            text: 3,
-        },
-    ])
+   
     const [farmCardData, setFarmCardData] = useState([])
     const [bannerData, setBannerData] = useState([])
     const [current, setCurrent] = useState(0)

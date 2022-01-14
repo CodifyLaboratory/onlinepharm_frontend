@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 import { myMedicine } from '../styles/components/myMedicine'
 import { cartItem } from '../styles/components/cartItem'
@@ -6,92 +6,76 @@ import CartWhite from './../assets/icons/cartWhiteSmall.svg'
 import Api from './../API/index'
 
 import {
+    addToBasket,
     createProductFavorite,
+    deleteFromBasket,
     deleteProductFavorite,
+    getAllBasket,
     getFavoritesProducts
 } from "../api";
 
-function MedicineCard({ navigation, data, type }) {
+function MedicineCard({ navigation, data, type, isSelected, setChanged, changed, basketObj }) {
 
     const [count, setCount] = useState(0)
 
-    const [isChecked, setChecked] = useState(null)
-
     const [favorite, setFavorite] = useState([])
-    const [favId, setFavId] = useState({})
-
+    // const [basket, setBasket] = useState(basketObj)
+    //  console.log('basket', basket)
     const [inBasketStatus, setInBasketStatus] = useState(type ? true : false)
     const [basketId, setBasketId] = useState({})
-    const [userData, setUserData] = useState(null)
 
     const counter = (type) =>
-        type === 'minus' ? setCount(count - 1) : setCount(count + 1)
+        type === 'minus' ? deleteFromBasket() : setCount(count + 1)
 
     useEffect(() => {
-        getAllFavorites()
-    }, [isChecked])
+       
 
-
-
-    const getAllFavorites = async () => {
-        try {
-            const res = await getFavoritesProducts()
-            setFavorite(res)
-            setChecked(isSelected())
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const isSelected = () => {
-        return favorite.some((item) => item.medication.id === data.id)
-    }
-
-    const findId = favorite.find((item) => item.medication.id === data.id)
+    }, [])
 
     const handleChange = async () => {
-        if (isChecked) {
-            await deleteProductFavorite(findId.id)
-            setChecked(false)
-        } else {
-            await createProductFavorite(data.id)
-            setChecked(true)
+        try {
+            if (isSelected) {
+                await deleteProductFavorite(isSelected.id)           
+            } else {
+                await createProductFavorite(data.id)
+            }
+        } catch(e) {
+
+        } finally {
+            setChanged(!changed)
         }
+       
+       
+    }
+
+    const handleChangeBasket = () => {
+      
     }
 
     // ADD TO YOUR FAVORITE LIST////////////////////////////////
 
-    const addToBasket = () => {
-        Api.postData(
-            `basket-medications/create/${data.id}/`,
-            { count: 1 },
-            userData?.access
-        )
-            .then((res) => {
-                res.status === 201
-                    ? setInBasketStatus(true)
-                    : setInBasketStatus(false)
-                setBasketId(res.data)
-                console.log(res)
-            })
-            .catch((e) => console.log(e))
+    const addProduct = async() => {
+        try {
+            const res = await addToBasket(data.id, basketObj.count + 1)
+
+            console.log('ADD TO BASKET', res)
+        } catch(e) {
+            console.log(e)
+        } finally {
+            setChanged(!changed)
+        }
     }
 
-    // console.log(basketId.id);
 
-    // const deleteFromBasket = () => {
-    //     Api.deleteData(
-    //         `basket-medications/delete/${basketId?.id}/`,
-    //         userData?.access
-    //     )
-    //         .then((res) => {
-    //             res.status === 204
-    //                 ? setInBasketStatus(false)
-    //                 : setInBasketStatus(true)
-    //             console.log(res)
-    //         })
-    //         .catch((e) => console.log(e))
-    // }
+   
+    const deleteProduct = async () => {
+        try {
+            const res = await deleteFromBasket(data.id)
+            console.log('res delete,', res)
+        } catch(e) {
+            throw new Error(e)
+        }
+    }
 
     // if (count < 1) {
     //     deleteFromBasket()
@@ -117,7 +101,7 @@ function MedicineCard({ navigation, data, type }) {
                         <Image
                             style={myMedicine.heart}
                             source={
-                                isSelected()
+                                isSelected
                                     ? require('./../assets/icons/fullHeart.png')
                                     : require('./../assets/icons/emptyHeart.png')
                             }
@@ -134,8 +118,8 @@ function MedicineCard({ navigation, data, type }) {
                     >
                         <Text style={myMedicine.findText}>Подробнее</Text>
                     </TouchableOpacity>
-
-                    {count ? (
+                    {/* {console.log('%%%%%%%%%', basket)} */}
+                    {basketObj?.count ? (
                         <TouchableOpacity style={cartItem.counter}>
                             <TouchableOpacity
                                 style={cartItem.btn}
@@ -148,12 +132,12 @@ function MedicineCard({ navigation, data, type }) {
                                     source={require('./../assets/icons/minus.png')}
                                 />
                             </TouchableOpacity>
-
-                            <Text style={cartItem.counterText}>{count} шт</Text>
+                            
+                            <Text style={cartItem.counterText}>{basketObj?.count} шт</Text>
 
                             <TouchableOpacity
                                 style={cartItem.btn}
-                                onPress={() => counter('plus')}
+                                onPress={() => addProduct(data.id, 1)}
                                 activeOpacity={0.7}
                             >
                                 <Image

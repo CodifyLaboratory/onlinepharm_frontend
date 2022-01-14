@@ -78,3 +78,19 @@ export async function getFarmInformation(id) {
 export async function getDoctorProfile() {
     return request('/doctor/profile', 'GET')
 }
+
+export async function addToBasket(id, count) {
+    return request(`/api/basket-medications/create/${id}/`, 'POST', {"count": count})
+}
+
+export async function deleteFromBasket(id) {
+    return request(`/api/basket-medications/delete/${id}/`, 'DELETE', {"status": true})
+}
+
+export async function updateBasket(id, count) {
+    return request(`/api/basket-medications/update/${id}/`, 'PUT', {"count": count})
+}
+
+export async function getAllBasket() {
+    return request(`/api/basket-medications/`, 'GET')
+}

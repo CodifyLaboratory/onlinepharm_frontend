@@ -14,43 +14,54 @@ import MedicineCard from '../components/MedicineCard'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import Loader from "../components/Loader";
 import {Colors} from "../constants/colors";
+import {
+    addToBasket,
+    createProductFavorite,
+    deleteProductFavorite,
+    getAllBasket,
+    getFavoritesProducts
+} from "../api";
 
 function MyMedicine({navigation}) {
-    const [userData, setUserData] = useState(null)
-    const [myMedicine, setMyMedicine] = useState(null)
 
-    const loadData = async () => {
+    const [myMedicine, setMyMedicine] = useState(null)
+    const [changed, setChanged] = useState(false)
+
+    useEffect(() => {
+        getAllFavorites()
+     }, [changed])
+
+    const getAllFavorites = async () => {
         try {
-            let data = await AsyncStorage.getItem('userData')
-            if (data !== null) {
-                setUserData(JSON.parse(data))
-            }
-        } catch (err) {
-            console.log(err)
+            const res = await getFavoritesProducts()
+            setMyMedicine(res)
+        } catch (e) {
+            console.log(e)
         }
     }
 
-    useEffect(() => {
-        loadData()
-
-        Api.getData(`favorite-medications/`, userData?.access)
-            .then((res) => setMyMedicine(res.data))
-            .catch((e) => console.log(e))
-    }, [userData?.access])
+    // const isSelected = (id) => {
+    //     return myMedicine?.find(item => (item.id === id))
+    // }
 
     if(!myMedicine) return <Loader />
 
     return (
         <ScrollView style={{ backgroundColor: Colors.background }}>
             <View style={{ paddingHorizontal: 16, marginTop: 25 }}>
-                {myMedicine?.map((item) => (
-                    <MedicineCard
-                        navigation={navigation}
-                        key={item.id}
-                        data={item.medication}
-                        type="s"
-                    />
-                ))}
+                {myMedicine?.map((item) => {
+                        // const selected = isSelected(item.id)
+                        return (
+                            <MedicineCard 
+                            isSelected={item} 
+                            key={item.id} 
+                            data={item.medication} 
+                            navigation={navigation} 
+                            setChanged={(e)=>setChanged(e)}
+                            changed={changed}
+                            />
+                        )
+                    } )}
             </View>
         </ScrollView>
     )
