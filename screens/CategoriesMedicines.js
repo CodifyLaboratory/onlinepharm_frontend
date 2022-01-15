@@ -33,13 +33,12 @@ function CategoriesMedicines({ navigation, route }) {
         } catch (e) {
             console.log(e)
         }
-    }  
+    }
 
     const getBasket = async () => {
         try {
              const res = await getAllBasket()
              setBasket(res)
-             console.log('MY BASKET', res)
         } catch(e) {
             throw new Error(e)
         }
@@ -48,7 +47,7 @@ function CategoriesMedicines({ navigation, route }) {
     const isSelected = (id) => {
         return favorites?.find(item => (item.medication.id === id))
     }
-    
+
     const findBasketProduct = (id) => {
         return basket?.find(item => item.medication.id === id )
     }
@@ -68,12 +67,12 @@ function CategoriesMedicines({ navigation, route }) {
                         const selected = isSelected(item.id)
                         const basketObj = findBasketProduct(item.id)
                         return (
-                            <MedicineCard 
+                            <MedicineCard
                             basketObj={basketObj}
-                            isSelected={selected} 
-                            key={item.id} 
-                            data={item} 
-                            navigation={navigation} 
+                            isSelected={selected}
+                            key={item.id}
+                            data={item}
+                            navigation={navigation}
                             setChanged={(e)=>setChanged(e)}
                             changed={changed}
                             />

@@ -4,9 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 export const request = async (url, method, payload) => {
     const data = await AsyncStorage.getItem('userData')
 
-    const test = JSON.parse(data)
-    const token = test?.access
-    // console.log(token)
+    const parsed = JSON.parse(data)
+    const token = parsed?.access
+
     const api = 'http://164.90.192.245'
     try {
         const res = await axios({
@@ -75,12 +75,8 @@ export async function getFarmInformation(id) {
     return request(`/api/pharms/${id}`, 'GET')
 }
 
-export async function getDoctorProfile() {
-    return request('/doctor/profile', 'GET')
-}
-
 export async function addToBasket(id, count) {
-    return request(`/api/basket-medications/create/${id}/`, 'POST', {"count": count})
+    return await request(`/api/basket-medications/create/${id}/`, 'POST', {"count": count})
 }
 
 export async function deleteFromBasket(id) {
@@ -88,7 +84,9 @@ export async function deleteFromBasket(id) {
 }
 
 export async function updateBasket(id, count) {
-    return request(`/api/basket-medications/update/${id}/`, 'PUT', {"count": count})
+    const res = await request(`/api/basket-medications/update/${id}/`, 'PUT', {"count": count})
+     console.log('RES!!!!!!!!!!!!', res)
+    return res
 }
 
 export async function getAllBasket() {

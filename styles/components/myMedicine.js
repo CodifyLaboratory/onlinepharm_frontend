@@ -49,6 +49,8 @@ export const myMedicine = StyleSheet.create({
         color: '#1F8BA7',
         fontWeight: 'bold',
     },
+    kg_symbol: {
+    },
     find: {
         backgroundColor: '#FFFF',
         paddingTop: 5,
@@ -76,7 +78,7 @@ export const myMedicine = StyleSheet.create({
         borderRadius: 8,
         height: 27,
         flexDirection: 'row',
-        width: 110,
+        width: 119,
     },
     favoriteText: {
         color: '#ffffff',

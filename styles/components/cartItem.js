@@ -26,12 +26,6 @@ export const cartItem = StyleSheet.create({
         marginRight: 8,
         resizeMode: 'contain',
     },
-    counter: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: 97,
-        justifyContent: 'space-between',
-    },
     counterBtn: {
         width: 30,
         height: 30,
@@ -71,7 +65,7 @@ export const cartItem = StyleSheet.create({
         fontWeight: 'bold',
     },
     counter: {
-        width: 100,
+        width: 119,
         flexDirection: 'row',
         backgroundColor: '#F3F3F3',
         alignItems: 'center',
