@@ -14,7 +14,8 @@ import Trash from './../assets/icons/trash.svg'
 import Api from '../API'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const Cart = ({ navigation }) => {
+const Cart = ({navigation}) => {
+
     const [cartItems, setCartItems] = useState([])
     const [userData, setUserData] = useState(null)
 
@@ -52,6 +53,7 @@ const Cart = ({ navigation }) => {
                     {cartItems.length ? (
                         cartItems.map((item) => (
                             <MedicineCard
+                                navigation={navigation}
                                 key={item.id}
                                 data={item.medication}
                                 type="inBusket"
@@ -77,7 +79,7 @@ const Cart = ({ navigation }) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    navigation.push('Ordering')
+                    props.navigation.push('Ordering')
                 }}
                 style={cart.btn}
                 activeOpacity={0.8}

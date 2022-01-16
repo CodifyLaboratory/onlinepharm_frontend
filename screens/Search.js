@@ -20,7 +20,6 @@ const Search = ({ navigation }) => {
         Api.getData(`medications/?search=${searchValue}`).then((res) =>
             searchValue.length > 0 ? setSearchData(res.data) : setSearchData([])
         )
-        console.log(searchData, 'dataaa')
     }, [searchValue])
 
     return (

@@ -29,8 +29,6 @@ function Map({ pharmacies, selectedFarm, navigation }) {
         )
     }, [])
 
-    console.log(pharmaData)
-
     return (
         <SafeAreaView>
             <MapView

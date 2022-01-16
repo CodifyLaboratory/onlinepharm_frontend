@@ -44,13 +44,10 @@ function RegistrationData({ navigation, setIsSignIn }) {
                 }
             })
             .catch((e) => console.log(e))
-
-        console.log(userData)
     }
 
     useEffect(() => {
         loadData()
-        console.log(userData)
     }, [])
 
     return (

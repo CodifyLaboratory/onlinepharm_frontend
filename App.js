@@ -4,6 +4,10 @@ import * as Location from 'expo-location'
 import Navigator from './navigator/Navigator'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+import {Provider} from 'react-redux'
+import { createStore } from 'redux'
+import reducers from "./store/reducers";
+
 export default function App() {
     const [location, setLocation] = useState(null)
     const [hasToken, setToken] = useState(false)
@@ -32,13 +36,18 @@ export default function App() {
         setToken(!!token)
     }
 
+    const store = createStore(reducers)
+
     return (
-        <NavigationContainer>
-            <Navigator
-                isLogged={hasToken}
-                isSignIn={isSignIn}
-                setIsSignIn={setIsSignIn}
-            />
-        </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                <Navigator
+                    isLogged={hasToken}
+                    isSignIn={isSignIn}
+                    setIsSignIn={setIsSignIn}
+                />
+            </NavigationContainer>
+        </Provider>
+
     )
 }

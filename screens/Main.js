@@ -14,24 +14,24 @@ import {
 } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 
-import Banner from '../assets/main/baner.svg'
 import Logo from '../assets/header/logo.svg'
-import Arrow from '../assets/header/arrow.svg'
-import SelectDropdown from 'react-native-select-dropdown'
-import CartHeader from '../assets/header/Cart.svg'
-import SearchHeader from '../assets/header/search.svg'
+
 import Api from '../API'
 import { main } from '../styles/main'
 import MainFarmCard from '../components/MainFarmCard'
 import MainSymptomsCard from '../components/MainSymptomsCard'
-import MainHitsCard from '../components/MainHitsCard'
+
 import BannerCard from '../components/BannerCard'
 import CategoryCard from '../components/CategoryCard'
 import NewsCard from '../components/NewsCard'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 
+import { useDispatch } from 'react-redux'
+import {loadCart} from "../store/actions";
+import {getAllBasket} from "../api";
+
 export default function Main({ navigation }) {
-   
+
     const [farmCardData, setFarmCardData] = useState([])
     const [bannerData, setBannerData] = useState([])
     const [current, setCurrent] = useState(0)
@@ -41,13 +41,27 @@ export default function Main({ navigation }) {
 
     const countries = ['Бишкек', 'Ош', 'Кант', 'Токмок']
 
+    const dispatch = useDispatch()
+
     useEffect(() => {
+
         Api.getData('pharm-brands/').then((res) => setFarmCardData(res.data))
         Api.getData('banners/').then((res) => setBannerData(res.data))
         Api.getData('categories/').then((res) => setCategoryData(res.data))
         Api.getData('selections/').then((res) => setSelectionsData(res.data))
         Api.getData('news/').then((res) => setNewsData(res.data))
-    }, [])
+        getBasket().then(r => r)
+    }, [dispatch])
+
+
+    const getBasket = async () => {
+        try {
+            const res = await getAllBasket()
+            await dispatch(loadCart(res))
+        } catch (e) {
+            console.log('e', e)
+        }
+    }
 
     const farmCardList = useMemo(
         () =>

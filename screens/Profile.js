@@ -25,7 +25,8 @@ import Close from './../assets/icons/close.svg'
 import { Colors } from '../constants/colors'
 import Loader from '../components/Loader'
 
-export default function Profile({ navigation, route, setIsSignIn }) {
+export default function Profile({ navigation, setIsSignIn }) {
+
     const [userData, setUserData] = useState(null)
     const [userInfo, setUserInfo] = useState(null)
     const [modalVisible, setModalVisible] = useState(false)
@@ -87,7 +88,7 @@ export default function Profile({ navigation, route, setIsSignIn }) {
                         <TouchableOpacity
                             style={profile.profileLink}
                             onPress={() => {
-                                navigation.push('MyMedicine')
+                                navigation.navigate('MyMedicine')
                             }}
                             activeOpacity={0.6}
                         >
@@ -102,7 +103,7 @@ export default function Profile({ navigation, route, setIsSignIn }) {
                         <TouchableOpacity
                             style={profile.profileLink}
                             onPress={() => {
-                                navigation.push('MyFarms')
+                                navigation.navigate('MyFarms')
                             }}
                             activeOpacity={0.6}
                         >
@@ -168,7 +169,7 @@ export default function Profile({ navigation, route, setIsSignIn }) {
 const LeaveModal = ({ navigation, visible, setVisible, setIsSignIn }) => {
     const leave = async () => {
         setVisible(false)
-        navigation.push('Login')
+        // navigation.push('Login')
         setIsSignIn(false)
         await AsyncStorage.removeItem('userData')
     }

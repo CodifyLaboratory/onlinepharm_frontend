@@ -3,7 +3,7 @@ import { main } from '../styles/main'
 import { Image, ImageBackground, Text, TouchableOpacity } from 'react-native'
 
 const CategoryCard = ({ data, navigation }) => {
-    console.log('DATA', data)
+
     return (
         <TouchableOpacity
             style={main.categoriesItem}
