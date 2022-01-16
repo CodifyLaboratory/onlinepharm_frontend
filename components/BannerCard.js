@@ -4,7 +4,6 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 var replacedStr = /-/gi
 
 function BannerCard({ data, navigation }) {
-    console.log('DATA', data)
 
     const { image, title, start_date, end_date, id } = data.item
 

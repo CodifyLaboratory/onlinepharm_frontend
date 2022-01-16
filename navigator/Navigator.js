@@ -54,359 +54,376 @@ import MedicineInfo from '../screens/MedicineInfo'
 
 import { mainBgColor, mainTextColor } from '../constants'
 import HeaderBackButton from '../components/Header'
+import {useSelector} from "react-redux";
+
+const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
+
+
+const ProfileNav = ({isSignIn, setIsSignIn}) => {
+    return (
+        <Stack.Navigator
+            initialRouteName="Profile"
+            detachInactiveScreens={false}
+            detachPreviousScreen={true}
+        >
+            <Stack.Screen name="Profile" options={{ headerShown: false }}>
+                {(props) => (
+                    <Profile
+                        {...props}
+                        isSignIn={isSignIn}
+                        setIsSignIn={setIsSignIn}
+                    />
+                )}
+            </Stack.Screen>
+            <Stack.Screen
+                name="MyProfile"
+                component={MyProfile}
+                options={{
+                    title: 'Профиль',
+                    headerRight: () => (
+                        <TouchableOpacity onPress={() => alert('Save!')}>
+                            <Text
+                                style={{
+                                    color: mainTextColor,
+                                    marginRight: 10,
+                                    fontSize: 15,
+                                }}
+                            >
+                                Сохранить
+                            </Text>
+                        </TouchableOpacity>
+                    ),
+                    headerBackTitle: 'Назад',
+                    headerStyle: { backgroundColor: mainBgColor },
+                    headerBackTitleStyle: { fontSize: 15 },
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+            <Stack.Screen
+                name="MyMedicine"
+                component={MyMedicine}
+                options={{
+                    headerBackTitle: 'Назад',
+                    headerStyle: { backgroundColor: mainBgColor },
+                    headerBackTitleStyle: { fontSize: 15 },
+                    headerTitleStyle: { color: mainTextColor },
+                    title: 'Мои лекарства',
+                }}
+            />
+            <Stack.Screen
+                name="MyFarms"
+                component={MyFarms}
+                options={{
+                    headerBackTitle: 'Назад',
+                    headerStyle: { backgroundColor: mainBgColor },
+                    headerBackTitleStyle: { fontSize: 15 },
+                    headerTitleStyle: { color: mainTextColor },
+                    title: 'Мои аптеки',
+                }}
+            />
+            <Stack.Screen
+                name="Login"
+                options={{
+                    headerTitle: 'Войти',
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            >
+                {(props) => (
+                    <Login
+                        {...props}
+                        isSignIn={isSignIn}
+                        setIsSignIn={setIsSignIn}
+                    />
+                )}
+            </Stack.Screen>
+            <Stack.Screen
+                name="OnBoarding"
+                options={{
+                    headerShown: false,
+                }}
+            >
+                {(props) => (
+                    <OnBoarding
+                        {...props}
+                        isSignIn={isSignIn}
+                        setIsSignIn={setIsSignIn}
+                    />
+                )}
+            </Stack.Screen>
+            <Stack.Screen
+                name="MedicineInfo"
+                component={MedicineInfo}
+                options={{
+                    headerBackTitle: 'Назад',
+                    title: 'О продукте',
+                }}
+            />
+            <Stack.Screen
+                name="FarmInfo"
+                component={FarmInfo}
+                options={{
+                    title: 'Об аптеке',
+                    headerStyle: { backgroundColor: '#F4F5F6' },
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+            <Stack.Screen
+                name="LeaveReview"
+                component={LeaveReview}
+                options={{
+                    headerBackTitle: 'Назад',
+                    title: 'Новый отзыв',
+                }}
+            />
+        </Stack.Navigator>
+    )
+}
+
+const MainNav = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Main"
+                component={Main}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Farms"
+                component={Farms}
+                options={{
+                    title: 'Аптеки',
+                    headerBackTitle: 'Назад',
+                    headerStyle: { backgroundColor: mainBgColor },
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+            <Stack.Screen
+                name="News"
+                component={News}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Farm"
+                component={Farm}
+                options={{
+                    title: 'Аптеки',
+                    headerStyle: { backgroundColor: mainBgColor },
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+            <Stack.Screen
+                name="FarmInfo"
+                component={FarmInfo}
+                options={{
+                    title: 'Об аптеке',
+                    headerStyle: { backgroundColor: '#F4F5F6' },
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+            <Stack.Screen
+                name="Map"
+                component={Map}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Categories"
+                component={Categories}
+                options={{
+                    title: 'Лекарственные препараты',
+                    headerBackTitle: 'Назад',
+                    headerStyle: {
+                        backgroundColor: mainBgColor,
+                    },
+                    headerTitleStyle: {
+                        color: mainTextColor,
+                        fontSize: 17,
+                    },
+                }}
+            />
+            <Stack.Screen
+                name="CategoriesMedicines"
+                component={CategoriesMedicines}
+                options={{
+                    title: 'Антибиотики',
+                    headerBackTitle: 'Назад',
+                    headerStyle: {
+                        backgroundColor: mainBgColor,
+                    },
+                    headerTitleStyle: {
+                        color: mainTextColor,
+                        fontSize: 17,
+                    },
+                }}
+            />
+            <Stack.Screen
+                name="BannerInfo"
+                component={BannerInfo}
+                options={{
+                    title: 'Подробнее',
+                    headerBackTitle: 'Назад',
+                }}
+            />
+            <Stack.Screen
+                name="NewsInfo"
+                component={NewsInfo}
+                options={{
+                    headerBackTitle: 'Назад',
+                    title: 'Подробнее',
+                }}
+            />
+            <Stack.Screen
+                name="SelectionInfo"
+                component={SelectionInfo}
+                options={{
+                    headerBackTitle: 'Назад',
+                    title: 'Подборки',
+                }}
+            />
+
+            <Stack.Screen
+                name="LeaveReview"
+                component={LeaveReview}
+                options={{
+                    headerBackTitle: 'Назад',
+                    title: 'Новый отзыв',
+                }}
+            />
+
+            <Stack.Screen
+                name="MedicineInfo"
+                component={MedicineInfo}
+                options={{
+                    headerBackTitle: 'Назад',
+                    title: 'О продукте',
+                }}
+            />
+        </Stack.Navigator>
+    )
+}
+
+const NewsNav = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="News"
+                component={News}
+                options={{ headerShown: true, headerTitle: 'Новости' }}
+            />
+            <Stack.Screen
+                name="NewsInfo"
+                component={NewsInfo}
+                options={{
+                    headerTitle: 'Подробнее',
+                    // headerLeft: () => ( <HeaderBackButton />
+                    // ),
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+        </Stack.Navigator>
+    )
+}
+
+const CartNav = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Cart"
+                component={Cart}
+                options={{
+                    title: 'Корзина',
+                    headerBackTitle: 'Назад',
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+            <Stack.Screen
+                name="Ordering"
+                component={Ordering}
+                options={{
+                    title: 'Оформление заказа',
+                    headerBackTitle: 'Назад',
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+
+            <Stack.Screen
+                name="MedicineInfo"
+                component={MedicineInfo}
+                options={{
+                    headerBackTitle: 'Назад',
+                    title: 'О продукте',
+                }}
+            />
+
+        </Stack.Navigator>
+    )
+}
+
+const AuthNav = ({isSignIn, setIsSignIn}) => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="OnBoarding"
+                options={{
+                    headerShown: false,
+                }}
+            >
+                {(props) => (
+                    <OnBoarding
+                        {...props}
+                        isSignIn={isSignIn}
+                        setIsSignIn={setIsSignIn}
+                    />
+                )}
+            </Stack.Screen>
+            <Stack.Screen
+                name="Registration"
+                component={Registration}
+                options={{
+                    headerTitle: 'Регистрация',
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            />
+            <Stack.Screen
+                name="RegistrationData"
+                options={{
+                    headerBackTitle: 'Назад',
+                    headerTitle: 'Регистрация',
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            >
+                {(props) => (
+                    <RegistrationData
+                        {...props}
+                        isSignIn={isSignIn}
+                        setIsSignIn={setIsSignIn}
+                    />
+                )}
+            </Stack.Screen>
+            <Stack.Screen
+                name="Login"
+                options={{
+                    headerTitle: 'Войти',
+                    headerTitleStyle: { color: mainTextColor },
+                }}
+            >
+                {(props) => (
+                    <Login
+                        {...props}
+                        isSignIn={isSignIn}
+                        setIsSignIn={setIsSignIn}
+                    />
+                )}
+            </Stack.Screen>
+        </Stack.Navigator>
+    )
+}
+
+
 
 export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
-    const Tab = createBottomTabNavigator()
-    const Stack = createStackNavigator()
 
-    const ProfileNav = () => {
-        return (
-            <Stack.Navigator
-                initialRouteName="Profile"
-                detachInactiveScreens={false}
-                detachPreviousScreen={true}
-            >
-                <Stack.Screen name="Profile" options={{ headerShown: false }}>
-                    {(props) => (
-                        <Profile
-                            {...props}
-                            isSignIn={isSignIn}
-                            setIsSignIn={setIsSignIn}
-                        />
-                    )}
-                </Stack.Screen>
-                <Stack.Screen
-                    name="MyProfile"
-                    component={MyProfile}
-                    options={{
-                        title: 'Профиль',
-                        headerRight: () => (
-                            <TouchableOpacity onPress={() => alert('Save!')}>
-                                <Text
-                                    style={{
-                                        color: mainTextColor,
-                                        marginRight: 10,
-                                        fontSize: 15,
-                                    }}
-                                >
-                                    Сохранить
-                                </Text>
-                            </TouchableOpacity>
-                        ),
-                        headerBackTitle: 'Назад',
-                        headerStyle: { backgroundColor: mainBgColor },
-                        headerBackTitleStyle: { fontSize: 15 },
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-                <Stack.Screen
-                    name="MyMedicine"
-                    component={MyMedicine}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        headerStyle: { backgroundColor: mainBgColor },
-                        headerBackTitleStyle: { fontSize: 15 },
-                        headerTitleStyle: { color: mainTextColor },
-                        title: 'Мои лекарства',
-                    }}
-                />
-                <Stack.Screen
-                    name="MyFarms"
-                    component={MyFarms}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        headerStyle: { backgroundColor: mainBgColor },
-                        headerBackTitleStyle: { fontSize: 15 },
-                        headerTitleStyle: { color: mainTextColor },
-                        title: 'Мои аптеки',
-                    }}
-                />
-                <Stack.Screen
-                    name="Login"
-                    options={{
-                        headerTitle: 'Войти',
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                >
-                    {(props) => (
-                        <Login
-                            {...props}
-                            isSignIn={isSignIn}
-                            setIsSignIn={setIsSignIn}
-                        />
-                    )}
-                </Stack.Screen>
-                <Stack.Screen
-                    name="OnBoarding"
-                    options={{
-                        headerShown: false,
-                    }}
-                >
-                    {(props) => (
-                        <OnBoarding
-                            {...props}
-                            isSignIn={isSignIn}
-                            setIsSignIn={setIsSignIn}
-                        />
-                    )}
-                </Stack.Screen>
-                <Stack.Screen
-                    name="MedicineInfo"
-                    component={MedicineInfo}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        title: 'О продукте',
-                    }}
-                />
-                <Stack.Screen
-                    name="FarmInfo"
-                    component={FarmInfo}
-                    options={{
-                        title: 'Об аптеке',
-                        headerStyle: { backgroundColor: '#F4F5F6' },
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-                <Stack.Screen
-                    name="LeaveReview"
-                    component={LeaveReview}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        title: 'Новый отзыв',
-                    }}
-                />
-            </Stack.Navigator>
-        )
-    }
-
-    const MainNav = () => {
-        return (
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Main"
-                    component={Main}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="Farms"
-                    component={Farms}
-                    options={{
-                        title: 'Аптеки',
-                        headerBackTitle: 'Назад',
-                        headerStyle: { backgroundColor: mainBgColor },
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-                <Stack.Screen
-                    name="News"
-                    component={News}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="Farm"
-                    component={Farm}
-                    options={{
-                        title: 'Аптеки',
-                        headerStyle: { backgroundColor: mainBgColor },
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-                <Stack.Screen
-                    name="FarmInfo"
-                    component={FarmInfo}
-                    options={{
-                        title: 'Об аптеке',
-                        headerStyle: { backgroundColor: '#F4F5F6' },
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-                <Stack.Screen
-                    name="Map"
-                    component={Map}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="Categories"
-                    component={Categories}
-                    options={{
-                        title: 'Лекарственные препараты',
-                        headerBackTitle: 'Назад',
-                        headerStyle: {
-                            backgroundColor: mainBgColor,
-                        },
-                        headerTitleStyle: {
-                            color: mainTextColor,
-                            fontSize: 17,
-                        },
-                    }}
-                />
-                <Stack.Screen
-                    name="CategoriesMedicines"
-                    component={CategoriesMedicines}
-                    options={{
-                        title: 'Антибиотики',
-                        headerBackTitle: 'Назад',
-                        headerStyle: {
-                            backgroundColor: mainBgColor,
-                        },
-                        headerTitleStyle: {
-                            color: mainTextColor,
-                            fontSize: 17,
-                        },
-                    }}
-                />
-                <Stack.Screen
-                    name="BannerInfo"
-                    component={BannerInfo}
-                    options={{
-                        title: 'Подробнее',
-                        headerBackTitle: 'Назад',
-                    }}
-                />
-                <Stack.Screen
-                    name="NewsInfo"
-                    component={NewsInfo}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        title: 'Подробнее',
-                    }}
-                />
-                <Stack.Screen
-                    name="SelectionInfo"
-                    component={SelectionInfo}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        title: 'Подборки',
-                    }}
-                />
-
-                <Stack.Screen
-                    name="LeaveReview"
-                    component={LeaveReview}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        title: 'Новый отзыв',
-                    }}
-                />
-
-                <Stack.Screen
-                    name="MedicineInfo"
-                    component={MedicineInfo}
-                    options={{
-                        headerBackTitle: 'Назад',
-                        title: 'О продукте',
-                    }}
-                />
-            </Stack.Navigator>
-        )
-    }
-
-    const NewsNav = () => {
-        return (
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="News"
-                    component={News}
-                    options={{ headerShown: true, headerTitle: 'Новости' }}
-                />
-                <Stack.Screen
-                    name="NewsInfo"
-                    component={NewsInfo}
-                    options={{
-                        headerTitle: 'Подробнее',
-                        // headerLeft: () => ( <HeaderBackButton />
-                        // ),
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-            </Stack.Navigator>
-        )
-    }
-
-    const CartNav = () => {
-        return (
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="Cart"
-                    component={Cart}
-                    options={{
-                        title: 'Корзина',
-                        headerBackTitle: 'Назад',
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-                <Stack.Screen
-                    name="Ordering"
-                    component={Ordering}
-                    options={{
-                        title: 'Оформление заказа',
-                        headerBackTitle: 'Назад',
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-            </Stack.Navigator>
-        )
-    }
-
-    const AuthNav = () => {
-        return (
-            <Stack.Navigator>
-                <Stack.Screen
-                    name="OnBoarding"
-                    options={{
-                        headerShown: false,
-                    }}
-                >
-                    {(props) => (
-                        <OnBoarding
-                            {...props}
-                            isSignIn={isSignIn}
-                            setIsSignIn={setIsSignIn}
-                        />
-                    )}
-                </Stack.Screen>
-                <Stack.Screen
-                    name="Registration"
-                    component={Registration}
-                    options={{
-                        headerTitle: 'Регистрация',
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                />
-                <Stack.Screen
-                    name="RegistrationData"
-                    options={{
-                        headerBackTitle: 'Назад',
-                        headerTitle: 'Регистрация',
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                >
-                    {(props) => (
-                        <RegistrationData
-                            {...props}
-                            isSignIn={isSignIn}
-                            setIsSignIn={setIsSignIn}
-                        />
-                    )}
-                </Stack.Screen>
-                <Stack.Screen
-                    name="Login"
-                    options={{
-                        headerTitle: 'Войти',
-                        headerTitleStyle: { color: mainTextColor },
-                    }}
-                >
-                    {(props) => (
-                        <Login
-                            {...props}
-                            isSignIn={isSignIn}
-                            setIsSignIn={setIsSignIn}
-                        />
-                    )}
-                </Stack.Screen>
-            </Stack.Navigator>
-        )
-    }
+    const cart = useSelector((state => state.data.cart))
 
     return isSignIn ? (
         <Tab.Navigator
@@ -457,14 +474,14 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
                                     focused ? <CartWhiteSvg /> : <CartSvg />
                                 }
                                 BadgeElement={
-                                    <Text style={{color:'#FFFFFF'}}>{2}</Text>
+                                    <Text style={{color:'#FFFFFF'}}>{cart.length}</Text>
                                 }
                                 IconBadgeStyle={
                                     {width:16,
                                         height:16,
                                         backgroundColor: 'red', top: -5, right: -8}
                                 }
-                                Hidden={false}
+                                Hidden={!cart.length}
                             />
                         </View>
                     ),
@@ -524,7 +541,7 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
             />
         </Tab.Navigator>
     ) : (
-        AuthNav()
+        <AuthNav setIsSignIn={setIsSignIn} isSignIn={isSignIn} />
     )
 }
 

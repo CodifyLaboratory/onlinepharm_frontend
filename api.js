@@ -84,9 +84,7 @@ export async function deleteFromBasket(id) {
 }
 
 export async function updateBasket(id, count) {
-    const res = await request(`/api/basket-medications/update/${id}/`, 'PUT', {"count": count})
-     console.log('RES!!!!!!!!!!!!', res)
-    return res
+    return await request(`/api/basket-medications/update/${id}/`, 'PUT', {"count": count})
 }
 
 export async function getAllBasket() {

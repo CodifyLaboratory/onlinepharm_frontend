@@ -6,7 +6,6 @@ import { myProfile } from '../styles/myProfile'
 
 export default function MyProfile({ route }) {
     const data = route.params
-    // console.log(route.params)
 
     return (
         <ScrollView style={{ backgroundColor: '#E6EFF9' }}>

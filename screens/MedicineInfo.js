@@ -24,8 +24,6 @@ export default function MedicineInfo({ navigation, route }) {
             .catch((e) => console.error(e))
     }, [])
 
-    console.log(medData)
-
     const reviewsList = useMemo(
         () =>
             medData?.feedbacks?.map((item) => (

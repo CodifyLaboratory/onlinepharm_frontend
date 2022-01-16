@@ -8,16 +8,24 @@ import MedicineCard from './../components/MedicineCard'
 import Api from '../API'
 import Loader from "../components/Loader";
 
+import { useSelector, useDispatch } from 'react-redux'
+
 import {
     getFavoritesProducts, getAllBasket
 } from "../api";
+
+import {loadCart} from "../store/actions";
 
 function CategoriesMedicines({ navigation, route }) {
     const category = route.params
     const [medicines, setMedicines] = useState(null)
     const [favorites, setFavorites] = useState(null)
-    const [basket, setBasket] = useState(null)
+
     const [changed, setChanged] = useState(false)
+
+    const dispatch = useDispatch()
+
+    const state = useSelector((state: any) => state.data)
 
     useEffect(() => {
         getAllFavorites()
@@ -38,7 +46,7 @@ function CategoriesMedicines({ navigation, route }) {
     const getBasket = async () => {
         try {
              const res = await getAllBasket()
-             setBasket(res)
+             await dispatch(loadCart(res))
         } catch(e) {
             throw new Error(e)
         }
@@ -49,7 +57,7 @@ function CategoriesMedicines({ navigation, route }) {
     }
 
     const findBasketProduct = (id) => {
-        return basket?.find(item => item.medication.id === id )
+        return state.cart?.find(item => item.medication.id === id )
     }
 
     if (!medicines) return <Loader />
