@@ -445,6 +445,7 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
                 name="Cart"
                 component={CartNav}
                 options={{
+                    unmountOnBlur: true,
                     tabBarIcon: ({ focused }) => (
                         <View
                             style={{
