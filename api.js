@@ -63,6 +63,10 @@ export async function createFeedback(id, data) {
     return request(`/api/pharmacy-feedbacks/create/${id}/`, 'POST', data)
 }
 
+export async function createMedicationFeedback(id, data) {
+    return request(`/api/medication-feedbacks/create/${id}/`, 'POST', data)
+}
+
 export async function getFavorites() {
     return request('/api/favorite-pharms/', 'GET')
 }

@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
     View,
     Text,
     TouchableOpacity,
-    Image,
-    ScrollView,
-    SafeAreaView,
     TextInput,
     StyleSheet,
-    Alert,
     Modal,
-    Pressable,
-    Dimensions,
+    Keyboard,
 } from 'react-native'
-import Api from './../API/index'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import Stars from 'react-native-stars'
 import Success from './../assets/icons/success.svg'
 import Close from './../assets/icons/close.svg'
-import { createFeedback } from '../api'
-import { bottom } from 'styled-system'
+import {createFeedback, createMedicationFeedback} from '../api'
 
 const LeaveReview = ({ route, navigation }) => {
     const [formData, setFormData] = useState({
-        star: null,
+        star: 1,
         text: null,
     })
+
+
     const [modalVisible, setModalVisible] = useState(false)
 
     const id = route.params.id
+    const type = route.params.type
+
+    const is_medication = type === 'medication'
+
     const isValid = formData.star && formData.text
     const handleChange = (str) => {
         setFormData({ ...formData, text: str })
@@ -41,88 +40,93 @@ const LeaveReview = ({ route, navigation }) => {
             pub_date: new Date().toISOString().slice(0, 10),
         }
         try {
-            await createFeedback(id, data)
+            is_medication
+                ? await createMedicationFeedback(id, data)
+                : await createFeedback(id, data)
         } catch (e) {
             console.log(e)
         } finally {
             setModalVisible(true)
             setTimeout(() => {
-                navigation.navigate('FarmInfo', id)
-            }, 5000)
+                navigation.navigate(is_medication ? 'MedicineInfo' : 'FarmInfo', id)
+            }, 3000)
         }
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <View
-                style={{
-                    alignItems: 'center',
-                    marginBottom: 40,
-                    marginTop: 40,
-                }}
-            >
-                <Stars
-                    half={false}
-                    default={1}
-                    update={(val) => {
-                        setFormData({ ...formData, star: val })
-                    }}
-                    spacing={24}
-                    starSize={40}
-                    count={5}
-                    fullStar={require('./../assets/icons/fullStar.png')}
-                    emptyStar={require('./../assets/icons/emptyStar.png')}
-                />
-            </View>
 
-            <TextInput
-                style={styles.input}
-                placeholder="Оставьте комментарий"
-                multiline
-                numberOfLines={4}
-                onChangeText={handleChange}
-            />
+            <View style={styles.container}>
+                    <View
+                        onPress={Keyboard.dismiss}
+                        style={{
+                            minHeight: '100%',
+                            flex: 1,
+                            marginTop: 40,
+                        }}
+                    >
 
-            <TouchableOpacity
-                disabled={!isValid}
-                style={{
-                    ...styles.btn,
-                    backgroundColor: !isValid ? '#CCCCCC' : '#4BCCED',
-                }}
-                onPress={() => handleSubmit()}
-            >
-                <Text style={styles.btnText}>Отправить отзыв</Text>
-            </TouchableOpacity>
-
-            <View style={styles.centeredView}>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                    onRequestClose={() => {
-                        setModalVisible(!modalVisible)
-                    }}
-                >
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <TouchableOpacity
-                                style={styles.modalViewClose}
-                                onPress={() => {
-                                    setModalVisible(!modalVisible)
-                                    navigation.navigate('FarmInfo', id)
-                                }}
-                            >
-                                <Close />
-                            </TouchableOpacity>
-                            <Success />
-                            <Text style={styles.modalText}>
-                                Ваш отзыв успешно отправлен
-                            </Text>
-                        </View>
+                        <Stars
+                            half={false}
+                            default={1}
+                            update={(val) => {
+                                setFormData({ ...formData, star: val })
+                            }}
+                            spacing={24}
+                            starSize={40}
+                            count={5}
+                            fullStar={require('./../assets/icons/fullStar.png')}
+                            emptyStar={require('./../assets/icons/emptyStar.png')}
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Оставьте комментарий"
+                            multiline
+                            numberOfLines={4}
+                            onChangeText={handleChange}
+                        />
                     </View>
-                </Modal>
+
+
+                    <TouchableOpacity
+                        disabled={!isValid}
+                        style={{
+                            ...styles.btn,
+                            backgroundColor: !isValid ? '#CCCCCC' : '#4BCCED',
+                        }}
+                        onPress={() => handleSubmit()}
+                    >
+                        <Text style={styles.btnText}>Отправить отзыв</Text>
+                    </TouchableOpacity>
+
+                <View style={styles.centeredView}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            setModalVisible(!modalVisible)
+                        }}
+                    >
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <TouchableOpacity
+                                    style={styles.modalViewClose}
+                                    onPress={() => {
+                                        setModalVisible(!modalVisible)
+                                        navigation.navigate(is_medication ? 'MedicineInfo' : 'FarmInfo', id)
+                                    }}
+                                >
+                                    <Close />
+                                </TouchableOpacity>
+                                <Success />
+                                <Text style={styles.modalText}>
+                                    Ваш отзыв успешно отправлен
+                                </Text>
+                            </View>
+                        </View>
+                    </Modal>
+                </View>
             </View>
-        </ScrollView>
     )
 }
 
@@ -130,7 +134,16 @@ export default LeaveReview
 
 const styles = StyleSheet.create({
     container: {
+        flex: 1,
         padding: 16,
+        position: 'relative'
+    },
+    wrapper: {
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+        backgroundColor: 'red',
+        flex: 1,
+        height: '100%'
     },
     input: {
         borderBottomWidth: 1,
@@ -138,17 +151,14 @@ const styles = StyleSheet.create({
         paddingBottom: 16,
         lineHeight: 24,
         fontSize: 16,
-        marginBottom: 300,
     },
     btn: {
         width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: '#4BCCED',
         padding: 13,
         borderRadius: 20,
         position: 'absolute',
-        bottom: 0,
+        bottom: 16,
         alignSelf: 'center',
     },
     disabled_btn: {

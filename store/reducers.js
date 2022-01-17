@@ -4,7 +4,8 @@ import { loadCart } from './actions';
 
 
 const defaultState = {
-    cart: []
+    cart: [],
+    loader: false
 };
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, {useState, useEffect, useMemo} from 'react'
 import {
     View,
     Text,
@@ -10,13 +10,28 @@ import {
 } from 'react-native'
 import ReviewCard from './../components/ReviewCard'
 import Api from './../API/index'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import Stars from 'react-native-stars'
 import Faq from '../components/Faq'
+import {Colors} from "../constants/colors";
+import Loader from "../components/Loader";
+import {useDispatch, useSelector} from "react-redux";
+import Counter from "../components/Counter";
+import {addToBasket, getAllBasket, updateBasket} from "../api";
+import {loadCart} from "../store/actions";
 
-export default function MedicineInfo({ navigation, route }) {
+export default function MedicineInfo({navigation, route}) {
     const medId = route.params
-    const [medData, setMedData] = useState({})
+    const [medData, setMedData] = useState(null)
+
+    const dispatch = useDispatch()
+
+
+
+    const cart = useSelector(state => state.data.cart)
+
+    console.log('cart', cart)
+
+    const find_basket = cart.find(item => item.medication?.id === medId)
 
     useEffect(() => {
         Api.getData(`medications/${medId}/`)
@@ -27,10 +42,33 @@ export default function MedicineInfo({ navigation, route }) {
     const reviewsList = useMemo(
         () =>
             medData?.feedbacks?.map((item) => (
-                <ReviewCard data={item} key={item.id} />
+                <ReviewCard data={item} key={item.id}/>
             )),
         [medData?.feedbacks]
     )
+
+
+
+    async function _create() {
+        await addToBasket(medId, 1)
+        const basket = await getAllBasket()
+        await dispatch(loadCart(basket))
+    }
+
+    async function _increment() {
+        await updateBasket(find_basket.id, find_basket.count + 1)
+        const basket = await getAllBasket()
+        await dispatch(loadCart(basket))
+    }
+
+    async function _decrement() {
+        await updateBasket(find_basket.id, find_basket.count - 1)
+        const basket = await getAllBasket()
+        await dispatch(loadCart(basket))
+
+    }
+
+    if (!medData) return <Loader />
 
     return (
         <ScrollView>
@@ -38,7 +76,7 @@ export default function MedicineInfo({ navigation, route }) {
                 <View style={styles.imageBox}>
                     <Image
                         style={styles.image}
-                        source={{ uri: medData?.image }}
+                        source={{uri: medData?.image}}
                     />
                 </View>
                 <Text style={styles.title}>{medData?.title}</Text>
@@ -57,11 +95,13 @@ export default function MedicineInfo({ navigation, route }) {
                         display={medData.middle_star}
                         spacing={8}
                         count={5}
+                        disabled={true}
                         starSize={20}
                         fullStar={require('./../assets/icons/fullStar.png')}
                         emptyStar={require('./../assets/icons/emptyStar.png')}
                     />
-                    <Text style={styles.reviewsCount}>
+                    <Text
+                        style={[styles.reviewsCount, {color: !medData?.feedbacks_count ? Colors.gray_light : Colors.black}]}>
                         отзывов: {medData?.feedbacks_count}
                     </Text>
                 </View>
@@ -228,17 +268,52 @@ export default function MedicineInfo({ navigation, route }) {
                     )}
                 </View>
 
-                {/*<Text style={styles.blockTitle}>Отзывы</Text>*/}
-                {/*<TouchableOpacity*/}
-                {/*  style={styles.reviewBtn}*/}
-                {/*  activeOpacity={0.8}*/}
-                {/*  onPress={() => navigation.navigate('LeaveReview', {route: medData, type: 'medication'})}*/}
-                {/*>*/}
-                {/*  <Text style={styles.reviewBtnText}>Отправить отзыв</Text>*/}
-                {/*</TouchableOpacity>*/}
-                {/*<View>*/}
-                {/*  {reviewsList}*/}
-                {/*</View>*/}
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        marginTop: 20,
+                    }}
+                >
+                    <Stars
+                        display={medData?.middle_star}
+                        spacing={8}
+                        count={5}
+                        disabled={true}
+                        starSize={20}
+                        fullStar={require('./../assets/icons/fullStar.png')}
+                        emptyStar={require('./../assets/icons/emptyStar.png')}
+                    />
+                    <Text
+                        style={[styles.reviewsCount, {color: !medData?.feedbacks_count ? Colors.gray_light : Colors.black}]}>
+                        отзывов: {medData?.feedbacks_count}
+                    </Text>
+                </View>
+
+                {medData?.feedbacks_count
+                    ? <Text style={styles.blockTitle}>Отзывы</Text>
+                    : <Text style={styles.withoutFeedbacks}>Отзывов о товаре еще нет</Text>}
+                <TouchableOpacity
+                    style={styles.reviewBtn}
+                    activeOpacity={0.8}
+                    onPress={() => navigation.navigate('LeaveReview', {id: medData.id, type: 'medication'})}
+                >
+                    <Text style={styles.reviewBtnText}>Оставить отзыв</Text>
+                </TouchableOpacity>
+                <View style={{marginBottom: medData?.feedbacks_count ? 10 : 0}}>
+                    {reviewsList}
+                </View>
+                {find_basket
+                    ? <Counter increment={_increment} decrement={_decrement} data={find_basket} />
+                    : <TouchableOpacity
+                    style={styles.reviewBtn}
+                    activeOpacity={0.8}
+                    onPress={() => _create()}
+                >
+                        <Text style={styles.reviewBtnText}>Добавить в корзину</Text>
+                </TouchableOpacity>}
+
             </SafeAreaView>
         </ScrollView>
     )
@@ -247,6 +322,7 @@ export default function MedicineInfo({ navigation, route }) {
 const styles = StyleSheet.create({
     container: {
         padding: 16,
+        backgroundColor: Colors.white
     },
     imageBox: {
         width: '100%',
@@ -286,6 +362,13 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         fontWeight: 'bold',
     },
+    withoutFeedbacks: {
+        fontSize: 18,
+        fontWeight: "500",
+        color: Colors.gray_light,
+        marginTop: 30,
+        marginBottom: 16
+    },
     description: {},
     descriptionElem: {
         flexDirection: 'row',
@@ -306,6 +389,7 @@ const styles = StyleSheet.create({
         padding: 13,
         borderRadius: 20,
         marginBottom: 10,
+        marginTop: 10
     },
     reviewBtnText: {
         color: '#ffffff',

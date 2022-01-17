@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
     View,
     Platform,
     TouchableOpacity,
-    StyleSheet,
     Text,
-    Button,
-    Image,
 } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -40,8 +37,6 @@ import CartWhiteSvg from '../assets/icons/cartWhite.svg'
 import SearchWhiteSvg from '../assets/icons/searchWhite.svg'
 import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
-import SearchFarmSvg from '../assets/farms/search.svg'
-import FarmFavorite from '../assets/farms/FarmFavorite.svg'
 
 import Registration from '../screens/Registration'
 import RegistrationData from '../screens/RegistrationData'
@@ -53,7 +48,7 @@ import LeaveReview from '../screens/LeaveReview'
 import MedicineInfo from '../screens/MedicineInfo'
 
 import { mainBgColor, mainTextColor } from '../constants'
-import HeaderBackButton from '../components/Header'
+
 import {useSelector} from "react-redux";
 
 const Tab = createBottomTabNavigator()
@@ -171,6 +166,9 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
             <Stack.Screen
                 name="LeaveReview"
                 component={LeaveReview}
+                tabBarOptions={{
+                    keyboardHidesTabBar: true
+                }}
                 options={{
                     headerBackTitle: 'Назад',
                     title: 'Новый отзыв',
@@ -284,6 +282,9 @@ const MainNav = () => {
             <Stack.Screen
                 name="LeaveReview"
                 component={LeaveReview}
+                tabBarOptions={{
+                    keyboardHidesTabBar: true
+                }}
                 options={{
                     headerBackTitle: 'Назад',
                     title: 'Новый отзыв',
@@ -421,7 +422,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
 
 
 
-export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
+export default function Navigator({ isSignIn, setIsSignIn }) {
 
     const cart = useSelector((state => state.data.cart))
 
@@ -545,8 +546,3 @@ export default function Navigator({ isSignIn, setIsSignIn, isLogged }) {
     )
 }
 
-const styles = StyleSheet.create({
-    flexRow: {
-        flexDirection: 'row',
-    },
-})

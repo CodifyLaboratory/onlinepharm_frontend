@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     ScrollView,
     SafeAreaView,
@@ -25,7 +25,7 @@ function CategoriesMedicines({ navigation, route }) {
 
     const dispatch = useDispatch()
 
-    const state = useSelector((state: any) => state.data)
+    const state = useSelector((state) => state.data)
 
     useEffect(() => {
         getAllFavorites()
