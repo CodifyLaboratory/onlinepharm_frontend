@@ -21,6 +21,9 @@ import {loadCart} from "../store/actions";
 
 export default function MedicineInfo({navigation, route}) {
     const medId = route.params
+
+    console.log('route', route)
+
     const [medData, setMedData] = useState(null)
 
     const dispatch = useDispatch()

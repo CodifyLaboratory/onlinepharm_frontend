@@ -94,3 +94,7 @@ export async function updateBasket(id, count) {
 export async function getAllBasket() {
     return request(`/api/basket-medications/`, 'GET')
 }
+
+export async function updateProfile(id, data) {
+    return request(`/api/auth/users/update/${id}/`, 'PUT', data)
+}

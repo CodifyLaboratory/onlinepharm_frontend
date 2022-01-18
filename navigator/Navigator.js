@@ -50,6 +50,7 @@ import MedicineInfo from '../screens/MedicineInfo'
 import { mainBgColor, mainTextColor } from '../constants'
 
 import {useSelector} from "react-redux";
+import Unauthorized from "../screens/Unauthorized";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -59,8 +60,8 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
     return (
         <Stack.Navigator
             initialRouteName="Profile"
-            detachInactiveScreens={false}
-            detachPreviousScreen={true}
+            // detachInactiveScreens={false}
+            // detachPreviousScreen={true}
         >
             <Stack.Screen name="Profile" options={{ headerShown: false }}>
                 {(props) => (
@@ -362,7 +363,7 @@ const CartNav = () => {
 
 const AuthNav = ({isSignIn, setIsSignIn}) => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName={'Unauthorized'}>
             <Stack.Screen
                 name="OnBoarding"
                 options={{
@@ -416,13 +417,28 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
                     />
                 )}
             </Stack.Screen>
+
+            <Stack.Screen
+                name="Unauthorized"
+                options={{
+                    headerShown: false,
+                }}
+            >
+                {(props) => (
+                    <Unauthorized
+                        {...props}
+                        isSignIn={isSignIn}
+                        setIsSignIn={setIsSignIn}
+                    />
+                )}
+            </Stack.Screen>
         </Stack.Navigator>
     )
 }
 
 
 
-export default function Navigator({ isSignIn, setIsSignIn }) {
+export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
 
     const cart = useSelector((state => state.data.cart))
 
@@ -525,7 +541,7 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
 
             <Tab.Screen
                 name="Profile"
-                component={ProfileNav}
+                // component={ProfileNav}
                 options={{
                     unmountOnBlur: true,
                     tabBarIcon: ({ focused }) => (
@@ -539,7 +555,9 @@ export default function Navigator({ isSignIn, setIsSignIn }) {
                     ),
                     headerShown: false,
                 }}
-            />
+            >
+                {props => <ProfileNav {...props} setIsSignIn={setIsSignIn} isSignIn={isSignIn} />}
+            </Tab.Screen>
         </Tab.Navigator>
     ) : (
         <AuthNav setIsSignIn={setIsSignIn} isSignIn={isSignIn} />

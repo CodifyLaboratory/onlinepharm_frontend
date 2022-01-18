@@ -49,7 +49,7 @@ const Search = ({ navigation }) => {
                                 style={search.searchItem}
                                 key={item.id}
                                 onPress={() =>
-                                    navigation.navigate('MedicineInfo', item.id)
+                                    navigation.navigate('Main', item.id, {screen: 'MedicineInfo'} )
                                 }
                             >
                                 <Text style={search.itemText}>
