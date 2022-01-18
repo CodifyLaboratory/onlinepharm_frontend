@@ -20,7 +20,8 @@ import {addToBasket, getAllBasket, updateBasket} from "../api";
 import {loadCart} from "../store/actions";
 
 export default function MedicineInfo({navigation, route}) {
-    const medId = route.params
+
+    const { medId } = route.params
 
     console.log('route', route)
 

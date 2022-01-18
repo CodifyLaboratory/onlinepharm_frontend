@@ -33,7 +33,7 @@ export default function App() {
         const data = await AsyncStorage.getItem('userData')
         const parsed = JSON.parse(data)
         const token = parsed?.access
-        setToken(!!token)
+       setIsSignIn(!!token)
     }
 
     const store = createStore(reducers)

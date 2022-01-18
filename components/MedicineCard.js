@@ -84,7 +84,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                             activeOpacity={0.6}
                             style={myMedicine.find}
                             onPress={() =>
-                                navigation.navigate('MedicineInfo', data.id)
+                                navigation.navigate('MedicineInfo', {medId: data.id})
                             }
                         >
                             <Text style={myMedicine.findText}>Подробнее</Text>

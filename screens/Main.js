@@ -39,8 +39,6 @@ export default function Main({ navigation }) {
     const [selectionsData, setSelectionsData] = useState([])
     const [newsData, setNewsData] = useState([])
 
-    const countries = ['Бишкек', 'Ош', 'Кант', 'Токмок']
-
     const dispatch = useDispatch()
 
     useEffect(() => {

@@ -11,10 +11,12 @@ import SearchImg from '../assets/search/search.svg'
 import { search } from '../styles/search'
 import Api from '../API'
 
-const Search = ({ navigation }) => {
+const Search = (props) => {
     const [searchValue, setSearchValue] = useState('')
     const [searchData, setSearchData] = useState([])
     const [nothing, setNothing] = useState(false)
+
+    console.log('navugation', props)
 
     useEffect(() => {
         Api.getData(`medications/?search=${searchValue}`).then((res) => {
@@ -36,7 +38,7 @@ const Search = ({ navigation }) => {
                         onChangeText={(value) => setSearchValue(value)}
                     />
                     <View style={search.back_button_wrap}>
-                        <TouchableOpacity onPress={()=>navigation.navigate('Main')}>
+                        <TouchableOpacity onPress={()=>props.navigation.navigate('Main')}>
                             <Text style={search.backBtn}>Назад</Text>
                         </TouchableOpacity>
                     </View>
@@ -48,9 +50,7 @@ const Search = ({ navigation }) => {
                             <TouchableOpacity
                                 style={search.searchItem}
                                 key={item.id}
-                                onPress={() =>
-                                    navigation.navigate('Main', item.id, {screen: 'MedicineInfo'} )
-                                }
+                                onPress={() => props.navigation.navigate('Main', {screen: 'MedicineInfo', params: {medId: item.id}})}
                             >
                                 <Text style={search.itemText}>
                                     {item?.title}

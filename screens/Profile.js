@@ -52,7 +52,7 @@ export default function Profile({navigation, setIsSignIn}) {
             .catch((e) => console.log(e))
     }, [userData?.access])
 
-    if (!userData) return <Loader/>
+    if (!userData || !userInfo) return <Loader/>
 
     return (
         <ScrollView>

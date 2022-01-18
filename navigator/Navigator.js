@@ -5,8 +5,8 @@ import {
     TouchableOpacity,
     Text,
 } from 'react-native'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStackNavigator } from '@react-navigation/stack'
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {createStackNavigator} from '@react-navigation/stack'
 
 import IconBadge from 'react-native-icon-badge';
 
@@ -47,7 +47,7 @@ import SelectionInfo from '../screens/SelectionInfo'
 import LeaveReview from '../screens/LeaveReview'
 import MedicineInfo from '../screens/MedicineInfo'
 
-import { mainBgColor, mainTextColor } from '../constants'
+import {mainBgColor, mainTextColor} from '../constants'
 
 import {useSelector} from "react-redux";
 import Unauthorized from "../screens/Unauthorized";
@@ -60,10 +60,10 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
     return (
         <Stack.Navigator
             initialRouteName="Profile"
-            // detachInactiveScreens={false}
-            // detachPreviousScreen={true}
+            detachInactiveScreens={false}
+            detachPreviousScreen={true}
         >
-            <Stack.Screen name="Profile" options={{ headerShown: false }}>
+            <Stack.Screen name="Profile" options={{headerShown: false}}>
                 {(props) => (
                     <Profile
                         {...props}
@@ -91,9 +91,9 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                         </TouchableOpacity>
                     ),
                     headerBackTitle: 'Назад',
-                    headerStyle: { backgroundColor: mainBgColor },
-                    headerBackTitleStyle: { fontSize: 15 },
-                    headerTitleStyle: { color: mainTextColor },
+                    headerStyle: {backgroundColor: mainBgColor},
+                    headerBackTitleStyle: {fontSize: 15},
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
@@ -101,9 +101,9 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 component={MyMedicine}
                 options={{
                     headerBackTitle: 'Назад',
-                    headerStyle: { backgroundColor: mainBgColor },
-                    headerBackTitleStyle: { fontSize: 15 },
-                    headerTitleStyle: { color: mainTextColor },
+                    headerStyle: {backgroundColor: mainBgColor},
+                    headerBackTitleStyle: {fontSize: 15},
+                    headerTitleStyle: {color: mainTextColor},
                     title: 'Мои лекарства',
                 }}
             />
@@ -112,9 +112,9 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 component={MyFarms}
                 options={{
                     headerBackTitle: 'Назад',
-                    headerStyle: { backgroundColor: mainBgColor },
-                    headerBackTitleStyle: { fontSize: 15 },
-                    headerTitleStyle: { color: mainTextColor },
+                    headerStyle: {backgroundColor: mainBgColor},
+                    headerBackTitleStyle: {fontSize: 15},
+                    headerTitleStyle: {color: mainTextColor},
                     title: 'Мои аптеки',
                 }}
             />
@@ -122,7 +122,7 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 name="Login"
                 options={{
                     headerTitle: 'Войти',
-                    headerTitleStyle: { color: mainTextColor },
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             >
                 {(props) => (
@@ -160,8 +160,8 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 component={FarmInfo}
                 options={{
                     title: 'Об аптеке',
-                    headerStyle: { backgroundColor: '#F4F5F6' },
-                    headerTitleStyle: { color: mainTextColor },
+                    headerStyle: {backgroundColor: '#F4F5F6'},
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
@@ -181,11 +181,11 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
 
 const MainNav = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName={'Main'} screenOptions={{unmountOnBlur: true}}>
             <Stack.Screen
                 name="Main"
                 component={Main}
-                options={{ headerShown: false }}
+                options={{headerShown: false}}
             />
             <Stack.Screen
                 name="Farms"
@@ -193,22 +193,22 @@ const MainNav = () => {
                 options={{
                     title: 'Аптеки',
                     headerBackTitle: 'Назад',
-                    headerStyle: { backgroundColor: mainBgColor },
-                    headerTitleStyle: { color: mainTextColor },
+                    headerStyle: {backgroundColor: mainBgColor},
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
                 name="News"
                 component={News}
-                options={{ headerShown: false }}
+                options={{headerShown: false}}
             />
             <Stack.Screen
                 name="Farm"
                 component={Farm}
                 options={{
                     title: 'Аптеки',
-                    headerStyle: { backgroundColor: mainBgColor },
-                    headerTitleStyle: { color: mainTextColor },
+                    headerStyle: {backgroundColor: mainBgColor},
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
@@ -216,14 +216,14 @@ const MainNav = () => {
                 component={FarmInfo}
                 options={{
                     title: 'Об аптеке',
-                    headerStyle: { backgroundColor: '#F4F5F6' },
-                    headerTitleStyle: { color: mainTextColor },
+                    headerStyle: {backgroundColor: '#F4F5F6'},
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
                 name="Map"
                 component={Map}
-                options={{ headerShown: false }}
+                options={{headerShown: false}}
             />
             <Stack.Screen
                 name="Categories"
@@ -310,7 +310,7 @@ const NewsNav = () => {
             <Stack.Screen
                 name="News"
                 component={News}
-                options={{ headerShown: true, headerTitle: 'Новости' }}
+                options={{headerShown: true, headerTitle: 'Новости'}}
             />
             <Stack.Screen
                 name="NewsInfo"
@@ -319,23 +319,29 @@ const NewsNav = () => {
                     headerTitle: 'Подробнее',
                     // headerLeft: () => ( <HeaderBackButton />
                     // ),
-                    headerTitleStyle: { color: mainTextColor },
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
         </Stack.Navigator>
     )
 }
 
-const CartNav = () => {
+const CartNav = ({isSignIn}) => {
+
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{unmountOnBlur: true}}>
             <Stack.Screen
                 name="Cart"
                 component={Cart}
+                listeners={({navigation}) =>({
+                    tabPress: () => {
+                        isSignIn && navigation.navigate('Unauthorized')
+                    }
+                })}
                 options={{
                     title: 'Корзина',
                     headerBackTitle: 'Назад',
-                    headerTitleStyle: { color: mainTextColor },
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
@@ -344,7 +350,7 @@ const CartNav = () => {
                 options={{
                     title: 'Оформление заказа',
                     headerBackTitle: 'Назад',
-                    headerTitleStyle: { color: mainTextColor },
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
 
@@ -383,7 +389,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
                 component={Registration}
                 options={{
                     headerTitle: 'Регистрация',
-                    headerTitleStyle: { color: mainTextColor },
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
@@ -391,7 +397,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
                 options={{
                     headerBackTitle: 'Назад',
                     headerTitle: 'Регистрация',
-                    headerTitleStyle: { color: mainTextColor },
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             >
                 {(props) => (
@@ -406,7 +412,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
                 name="Login"
                 options={{
                     headerTitle: 'Войти',
-                    headerTitleStyle: { color: mainTextColor },
+                    headerTitleStyle: {color: mainTextColor},
                 }}
             >
                 {(props) => (
@@ -437,8 +443,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
 }
 
 
-
-export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
+export default function Navigator({isSignIn, setIsSignIn, navigation}) {
 
     const cart = useSelector((state => state.data.cart))
 
@@ -446,6 +451,7 @@ export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
         <Tab.Navigator
             initialRouteName="Main"
             screenOptions={{
+                unmountOnBlur: true,
                 tabBarStyle: {
                     backgroundColor: mainTextColor,
                     height: 78,
@@ -463,13 +469,13 @@ export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
                 name="News"
                 component={NewsNav}
                 options={{
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({focused}) => (
                         <View
                             style={{
                                 paddingTop: 10,
                             }}
                         >
-                            {focused ? <NewsWhiteSvg /> : <NewsSvg />}
+                            {focused ? <NewsWhiteSvg/> : <NewsSvg/>}
                         </View>
                     ),
                     headerShown: false,
@@ -480,7 +486,7 @@ export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
                 component={CartNav}
                 options={{
                     unmountOnBlur: true,
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({focused}) => (
                         <View
                             style={{
                                 paddingTop: 10,
@@ -488,15 +494,17 @@ export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
                         >
                             <IconBadge
                                 MainElement={
-                                    focused ? <CartWhiteSvg /> : <CartSvg />
+                                    focused ? <CartWhiteSvg/> : <CartSvg/>
                                 }
                                 BadgeElement={
-                                    <Text style={{color:'#FFFFFF'}}>{cart.length}</Text>
+                                    <Text style={{color: '#FFFFFF'}}>{cart.length}</Text>
                                 }
                                 IconBadgeStyle={
-                                    {width:16,
-                                        height:16,
-                                        backgroundColor: 'red', top: -5, right: -8}
+                                    {
+                                        width: 16,
+                                        height: 16,
+                                        backgroundColor: 'red', top: -5, right: -8
+                                    }
                                 }
                                 Hidden={!cart.length}
                             />
@@ -507,16 +515,22 @@ export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
             />
             <Tab.Screen
                 name="Main"
+                listeners={({navigation}) =>({
+                    tabPress: (event) => {
+                        event.preventDefault()
+                        navigation.navigate('Main')
+                    }
+                })}
                 component={MainNav}
                 options={{
                     unmountOnBlur: true,
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({focused}) => (
                         <View
                             style={{
                                 paddingTop: 10,
                             }}
                         >
-                            {focused ? <MainSvg /> : <MainGraySvg />}
+                            {focused ? <MainSvg/> : <MainGraySvg/>}
                         </View>
                     ),
                     headerShown: false,
@@ -526,13 +540,13 @@ export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
                 name="Search"
                 component={Search}
                 options={{
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({focused}) => (
                         <View
                             style={{
                                 paddingTop: 10,
                             }}
                         >
-                            {focused ? <SearchWhiteSvg /> : <SearchSvg />}
+                            {focused ? <SearchWhiteSvg/> : <SearchSvg/>}
                         </View>
                     ),
                     headerShown: false,
@@ -541,26 +555,25 @@ export default function Navigator({ isSignIn, setIsSignIn, navigation }) {
 
             <Tab.Screen
                 name="Profile"
-                // component={ProfileNav}
                 options={{
                     unmountOnBlur: true,
-                    tabBarIcon: ({ focused }) => (
+                    tabBarIcon: ({focused}) => (
                         <View
                             style={{
                                 paddingTop: 10,
                             }}
                         >
-                            {focused ? <ProfileWhiteSvg /> : <ProfileSvg />}
+                            {focused ? <ProfileWhiteSvg/> : <ProfileSvg/>}
                         </View>
                     ),
                     headerShown: false,
                 }}
             >
-                {props => <ProfileNav {...props} setIsSignIn={setIsSignIn} isSignIn={isSignIn} />}
+                {props => <ProfileNav {...props} setIsSignIn={setIsSignIn} isSignIn={isSignIn}/>}
             </Tab.Screen>
         </Tab.Navigator>
     ) : (
-        <AuthNav setIsSignIn={setIsSignIn} isSignIn={isSignIn} />
+        <AuthNav setIsSignIn={setIsSignIn} isSignIn={isSignIn}/>
     )
 }
 

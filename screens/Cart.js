@@ -24,6 +24,9 @@ const Cart = ({navigation}) => {
             let data = await AsyncStorage.getItem('userData')
             if (data !== null) {
                 setUserData(JSON.parse(data))
+            } else {
+                /// hot fix
+               navigation.navigate('Profile')
             }
         } catch (err) {
             console.log(err)
@@ -79,7 +82,7 @@ const Cart = ({navigation}) => {
 
             <TouchableOpacity
                 onPress={() => {
-                    props.navigation.push('Ordering')
+                    navigation.push('Ordering')
                 }}
                 style={cart.btn}
                 activeOpacity={0.8}
