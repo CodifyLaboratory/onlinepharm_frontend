@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     StyleSheet,
     Text,
     View,
-    Button,
     SafeAreaView,
     Modal,
     ScrollView,
@@ -12,20 +11,22 @@ import {
 } from 'react-native'
 import Api from './../API/index'
 import User from '../assets/profile/user.svg'
-import Pill from '../assets/profile/pill.svg'
-import Doctor from '../assets/profile/doctor.svg'
-import Pencil from '../assets/profile/pencil.svg'
+import Pill from '../assets/profile/medicine.svg'
+import Doctor from '../assets/profile/hospital.svg'
+import Pencil from '../assets/profile/note.svg'
 import Arrow from '../assets/profile/arrow.svg'
 import Logout from '../assets/profile/logout.svg'
 import BlackLogo from '../assets/icons/blackLogo.svg'
+import Settings from '../assets/profile/Settings.svg'
+import Payment from '../assets/profile/Payment methods.svg'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { profile } from '../styles/profile'
+import {profile} from '../styles/profile'
 
 import Close from './../assets/icons/close.svg'
-import { Colors } from '../constants/colors'
+import {Colors} from '../constants/colors'
 import Loader from '../components/Loader'
 
-export default function Profile({ navigation, setIsSignIn }) {
+export default function Profile({navigation, setIsSignIn}) {
 
     const [userData, setUserData] = useState(null)
     const [userInfo, setUserInfo] = useState(null)
@@ -51,10 +52,10 @@ export default function Profile({ navigation, setIsSignIn }) {
             .catch((e) => console.log(e))
     }, [userData?.access])
 
-    if (!userData) return <Loader />
+    if (!userData) return <Loader/>
 
     return (
-        <ScrollView style={{ backgroundColor: '#E6EFF9' }}>
+        <ScrollView>
             <SafeAreaView>
                 <View style={profile.container}>
                     <Image
@@ -63,8 +64,8 @@ export default function Profile({ navigation, setIsSignIn }) {
                     />
                     <Text style={profile.profileName}>
                         {userInfo?.user_profile?.first_name +
-                            ' ' +
-                            userInfo?.user_profile?.last_name}{' '}
+                        ' ' +
+                        userInfo?.user_profile?.last_name}{' '}
                     </Text>
                     <Text style={profile.profileNumber}>
                         {userInfo?.user_profile?.phone}
@@ -78,12 +79,12 @@ export default function Profile({ navigation, setIsSignIn }) {
                             activeOpacity={0.6}
                         >
                             <View style={profile.profileLinkInner}>
-                                <User style={{ width: 24, height: 24 }} />
+                                <User style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
                                     Мои аккаунт
                                 </Text>
                             </View>
-                            <Arrow />
+                            <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={profile.profileLink}
@@ -93,12 +94,12 @@ export default function Profile({ navigation, setIsSignIn }) {
                             activeOpacity={0.6}
                         >
                             <View style={profile.profileLinkInner}>
-                                <Pill style={{ width: 24, height: 24 }} />
+                                <Pill style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
                                     Мои лекарства
                                 </Text>
                             </View>
-                            <Arrow />
+                            <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={profile.profileLink}
@@ -108,31 +109,55 @@ export default function Profile({ navigation, setIsSignIn }) {
                             activeOpacity={0.6}
                         >
                             <View style={profile.profileLinkInner}>
-                                <Doctor style={{ width: 24, height: 24 }} />
+                                <Doctor style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
                                     Мои аптеки
                                 </Text>
                             </View>
-                            <Arrow />
+                            <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={profile.profileLink}
                             activeOpacity={0.6}
                         >
                             <View style={profile.profileLinkInner}>
-                                <Pencil style={{ width: 24, height: 24 }} />
+                                <Pencil style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
                                     Мои заказы
                                 </Text>
                             </View>
-                            <Arrow />
+                            <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={profile.profileLink}
                             activeOpacity={0.6}
                         >
                             <View style={profile.profileLinkInner}>
-                                <BlackLogo style={{ width: 24, height: 24 }} />
+                                <Payment style={{width: 30, height: 30}}/>
+                                <Text style={profile.profileLinkText}>
+                                    Мои способы оплаты
+                                </Text>
+                            </View>
+                            <Arrow/>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={profile.profileLink}
+                            activeOpacity={0.6}
+                        >
+                            <View style={profile.profileLinkInner}>
+                                <Settings style={{width: 24, height: 24}}/>
+                                <Text style={profile.profileLinkText}>
+                                    Настройки
+                                </Text>
+                            </View>
+                            <Arrow/>
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={profile.profileLink}
+                            activeOpacity={0.6}
+                        >
+                            <View style={profile.profileLinkInner}>
+                                <BlackLogo style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
                                     О приложении
                                 </Text>
@@ -142,12 +167,12 @@ export default function Profile({ navigation, setIsSignIn }) {
                             onPress={() => setModalVisible(true)}
                             style={[
                                 profile.profileLink,
-                                { borderBottomWidth: 0 },
+                                {borderBottomWidth: 0},
                             ]}
                             activeOpacity={0.6}
                         >
                             <View style={profile.profileLinkInner}>
-                                <Logout style={{ width: 24, height: 24 }} />
+                                <Logout style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
                                     Выйти
                                 </Text>
@@ -166,7 +191,7 @@ export default function Profile({ navigation, setIsSignIn }) {
     )
 }
 
-const LeaveModal = ({ navigation, visible, setVisible, setIsSignIn }) => {
+const LeaveModal = ({navigation, visible, setVisible, setIsSignIn}) => {
     const leave = async () => {
         setVisible(false)
         // navigation.push('Login')
@@ -192,7 +217,7 @@ const LeaveModal = ({ navigation, visible, setVisible, setIsSignIn }) => {
                                 setVisible(false)
                             }}
                         >
-                            <Close />
+                            <Close/>
                         </TouchableOpacity>
                         {/* <Success /> */}
                         <Text style={styles.modalText}>
@@ -263,7 +288,7 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         lineHeight: 20,
         textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        textShadowOffset: { width: -1, height: 1 },
+        textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 9,
     },
     centeredView: {
@@ -311,6 +336,6 @@ const styles = StyleSheet.create({
     },
     modalViewClose: {
         marginTop: 20,
-        transform: [{ translateX: 145 }, { translateY: -60 }],
+        transform: [{translateX: 145}, {translateY: -60}],
     },
 })

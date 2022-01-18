@@ -12,9 +12,13 @@ export const myProfile = StyleSheet.create({
     profileAvatar: {
         width: 120,
         height: 120,
-        borderRadius: 50,
-        marginBottom: 32,
+        borderRadius: 60,
         resizeMode: 'cover',
+    },
+    avatar_camera: {
+      position: 'absolute',
+      bottom: 0,
+      right: -20
     },
     input: {
         borderBottomWidth: 0,

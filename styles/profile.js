@@ -1,10 +1,9 @@
-import { StyleSheet, Platform } from 'react-native'
+import {StyleSheet, Platform} from 'react-native'
 
 export const profile = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-        backgroundColor: '#E6EFF9',
         paddingLeft: 37,
         paddingRight: 37,
         justifyContent: 'center',
@@ -31,10 +30,9 @@ export const profile = StyleSheet.create({
     },
     profileLinks: {
         width: 302,
-        height: 290,
         backgroundColor: '#fff',
         borderRadius: 18,
-        marginTop: 80,
+        marginTop: 45,
     },
     profileLink: {
         flexDirection: 'row',
