@@ -4,16 +4,21 @@ import * as Location from 'expo-location'
 import Navigator from './navigator/Navigator'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
+import AppLoading from 'expo-app-loading';
+import * as Font from 'expo-font';
+
 import {Provider, useSelector} from 'react-redux'
 import { createStore } from 'redux'
 import reducers from "./store/reducers";
 import {setAuthorization, setGuest} from "./store/actions";
+import {useFonts} from "expo-font";
 
 export default function App() {
     const [location, setLocation] = useState(null)
     const [hasToken, setToken] = useState(false)
     const [is_guest, setGuestUser] = useState(false)
-    const [isSignIn, setIsSignIn] = useState(false)
+
+
 
     const store = createStore(reducers)
 
@@ -52,6 +57,13 @@ export default function App() {
         setToken(store.getState().data.authorized)
         setGuestUser(store.getState().data.is_guest)
     })
+
+    let [fontsLoaded] = useFonts({
+        'Inter-SemiBoldItalic': 'https://rsms.me/inter/font-files/Inter-SemiBoldItalic.otf?v=3.12',
+    });
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    }
 
     return (
         <Provider store={store}>
