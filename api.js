@@ -91,6 +91,10 @@ export async function updateBasket(id, count) {
     return await request(`/api/basket-medications/update/${id}/`, 'PUT', {"count": count})
 }
 
+export async function deleteAllBasket() {
+    return await request(`/api/basket-delete-all/`, 'POST')
+}
+
 export async function getAllBasket() {
     return request(`/api/basket-medications/`, 'GET')
 }

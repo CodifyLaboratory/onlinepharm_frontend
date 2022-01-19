@@ -46,11 +46,11 @@ import BannerInfo from '../screens/BannerInfo'
 import SelectionInfo from '../screens/SelectionInfo'
 import LeaveReview from '../screens/LeaveReview'
 import MedicineInfo from '../screens/MedicineInfo'
+import Unauthorized from "../screens/Unauthorized";
 
 import {mainBgColor, mainTextColor} from '../constants'
 
 import {useSelector} from "react-redux";
-import Unauthorized from "../screens/Unauthorized";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -329,15 +329,10 @@ const NewsNav = () => {
 const CartNav = ({isSignIn}) => {
 
     return (
-        <Stack.Navigator screenOptions={{unmountOnBlur: true}}>
+        <Stack.Navigator>
             <Stack.Screen
                 name="Cart"
                 component={Cart}
-                listeners={({navigation}) =>({
-                    tabPress: () => {
-                        isSignIn && navigation.navigate('Unauthorized')
-                    }
-                })}
                 options={{
                     title: 'Корзина',
                     headerBackTitle: 'Назад',
@@ -445,9 +440,9 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
 
 export default function Navigator({isSignIn, setIsSignIn, navigation}) {
 
-    const cart = useSelector((state => state.data.cart))
+    const {cart, authorized } = useSelector((state => state.data))
 
-    return isSignIn ? (
+    return authorized ? (
         <Tab.Navigator
             initialRouteName="Main"
             screenOptions={{
@@ -573,7 +568,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
             </Tab.Screen>
         </Tab.Navigator>
     ) : (
-        <AuthNav setIsSignIn={setIsSignIn} isSignIn={isSignIn}/>
+        <AuthNav />
     )
 }
 

@@ -3,6 +3,7 @@ import {View, Image, ScrollView, TouchableOpacity, Platform, Button} from 'react
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import {Input} from 'react-native-elements'
 import {myProfile} from '../styles/myProfile'
+import { serialize } from 'object-to-formdata'
 
 import Camera from '../assets/profile/camera.svg'
 
@@ -15,7 +16,7 @@ export default function MyProfile({route, navigation}) {
 
     const [image, setImage] = useState(null);
     const [state, setState] = useState(data)
-
+    console.log('DATA+++++++++++++', data)
     useEffect(() => {
         cameraPermission()
     }, []);
@@ -40,20 +41,39 @@ export default function MyProfile({route, navigation}) {
             })}
         }
 
-    // const form = new FormData();
-
-
+    // const toFormData = () => {
+    //     const formData = new FormData();
     //
-    // form.append('user_profile.photo', {
-    //     photo: state.user_profile.photo,
-    //     type: 'image/jpg',
-    //     name: 'image.jpg',
-    // });
+    //     for (let key in data) {
+    //         let data
+    //         if (typeof (data) === 'object') {
+    //             data = new Blob([JSON.stringify(data)], {type: 'application/json'});// or just JSON.stringify(value)
+    //         }
+    //         formData.append(key, data);
+    //     }
+    //     return formData
+    // }
+    //
+    //
+    // const form = toFormData()
+    // const options = {
+    //     dotsForObjectNotation: true,
+    //     noFilesWithArrayNotation : true,
+    //     indexes : true
+    // }
+    const formData = serialize(
+        state
+        // options
+        // existingFormData, // optional
+        // keyPrefix, // optional
+    );
+
 
 
     const update = async () => {
+        console.log('FORM', formData)
         try {
-         await updateProfile(data.id, state)
+         await updateProfile(data.id, formData)
         } catch (e) {
             throw new Error(e)
         } finally {

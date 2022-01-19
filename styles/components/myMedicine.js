@@ -8,6 +8,15 @@ export const myMedicine = StyleSheet.create({
         paddingTop: 30,
         paddingBottom: 16,
     },
+    basketIcon: {
+        position: 'absolute',
+        width: 32,
+        height: 32,
+        justifyContent: 'center',
+        alignItems: 'center',
+        bottom: 10,
+        left: 10
+    },
     medicineCard: {
         width: '100%',
         height: 120,
@@ -31,8 +40,8 @@ export const myMedicine = StyleSheet.create({
         height: 70,
         width: 70,
         borderRadius: 20,
-        borderWidth: 1,
-        borderColor: '#F3F3F3',
+        // borderWidth: 1,
+        // borderColor: '#F3F3F3',
     },
     name: {
         color: '#1F8BA7',

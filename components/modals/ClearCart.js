@@ -1,12 +1,10 @@
-import React from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import Close from "../assets/icons/close.svg";
-import {Colors} from "../constants/colors";
-import {styles} from "../styles/components/modals";
+import React from 'react'
+import {Modal, Text, TouchableOpacity, View} from "react-native";
+import {styles} from "../../styles/components/modals";
+import Close from "../../assets/icons/close.svg";
 
-const DeleteProductModal = ({visible, setVisible, handleChange }) => {
 
+const ClearCart = ({visible, setVisible, handleChange }) => {
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -29,7 +27,7 @@ const DeleteProductModal = ({visible, setVisible, handleChange }) => {
                         </TouchableOpacity>
                         {/* <Success /> */}
                         <Text style={styles.modalText}>
-                            Удалить товар из корзины?
+                            Очистить корзину?
                         </Text>
                         <View style={styles.leave_btn_wrap}>
                             <TouchableOpacity
@@ -37,17 +35,14 @@ const DeleteProductModal = ({visible, setVisible, handleChange }) => {
                                 style={styles.btn_cancel}
                             >
                                 <Text style={styles.btn_cancel_text}>
-                                    Отмена
+                                    Нет
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                onPress={()=> {
-                                    handleChange('delete')
-                                    setVisible(false)
-                                }}
+                                onPress={()=> handleChange()}
                                 style={styles.btn_leave}
                             >
-                                <Text style={styles.btn_leave_text}>Удалить</Text>
+                                <Text style={styles.btn_leave_text}>Да</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -56,5 +51,5 @@ const DeleteProductModal = ({visible, setVisible, handleChange }) => {
         </View>
     )
 }
-export default DeleteProductModal
 
+export default ClearCart

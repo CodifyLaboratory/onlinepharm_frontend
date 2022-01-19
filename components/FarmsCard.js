@@ -2,8 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { farms } from '../styles/farms'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { createPharmFavorite, getFavorites, deletePharmFavorite } from '../api'
+import {useDispatch, useSelector} from "react-redux";
+import {setAuthorization} from "../store/actions";
 
 const FarmsCard = ({ navigation, data }) => {
+
+    const dispatch = useDispatch()
+
+    const {is_guest} = useSelector(state => state.data)
+
     const [favorite, setFavorite] = useState([])
     const [isChecked, setChecked] = useState(null)
 
@@ -28,6 +35,7 @@ const FarmsCard = ({ navigation, data }) => {
     const findId = favorite.find((item) => item.pharmacy.id === data.id)
 
     const handleChange = async () => {
+        if(is_guest) dispatch(setAuthorization(false))
         if (isChecked) {
             await deletePharmFavorite(findId.id)
             setChecked(false)

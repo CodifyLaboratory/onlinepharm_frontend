@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     ScrollView,
     SafeAreaView,
 } from 'react-native'
-import { categoriesMedicines } from '../styles/categoriesMedicines'
+import {categoriesMedicines} from '../styles/categoriesMedicines'
 import MedicineCard from './../components/MedicineCard'
 import Api from '../API'
 import Loader from "../components/Loader";
 
-import { useSelector, useDispatch } from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 
-import {
-    getFavoritesProducts, getAllBasket
-} from "../api";
+import {getFavoritesProducts, getAllBasket} from "../api";
 
 import {loadCart} from "../store/actions";
 
-function CategoriesMedicines({ navigation, route }) {
+function CategoriesMedicines({navigation, route}) {
     const category = route.params
     const [medicines, setMedicines] = useState(null)
     const [favorites, setFavorites] = useState(null)
@@ -45,9 +43,9 @@ function CategoriesMedicines({ navigation, route }) {
 
     const getBasket = async () => {
         try {
-             const res = await getAllBasket()
-             await dispatch(loadCart(res))
-        } catch(e) {
+            const res = await getAllBasket()
+            await dispatch(loadCart(res))
+        } catch (e) {
             throw new Error(e)
         }
     }
@@ -57,13 +55,13 @@ function CategoriesMedicines({ navigation, route }) {
     }
 
     const findBasketProduct = (id) => {
-        return state.cart?.find(item => item.medication.id === id )
+        return state.cart?.find(item => item.medication.id === id)
     }
 
-    if (!medicines) return <Loader />
+    if (!medicines) return <Loader/>
 
     return (
-        <ScrollView style={{ backgroundColor: '#E6EFF9' }}>
+        <ScrollView style={{backgroundColor: '#E6EFF9'}}>
             <SafeAreaView style={categoriesMedicines.container}>
                 {medicines
                     .filter((el) => {
@@ -76,16 +74,16 @@ function CategoriesMedicines({ navigation, route }) {
                         const basketObj = findBasketProduct(item.id)
                         return (
                             <MedicineCard
-                            basketObj={basketObj}
-                            isSelected={selected}
-                            key={item.id}
-                            data={item}
-                            navigation={navigation}
-                            setChanged={(e)=>setChanged(e)}
-                            changed={changed}
+                                basketObj={basketObj}
+                                isSelected={selected}
+                                key={item.id}
+                                data={item}
+                                navigation={navigation}
+                                setChanged={(e) => setChanged(e)}
+                                changed={changed}
                             />
                         )
-                    } )}
+                    })}
             </SafeAreaView>
         </ScrollView>
     )

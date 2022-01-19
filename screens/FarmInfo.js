@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, {useEffect, useState, useMemo} from 'react'
 import {
     Text,
     View,
@@ -10,14 +10,21 @@ import {
 import Api from './../API/index'
 import Stars from 'react-native-stars'
 import ReviewCard from './../components/ReviewCard'
-import { farmInfo } from '../styles/farmInfo'
+import {farmInfo} from '../styles/farmInfo'
 import Marker from './../assets/icons/marker.svg'
 import Clock from './../assets/icons/clock.svg'
 import Phone from './../assets/icons/phone.svg'
-import { getFarmInformation } from '../api'
+import {getFarmInformation} from '../api'
 import Loader from '../components/Loader'
+import {useDispatch, useSelector} from "react-redux";
+import {setAuthorization} from "../store/actions";
 
-function FarmInfo({ navigation, route }) {
+function FarmInfo({navigation, route}) {
+    const dispatch = useDispatch()
+
+    const { is_guest } = useSelector(state => state.data)
+
+
     const [farmData, setFarmData] = useState(null)
 
     const id = route.params
@@ -41,22 +48,22 @@ function FarmInfo({ navigation, route }) {
     const reviewList = useMemo(
         () =>
             farmData?.feedbacks?.map((item) => (
-                <ReviewCard data={item} key={item.id} />
+                <ReviewCard data={item} key={item.id}/>
             )),
         [farmData]
     )
 
-    if (!farmData) return <Loader />
+    if (!farmData) return <Loader/>
 
     return (
         <ScrollView>
             <View style={farmInfo.container}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Image
                         height={61}
                         width={100}
                         style={farmInfo.logo}
-                        source={{ uri: farmData?.pharmacy_profile?.logo }}
+                        source={{uri: farmData?.pharmacy_profile?.logo}}
                     />
                     <Text style={farmInfo.title}>
                         {farmData?.pharmacy_profile?.brand?.title}
@@ -70,7 +77,7 @@ function FarmInfo({ navigation, route }) {
                         marginBottom: 28,
                     }}
                 >
-                    <Marker />
+                    <Marker/>
                     <Text
                         style={farmInfo.time}
                         onPress={() => navigation.navigate('Map')}
@@ -86,13 +93,13 @@ function FarmInfo({ navigation, route }) {
                         marginBottom: 28,
                     }}
                 >
-                    <Clock />
+                    <Clock/>
                     <Text style={farmInfo.time}>
                         {farmData?.pharmacy_profile?.schedule}
                     </Text>
                 </View>
-                <View style={{ flexDirection: 'row', marginBottom: 25 }}>
-                    <Phone />
+                <View style={{flexDirection: 'row', marginBottom: 25}}>
+                    <Phone/>
                     <View>
                         <Text style={farmInfo.time}>+996 555 323 145</Text>
                         {/*  add numbers from back */}
@@ -119,9 +126,12 @@ function FarmInfo({ navigation, route }) {
                     <TouchableOpacity
                         style={farmInfo.reviewBtn}
                         activeOpacity={0.7}
-                        onPress={() =>
-                            navigation.navigate('LeaveReview', farmData)
+                        onPress={() => {
+                            !is_guest
+                                ? navigation.navigate('LeaveReview', farmData)
+                                : dispatch(setAuthorization(false))
                         }
+                    }
                     >
                         <Text style={farmInfo.reviewBtnText}>
                             Оставить отзыв

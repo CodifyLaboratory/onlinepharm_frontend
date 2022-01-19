@@ -25,8 +25,12 @@ import {profile} from '../styles/profile'
 import Close from './../assets/icons/close.svg'
 import {Colors} from '../constants/colors'
 import Loader from '../components/Loader'
+import {useDispatch, useSelector} from "react-redux";
+import {setAuthorization} from "../store/actions";
 
 export default function Profile({navigation, setIsSignIn}) {
+
+    const dispatch = useDispatch()
 
     const [userData, setUserData] = useState(null)
     const [userInfo, setUserInfo] = useState(null)
@@ -38,7 +42,7 @@ export default function Profile({navigation, setIsSignIn}) {
             if (data !== null) {
                 setUserData(JSON.parse(data))
             } else {
-                setIsSignIn(false)
+                dispatch(setAuthorization(false))
             }
         } catch (err) {
             console.log(err)
@@ -192,11 +196,13 @@ export default function Profile({navigation, setIsSignIn}) {
 }
 
 const LeaveModal = ({navigation, visible, setVisible, setIsSignIn}) => {
+    const dispatch = useDispatch()
     const leave = async () => {
         setVisible(false)
-        // navigation.push('Login')
-        setIsSignIn(false)
+        // setIsSignIn(false)
+        dispatch(setAuthorization(false))
         await AsyncStorage.removeItem('userData')
+        // navigation.navigate('Unauthorized')
     }
 
     return (

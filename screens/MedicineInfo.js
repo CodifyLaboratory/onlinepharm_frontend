@@ -17,7 +17,7 @@ import Loader from "../components/Loader";
 import {useDispatch, useSelector} from "react-redux";
 import Counter from "../components/Counter";
 import {addToBasket, getAllBasket, updateBasket} from "../api";
-import {loadCart} from "../store/actions";
+import {loadCart, setAuthorization} from "../store/actions";
 
 export default function MedicineInfo({navigation, route}) {
 
@@ -31,9 +31,7 @@ export default function MedicineInfo({navigation, route}) {
 
 
 
-    const cart = useSelector(state => state.data.cart)
-
-    console.log('cart', cart)
+    const { cart, is_guest } = useSelector(state => state.data)
 
     const find_basket = cart.find(item => item.medication?.id === medId)
 
@@ -54,6 +52,7 @@ export default function MedicineInfo({navigation, route}) {
 
 
     async function _create() {
+        if(is_guest) dispatch(setAuthorization(false))
         await addToBasket(medId, 1)
         const basket = await getAllBasket()
         await dispatch(loadCart(basket))
@@ -301,7 +300,9 @@ export default function MedicineInfo({navigation, route}) {
                 <TouchableOpacity
                     style={styles.reviewBtn}
                     activeOpacity={0.8}
-                    onPress={() => navigation.navigate('LeaveReview', {id: medData.id, type: 'medication'})}
+                    onPress={() => {is_guest
+                        ? dispatch(setAuthorization(false))
+                        : navigation.navigate('LeaveReview', {id: medData.id, type: 'medication'})}}
                 >
                     <Text style={styles.reviewBtnText}>Оставить отзыв</Text>
                 </TouchableOpacity>

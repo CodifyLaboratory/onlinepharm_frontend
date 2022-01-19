@@ -12,10 +12,18 @@ import OnBoardingItem from '../components/OnBoardingItem'
 import Paginator from '../components/Paginator'
 import slidesData from '../data/slidesData'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {useDispatch, useSelector} from "react-redux";
+import {setAuthorization, setGuest} from "../store/actions";
 
-const OnBoarding = ({ navigation, isSignIn, setIsSignIn }) => {
+const OnBoarding = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [userData, setUserData] = useState()
+
+    const dispatch = useDispatch()
+
+    const state = useSelector(state => state.data)
+
+    console.log('state', state)
 
     const loadData = async () => {
         try {
@@ -32,8 +40,6 @@ const OnBoarding = ({ navigation, isSignIn, setIsSignIn }) => {
         loadData()
     }, [])
 
-    // console.log(userData)
-
     const item = useRef(0)
     const scrollX = useRef(new Animated.Value(0)).current
     const slidesRef = useRef(null)
@@ -44,7 +50,7 @@ const OnBoarding = ({ navigation, isSignIn, setIsSignIn }) => {
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
 
     if (userData) {
-        setIsSignIn(true)
+        dispatch(setAuthorization(true))
     }
 
     return (
@@ -89,8 +95,9 @@ const OnBoarding = ({ navigation, isSignIn, setIsSignIn }) => {
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.btnWhite}
-                        onPress={() => {
-                            setIsSignIn(true)
+                        onPress={async () => {
+                            await dispatch(setGuest(true))
+                            await dispatch(setAuthorization(true))
                         }}
                     >
                         <Text style={{ color: '#1F8BA7' }}>

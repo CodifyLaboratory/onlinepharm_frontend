@@ -1,18 +1,43 @@
-import { StyleSheet, Platform } from 'react-native'
+import {StyleSheet, Platform} from 'react-native'
+import {Colors} from "../constants/colors";
 
 export const cart = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingTop: Platform.OS == 'android' ? 30 : 0,
-        padding: 16,
+        paddingTop: Platform.OS == 'android' ? 0 : 0,
+        // padding: 16,
+        paddingBottom: 70,
+    },
+    productList: {
+        paddingLeft: 16,
+        paddingRight: 16,
+        paddingBottom: 50
+    },
+    total: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 34,
+    },
+    bottomButton: {
+        position: "absolute",
+        width: '100%',
+        bottom: 0,
+        paddingLeft: 16,
+        paddingRight: 16,
+        backgroundColor: Colors.white,
+        alignSelf: 'center',
+        paddingTop: 10
     },
     btn: {
-        marginHorizontal: 16,
         backgroundColor: '#4BCCED',
         borderRadius: 27,
         alignItems: 'center',
         paddingVertical: 14,
+        marginBottom: 10,
+        width: '100%',
     },
     btnText: {
         color: '#fff',
@@ -33,7 +58,8 @@ export const cart = StyleSheet.create({
         height: 23,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 17,
+        marginBottom: 33,
+        marginTop: 20
     },
     clearBtnText: {
         color: '#4B4747',

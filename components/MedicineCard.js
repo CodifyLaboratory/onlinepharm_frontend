@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useMemo, useDeferredValue } from 'react'
 import { View, TouchableOpacity, Image, Text } from 'react-native'
+
 import { myMedicine } from '../styles/components/myMedicine'
 import { cartItem } from '../styles/components/cartItem'
+
 import CountDecrement from '../assets/cart/counter_d.svg'
 import CountIncrement from '../assets/cart/counter_i.svg'
-import CartWhite from './../assets/icons/cartWhiteSmall.svg'
+import Basket from '../assets/cart/basket.svg'
 
 import {
     addToBasket,
@@ -14,11 +16,17 @@ import {
     updateBasket
 } from "../api";
 import DeleteProductModal from "./Modals";
+import {useDispatch, useSelector} from "react-redux";
+import {setAuthorization} from "../store/actions";
 
-function MedicineCard({ navigation, data, isSelected, setChanged, changed, basketObj }) {
+function MedicineCard({ navigation, data, isSelected, setChanged, changed, basketObj, type }) {
+    const dispatch = useDispatch()
     const [modalVisible, setVisible] = useState(false)
 
+    const {is_guest} = useSelector((state) => state.data)
+
     const handleChange = async () => {
+        if (is_guest) dispatch(setAuthorization(false))
         try {
             if (isSelected) {
                 await deleteProductFavorite(isSelected.id)
@@ -43,6 +51,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
     }
 
     async function _create() {
+            if(is_guest) dispatch(setAuthorization(false))
             await addToBasket(data.id, 1)
             setChanged(!changed)
     }
@@ -57,6 +66,9 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
             <DeleteProductModal visible={modalVisible} setVisible={(e)=>setVisible(e)} handleChange={_delete} />
             <View activeOpacity={0.85} style={myMedicine.medicineCard}>
                 <Image style={myMedicine.img} source={{ uri: data.image }} />
+                {type === 'cart' ? <TouchableOpacity onPress={()=>setVisible(true)} style={myMedicine.basketIcon}>
+                    <Basket />
+                </TouchableOpacity> : null }
                 <View>
                     <View style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between' }}>
                         <View>
@@ -79,6 +91,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                             />
                         </TouchableOpacity>
                     </View>
+
                     <View style={{ flexDirection: 'row' }}>
                         <TouchableOpacity
                             activeOpacity={0.6}
@@ -95,7 +108,6 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                                 <TouchableOpacity
                                     style={cartItem.btn}
                                     onPress={() => (basketObj.count <= 1) ? setVisible(true) : _decrement()}
-                                    // disabled={count === 1 ? true : false}
                                     activeOpacity={0.7}
                                 >
                                    <CountDecrement />

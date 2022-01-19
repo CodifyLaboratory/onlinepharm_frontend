@@ -11,8 +11,13 @@ import Logo from '../assets/header/logo.svg'
 import { API } from 'react-native-web/dist/vendor/react-native/Animated/NativeAnimatedHelper'
 import Api from '../API'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {setAuthorization, setGuest} from "../store/actions";
+import {useDispatch} from "react-redux";
 
-function Login({ navigation, setIsSignIn }) {
+function Login({ navigation }) {
+
+    const dispatch = useDispatch()
+
     const [formData, setFormData] = useState({
         email: null,
         password: null,
@@ -39,7 +44,8 @@ function Login({ navigation, setIsSignIn }) {
             .then((res) => {
                 if (res.status === 200) {
                     saveData(res.data)
-                    setIsSignIn(true)
+                    dispatch(setGuest(false))
+                    dispatch(setAuthorization(true))
                 }
             })
             .catch((e) => console.log(e))

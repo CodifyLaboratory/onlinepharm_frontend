@@ -26,7 +26,7 @@ import CategoryCard from '../components/CategoryCard'
 import NewsCard from '../components/NewsCard'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {loadCart} from "../store/actions";
 import {getAllBasket} from "../api";
 
@@ -40,6 +40,11 @@ export default function Main({ navigation }) {
     const [newsData, setNewsData] = useState([])
 
     const dispatch = useDispatch()
+
+
+    const state = useSelector((state) => state.data)
+
+    console.log('MAIN', state)
 
     useEffect(() => {
 
