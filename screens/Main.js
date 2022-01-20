@@ -1,13 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import {
-    StyleSheet,
     Text,
     View,
-    TouchableOpacity,
     TouchableWithoutFeedback,
-    Image,
-    Platform,
-    ImageBackground,
     ScrollView,
     SafeAreaView,
     Dimensions,
@@ -40,11 +35,6 @@ export default function Main({ navigation }) {
     const [newsData, setNewsData] = useState([])
 
     const dispatch = useDispatch()
-
-
-    const state = useSelector((state) => state.data)
-
-    console.log('MAIN', state)
 
     useEffect(() => {
 
@@ -180,7 +170,7 @@ export default function Main({ navigation }) {
                     </View>
                     <View>
                         <View style={main.title}>
-                            <Text style={{ fontSize: 15 }}>Аптеки</Text>
+                            <Text style={main.title_text}>Аптеки</Text>
                             <TouchableWithoutFeedback
                                 onPress={() => navigation.push('Farm')}
                             >
@@ -197,19 +187,15 @@ export default function Main({ navigation }) {
                         </View>
 
                         <View style={main.title}>
-                            <Text style={{ fontSize: 15 }}>
+                            <Text style={main.title_text}>
                                 Категории товаров
                             </Text>
-                            <TouchableWithoutFeedback
-                                onPress={() => alert('heh zdarova')}
-                            >
-                                <Text style={main.watchAll}>Смотреть все</Text>
-                            </TouchableWithoutFeedback>
+
                         </View>
                         <View style={main.categories}>{categoryList}</View>
 
                         <View style={main.title}>
-                            <Text style={{ fontSize: 15 }}>Подборки</Text>
+                            <Text style={main.title_text}>Подборки</Text>
                         </View>
                         <View style={{ height: 100 }}>
                             <ScrollView
@@ -221,14 +207,14 @@ export default function Main({ navigation }) {
                         </View>
 
                         <View style={main.title}>
-                            <Text style={{ fontSize: 15 }}>Новости</Text>
+                            <Text style={main.title_text}>Новости</Text>
                             <TouchableWithoutFeedback
                                 onPress={() => navigation.push('News')}
                             >
                                 <Text style={main.watchAll}>Смотреть все</Text>
                             </TouchableWithoutFeedback>
                         </View>
-                        <View style={main.banner}>
+                        <View style={main.banner_news}>
                             <ScrollView
                                 horizontal={true}
                                 showsHorizontalScrollIndicator={false}

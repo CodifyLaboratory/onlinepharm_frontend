@@ -45,6 +45,7 @@ const styles = StyleSheet.create({
         color: '#4B4747',
         marginBottom: -30,
         width: 340,
+        fontFamily: 'SF-Pro-Regular'
     },
     lastTitle: {
         fontSize: 18,
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
         color: '#4B4747',
         marginBottom: -30,
         width: 243,
+        fontFamily: 'SF-Pro-Regular'
     },
     btn: {
         width: 300,

@@ -48,15 +48,20 @@ export const myMedicine = StyleSheet.create({
         fontSize: 13,
         fontWeight: '500',
         marginBottom: 6,
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 16
     },
     category: {
         color: '#999999',
         fontSize: 14,
         marginBottom: 20,
+        fontFamily: 'SF-Pro-Light',
+        lineHeight: 17
     },
     price: {
         color: '#1F8BA7',
-        fontWeight: 'bold',
+        fontWeight: '600',
+        fontFamily: 'SF-Pro-SemiBold'
     },
     kg_symbol: {
     },
@@ -75,6 +80,9 @@ export const myMedicine = StyleSheet.create({
     },
     findText: {
         color: '#4BCCED',
+        fontFamily: 'SF-Pro-Medium',
+        fontSize: 14,
+        lineHeight: 17
     },
     favorite: {
         backgroundColor: '#4BCCED',

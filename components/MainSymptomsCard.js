@@ -13,12 +13,7 @@ const MainSymptomsCard = ({ data, navigation }) => {
                 source={{ uri: data.image }}
             />
             <Text
-                style={{
-                    color: '#1F8BA7',
-                    fontSize: 11,
-                    lineHeight: 13,
-                    marginTop: 11,
-                }}
+                style={main.symptomsCardText}
             >
                 {data.title}
             </Text>

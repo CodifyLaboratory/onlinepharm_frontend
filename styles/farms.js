@@ -31,10 +31,14 @@ export const farms = StyleSheet.create({
     typeText: {
         color: '#999999',
         fontSize: 18,
+        fontFamily: 'Poppins-Medium',
+        lineHeight: 27
     },
     typeTextActive: {
         color: '#1F8BA7',
         fontSize: 18,
+        fontFamily: 'Poppins-Medium',
+        lineHeight: 27
     },
     farmCard: {
         width: '100%',
@@ -84,12 +88,16 @@ export const farms = StyleSheet.create({
         fontWeight: '500',
         marginBottom: 8,
         width: 140,
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 15.5
     },
     farmAdress: {
         color: '#1F8BA7',
         fontSize: 11,
         marginBottom: 10,
         width: 90,
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 14.3
     },
     farmClose: {
         color: '#999',
@@ -99,18 +107,21 @@ export const farms = StyleSheet.create({
         width: 21,
         height: 18,
         marginTop: 7,
-        marginRight: 2,
+        marginRight: 3,
         marginBottom: 52,
     },
     farmFind: {
         backgroundColor: '#4BCCED',
-        paddingTop: 4,
-        paddingBottom: 4,
+        paddingTop: 5,
+        paddingBottom: 5,
         paddingLeft: 10,
         paddingRight: 10,
         borderRadius: 8,
+        // height: 27
     },
     farmFindText: {
         color: '#fff',
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 17
     },
 })

@@ -79,7 +79,7 @@ const LeaveReview = ({ route, navigation }) => {
                         />
                         <TextInput
                             style={styles.input}
-                            placeholder="Оставьте комментарий"
+                            placeholder="Напишите ваш отзыв"
                             multiline
                             numberOfLines={4}
                             onChangeText={handleChange}
@@ -148,9 +148,10 @@ const styles = StyleSheet.create({
     input: {
         borderBottomWidth: 1,
         borderBottomColor: '#CCCCCC',
-        paddingBottom: 16,
+        paddingBottom: 0,
         lineHeight: 24,
         fontSize: 16,
+        marginTop: 20
     },
     btn: {
         width: '100%',
@@ -168,6 +169,8 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 17,
         alignSelf: 'center',
+        fontFamily: 'SF-Pro-SemiBold',
+        lineHeight: 20
     },
     centeredView: {
         flex: 1,
@@ -211,6 +214,8 @@ const styles = StyleSheet.create({
         color: '#4B4747',
         fontSize: 15,
         marginTop: 18,
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 17
     },
     modalViewClose: {
         transform: [{ translateX: 145 }, { translateY: -60 }],

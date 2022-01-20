@@ -68,15 +68,21 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: '#1F8BA7',
         marginBottom: 6,
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 17
     },
     count: {
         color: '#999999',
         fontSize: 11,
         marginBottom: 20,
+        fontFamily: 'Poppins-Regular',
+        lineHeight: 16
     },
     number: {
         fontSize: 13,
         color: '#4B4747',
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 15.5
     },
     see: {
         width: '100%',
@@ -87,5 +93,7 @@ const styles = StyleSheet.create({
         fontSize: 12,
         textDecorationLine: 'underline',
         paddingBottom: 2,
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 14
     },
 })

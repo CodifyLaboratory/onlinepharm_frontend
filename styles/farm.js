@@ -54,7 +54,9 @@ export const farm = StyleSheet.create({
     },
     farmClose: {
         color: '#999',
-        fontSize: 13,
+        fontSize: 14,
+        fontFamily: 'SF-Pro-Medium'
+
     },
     farmFind: {
         backgroundColor: '#4BCCED',

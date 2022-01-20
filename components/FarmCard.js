@@ -23,7 +23,7 @@ function FarmCard({ navigation, data }) {
                 <Text style={farm.farmCount}>{data.title}</Text>
                 <View style={farm.farmLocation}>
                     <Location style={{ marginRight: 8 }} />
-                    <Text style={farm.farmClose}>4 КМ от вас</Text>
+                    <Text style={farm.farmClose}>4 км от вас</Text>
                 </View>
             </View>
             <TouchableOpacity activeOpacity={0.6} style={farm.farmFind}>

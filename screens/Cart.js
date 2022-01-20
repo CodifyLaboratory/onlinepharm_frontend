@@ -116,7 +116,7 @@ const Cart = ({navigation}) => {
             </ScrollView>
         <View style={cart.bottomButton}>
             {cartItems.length
-                ? <View style={cart.total}><Text>Итого</Text><Text>от {total} с</Text></View>
+                ? <View style={cart.total}><Text style={cart.total_text}>Итого</Text><Text style={cart.total_text} >от {total} с</Text></View>
                 : null }
             <TouchableOpacity
                 onPress={() => {

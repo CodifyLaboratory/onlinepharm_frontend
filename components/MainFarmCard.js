@@ -23,7 +23,7 @@ const MainFarmCard = ({ navigation, data }) => {
                         : require('../assets/main/farmLogo.png')
                 }
             />
-            <Text style={{ color: '#1F8BA7', fontSize: 11, lineHeight: 13 }}>
+            <Text style={main.farmCardText}>
                 {data.title}
             </Text>
         </TouchableOpacity>

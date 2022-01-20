@@ -13,7 +13,7 @@ import Api from './../API/index'
 import { newsInfo } from '../styles/newsInfo'
 import MedicineCard from './../components/MedicineCard'
 
-var replacedStr = /-/gi
+const replacedStr = /-/gi;
 
 function NewsInfo({ route }) {
     const [newsData, setNewsData] = useState({})
@@ -68,15 +68,24 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#1F8BA7',
         marginBottom: 24,
+        lineHeight: 30,
+        fontStyle: 'normal',
+        fontFamily: 'Poppins-Regular'
     },
     date: {
         color: '#999999',
         fontSize: 14,
         marginBottom: 16,
+        fontStyle: 'normal',
+        lineHeight: 21,
+        fontFamily: 'Poppins-Regular'
     },
     description: {
         color: '#4B4747',
         fontSize: 16,
         marginBottom: 24,
+        fontStyle: 'normal',
+        lineHeight: 24,
+        fontFamily: 'Poppins-Regular'
     },
 })

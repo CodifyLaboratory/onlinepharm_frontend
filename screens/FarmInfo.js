@@ -18,6 +18,7 @@ import {getFarmInformation} from '../api'
 import Loader from '../components/Loader'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../store/actions";
+import {Colors} from "../constants/colors";
 
 function FarmInfo({navigation, route}) {
     const dispatch = useDispatch()
@@ -26,6 +27,8 @@ function FarmInfo({navigation, route}) {
 
 
     const [farmData, setFarmData] = useState(null)
+
+    console.log("FARM DATA", farmData)
 
     const id = route.params
 
@@ -58,15 +61,14 @@ function FarmInfo({navigation, route}) {
     return (
         <ScrollView>
             <View style={farmInfo.container}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flexDirection: 'row', alignItems: 'center', height: 40, width: 200, marginTop: 20, marginBottom: 24}}>
                     <Image
-                        height={61}
-                        width={100}
                         style={farmInfo.logo}
                         source={{uri: farmData?.pharmacy_profile?.logo}}
                     />
+
                     <Text style={farmInfo.title}>
-                        {farmData?.pharmacy_profile?.brand?.title}
+                        {farmData?.pharmacy_profile?.title}
                     </Text>
                 </View>
 
@@ -101,7 +103,7 @@ function FarmInfo({navigation, route}) {
                 <View style={{flexDirection: 'row', marginBottom: 25}}>
                     <Phone/>
                     <View>
-                        <Text style={farmInfo.time}>+996 555 323 145</Text>
+                        <Text style={farmInfo.time}>{farmData?.pharmacy_profile?.phone || ''}</Text>
                         {/*  add numbers from back */}
                     </View>
                 </View>
@@ -116,13 +118,18 @@ function FarmInfo({navigation, route}) {
                         fullStar={require('./../assets/icons/fullStar.png')}
                         emptyStar={require('./../assets/icons/emptyStar.png')}
                     />
-                    <Text style={farmInfo.starCount}>
-                        {farmData?.feedbacks_count} отзыва
+                    <Text
+                        style={[farmInfo.starCount, {color: !farmData?.feedbacks_count ? Colors.gray_light : Colors.black}]}>
+                        отзывов: {farmData?.feedbacks_count}
                     </Text>
                 </View>
 
+                {!!farmData?.feedbacks_count
+                    ? <Text style={farmInfo.withFeedback}>Отзывы</Text>
+                    : <Text style={farmInfo.withoutFeedback}>Отзывов об аптеке еще нет</Text>
+                }
                 <View style={farmInfo.reviewsBox}>
-                    <Text style={farmInfo.reviewsTitle}>Отзывы</Text>
+
                     <TouchableOpacity
                         style={farmInfo.reviewBtn}
                         activeOpacity={0.7}
@@ -147,4 +154,4 @@ function FarmInfo({navigation, route}) {
 
 export default FarmInfo
 
-const styles = StyleSheet.create({})
+

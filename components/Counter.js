@@ -9,12 +9,12 @@ import {Colors} from "../constants/colors"
 const Counter = ({data, increment, decrement}) => {
     return (
         <View style={styles.wrapper}>
-           <TouchableOpacity disabled={data.count < 2} onPress={decrement} style={{opacity: data.count < 2 ? .4 : 1}}>
-               <DecrementIconXL />
-           </TouchableOpacity>
+            <TouchableOpacity disabled={data.count < 2} onPress={decrement} style={{opacity: data.count < 2 ? .4 : 1}}>
+                <DecrementIconXL/>
+            </TouchableOpacity>
             <Text style={styles.text}>В корзине {data.count} шт</Text>
             <TouchableOpacity onPress={increment}>
-                <IncrementIconXL />
+                <IncrementIconXL/>
             </TouchableOpacity>
         </View>
     )
@@ -35,10 +35,12 @@ const styles = StyleSheet.create({
             marginTop: 10,
             marginBottom: 10,
         },
-    text: {
+        text: {
             fontSize: 16,
             fontWeight: "normal",
-            color: Colors.black
-    }
+            color: Colors.gray,
+            fontFamily: 'SF-Pro-Regular',
+            lineHeight: 20
+        }
     }
 )

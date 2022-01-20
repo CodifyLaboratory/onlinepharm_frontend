@@ -1,4 +1,5 @@
-import { Platform, StyleSheet } from 'react-native'
+import {Platform, StyleSheet} from 'react-native'
+import {Colors} from "../constants/colors";
 
 export const main = StyleSheet.create({
     text: {
@@ -16,6 +17,13 @@ export const main = StyleSheet.create({
         paddingTop: 24,
         // height: 215,
         backgroundColor: '#FFFFFF',
+    },
+    banner_news: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        // height: 215,
     },
     bannerBulletsWrap: {
         display: 'flex',
@@ -84,10 +92,18 @@ export const main = StyleSheet.create({
         paddingRight: 8,
         paddingLeft: 8,
     },
+    title_text: {
+        fontSize: 15,
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-Regular',
+        color: Colors.gray
+    },
     watchAll: {
         color: '#1F8BA7',
-        fontSize: 13,
+        fontSize: 14,
         textDecorationLine: 'underline',
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-Regular'
     },
     farmSliderElem: {
         margin: 0,
@@ -142,6 +158,8 @@ export const main = StyleSheet.create({
         color: '#1F8BA7',
         fontSize: 13,
         lineHeight: 15,
+        fontFamily: 'SF-Pro-Regular',
+        fontStyle: 'normal'
     },
     hitsItem: {
         backgroundColor: '#fff',
@@ -211,4 +229,20 @@ export const main = StyleSheet.create({
         lineHeight: 17,
         marginBottom: 24,
     },
+    farmCardText: {
+        color: '#1F8BA7',
+        fontSize: 11,
+        lineHeight: 13,
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-Regular'
+    },
+    symptomsCardText: {
+        color: '#1F8BA7',
+        fontSize: 11,
+        lineHeight: 13,
+        marginTop: 11,
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-Medium',
+        fontWeight: '500'
+    }
 })

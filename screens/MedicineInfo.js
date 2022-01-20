@@ -189,7 +189,7 @@ export default function MedicineInfo({navigation, route}) {
                         </View>
                     )}
                 </View>
-                <Text style={styles.blockTitle}>Форма выпуска</Text>
+                <Text style={styles.blockTitle}>Инструкция по применению</Text>
                 <View>
                     {!medData?.instruction?.description ? null : (
                         <Faq
@@ -346,33 +346,44 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#4B4747',
         marginBottom: 25,
+        fontFamily: 'SF-Pro-SemiBold',
+        lineHeight: 24
     },
     price: {
         fontSize: 14,
         color: '#999999',
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 17
     },
     soms: {
         fontSize: 17,
         color: '#1F8BA7',
+        fontFamily: 'SF-Pro-SemiBold',
+        lineHeight: 20
     },
     reviewsCount: {
         fontSize: 15,
         color: '#4B4747',
         marginLeft: 14,
+        fontFamily: 'Poppins-Medium',
+        lineHeight: 22
     },
     blockTitle: {
         color: '#4B4747',
         fontSize: 15,
         marginTop: 24,
         marginBottom: 20,
-        fontWeight: 'bold',
+        fontFamily: 'SF-Pro-SemiBold',
+        fontWeight: '600'
     },
     withoutFeedbacks: {
         fontSize: 18,
         fontWeight: "500",
         color: Colors.gray_light,
         marginTop: 30,
-        marginBottom: 16
+        marginBottom: 16,
+        fontFamily: 'Poppins-Medium',
+        lineHeight: 27
     },
     description: {},
     descriptionElem: {
@@ -382,10 +393,16 @@ const styles = StyleSheet.create({
     descriptionElemTitle: {
         width: 126,
         color: '#999999',
+        fontFamily: 'SF-Pro-Regular',
+        fontSize: 14,
+        lineHeight: 17
     },
     descriptionElemDesc: {
         width: 200,
         color: '#4B4747',
+        fontFamily: 'SF-Pro-Regular',
+        fontSize: 14,
+        lineHeight: 17
     },
     reviewBtn: {
         justifyContent: 'center',
@@ -399,5 +416,7 @@ const styles = StyleSheet.create({
     reviewBtnText: {
         color: '#ffffff',
         fontSize: 17,
+        fontFamily: 'SF-Pro-SemiBold',
+        lineHeight: 20
     },
 })

@@ -41,6 +41,8 @@ export const categories = StyleSheet.create({
         backgroundColor: '#ffffff',
         padding: 16,
         borderRadius: 8,
+        height: 36,
+        justifyContent: 'center',
         marginBottom: 8,
         shadowColor: '#000',
         shadowOffset: {
@@ -54,9 +56,19 @@ export const categories = StyleSheet.create({
     pillsListElemText: {
         color: '#1F8BA7',
         fontSize: 13,
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 17
     },
     popular: {
         // paddingRight: 16,
         // paddingLeft: 16,
     },
+    popular_text: {
+        marginBottom: 20,
+        marginLeft: 16,
+        fontFamily: 'SF-Pro-Medium',
+        fontSize: 15,
+        lineHeight: 18,
+        color: Colors.gray
+    }
 })

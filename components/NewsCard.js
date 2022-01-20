@@ -1,10 +1,11 @@
 import React from 'react'
-import { news } from '../styles/news'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
+import {news} from '../styles/news'
+import {Image, Text, TouchableOpacity, View} from 'react-native'
 import NewsIcon from './../assets/icons/newsFarmIcon.svg'
 
-const NewsCard = ({ navigation, data }) => {
-    var re = /-/gi
+const NewsCard = ({navigation, data}) => {
+    const re = /-/gi;
+
     return (
         <TouchableOpacity
             onPress={() => {
@@ -16,8 +17,9 @@ const NewsCard = ({ navigation, data }) => {
         >
             <View style={news.farmCardInfo}>
                 <View style={news.nameFarm}>
-                    <NewsIcon />
-                    <Text style={news.farmName}>{data.pharmacy.title}</Text>
+                    <NewsIcon/>
+                    <Text
+                        style={news.farmName}>{data?.pharmacy?.pharmacy_profile ? data?.pharmacy?.pharmacy_profile.title : ''}</Text>
                 </View>
                 <Text style={news.farmDesc}>{data.title}</Text>
                 <Text style={news.farmDate}>
@@ -39,7 +41,7 @@ const NewsCard = ({ navigation, data }) => {
                 style={news.farmCardImage}
                 source={
                     data.image
-                        ? { uri: data.image }
+                        ? {uri: data.image}
                         : require('../assets/news/cardLogo.png')
                 }
             />

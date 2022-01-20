@@ -18,7 +18,7 @@ const ReviewCard = ({ data }) => {
                     }
                 />
             </View>
-            <View>
+            <View style={{marginLeft: 16}}>
                 <Text style={farmInfo.reviewsElemName}>
                     {data.user.user_profile.first_name +
                         ' ' +

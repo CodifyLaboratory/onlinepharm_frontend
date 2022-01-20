@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
+import {Colors} from "../constants/colors";
 
 var replacedStr = /-/gi
 
@@ -59,15 +60,18 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 14,
-        color: '#ffffff',
+        color: Colors.white,
         lineHeight: 21,
         marginBottom: 16,
         height: 42,
+        fontStyle: 'normal',
+        fontFamily: 'Poppins-Regular',
     },
     date: {
         fontSize: 11,
-        color: '#CCCCCC',
+        color: Colors.gray_light,
         marginBottom: 16,
+        fontFamily: 'Poppins-Regular'
     },
     btn: {
         backgroundColor: '#4BCCED',
@@ -77,10 +81,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: '20%',
-        padding: 4,
+        paddingTop: 2,
+        height: 25
     },
     btnTitle: {
         color: '#ffffff',
+        fontStyle: 'normal',
+        fontFamily: 'Poppins-Regular',
+        fontSize: 11
     },
     right: {
         display: 'flex',

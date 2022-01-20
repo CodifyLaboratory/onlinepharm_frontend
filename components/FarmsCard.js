@@ -5,6 +5,10 @@ import { createPharmFavorite, getFavorites, deletePharmFavorite } from '../api'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../store/actions";
 
+import Tag from '../assets/farms/tag.svg'
+import {farm} from "../styles/farm";
+import Location from "../assets/farms/location.svg";
+
 const FarmsCard = ({ navigation, data }) => {
 
     const dispatch = useDispatch()
@@ -56,7 +60,10 @@ const FarmsCard = ({ navigation, data }) => {
                     {data?.pharmacy_profile?.title}
                 </Text>
                 <Text style={farms.farmAdress}>{data?.location?.address}</Text>
-                <Text style={farms.farmClose}>4 км от вас</Text>
+                <View style={farm.farmLocation}>
+                    <Tag style={{marginRight: 6}} />
+                    <Text style={farm.farmClose}>4 км от вас</Text>
+                </View>
             </View>
             <View style={{ alignItems: 'space-between', height: '100%' }}>
                 <TouchableOpacity onPress={() => handleChange()}>

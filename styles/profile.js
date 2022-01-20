@@ -22,11 +22,13 @@ export const profile = StyleSheet.create({
         marginTop: 16,
         marginBottom: 8,
         color: '#1A1717',
+        fontFamily: 'SF-Pro-Medium'
     },
     profileNumber: {
         fontSize: 12,
         lineHeight: 18,
         color: '#4B4747',
+        fontFamily: 'SF-Pro-Regular'
     },
     profileLinks: {
         width: 302,
@@ -52,5 +54,6 @@ export const profile = StyleSheet.create({
     profileLinkText: {
         fontSize: 16,
         marginLeft: 14,
+        fontFamily: 'SF-Pro-Regular'
     },
 })

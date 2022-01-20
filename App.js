@@ -59,8 +59,15 @@ export default function App() {
     })
 
     let [fontsLoaded] = useFonts({
-        'Inter-SemiBoldItalic': 'https://rsms.me/inter/font-files/Inter-SemiBoldItalic.otf?v=3.12',
-    });
+        'Poppins-Regular': require('./assets/fonts/Poppins-Regular.ttf'),
+        'Poppins-Medium': require('./assets/fonts/Poppins-Medium.ttf'),
+        'Poppins-Bold': require('./assets/fonts/Poppins-Bold.ttf'),
+        'SF-Pro-Regular': require('./assets/fonts/SFProDisplay-Regular.ttf'), /// weight 400
+        'SF-Pro-Medium': require('./assets/fonts/SFProDisplay-Medium.ttf'),  /// weight 500
+        'SF-Pro-SemiBold': require('./assets/fonts/SFProDisplay-Semibold.ttf'), /// weight 600
+        'SF-Pro-Light': require('./assets/fonts/SFProDisplay-Light.ttf')
+    })
+
     if (!fontsLoaded) {
         return <AppLoading />;
     }

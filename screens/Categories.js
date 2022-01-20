@@ -20,9 +20,18 @@ import PopularMedicine from '../components/PopularMedicine'
 import { main } from '../styles/main'
 import { categories } from '../styles/categories'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
+import {getAllBasket} from "../api";
+import {loadCart} from "../store/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 function Categories({ navigation, route }) {
+
+    const dispatch = useDispatch()
+
+    const { cart } = useSelector(state => state.data)
+
     const id = route.params
+    const [changed, setChanged] = useState(false)
     const [bannerData, setBannerData] = useState([])
     const [popularData, setPopularData] = useState([])
     const [subCategory, setSubCategory] = useState([])
@@ -31,32 +40,30 @@ function Categories({ navigation, route }) {
 
     useEffect(() => {
         Api.getData('banners/').then((res) => setBannerData(res.data))
-        Api.getData('popular-medications/').then((res) =>
-            setPopularData(res.data)
-        )
         Api.getData('subcategories/').then((res) => setSubCategory(res.data))
     }, [])
 
-    function symptomsItem() {
-        return (
-            <View style={categories.symptomsSliderElem}>
-                <Image
-                    style={{ width: 36, height: 36 }}
-                    source={require('../assets/main/symptomsLogo.png')}
-                />
-                <Text
-                    style={{
-                        color: '#1F8BA7',
-                        fontSize: 11,
-                        lineHeight: 13,
-                        marginTop: 11,
-                    }}
-                >
-                    Головная боль
-                </Text>
-            </View>
+    useEffect(()=>{
+        getBasket()
+        Api.getData('popular-medications/').then((res) =>
+            setPopularData(res.data)
         )
+    }, [changed])
+
+
+    const getBasket = async () => {
+        try {
+            const res = await getAllBasket()
+            await dispatch(loadCart(res))
+        } catch (e) {
+            throw new Error(e)
+        }
     }
+
+    const findBasketProduct = (id) => {
+        return cart?.find(item => item.medication.id === id)
+    }
+
 
     return (
         <ScrollView>
@@ -102,7 +109,7 @@ function Categories({ navigation, route }) {
                 </View>
 
                 <View style={categories.popular}>
-                    <Text style={{ marginBottom: 20, marginLeft: 16 }}>
+                    <Text style={categories.popular_text}>
                         Популярные
                     </Text>
                     <View
@@ -126,13 +133,18 @@ function Categories({ navigation, route }) {
                                     sliderWidth={Dimensions.get('window').width}
                                     itemWidth={167}
                                     data={popularData}
-                                    renderItem={(item) => (
+                                    renderItem={(item) => {
+                                        const basketObj = findBasketProduct(item.item.id)
+                                        return (
                                         <PopularMedicine
+                                            setChanged={(e)=>setChanged(e)}
+                                            changed={changed}
+                                            basketObj={basketObj}
                                             navigation={navigation}
                                             key={item.id}
                                             data={item.item}
                                         />
-                                    )}
+                                    )}}
                                     layout={'default'}
                                 />
                             </View>

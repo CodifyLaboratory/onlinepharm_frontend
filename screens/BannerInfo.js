@@ -51,15 +51,21 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#1F8BA7',
         marginBottom: 24,
+        fontFamily: 'Poppins-Regular',
+        lineHeight: 30,
     },
     date: {
         color: '#999999',
         fontSize: 14,
         marginBottom: 16,
+        fontFamily: 'Poppins-Regular',
+        lineHeight: 21
     },
     description: {
         color: '#4B4747',
         fontSize: 16,
         marginBottom: 24,
+        fontFamily: 'Poppins-Regular',
+        lineHeight: 24
     },
 })

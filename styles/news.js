@@ -15,6 +15,7 @@ export const news = StyleSheet.create({
     newsItem: {
         marginRight: 20,
         marginLeft: 20,
+        paddingBottom: 8,
     },
     newsItemActive: {
         marginRight: 20,
@@ -22,15 +23,19 @@ export const news = StyleSheet.create({
         borderBottomWidth: 3,
         borderBottomColor: Colors.yellow,
         paddingBottom: 8,
-        color: 'red',
     },
     newsNavText: {
         fontSize: 18,
         color: '#999999',
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 21
     },
     newsNavTextActive: {
         fontSize: 18,
         color: Colors.primary,
+        fontFamily: 'SF-Pro-SemiBold',
+        lineHeight: 21
     },
     farmCard: {
         flex: 1,
@@ -62,6 +67,9 @@ export const news = StyleSheet.create({
         fontSize: 11,
         fontWeight: '500',
         color: '#fff',
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-Medium',
+        marginLeft: 5
     },
     farmDesc: {
         fontSize: 13,
@@ -69,26 +77,34 @@ export const news = StyleSheet.create({
         color: '#fff',
         marginBottom: 8,
         width: 171,
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-Regular'
     },
     farmDate: {
         fontSize: 11,
         fontWeight: '500',
         color: '#CCCCCC',
         marginBottom: 20,
+        fontStyle: 'normal',
+        fontFamily: 'Poppins-Regular'
     },
     farmCardBtn: {
-        backgroundColor: '#4BCCED',
+        borderWidth: 1,
+        borderColor: Colors.white,
         borderRadius: 8,
-        width: 82,
+        width: 101,
         paddingTop: 4,
         paddingBottom: 4,
-        paddingLeft: 10,
-        paddingRight: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
         marginLeft: 45,
     },
     farmCardBtnText: {
         fontSize: 11,
-        color: '#ffffff',
+        color: Colors.white,
+        lineHeight: 15,
+        fontStyle: 'normal',
+        fontFamily: 'Poppins-Regular'
     },
     farmCardImage: {
         flex: 0.5,

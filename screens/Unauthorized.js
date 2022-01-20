@@ -1,25 +1,26 @@
 import React from "react";
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Logo from '../assets/auth/logo-2.svg'
+import {Colors} from "../constants/colors";
 
 
 const Unauthorized = ({navigation}) => {
     return (
         <View style={styles.container}>
 
-             <View>
-                 <Logo />
-             </View>
+            <View>
+                <Logo/>
+            </View>
 
-                <Text style={{marginTop: 97}}>Войдите или зарегистрируйтесь</Text>
-                <Text>чтобы не потерять данные аккаунта, </Text>
-                   <Text>и иметь доступ с другого устройства</Text>
+            <Text style={{marginTop: 97, ...styles.description}}>Войдите или зарегистрируйтесь</Text>
+            <Text style={styles.description}>чтобы не потерять данные аккаунта, </Text>
+            <Text style={styles.description}>и иметь доступ с другого устройства</Text>
 
             <TouchableOpacity
                 style={styles.btn}
                 onPress={() => navigation.navigate('Login')}
             >
-                <Text style={{ color: '#ffffff' }}>
+                <Text style={styles.btnText}>
                     Войти в профиль
                 </Text>
             </TouchableOpacity>
@@ -27,7 +28,7 @@ const Unauthorized = ({navigation}) => {
                 style={styles.btnWhite}
                 onPress={() => navigation.navigate('OnBoarding')}
             >
-                <Text style={{ color: '#1F8BA7' }}>
+                <Text style={styles.btnWhiteText}>
                     Зарегистрироваться
                 </Text>
             </TouchableOpacity>
@@ -44,10 +45,11 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 16
         // paddingTop: 81
     },
     btn: {
-        width: 300,
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -56,16 +58,34 @@ const styles = StyleSheet.create({
         backgroundColor: '#1F8BA7',
         marginTop: 30
     },
+    btnText: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 17,
+        lineHeight: 24,
+        color: Colors.white
+    },
     btnWhite: {
-        width: 300,
+        width: '100%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 12,
+        padding: 10,
         borderRadius: 23,
         backgroundColor: '#FFFFFF',
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#1F8BA7',
-        marginTop: 11,
+        marginTop: 16,
     },
+    btnWhiteText: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 17,
+        lineHeight: 25,
+        color: Colors.primary
+    },
+    description: {
+        fontFamily: 'Poppins-Regular',
+        lineHeight: 24,
+        fontSize: 16
+    }
+
 })

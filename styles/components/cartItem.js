@@ -74,6 +74,9 @@ export const cartItem = StyleSheet.create({
     },
     counterText: {
         color: '#4B4747',
+        fontFamily: 'SF-Pro-Regular',
+        fontSize: 14,
+        lineHeight: 17
     },
     counterImg: {
         width: 27,

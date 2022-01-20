@@ -21,6 +21,12 @@ export const cart = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 34,
     },
+    total_text: {
+        fontSize: 15,
+        fontFamily: 'SF-Pro-Medium',
+        fontStyle: 'normal',
+        lineHeight: 18
+    },
     bottomButton: {
         position: "absolute",
         width: '100%',
@@ -43,6 +49,9 @@ export const cart = StyleSheet.create({
         color: '#fff',
         fontSize: 17,
         fontWeight: '600',
+        fontStyle: 'normal',
+        fontFamily: 'SF-Pro-SemiBold',
+        lineHeight: 20
     },
     emptyCart: {
         marginTop: 120,
@@ -53,6 +62,8 @@ export const cart = StyleSheet.create({
         color: '#4B4747',
         fontSize: 20,
         marginBottom: 70,
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 24
     },
     clearBtn: {
         height: 23,
@@ -65,6 +76,8 @@ export const cart = StyleSheet.create({
         color: '#4B4747',
         fontSize: 14,
         marginLeft: 9,
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 17
     },
     result: {
         flexDirection: 'row',

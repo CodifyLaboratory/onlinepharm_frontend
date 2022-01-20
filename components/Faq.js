@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import { style } from 'styled-system'
 import Arrow from './../assets/icons/arrow.svg'
+import {Colors} from "../constants/colors";
 
 export default function Faq({ title, data }) {
     const [faqStatus, setFaqStatus] = useState(false)
@@ -18,7 +19,7 @@ export default function Faq({ title, data }) {
             </View>
             {faqStatus ? (
                 <View>
-                    <Text>{data}</Text>
+                    <Text style={styles.infoDescription}>{data}</Text>
                 </View>
             ) : null}
         </TouchableOpacity>
@@ -33,6 +34,7 @@ const styles = StyleSheet.create({
         borderColor: '#ECEEEF',
         borderRadius: 10,
         marginBottom: 8,
+        marginTop: 8
     },
     infoOpened: {
         flexDirection: 'row',
@@ -48,7 +50,14 @@ const styles = StyleSheet.create({
     },
     infoTitle: {
         fontSize: 14,
-        fontWeight: 'bold',
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 17
+    },
+    infoDescription: {
+        fontSize: 14,
+        lineHeight: 17,
+        fontFamily: 'SF-Pro-Regular',
+        color: Colors.gray
     },
     openStar: {
         transform: [{ rotate: 180 }],

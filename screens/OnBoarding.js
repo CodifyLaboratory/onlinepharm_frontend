@@ -14,6 +14,7 @@ import slidesData from '../data/slidesData'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization, setGuest} from "../store/actions";
+import {Colors} from "../constants/colors";
 
 const OnBoarding = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -84,12 +85,12 @@ const OnBoarding = ({ navigation }) => {
             )}
 
             {currentIndex === 3 ? (
-                <View>
+                <View style={{width: '100%'}}>
                     <TouchableOpacity
                         style={styles.btn}
                         onPress={() => navigation.push('Registration')}
                     >
-                        <Text style={{ color: '#ffffff' }}>
+                        <Text style={styles.btnText}>
                             Зарегистрироваться
                         </Text>
                     </TouchableOpacity>
@@ -100,7 +101,7 @@ const OnBoarding = ({ navigation }) => {
                             await dispatch(setAuthorization(true))
                         }}
                     >
-                        <Text style={{ color: '#1F8BA7' }}>
+                        <Text style={styles.btnWhiteText}>
                             Войти как гость
                         </Text>
                     </TouchableOpacity>
@@ -123,25 +124,39 @@ const styles = StyleSheet.create({
         paddingBottom: 60,
     },
     btn: {
-        width: 300,
+        width: '90%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 12,
         borderRadius: 23,
         backgroundColor: '#1F8BA7',
+        alignSelf: 'center'
+    },
+    btnText: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 17,
+        lineHeight: 24,
+        color: Colors.white
     },
     btnWhite: {
-        width: 300,
+        width: '90%',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         padding: 12,
         borderRadius: 23,
         backgroundColor: '#FFFFFF',
-        borderWidth: 2,
+        borderWidth: 1,
         borderColor: '#1F8BA7',
         marginTop: 11,
+        alignSelf: 'center'
+    },
+    btnWhiteText: {
+        fontFamily: 'Poppins-Regular',
+        fontSize: 17,
+        lineHeight: 25,
+        color: Colors.primary
     },
     // images: {
     //   height: 310,

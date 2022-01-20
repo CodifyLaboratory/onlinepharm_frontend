@@ -4,9 +4,36 @@ import Stars from 'react-native-stars'
 import { Colors } from '../constants/colors'
 import CountDecrement from '../assets/cart/counter_d.svg'
 import CountIncrement from '../assets/cart/counter_i.svg'
+import {addToBasket, deleteFromBasket, updateBasket} from "../api";
+import {setAuthorization} from "../store/actions";
+import {useDispatch, useSelector} from "react-redux";
 
-const PopularMedicine = ({ data, navigation }) => {
-    const [count, setCount] = useState(0)
+const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) => {
+
+    const dispatch = useDispatch()
+
+    const { is_guest } = useSelector(state => state.data)
+
+
+    async function _increment() {
+        await updateBasket(basketObj.id, basketObj.count + 1)
+        setChanged(!changed)
+    }
+
+    async function _decrement() {
+        await updateBasket(basketObj.id, basketObj.count - 1)
+        setChanged(!changed)
+    }
+
+    async function _create() {
+        if(is_guest) dispatch(setAuthorization(false))
+        await addToBasket(data.id, 1)
+        setChanged(!changed)
+    }
+    async function _delete() {
+        await deleteFromBasket(basketObj.id)
+        setChanged(!changed)
+    }
 
     return (
         <View style={styles.container}>
@@ -38,27 +65,28 @@ const PopularMedicine = ({ data, navigation }) => {
                 <TouchableOpacity
                     style={styles.detailsBtn}
                     onPress={() => {
-                        navigation.navigate('MedicineInfo', data.id)
+                        navigation.navigate('MedicineInfo', {medId: data.id})
                     }}
                 >
                     <Text style={styles.detailsBtnText}>Подробнее</Text>
                 </TouchableOpacity>
-                {!count ? (
+                {!basketObj ? (
                     <TouchableOpacity
-                        onPress={() => setCount(1)}
+
+                        onPress={_create}
                         style={styles.cartBtn}
                     >
                         <Text style={styles.cartBtnText}>В корзину</Text>
                     </TouchableOpacity>
                 ) : (
                     <View style={styles.counter_btn_wrap}>
-                        <TouchableOpacity onPress={()=>setCount(count-1)}>
+                        <TouchableOpacity onPress={basketObj.count === 1 ? _delete : _decrement}>
                             <CountDecrement />
                         </TouchableOpacity>
                         <View>
-                            <Text>{count} шт</Text>
+                            <Text>{basketObj.count} шт</Text>
                         </View>
-                        <TouchableOpacity onPress={()=>setCount(count+1)}>
+                        <TouchableOpacity onPress={_increment}>
                             <CountIncrement />
                         </TouchableOpacity>
                     </View>
@@ -115,16 +143,22 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#4B4747',
         marginBottom: 10,
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 21
     },
     price: {
         color: '#999999',
         fontSize: 14,
         marginBottom: 16,
+        fontFamily: 'SF-Pro-Light',
+        lineHeight: 16
     },
     soms: {
         color: '#1F8BA7',
         fontSize: 14,
         marginLeft: 6,
+        fontFamily: 'SF-Pro-SemiBold',
+        lineHeight: 16
     },
     detailsBtn: {
         alignItems: 'center',
@@ -135,10 +169,14 @@ const styles = StyleSheet.create({
         borderColor: '#4BCCED',
         borderRadius: 8,
         marginBottom: 8,
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 16
     },
     detailsBtnText: {
         color: '#4BCCED',
         fontSize: 14,
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 16
     },
     cartBtn: {
         alignItems: 'center',
@@ -150,5 +188,7 @@ const styles = StyleSheet.create({
     },
     cartBtnText: {
         color: '#ffffff',
+        fontFamily: 'SF-Pro-Medium',
+        lineHeight: 16
     },
 })
