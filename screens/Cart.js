@@ -15,6 +15,7 @@ import ClearCart from "../components/modals/ClearCart";
 import {deleteAllBasket, getAllBasket, getFavoritesProducts} from "../api";
 import {loadCart} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
+import {strings} from "../localization";
 
 const Cart = ({navigation}) => {
 
@@ -84,7 +85,7 @@ const Cart = ({navigation}) => {
                             onPress={() => setVisible(true)}
                         >
                             <Trash/>
-                            <Text style={cart.clearBtnText}>Очистить корзину</Text>
+                            <Text style={cart.clearBtnText}>{strings.cart.clear_basket}</Text>
                         </TouchableOpacity>
                     ) : null}
                     {cartItems.length ? (
@@ -116,7 +117,7 @@ const Cart = ({navigation}) => {
             </ScrollView>
         <View style={cart.bottomButton}>
             {cartItems.length
-                ? <View style={cart.total}><Text style={cart.total_text}>Итого</Text><Text style={cart.total_text} >от {total} с</Text></View>
+                ? <View style={cart.total}><Text style={cart.total_text}>{strings.cart.total}</Text><Text style={cart.total_text} >{strings.main.from} {total} с</Text></View>
                 : null }
             <TouchableOpacity
                 onPress={() => {
@@ -125,7 +126,7 @@ const Cart = ({navigation}) => {
                 style={cart.btn}
                 activeOpacity={0.8}
             >
-                <Text style={cart.btnText}>{cartItems.length ? 'Оформить заказ' : 'На главную'}</Text>
+                <Text style={cart.btnText}>{cartItems.length ? strings.cart.checkout : 'На главную'}</Text>
             </TouchableOpacity>
         </View>
 

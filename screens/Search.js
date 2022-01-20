@@ -10,6 +10,7 @@ import { Input } from 'react-native-elements'
 import SearchImg from '../assets/search/search.svg'
 import { search } from '../styles/search'
 import Api from '../API'
+import {strings} from "../localization";
 
 const Search = (props) => {
     const [searchValue, setSearchValue] = useState('')
@@ -30,7 +31,7 @@ const Search = (props) => {
             <View style={search.container}>
                 <View style={{ display: 'flex', flexDirection: 'row' }}>
                     <Input
-                        placeholder={'Поиск'}
+                        placeholder={strings.search.search}
                         keyboardType="default"
                         rightIcon={<Icon name="search" size={30} color="#1A1717" />}
                         inputStyle={{ fontSize: 15 }}
@@ -39,7 +40,7 @@ const Search = (props) => {
                     />
                     <View style={search.back_button_wrap}>
                         <TouchableOpacity onPress={()=>props.navigation.navigate('Main')}>
-                            <Text style={search.backBtn}>Назад</Text>
+                            <Text style={search.backBtn}>{strings.auth.back}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -65,7 +66,7 @@ const Search = (props) => {
                         <SearchImg style />
                         <Text style={search.searchLogoText}>
                             {' '}
-                            Найдите желаемый продукт
+                            {strings.search.find_product}
                         </Text>
                     </View>
                 )}

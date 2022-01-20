@@ -2,6 +2,7 @@ import React from 'react'
 import {news} from '../styles/news'
 import {Image, Text, TouchableOpacity, View} from 'react-native'
 import NewsIcon from './../assets/icons/newsFarmIcon.svg'
+import {strings} from "../localization";
 
 const NewsCard = ({navigation, data}) => {
     const re = /-/gi;
@@ -23,7 +24,7 @@ const NewsCard = ({navigation, data}) => {
                 </View>
                 <Text style={news.farmDesc}>{data.title}</Text>
                 <Text style={news.farmDate}>
-                    с {data.start_date.replace(re, '.')} по{' '}
+                    {strings.main.from} {data.start_date.replace(re, '.')} {strings.main.to}{' '}
                     {data.end_date.replace(re, '.')}
                 </Text>
                 <TouchableOpacity
@@ -34,7 +35,7 @@ const NewsCard = ({navigation, data}) => {
                     activeOpacity={0.85}
                     key={data.id}
                 >
-                    <Text style={news.farmCardBtnText}>Подробнее</Text>
+                    <Text style={news.farmCardBtnText}>{strings.main.more}</Text>
                 </TouchableOpacity>
             </View>
             <Image

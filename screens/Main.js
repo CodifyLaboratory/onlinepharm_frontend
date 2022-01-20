@@ -5,7 +5,7 @@ import {
     TouchableWithoutFeedback,
     ScrollView,
     SafeAreaView,
-    Dimensions,
+    Dimensions, Button,
 } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 
@@ -24,6 +24,7 @@ import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 import {useDispatch, useSelector} from 'react-redux'
 import {loadCart} from "../store/actions";
 import {getAllBasket} from "../api";
+import {strings} from "../localization";
 
 export default function Main({ navigation }) {
 
@@ -170,11 +171,11 @@ export default function Main({ navigation }) {
                     </View>
                     <View>
                         <View style={main.title}>
-                            <Text style={main.title_text}>Аптеки</Text>
+                            <Text style={main.title_text}>{strings.main.pharmacies}</Text>
                             <TouchableWithoutFeedback
                                 onPress={() => navigation.push('Farm')}
                             >
-                                <Text style={main.watchAll}>Смотреть все</Text>
+                                <Text style={main.watchAll}>{strings.main.show_all}</Text>
                             </TouchableWithoutFeedback>
                         </View>
                         <View style={{ height: 132 }}>
@@ -188,14 +189,14 @@ export default function Main({ navigation }) {
 
                         <View style={main.title}>
                             <Text style={main.title_text}>
-                                Категории товаров
+                                {strings.main.product_categories}
                             </Text>
 
                         </View>
                         <View style={main.categories}>{categoryList}</View>
 
                         <View style={main.title}>
-                            <Text style={main.title_text}>Подборки</Text>
+                            <Text style={main.title_text}>{strings.main.collections}</Text>
                         </View>
                         <View style={{ height: 100 }}>
                             <ScrollView
@@ -207,11 +208,11 @@ export default function Main({ navigation }) {
                         </View>
 
                         <View style={main.title}>
-                            <Text style={main.title_text}>Новости</Text>
+                            <Text style={main.title_text}>{strings.news.news}</Text>
                             <TouchableWithoutFeedback
                                 onPress={() => navigation.push('News')}
                             >
-                                <Text style={main.watchAll}>Смотреть все</Text>
+                                <Text style={main.watchAll}>{strings.main.show_all}</Text>
                             </TouchableWithoutFeedback>
                         </View>
                         <View style={main.banner_news}>

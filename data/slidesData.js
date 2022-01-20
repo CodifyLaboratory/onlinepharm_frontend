@@ -1,22 +1,24 @@
+import {strings} from "../localization";
+
 export default [
     {
         id: '1',
-        title: 'Преобретайте  нужное вам лекарство',
+        title: strings.auth.medicine_you_need,
         image: require('./../assets/onBoardingStep1.png'),
     },
     {
         id: '2',
-        title: 'Узнайте ближайший филиал аптеки',
+        title: strings.auth.nearest_pharmacy,
         image: require('./../assets/onBoardingStep2.png'),
     },
     {
         id: '3',
-        title: 'Оплатите удобным для вас способом',
+        title: strings.auth.convenient_payment,
         image: require('./../assets/onBoardingStep3.png'),
     },
     {
         id: '4',
-        title: 'Получите товар в руки совершенно бесплатно!',
+        title: strings.auth.get_your_product,
         image: require('./../assets/onBoardingStep4.png'),
     },
 ]

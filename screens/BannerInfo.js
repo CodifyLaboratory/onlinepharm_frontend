@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Text, StyleSheet, ScrollView } from 'react-native'
 import Api from './../API/index'
 import MedicineCard from './../components/MedicineCard'
+import {strings} from "../localization";
 
 var replacedStr = /-/gi
 
@@ -31,7 +32,7 @@ const MyComponent = ({ route, navigation }) => {
         <ScrollView style={styles.container}>
             <Text style={styles.title}>{bannerData?.title}</Text>
             <Text style={styles.date}>
-                с {bannerData?.start_date?.replace(replacedStr, '.')} по{' '}
+                {strings.main.from} {bannerData?.start_date?.replace(replacedStr, '.')} {strings.main.to}{' '}
                 {bannerData?.end_date?.replace(replacedStr, '.')}
             </Text>
             <Text style={styles.description}>{bannerData?.description}</Text>

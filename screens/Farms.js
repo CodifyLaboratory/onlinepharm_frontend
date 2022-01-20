@@ -6,6 +6,7 @@ import { farms } from '../styles/farms'
 import Api from '../API'
 import FarmsCard from '../components/FarmsCard'
 import { Colors } from '../constants/colors'
+import {strings} from "../localization";
 
 const Farms = ({ navigation, route }) => {
     const [type, setType] = useState(true)
@@ -57,7 +58,7 @@ const Farms = ({ navigation, route }) => {
                         <Text
                             style={type ? farms.typeTextActive : farms.typeText}
                         >
-                            Список
+                            {strings.main.list}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -69,7 +70,7 @@ const Farms = ({ navigation, route }) => {
                                 !type ? farms.typeTextActive : farms.typeText
                             }
                         >
-                            На карте
+                            {strings.main.on_the_map}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -94,7 +95,7 @@ const Farms = ({ navigation, route }) => {
                     >
                         <Picker.Item
                             mode={'dropdown'}
-                            label="Выберите аптеку"
+                            label={strings.main.select_pharmacy}
                             value={0}
                         />
                         {brands.map((item) => (

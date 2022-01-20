@@ -13,6 +13,7 @@ import Stars from 'react-native-stars'
 import Success from './../assets/icons/success.svg'
 import Close from './../assets/icons/close.svg'
 import {createFeedback, createMedicationFeedback} from '../api'
+import {strings} from "../localization";
 
 const LeaveReview = ({ route, navigation }) => {
     const [formData, setFormData] = useState({
@@ -79,7 +80,7 @@ const LeaveReview = ({ route, navigation }) => {
                         />
                         <TextInput
                             style={styles.input}
-                            placeholder="Напишите ваш отзыв"
+                            placeholder={strings.main.write_review}
                             multiline
                             numberOfLines={4}
                             onChangeText={handleChange}
@@ -95,7 +96,7 @@ const LeaveReview = ({ route, navigation }) => {
                         }}
                         onPress={() => handleSubmit()}
                     >
-                        <Text style={styles.btnText}>Отправить отзыв</Text>
+                        <Text style={styles.btnText}>{strings.main.send_feedback}</Text>
                     </TouchableOpacity>
 
                 <View style={styles.centeredView}>
@@ -120,7 +121,7 @@ const LeaveReview = ({ route, navigation }) => {
                                 </TouchableOpacity>
                                 <Success />
                                 <Text style={styles.modalText}>
-                                    Ваш отзыв успешно отправлен
+                                    {strings.main.feedback_sent}
                                 </Text>
                             </View>
                         </View>

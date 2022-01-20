@@ -27,6 +27,7 @@ import {Colors} from '../constants/colors'
 import Loader from '../components/Loader'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../store/actions";
+import {strings} from "../localization";
 
 export default function Profile({navigation, setIsSignIn}) {
 
@@ -85,7 +86,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <User style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
-                                    Мои аккаунт
+                                    {strings.profile.my_account}
                                 </Text>
                             </View>
                             <Arrow/>
@@ -100,7 +101,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <Pill style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
-                                    Мои лекарства
+                                    {strings.profile.my_drugs}
                                 </Text>
                             </View>
                             <Arrow/>
@@ -115,7 +116,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <Doctor style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
-                                    Мои аптеки
+                                    {strings.profile.my_pharmacies}
                                 </Text>
                             </View>
                             <Arrow/>
@@ -127,7 +128,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <Pencil style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
-                                    Мои заказы
+                                    {strings.profile.my_orders}
                                 </Text>
                             </View>
                             <Arrow/>
@@ -139,7 +140,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <Payment style={{width: 30, height: 30}}/>
                                 <Text style={profile.profileLinkText}>
-                                    Мои способы оплаты
+                                    {strings.profile.my_payment_methods}
                                 </Text>
                             </View>
                             <Arrow/>
@@ -151,7 +152,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <Settings style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
-                                    Настройки
+                                    {strings.profile.settings}
                                 </Text>
                             </View>
                             <Arrow/>
@@ -163,7 +164,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <BlackLogo style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
-                                    О приложении
+                                    {strings.profile.about_application}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -178,7 +179,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <View style={profile.profileLinkInner}>
                                 <Logout style={{width: 24, height: 24}}/>
                                 <Text style={profile.profileLinkText}>
-                                    Выйти
+                                    {strings.profile.logout}
                                 </Text>
                             </View>
                         </TouchableOpacity>

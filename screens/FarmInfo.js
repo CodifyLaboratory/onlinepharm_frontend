@@ -19,6 +19,7 @@ import Loader from '../components/Loader'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../store/actions";
 import {Colors} from "../constants/colors";
+import {strings} from "../localization";
 
 function FarmInfo({navigation, route}) {
     const dispatch = useDispatch()
@@ -120,13 +121,13 @@ function FarmInfo({navigation, route}) {
                     />
                     <Text
                         style={[farmInfo.starCount, {color: !farmData?.feedbacks_count ? Colors.gray_light : Colors.black}]}>
-                        отзывов: {farmData?.feedbacks_count}
+                        {strings.main.review_count}: {farmData?.feedbacks_count}
                     </Text>
                 </View>
 
                 {!!farmData?.feedbacks_count
-                    ? <Text style={farmInfo.withFeedback}>Отзывы</Text>
-                    : <Text style={farmInfo.withoutFeedback}>Отзывов об аптеке еще нет</Text>
+                    ? <Text style={farmInfo.withFeedback}>{strings.main.reviews}</Text>
+                    : <Text style={farmInfo.withoutFeedback}>{strings.main.without_feedbacks_pharmacy}</Text>
                 }
                 <View style={farmInfo.reviewsBox}>
 
@@ -141,7 +142,7 @@ function FarmInfo({navigation, route}) {
                     }
                     >
                         <Text style={farmInfo.reviewBtnText}>
-                            Оставить отзыв
+                            {strings.main.leave_feedback}
                         </Text>
                     </TouchableOpacity>
 

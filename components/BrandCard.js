@@ -7,6 +7,7 @@ import {
     Image,
     StyleSheet,
 } from 'react-native'
+import {strings} from "../localization";
 
 const BrandCard = ({ navigation, data }) => {
     return (
@@ -19,14 +20,14 @@ const BrandCard = ({ navigation, data }) => {
             <View style={styles.right}>
                 <Text style={styles.name}>{data?.title}</Text>
                 <Text style={styles.count}>
-                    Количество аптек:{' '}
+                    {strings.main.pharmacy_count}:{' '}
                     <Text style={styles.number}> {data?.pharmacy_count}</Text>{' '}
                 </Text>
                 <TouchableOpacity
                     style={styles.see}
                     onPress={() => navigation.navigate('Farms', data.id)}
                 >
-                    <Text style={styles.seeText}>Смотреть все</Text>
+                    <Text style={styles.seeText}>{strings.main.show_all}</Text>
                 </TouchableOpacity>
             </View>
         </View>

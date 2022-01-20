@@ -12,6 +12,7 @@ import {
 import Api from './../API/index'
 import { newsInfo } from '../styles/newsInfo'
 import MedicineCard from './../components/MedicineCard'
+import {strings} from "../localization";
 
 const replacedStr = /-/gi;
 
@@ -42,7 +43,7 @@ function NewsInfo({ route }) {
             />
             <Text style={styles.title}>{newsData?.title}</Text>
             <Text style={styles.date}>
-                с {newsData?.start_date?.replace(replacedStr, '.')} по{' '}
+                {strings.main.from} {newsData?.start_date?.replace(replacedStr, '.')} {strings.main.to}{' '}
                 {newsData?.end_date?.replace(replacedStr, '.')}
             </Text>
             <Text style={styles.description}>{newsData?.description}</Text>

@@ -10,6 +10,7 @@ import Camera from '../assets/profile/camera.svg'
 import * as ImagePicker from 'expo-image-picker';
 import {cameraPermission} from "../permissions/camera";
 import {updateProfile} from "../api";
+import {strings} from "../localization";
 
 export default function MyProfile({route, navigation}) {
     const data = route.params
@@ -96,7 +97,7 @@ export default function MyProfile({route, navigation}) {
 
                     <Input
                         keyboardType="default"
-                        label={'Имя'}
+                        label={strings.auth.name}
                         labelStyle={myProfile.label}
                         rightIcon={
                             <Icon name="pen" size={14} color="#cccccc"/>
@@ -114,7 +115,7 @@ export default function MyProfile({route, navigation}) {
                     />
                     <Input
                         keyboardType="default"
-                        label={'Фамилия'}
+                        label={strings.auth.surname}
                         labelStyle={myProfile.label}
                         rightIcon={
                             <Icon name="pen" size={14} color="#cccccc"/>
@@ -132,7 +133,7 @@ export default function MyProfile({route, navigation}) {
                     />
                     <Input
                         keyboardType="email-address"
-                        label={'Email'}
+                        label={strings.auth.email}
                         labelStyle={myProfile.label}
                         rightIcon={
                             <Icon name="pen" size={14} color="#cccccc"/>
@@ -144,7 +145,7 @@ export default function MyProfile({route, navigation}) {
                     />
                     <Input
                         keyboardType="numeric"
-                        label={'Телефон'}
+                        label={strings.auth.phone}
                         labelStyle={myProfile.label}
                         rightIcon={
                             <Icon name="pen" size={14} color="#cccccc"/>
@@ -161,7 +162,7 @@ export default function MyProfile({route, navigation}) {
                     />
                     <Input
                         keyboardType="default"
-                        label={'Адрес'}
+                        label={strings.profile.address}
                         labelStyle={myProfile.label}
                         rightIcon={
                             <Icon name="pen" size={14} color="#cccccc"/>

@@ -13,6 +13,7 @@ import Api from '../API'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {setAuthorization, setGuest} from "../store/actions";
 import {useDispatch} from "react-redux";
+import {strings} from "../localization";
 
 function Login({ navigation }) {
 
@@ -62,7 +63,7 @@ function Login({ navigation }) {
                     onChangeText={handleChangeEmail}
                 />
                 <TextInput
-                    placeholder={'Пароль'}
+                    placeholder={strings.auth.password}
                     placeholderTextColor={'#333333'}
                     style={registration.input}
                     onChangeText={handleChangePassword}
@@ -75,21 +76,21 @@ function Login({ navigation }) {
                             { textAlign: 'center' },
                         ]}
                     >
-                        Забыли пароль?
+                        {strings.auth.forgot_your_password}
                     </Text>
                 </TouchableOpacity>
             </View>
 
             <View style={registration.forgotContainer}>
                 <Text style={registration.forgotAccount}>
-                    Еще нет аккаунта?
+                    {strings.auth.dont_have_account}
                 </Text>
                 <TouchableOpacity
                     style={registration.forgotTextContainer}
-                    onPress={() => navigation.push('Login')}
+                    onPress={() => navigation.push('Registration')}
                 >
                     <Text style={registration.forgotText}>
-                        Зарегистрироваться
+                        {strings.auth.registration}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -101,7 +102,7 @@ function Login({ navigation }) {
                 }}
                 activeOpacity={0.8}
             >
-                <Text style={registration.nextText}>Войти</Text>
+                <Text style={registration.nextText}>{strings.auth.enter}</Text>
             </TouchableOpacity>
         </View>
     )

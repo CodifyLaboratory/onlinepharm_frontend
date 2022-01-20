@@ -23,6 +23,7 @@ import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 import {getAllBasket} from "../api";
 import {loadCart} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
+import {strings} from "../localization";
 
 function Categories({ navigation, route }) {
 
@@ -110,7 +111,7 @@ function Categories({ navigation, route }) {
 
                 <View style={categories.popular}>
                     <Text style={categories.popular_text}>
-                        Популярные
+                        {strings.main.popular}
                     </Text>
                     <View
                         style={{

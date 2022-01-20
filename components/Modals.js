@@ -4,6 +4,7 @@ import {Modal, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Close from "../assets/icons/close.svg";
 import {Colors} from "../constants/colors";
 import {styles} from "../styles/components/modals";
+import {strings} from "../localization";
 
 const DeleteProductModal = ({visible, setVisible, handleChange }) => {
 
@@ -27,9 +28,8 @@ const DeleteProductModal = ({visible, setVisible, handleChange }) => {
                         >
                             <Close />
                         </TouchableOpacity>
-                        {/* <Success /> */}
                         <Text style={styles.modalText}>
-                            Удалить товар из корзины?
+                            {strings.cart.remove_item}
                         </Text>
                         <View style={styles.leave_btn_wrap}>
                             <TouchableOpacity
@@ -37,7 +37,7 @@ const DeleteProductModal = ({visible, setVisible, handleChange }) => {
                                 style={styles.btn_cancel}
                             >
                                 <Text style={styles.btn_cancel_text}>
-                                    Отмена
+                                    {strings.modals.cancel}
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -47,7 +47,7 @@ const DeleteProductModal = ({visible, setVisible, handleChange }) => {
                                 }}
                                 style={styles.btn_leave}
                             >
-                                <Text style={styles.btn_leave_text}>Удалить</Text>
+                                <Text style={styles.btn_leave_text}>{strings.modals.delete}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

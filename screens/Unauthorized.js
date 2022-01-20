@@ -2,6 +2,7 @@ import React from "react";
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Logo from '../assets/auth/logo-2.svg'
 import {Colors} from "../constants/colors";
+import {strings} from "../localization";
 
 
 const Unauthorized = ({navigation}) => {
@@ -12,16 +13,13 @@ const Unauthorized = ({navigation}) => {
                 <Logo/>
             </View>
 
-            <Text style={{marginTop: 97, ...styles.description}}>Войдите или зарегистрируйтесь</Text>
-            <Text style={styles.description}>чтобы не потерять данные аккаунта, </Text>
-            <Text style={styles.description}>и иметь доступ с другого устройства</Text>
-
+            <Text style={{marginTop: 97, ...styles.description}}>{strings.auth.unauthorized}</Text>
             <TouchableOpacity
                 style={styles.btn}
                 onPress={() => navigation.navigate('Login')}
             >
                 <Text style={styles.btnText}>
-                    Войти в профиль
+                    {strings.auth.login}
                 </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -29,7 +27,7 @@ const Unauthorized = ({navigation}) => {
                 onPress={() => navigation.navigate('OnBoarding')}
             >
                 <Text style={styles.btnWhiteText}>
-                    Зарегистрироваться
+                    {strings.auth.registration}
                 </Text>
             </TouchableOpacity>
         </View>
@@ -85,7 +83,9 @@ const styles = StyleSheet.create({
     description: {
         fontFamily: 'Poppins-Regular',
         lineHeight: 24,
-        fontSize: 16
+        fontSize: 16,
+        alignSelf: 'center',
+        textAlign: 'center'
     }
 
 })

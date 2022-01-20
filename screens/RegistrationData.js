@@ -5,6 +5,7 @@ import { registrationData } from '../styles/registrationData'
 import Logo from '../assets/header/logo.svg'
 import { registration } from '../styles/registration'
 import Api from '../API'
+import {strings} from "../localization";
 
 function RegistrationData({ navigation, setIsSignIn }) {
     const [userProfile, setUserProfile] = useState({
@@ -54,23 +55,23 @@ function RegistrationData({ navigation, setIsSignIn }) {
         <View style={registrationData.container}>
             <View style={{ width: '100%', alignItems: 'center' }}>
                 <Logo />
-                <Text style={registrationData.text}>Укажите имя и фамилию</Text>
+                <Text style={registrationData.text}>{strings.auth.personal_data}</Text>
             </View>
             <View style={{ width: '100%' }}>
                 <TextInput
-                    placeholder={'Имя'}
+                    placeholder={strings.auth.name}
                     placeholderTextColor={'#333333'}
                     style={registration.input}
                     onChangeText={handleChangeFirstName}
                 />
                 <TextInput
-                    placeholder={'Фамилия'}
+                    placeholder={strings.auth.surname}
                     placeholderTextColor={'#333333'}
                     style={registration.input}
                     onChangeText={handleChangeLastName}
                 />
                 <TextInput
-                    placeholder={'Номер телефона'}
+                    placeholder={strings.auth.phone}
                     placeholderTextColor={'#333333'}
                     style={registration.input}
                     onChangeText={handleChangePhone}
@@ -84,7 +85,7 @@ function RegistrationData({ navigation, setIsSignIn }) {
                 }}
                 activeOpacity={0.8}
             >
-                <Text style={registration.nextText}>Зарегистрироваться</Text>
+                <Text style={registration.nextText}>{strings.auth.registration}</Text>
             </TouchableOpacity>
         </View>
     )

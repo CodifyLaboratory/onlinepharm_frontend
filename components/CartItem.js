@@ -4,6 +4,7 @@ import { myMedicine } from '../styles/components/myMedicine'
 import { cartItem } from '../styles/components/cartItem'
 import Api from './../API/index'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {strings} from "../localization";
 
 function CartItem({ data }) {
     const [favorite, setFavorite] = useState(false)
@@ -93,7 +94,7 @@ function CartItem({ data }) {
                 </View>
                 <View style={{ marginTop: 20, flexDirection: 'row' }}>
                     <TouchableOpacity style={cartItem.button}>
-                        <Text style={cartItem.buttonText}>Подробнее</Text>
+                        <Text style={cartItem.buttonText}>{strings.main.more}</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={cartItem.counter}>

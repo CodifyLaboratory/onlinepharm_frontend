@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import {Colors} from "../constants/colors";
+import {strings} from "../localization";
 
 var replacedStr = /-/gi
 
@@ -13,14 +14,14 @@ function BannerCard({ data, navigation }) {
             <View style={styles.left}>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.date}>
-                    с {start_date?.replace(replacedStr, '.')} по{' '}
+                    {strings.main.from} {start_date?.replace(replacedStr, '.')} {strings.main.to}{' '}
                     {end_date?.replace(replacedStr, '.')}
                 </Text>
                 <TouchableOpacity
                     style={styles.btn}
                     onPress={() => navigation.navigate('BannerInfo', id)}
                 >
-                    <Text style={styles.btnTitle}>Подробнее</Text>
+                    <Text style={styles.btnTitle}>{strings.main.more}</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.right}>

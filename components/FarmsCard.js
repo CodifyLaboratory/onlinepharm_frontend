@@ -8,6 +8,7 @@ import {setAuthorization} from "../store/actions";
 import Tag from '../assets/farms/tag.svg'
 import {farm} from "../styles/farm";
 import Location from "../assets/farms/location.svg";
+import {strings} from "../localization";
 
 const FarmsCard = ({ navigation, data }) => {
 
@@ -62,7 +63,7 @@ const FarmsCard = ({ navigation, data }) => {
                 <Text style={farms.farmAdress}>{data?.location?.address}</Text>
                 <View style={farm.farmLocation}>
                     <Tag style={{marginRight: 6}} />
-                    <Text style={farm.farmClose}>4 км от вас</Text>
+                    <Text style={farm.farmClose}>4km {strings.main.away}</Text>
                 </View>
             </View>
             <View style={{ alignItems: 'space-between', height: '100%' }}>
@@ -81,7 +82,7 @@ const FarmsCard = ({ navigation, data }) => {
                     style={farms.farmFind}
                     onPress={() => navigation.navigate('FarmInfo', data.id)}
                 >
-                    <Text style={farms.farmFindText}>Подробнее</Text>
+                    <Text style={farms.farmFindText}>{strings.main.more}</Text>
                 </TouchableOpacity>
             </View>
         </View>

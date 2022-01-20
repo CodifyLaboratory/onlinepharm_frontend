@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { registration } from '../styles/registration'
 import Api from '../API'
 import Logo from '../assets/header/logo.svg'
+import {strings} from "../localization";
 
 function Registration({ navigation }) {
     const [initialState, setInitialState] = useState({
@@ -66,7 +67,7 @@ function Registration({ navigation }) {
                         onChangeText={handleChangeEmail}
                     />
                     <TextInput
-                        placeholder={'Пароль'}
+                        placeholder={strings.auth.password}
                         placeholderTextColor={'#333333'}
                         style={registration.input}
                         secureTextEntry={true}
@@ -85,7 +86,7 @@ function Registration({ navigation }) {
                         </Text>
                     ) : null}
                     <TextInput
-                        placeholder={'Подтвердите пароль'}
+                        placeholder={strings.auth.confirm_password}
                         placeholderTextColor={'#333333'}
                         style={registration.input}
                         secureTextEntry={true}
@@ -108,13 +109,13 @@ function Registration({ navigation }) {
 
                 <View style={registration.forgotContainer}>
                     <Text style={registration.forgotAccount}>
-                        Уже есть аккаунт?
+                        {strings.auth.already_have_account}
                     </Text>
                     <TouchableOpacity
                         style={registration.forgot}
                         onPress={() => navigation.push('Login')}
                     >
-                        <Text style={registration.forgotText}>Войти</Text>
+                        <Text style={registration.forgotText}>{strings.auth.enter}</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -127,7 +128,7 @@ function Registration({ navigation }) {
                 }}
                 activeOpacity={0.8}
             >
-                <Text style={registration.nextText}>Далее</Text>
+                <Text style={registration.nextText}>{strings.auth.next}</Text>
             </TouchableOpacity>
         </View>
     )

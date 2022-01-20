@@ -7,6 +7,7 @@ import CountIncrement from '../assets/cart/counter_i.svg'
 import {addToBasket, deleteFromBasket, updateBasket} from "../api";
 import {setAuthorization} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
+import {strings} from "../localization";
 
 const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) => {
 
@@ -59,7 +60,7 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
                     />
                 </View>
                 <Text style={styles.price}>
-                    Цена от: <Text style={styles.soms}>{data?.price} c</Text>
+                    {strings.cart.price}: <Text style={styles.soms}>{data?.price} c</Text>
                 </Text>
 
                 <TouchableOpacity
@@ -68,7 +69,7 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
                         navigation.navigate('MedicineInfo', {medId: data.id})
                     }}
                 >
-                    <Text style={styles.detailsBtnText}>Подробнее</Text>
+                    <Text style={styles.detailsBtnText}>{strings.main.more}</Text>
                 </TouchableOpacity>
                 {!basketObj ? (
                     <TouchableOpacity
@@ -76,7 +77,7 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
                         onPress={_create}
                         style={styles.cartBtn}
                     >
-                        <Text style={styles.cartBtnText}>В корзину</Text>
+                        <Text style={styles.cartBtnText}>{strings.main.add_to_cart}</Text>
                     </TouchableOpacity>
                 ) : (
                     <View style={styles.counter_btn_wrap}>
@@ -84,7 +85,7 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
                             <CountDecrement />
                         </TouchableOpacity>
                         <View>
-                            <Text>{basketObj.count} шт</Text>
+                            <Text>{basketObj.count} {strings.main.pcs}</Text>
                         </View>
                         <TouchableOpacity onPress={_increment}>
                             <CountIncrement />

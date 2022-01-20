@@ -18,6 +18,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Counter from "../components/Counter";
 import {addToBasket, getAllBasket, updateBasket} from "../api";
 import {loadCart, setAuthorization} from "../store/actions";
+import {strings} from "../localization";
 
 export default function MedicineInfo({navigation, route}) {
 
@@ -290,13 +291,13 @@ export default function MedicineInfo({navigation, route}) {
                     />
                     <Text
                         style={[styles.reviewsCount, {color: !medData?.feedbacks_count ? Colors.gray_light : Colors.black}]}>
-                        отзывов: {medData?.feedbacks_count}
+                        {strings.main.review_count}: {medData?.feedbacks_count}
                     </Text>
                 </View>
 
                 {medData?.feedbacks_count
-                    ? <Text style={styles.blockTitle}>Отзывы</Text>
-                    : <Text style={styles.withoutFeedbacks}>Отзывов о товаре еще нет</Text>}
+                    ? <Text style={styles.blockTitle}>{strings.main.reviews}</Text>
+                    : <Text style={styles.withoutFeedbacks}>{strings.main.without_feedbacks_pharmacy}</Text>}
                 <TouchableOpacity
                     style={styles.reviewBtn}
                     activeOpacity={0.8}
@@ -304,7 +305,7 @@ export default function MedicineInfo({navigation, route}) {
                         ? dispatch(setAuthorization(false))
                         : navigation.navigate('LeaveReview', {id: medData.id, type: 'medication'})}}
                 >
-                    <Text style={styles.reviewBtnText}>Оставить отзыв</Text>
+                    <Text style={styles.reviewBtnText}>{strings.main.leave_feedback}</Text>
                 </TouchableOpacity>
                 <View style={{marginBottom: medData?.feedbacks_count ? 10 : 0}}>
                     {reviewsList}
@@ -316,7 +317,7 @@ export default function MedicineInfo({navigation, route}) {
                     activeOpacity={0.8}
                     onPress={() => _create()}
                 >
-                        <Text style={styles.reviewBtnText}>Добавить в корзину</Text>
+                        <Text style={styles.reviewBtnText}>{strings.main.add_to_cart}</Text>
                 </TouchableOpacity>}
 
             </SafeAreaView>

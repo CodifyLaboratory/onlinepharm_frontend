@@ -2,6 +2,7 @@ import React from 'react'
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 import { farm } from '../styles/farm'
 import Location from '../assets/farms/location.svg'
+import {strings} from "../localization";
 
 function FarmCard({ navigation, data }) {
     return (
@@ -23,7 +24,7 @@ function FarmCard({ navigation, data }) {
                 <Text style={farm.farmCount}>{data.title}</Text>
                 <View style={farm.farmLocation}>
                     <Location style={{ marginRight: 8 }} />
-                    <Text style={farm.farmClose}>4 км от вас</Text>
+                    <Text style={farm.farmClose}>4 km {strings.main.away}</Text>
                 </View>
             </View>
             <TouchableOpacity activeOpacity={0.6} style={farm.farmFind}>

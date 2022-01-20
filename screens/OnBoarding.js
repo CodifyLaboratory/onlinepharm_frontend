@@ -15,6 +15,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization, setGuest} from "../store/actions";
 import {Colors} from "../constants/colors";
+import {strings} from "../localization";
 
 const OnBoarding = ({ navigation }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -91,7 +92,7 @@ const OnBoarding = ({ navigation }) => {
                         onPress={() => navigation.push('Registration')}
                     >
                         <Text style={styles.btnText}>
-                            Зарегистрироваться
+                            {strings.auth.registration}
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity
@@ -102,7 +103,7 @@ const OnBoarding = ({ navigation }) => {
                         }}
                     >
                         <Text style={styles.btnWhiteText}>
-                            Войти как гость
+                            {strings.auth.as_guest}
                         </Text>
                     </TouchableOpacity>
                 </View>

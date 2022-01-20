@@ -12,6 +12,7 @@ import { createStore } from 'redux'
 import reducers from "./store/reducers";
 import {setAuthorization, setGuest} from "./store/actions";
 import {useFonts} from "expo-font";
+import {strings} from "./localization";
 
 export default function App() {
     const [location, setLocation] = useState(null)
@@ -28,6 +29,7 @@ export default function App() {
     // const auth = store.getState().data.authorized
 
     useEffect(() => {
+        strings.setLanguage('en')
         _getLocation()
         me()
     }, [])

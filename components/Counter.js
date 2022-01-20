@@ -5,6 +5,7 @@ import DecrementIconXL from '../assets/cart/counter_d_xl.svg'
 import IncrementIconXL from '../assets/cart/counter_i_xl.svg'
 
 import {Colors} from "../constants/colors"
+import {strings} from "../localization";
 
 const Counter = ({data, increment, decrement}) => {
     return (
@@ -12,7 +13,7 @@ const Counter = ({data, increment, decrement}) => {
             <TouchableOpacity disabled={data.count < 2} onPress={decrement} style={{opacity: data.count < 2 ? .4 : 1}}>
                 <DecrementIconXL/>
             </TouchableOpacity>
-            <Text style={styles.text}>В корзине {data.count} шт</Text>
+            <Text style={styles.text}>{strings.main.in_cart} {data.count} {strings.main.pcs}</Text>
             <TouchableOpacity onPress={increment}>
                 <IncrementIconXL/>
             </TouchableOpacity>

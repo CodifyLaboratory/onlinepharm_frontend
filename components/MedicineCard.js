@@ -18,6 +18,7 @@ import {
 import DeleteProductModal from "./Modals";
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../store/actions";
+import {strings} from "../localization";
 
 function MedicineCard({ navigation, data, isSelected, setChanged, changed, basketObj, type }) {
     const dispatch = useDispatch()
@@ -100,7 +101,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                                 navigation.navigate('MedicineInfo', {medId: data.id})
                             }
                         >
-                            <Text style={myMedicine.findText}>Подробнее</Text>
+                            <Text style={myMedicine.findText}>{strings.main.more}</Text>
                         </TouchableOpacity>
 
                         {basketObj?.count ? (
@@ -113,7 +114,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                                    <CountDecrement />
                                 </TouchableOpacity>
 
-                                <Text style={cartItem.counterText}>{basketObj?.count} шт</Text>
+                                <Text style={cartItem.counterText}>{basketObj?.count} {strings.main.pcs}</Text>
 
                                 <TouchableOpacity
                                     style={cartItem.btn}
@@ -130,7 +131,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                                 onPress={_create}
                             >
                                 <Text style={myMedicine.favoriteText}>
-                                    В корзину
+                                    {strings.main.add_to_cart}
                                 </Text>
                             </TouchableOpacity>
                         )}
