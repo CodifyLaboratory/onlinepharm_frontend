@@ -1,22 +1,15 @@
-import {combineReducers} from 'redux';
-import {handleActions} from 'redux-actions';
-import {loadCart, setAuthorization, setGuest} from './actions';
+import { combineReducers } from 'redux';
+import { handleActions } from 'redux-actions';
+import { loadCart, setAuthorization, setCoordinates, setGuest } from './actions';
 
 
 const defaultState = {
     cart: [],
+    coordinates: null,
     authorized: false,
     is_guest: false,
     loader: false
 };
-
-
-// const initStateHandler = (state, {payload: {collection, wishlist}}) => {
-//     return {...state, collection: collection, wishlist: wishlist}
-// }
-//
-// const loadLibraryHandler = (state, data) => {
-//     return {...state, collection: data.payload}
 
 
 const loadCartHandler = (state, { payload: cart }) => {
@@ -31,15 +24,19 @@ const authHandler = (state, { payload: status }) => {
 }
 
 const setGuestHandler = (state, {payload: status}) => {
-    console.log('STATUS', status)
     const updated = {...state}
     return {...updated, is_guest: status}
+}
+
+const setUserCoordinatesHandler = (state, { payload: coords }) => {
+    return {...state, coordinates: coords}
 }
 
 const handlers = {
     [loadCart]: loadCartHandler,
     [setAuthorization]: authHandler,
-    [setGuest]: setGuestHandler
+    [setGuest]: setGuestHandler,
+    [setCoordinates]: setUserCoordinatesHandler
 };
 
 const cartReducer = handleActions(handlers, defaultState);

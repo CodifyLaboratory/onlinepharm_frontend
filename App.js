@@ -9,7 +9,7 @@ import AppLoading from 'expo-app-loading';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducers from "./store/reducers";
-import {setAuthorization, setGuest} from "./store/actions";
+import {setAuthorization, setCoordinates, setGuest, setPosition} from "./store/actions";
 import {useFonts} from "expo-font";
 import {strings} from "./localization";
 
@@ -18,6 +18,7 @@ export default function App() {
     const [hasToken, setToken] = useState(false)
     const [is_guest, setGuestUser] = useState(false)
 
+    console.log('LOCATION', location?.coords)
 
     const initLanguage = async () => {
         const lang = await AsyncStorage.getItem('lang')
@@ -47,7 +48,7 @@ export default function App() {
         }
 
         let location = await Location.getCurrentPositionAsync({})
-        setLocation(location)
+        await store.dispatch(setCoordinates(location?.coords))
     }
 
     const me = async () => {

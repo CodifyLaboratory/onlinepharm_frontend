@@ -9,6 +9,7 @@ import Tag from '../assets/farms/tag.svg'
 import {farm} from "../styles/farm";
 import Location from "../assets/farms/location.svg";
 import {strings} from "../localization";
+import CalculateDistance from "./CalculateDistance";
 
 const FarmsCard = ({ navigation, data }) => {
 
@@ -63,7 +64,8 @@ const FarmsCard = ({ navigation, data }) => {
                 <Text style={farms.farmAdress}>{data?.location?.address}</Text>
                 <View style={farm.farmLocation}>
                     <Tag style={{marginRight: 6}} />
-                    <Text style={farm.farmClose}>4km {strings.main.away}</Text>
+                    <CalculateDistance />
+                    {/*<Text style={farm.farmClose}>4km {strings.main.away}</Text>*/}
                 </View>
             </View>
             <View style={{ alignItems: 'space-between', height: '100%' }}>

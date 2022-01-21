@@ -10,3 +10,5 @@ export const setUser = createAction('SET_USER')
 
 export const setGuest = createAction('SET_GUEST')
 
+export const setCoordinates = createAction('SET_COORDINATES')
+
