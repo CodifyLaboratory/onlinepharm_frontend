@@ -24,10 +24,11 @@ export default function MedicineInfo({navigation, route}) {
 
     const { medId } = route.params
 
-    console.log('route', route)
+
 
     const [medData, setMedData] = useState(null)
 
+    console.log('MED DATA', medData)
     const dispatch = useDispatch()
 
 
@@ -109,12 +110,12 @@ export default function MedicineInfo({navigation, route}) {
                         отзывов: {medData?.feedbacks_count}
                     </Text>
                 </View>
-                <Text style={styles.blockTitle}>Описание</Text>
+                <Text style={styles.blockTitle}>{strings.product.description}</Text>
                 <View style={styles.description}>
                     {!medData?.description?.manufacturer ? null : (
                         <View style={styles.descriptionElem}>
                             <Text style={styles.descriptionElemTitle}>
-                                Производитель
+                                {strings.product.manufacturer}
                             </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.manufacturer}
@@ -123,7 +124,7 @@ export default function MedicineInfo({navigation, route}) {
                     )}
                     {!medData?.description?.inn ? null : (
                         <View style={styles.descriptionElem}>
-                            <Text style={styles.descriptionElemTitle}>МНН</Text>
+                            <Text style={styles.descriptionElemTitle}>{strings.product.INN}</Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.inn}
                             </Text>
@@ -132,7 +133,7 @@ export default function MedicineInfo({navigation, route}) {
                     {!medData?.description?.ingredient ? null : (
                         <View style={styles.descriptionElem}>
                             <Text style={styles.descriptionElemTitle}>
-                                Действующие вещества
+                                {strings.product.active_ingredients}
                             </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.ingredient}
@@ -142,7 +143,7 @@ export default function MedicineInfo({navigation, route}) {
                     {!medData?.description?.form ? null : (
                         <View style={styles.descriptionElem}>
                             <Text style={styles.descriptionElemTitle}>
-                                Форма выпуска
+                                {strings.product.release_form}
                             </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.form}
@@ -152,7 +153,7 @@ export default function MedicineInfo({navigation, route}) {
                     {!medData?.description?.package ? null : (
                         <View style={styles.descriptionElem}>
                             <Text style={styles.descriptionElemTitle}>
-                                Фасовка
+                                {strings.product.packing}
                             </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.package}
@@ -162,7 +163,7 @@ export default function MedicineInfo({navigation, route}) {
                     {!medData?.description?.dosage ? null : (
                         <View style={styles.descriptionElem}>
                             <Text style={styles.descriptionElemTitle}>
-                                Дозировка
+                                {strings.product.dosage}
                             </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.dosage}
@@ -172,7 +173,7 @@ export default function MedicineInfo({navigation, route}) {
                     {!medData?.description?.expiration_date ? null : (
                         <View style={styles.descriptionElem}>
                             <Text style={styles.descriptionElemTitle}>
-                                Срок годности
+                                {strings.product.expiration_date}
                             </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.expiration_date}
@@ -182,7 +183,7 @@ export default function MedicineInfo({navigation, route}) {
                     {!medData?.description?.pharmacy_term ? null : (
                         <View style={styles.descriptionElem}>
                             <Text style={styles.descriptionElemTitle}>
-                                Условия отпуска из аптеки
+                                {strings.product.conditions}
                             </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.pharmacy_term}
@@ -190,83 +191,83 @@ export default function MedicineInfo({navigation, route}) {
                         </View>
                     )}
                 </View>
-                <Text style={styles.blockTitle}>Инструкция по применению</Text>
+                <Text style={styles.blockTitle}>{strings.product.instructions}</Text>
                 <View>
                     {!medData?.instruction?.description ? null : (
                         <Faq
-                            title={'Форма выпуска, упаковка и состав'}
+                            title={strings.product.release_form_packing}
                             data={medData?.instruction?.description}
                         />
                     )}
                     {!medData?.instruction?.consistency ? null : (
                         <Faq
-                            title={'Состав оболочки'}
+                            title={strings.product.shell_composition}
                             data={medData?.instruction?.consistency}
                         />
                     )}
                     {!medData?.instruction?.pharmacologic_effect ? null : (
                         <Faq
-                            title={'Фармакологическое действие'}
+                            title={strings.product.side_effects}
                             data={medData?.instruction?.pharmacologic_effect}
                         />
                     )}
                     {!medData?.instruction?.pharmacokinetic ? null : (
                         <Faq
-                            title={'Фармакокинетика'}
+                            title={strings.product.pharmacokinetics}
                             data={medData?.instruction?.pharmacokinetic}
                         />
                     )}
                     {!medData?.instruction?.indication ? null : (
                         <Faq
-                            title={'Показания препарата'}
+                            title={strings.product.indications}
                             data={medData?.instruction?.indication}
                         />
                     )}
                     {!medData?.instruction?.method ? null : (
                         <Faq
-                            title={'Применение'}
+                            title={strings.product.application}
                             data={medData?.instruction?.method}
                         />
                     )}
                     {!medData?.instruction?.dosage ? null : (
                         <Faq
-                            title={'Режим дозирования'}
+                            title={strings.product.dosage_regimen}
                             data={medData?.instruction?.dosage}
                         />
                     )}
                     {!medData?.instruction?.effect ? null : (
                         <Faq
-                            title={'Побочное действие'}
+                            title={strings.product.side_effects}
                             data={medData?.instruction?.effect}
                         />
                     )}
                     {!medData?.instruction?.contraindication ? null : (
                         <Faq
-                            title={'Противопоказания к применению'}
+                            title={strings.product.contraindications}
                             data={medData?.instruction?.contraindication}
                         />
                     )}
                     {!medData?.instruction?.special_instruction ? null : (
                         <Faq
-                            title={'Особые указания'}
+                            title={strings.product.special_instructions}
                             data={medData?.instruction?.special_instruction}
                         />
                     )}
                     {!medData?.instruction?.overdose ? null : (
                         <Faq
-                            title={'Передозировка'}
+                            title={strings.product.overdose}
                             data={medData?.instruction?.overdose}
                         />
                     )}
                     {!medData?.instruction?.interaction ? null : (
                         <Faq
-                            title={'Лекарственное взаимодействие'}
+                            title={strings.product.drug_interaction}
                             data={medData?.instruction?.interaction}
                         />
                     )}
                     {!medData?.instruction?.storage ? null : (
                         <Faq
-                            title={'Условия хранения'}
+                            title={strings.product.storage_conditions}
                             data={medData?.instruction?.storage}
                         />
                     )}

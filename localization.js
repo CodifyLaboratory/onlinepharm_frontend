@@ -4,7 +4,7 @@ import LocalizedStrings from 'react-localization';
 export let strings = new LocalizedStrings({
     ru: {
         auth: {
-            unauthorized: 'Войдите или зарегистрируйтесь,\n чтобы не потерять данные аккаунта , и иметь доступ с другого устройства',
+            unauthorized: 'Войдите или зарегистрируйтесь,\n чтобы не потерять данные аккаунта,\n и иметь доступ с другого устройства',
             login: 'Войдите в профиль',
             signup: 'Зарегистрироваться',
             medicine_you_need: 'Приобретайте нужное вам лекарство',
@@ -81,7 +81,7 @@ export let strings = new LocalizedStrings({
             total: 'Итого',
             in_stock: 'В наличии',
             choose: 'Выбрать',
-            price: 'Стоимость',
+            price: 'Цена от',
             purchase: 'Приобрести',
             sum: 'Сумма',
             remove_item: 'Удалить товар из корзины?',
@@ -111,6 +111,8 @@ export let strings = new LocalizedStrings({
             clear_basket: 'Очистить корзину',
             successfully_placed: 'Ваш заказ успешно оформлен! Ожидайте курьера он с вами свяжется в ближайшее время! ',
             in_cart: 'В корзине',
+            to_main: 'На главную',
+            empty_basket: 'Корзина пуста'
         },
         profile: {
             profile: 'Профиль',
@@ -140,7 +142,34 @@ export let strings = new LocalizedStrings({
         modals: {
             cancel: 'Отмена',
             delete: 'Удалить',
-
+            clear_basket: 'Очистить корзину?',
+            yes: 'Да',
+            no: 'Нет'
+        },
+        product: {
+            description: 'Описание',
+            manufacturer: 'Производитель',
+            INN: 'МНН',
+            active_ingredients: 'Действующие вещества',
+            release_form: 'Форма выпуска',
+            packing: 'Фасовка',
+            dosage: 'Дозировка',
+            expiration_date: 'Срок годности',
+            conditions: 'Условия отпуска из аптеки',
+            instructions: 'Инструкция по применению',
+            release_form_packing: 'Форма выпуска, упаковка и состав',
+            shell_composition: 'Состав оболочки',
+            pharmacological_action: 'Фармакологическое действие',
+            pharmacokinetics: 'Фармакокинетика',
+            indications: 'Показания препарата',
+            application: 'Применение',
+            dosage_regimen: 'Режим дозирования',
+            side_effects: 'Побочные действие',
+            contraindications: 'Противопоказания к применению',
+            special_instructions: 'Особые указания',
+            overdose: 'Передозировка',
+            drug_interaction: 'Лекарственное взаимодействие',
+            storage_conditions: 'Условия хранения',
         }
     },
     kg: {
@@ -251,9 +280,11 @@ export let strings = new LocalizedStrings({
             checkout: 'Тапшырык жол-жоболоштуруу',
             to_pay: 'Төлөөгө',
             list: 'Тизме',
-            clear_basket: 'Очистить корзину',
+            clear_basket: 'Себетти тазалоо',
             successfully_placed: 'Буйрутмаңыз ийгиликтүү жайгаштырылды! Курьерди күтүңүз, ал сиз менен жакында байланышат',
-
+            in_cart: 'В корзине',
+            to_main: 'Башкы',
+            empty_basket: 'Бош себет'
         },
         profile: {
             profile: 'Профиль',
@@ -283,6 +314,34 @@ export let strings = new LocalizedStrings({
         modals: {
             cancel: 'Жокко чыгаруу',
             delete: 'Жок кылуу',
+            clear_basket: 'Себетти тазалоо',
+            yes: 'Ооба',
+            no: 'Жок'
+        },
+        product: {
+            description: 'Баяны',
+            manufacturer: 'Өндүрүүчү',
+            INN: 'ЭАПА',
+            active_ingredients: 'Таасир этүүчү заттар',
+            release_form: 'Чыгаруу формасы',
+            packing: 'Таңгактоо',
+            dosage: 'Дозалоо',
+            expiration_date: 'Жарактуулук мөөнөтү',
+            conditions: 'Дарыканадан чыгаруунун шарттары',
+            instructions: 'Колдонуу боюнча нускама',
+            release_form_packing: 'Чыгарылыш формасы, таңгагы жана курамы',
+            shell_composition: 'Кабыгы курамы',
+            pharmacological_action: 'Фармакологиялык таасири',
+            pharmacokinetics: 'Фармакокинетика',
+            indications: 'Дары көрсөтмөлөр',
+            application: 'Колдонмо',
+            dosage_regimen: 'Дозалоо режими',
+            side_effects: 'Терс таасирлери',
+            contraindications: 'Колдонууга каршы көрсөтмөлөр',
+            special_instructions: 'Атайын көрсөтмөлөр',
+            overdose: 'Ашыкча доза',
+            drug_interaction: 'Дары өз ара аракеттенүү',
+            storage_conditions: 'Сактоо шарттары',
         }
     },
     en: {
@@ -395,6 +454,9 @@ export let strings = new LocalizedStrings({
             list: 'List',
             clear_basket: 'Clear all',
             successfully_placed: 'Your order has been successfully placed! Wait for the courier, he will contact you shortly!',
+            in_cart: 'In the basket',
+            to_main: 'To main',
+            empty_basket: 'Empty shopping cart'
         },
         profile: {
             profile: 'Profile',
@@ -424,6 +486,34 @@ export let strings = new LocalizedStrings({
         modals: {
             cancel: 'Cancel',
             delete: 'Delete',
+            clear_basket: 'Empty shopping cart?',
+            yes: 'Yes',
+            no: 'No'
+        },
+        product: {
+            description: 'Description',
+            manufacturer: 'Manufacturer',
+            INN: 'INN',
+            active_ingredients: 'Active ingredients',
+            release_form: 'Release form',
+            packing: 'Packing',
+            dosage: 'Dosage',
+            expiration_date: 'Expiration date',
+            conditions: 'Conditions of vacation from the pharmacy',
+            instructions: 'Instructions for use',
+            release_form_packing: 'Release form, packaging and composition',
+            shell_composition: 'Shell composition',
+            pharmacological_action: 'Pharmacological action',
+            pharmacokinetics: 'Pharmacokinetics',
+            indications: 'Indications of the drug',
+            application: 'Application',
+            dosage_regimen: 'Dosage regimen',
+            side_effects: 'Side effects',
+            contraindications: 'Contraindications to use',
+            special_instructions: 'Special instructions',
+            overdose: 'Overdose',
+            drug_interaction: 'Drug interaction',
+            storage_conditions: 'Storage conditions',
         }
     },
 });

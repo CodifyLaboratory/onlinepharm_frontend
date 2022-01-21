@@ -108,7 +108,7 @@ const Cart = ({navigation}) => {
                     ) : (
                         <View style={cart.emptyCart}>
                             <Text style={cart.emptyCartText}>
-                                Корзина пуста
+                                {strings.cart.empty_basket}
                             </Text>
                             <NoCart/>
                         </View>
@@ -126,7 +126,7 @@ const Cart = ({navigation}) => {
                 style={cart.btn}
                 activeOpacity={0.8}
             >
-                <Text style={cart.btnText}>{cartItems.length ? strings.cart.checkout : 'На главную'}</Text>
+                <Text style={cart.btnText}>{cartItems.length ? strings.cart.checkout : strings.cart.to_main}</Text>
             </TouchableOpacity>
         </View>
 

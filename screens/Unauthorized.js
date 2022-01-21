@@ -6,13 +6,8 @@ import {strings} from "../localization";
 
 
 const Unauthorized = ({navigation}) => {
-    return (
-        <View style={styles.container}>
-
-            <View>
-                <Logo/>
-            </View>
-
+    return (<View style={styles.container}>
+            <Logo style={styles.logo}/>
             <Text style={{marginTop: 97, ...styles.description}}>{strings.auth.unauthorized}</Text>
             <TouchableOpacity
                 style={styles.btn}
@@ -30,8 +25,7 @@ const Unauthorized = ({navigation}) => {
                     {strings.auth.registration}
                 </Text>
             </TouchableOpacity>
-        </View>
-    )
+        </View>)
 }
 
 export default Unauthorized
@@ -45,8 +39,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 16
         // paddingTop: 81
-    },
-    btn: {
+    }, btn: {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
@@ -55,14 +48,9 @@ const styles = StyleSheet.create({
         borderRadius: 23,
         backgroundColor: '#1F8BA7',
         marginTop: 30
-    },
-    btnText: {
-        fontFamily: 'Poppins-Regular',
-        fontSize: 17,
-        lineHeight: 24,
-        color: Colors.white
-    },
-    btnWhite: {
+    }, btnText: {
+        fontFamily: 'Poppins-Regular', fontSize: 17, lineHeight: 24, color: Colors.white
+    }, btnWhite: {
         width: '100%',
         display: 'flex',
         justifyContent: 'center',
@@ -73,19 +61,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#1F8BA7',
         marginTop: 16,
-    },
-    btnWhiteText: {
-        fontFamily: 'Poppins-Regular',
-        fontSize: 17,
-        lineHeight: 25,
-        color: Colors.primary
-    },
-    description: {
-        fontFamily: 'Poppins-Regular',
-        lineHeight: 24,
-        fontSize: 16,
-        alignSelf: 'center',
-        textAlign: 'center'
+    }, btnWhiteText: {
+        fontFamily: 'Poppins-Regular', fontSize: 17, lineHeight: 25, color: Colors.primary
+    }, description: {
+        fontFamily: 'Poppins-Regular', lineHeight: 24, fontSize: 16, alignSelf: 'center', textAlign: 'center'
+    }, logo: {
+        position: 'absolute', top: 100
     }
 
 })

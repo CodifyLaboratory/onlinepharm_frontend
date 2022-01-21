@@ -5,9 +5,8 @@ import Navigator from './navigator/Navigator'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import AppLoading from 'expo-app-loading';
-import * as Font from 'expo-font';
 
-import {Provider, useSelector} from 'react-redux'
+import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducers from "./store/reducers";
 import {setAuthorization, setGuest} from "./store/actions";
@@ -20,16 +19,22 @@ export default function App() {
     const [is_guest, setGuestUser] = useState(false)
 
 
+    const initLanguage = async () => {
+        const lang = await AsyncStorage.getItem('lang')
+        lang
+            ? strings.setLanguage(lang)
+            : strings.setLanguage('ru')
+    }
+
 
     const store = createStore(reducers)
 
     store.dispatch(setAuthorization(hasToken))
     store.dispatch(setGuest(is_guest))
 
-    // const auth = store.getState().data.authorized
 
     useEffect(() => {
-        strings.setLanguage('en')
+        initLanguage()
         _getLocation()
         me()
     }, [])

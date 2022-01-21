@@ -51,6 +51,10 @@ import Unauthorized from "../screens/Unauthorized";
 import {mainBgColor, mainTextColor} from '../constants'
 
 import {useSelector} from "react-redux";
+import Settings from "../screens/Settings";
+import ChangeLanguage from "../screens/ChangeLanguage";
+import SelectLanguage from "../screens/SelectLanguage";
+import {strings} from "../localization";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -116,6 +120,28 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                     headerBackTitleStyle: {fontSize: 15},
                     headerTitleStyle: {color: mainTextColor},
                     title: 'Мои аптеки',
+                }}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+                options={{
+                    headerBackTitle: 'Назад',
+                    headerStyle: {backgroundColor: mainBgColor},
+                    headerBackTitleStyle: {fontSize: 15},
+                    headerTitleStyle: {color: mainTextColor},
+                    title: 'Настройки',
+                }}
+            />
+            <Stack.Screen
+                name="ChangeLanguage"
+                component={ChangeLanguage}
+                options={{
+                    headerBackTitle: 'Назад',
+                    headerStyle: {backgroundColor: mainBgColor},
+                    headerBackTitleStyle: {fontSize: 15},
+                    headerTitleStyle: {color: mainTextColor},
+                    title: 'Сменить язык',
                 }}
             />
             <Stack.Screen
@@ -364,7 +390,14 @@ const CartNav = ({isSignIn}) => {
 
 const AuthNav = ({isSignIn, setIsSignIn}) => {
     return (
-        <Stack.Navigator initialRouteName={'Unauthorized'}>
+        <Stack.Navigator initialRouteName={'SelectLanguage'}>
+            <Stack.Screen
+                component={SelectLanguage}
+                name="SelectLanguage"
+                options={{
+                    headerShown: false,
+                }}
+            />
             <Stack.Screen
                 name="OnBoarding"
                 options={{
@@ -464,6 +497,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                 name="News"
                 component={NewsNav}
                 options={{
+                    title: strings.news.news,
                     tabBarIcon: ({focused}) => (
                         <View
                             style={{
@@ -480,6 +514,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                 name="Cart"
                 component={CartNav}
                 options={{
+                    title: strings.cart.cart,
                     unmountOnBlur: true,
                     tabBarIcon: ({focused}) => (
                         <View
@@ -518,6 +553,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                 })}
                 component={MainNav}
                 options={{
+                    title: strings.main.main,
                     unmountOnBlur: true,
                     tabBarIcon: ({focused}) => (
                         <View
@@ -535,6 +571,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                 name="Search"
                 component={Search}
                 options={{
+                    title: strings.search.search,
                     tabBarIcon: ({focused}) => (
                         <View
                             style={{
@@ -551,6 +588,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
             <Tab.Screen
                 name="Profile"
                 options={{
+                    title: strings.profile.profile,
                     unmountOnBlur: true,
                     tabBarIcon: ({focused}) => (
                         <View

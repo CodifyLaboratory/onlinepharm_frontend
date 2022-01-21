@@ -2,6 +2,7 @@ import React from 'react'
 import {Modal, Text, TouchableOpacity, View} from "react-native";
 import {styles} from "../../styles/components/modals";
 import Close from "../../assets/icons/close.svg";
+import {strings} from "../../localization";
 
 
 const ClearCart = ({visible, setVisible, handleChange }) => {
@@ -27,7 +28,7 @@ const ClearCart = ({visible, setVisible, handleChange }) => {
                         </TouchableOpacity>
                         {/* <Success /> */}
                         <Text style={styles.modalText}>
-                            Очистить корзину?
+                            {strings.modals.clear_basket}
                         </Text>
                         <View style={styles.leave_btn_wrap}>
                             <TouchableOpacity
@@ -35,14 +36,14 @@ const ClearCart = ({visible, setVisible, handleChange }) => {
                                 style={styles.btn_cancel}
                             >
                                 <Text style={styles.btn_cancel_text}>
-                                    Нет
+                                    {strings.modals.no}
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={()=> handleChange()}
                                 style={styles.btn_leave}
                             >
-                                <Text style={styles.btn_leave_text}>Да</Text>
+                                <Text style={styles.btn_leave_text}>{strings.modals.yes}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>

@@ -75,7 +75,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                         <View>
                             <Text style={myMedicine.name}>{data.title}</Text>
                             <Text style={myMedicine.category}>
-                                Цена от:{' '}
+                                {strings.cart.price}:{' '}
                                 <Text style={myMedicine.price}>{data.price} <Text style={myMedicine.kg_symbol}>c̲ </Text></Text>{' '}
                             </Text>
                         </View>
