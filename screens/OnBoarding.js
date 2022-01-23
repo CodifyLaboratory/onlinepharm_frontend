@@ -25,22 +25,20 @@ const OnBoarding = ({ navigation }) => {
 
     const state = useSelector(state => state.data)
 
-    console.log('state', state)
-
-    const loadData = async () => {
-        try {
-            let data = await AsyncStorage.getItem('userData')
-            if (data !== null) {
-                setUserData(JSON.parse(data))
-            }
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    useEffect(() => {
-        loadData()
-    }, [])
+    // const loadData = async () => {
+    //     try {
+    //         let data = await AsyncStorage.getItem('userData')
+    //         if (data !== null) {
+    //             setUserData(JSON.parse(data))
+    //         }
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
+    // }
+    //
+    // useEffect(() => {
+    //     loadData().then(r => r)
+    // }, [])
 
     const item = useRef(0)
     const scrollX = useRef(new Animated.Value(0)).current

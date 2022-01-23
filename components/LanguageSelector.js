@@ -19,7 +19,7 @@ const LanguageSelector = ({next}) => {
     const [language, setLanguage] = useState('')
 
     useEffect(() => {
-        initLanguage()
+        initLanguage().then(r => r)
     }, [language])
 
     const languages = [
@@ -39,7 +39,7 @@ const LanguageSelector = ({next}) => {
         <View style={styles.wrap}>
             <Text style={styles.select_lang}>{strings.profile.choose_language}</Text>
             {languages.map((item, i) => (
-                <TouchableOpacity onPress={() => handleChange(item.lang)} style={styles.lang_row}>
+                <TouchableOpacity key={i} onPress={() => handleChange(item.lang)} style={styles.lang_row}>
                     <View>{item.icon}</View>
                     <Text
                         style={{...styles.langText, color: (item.lang === language) ? Colors.light : Colors.gray}}>

@@ -4,16 +4,12 @@ import {
     Text,
     ScrollView,
     SafeAreaView,
-    Image,
     TouchableOpacity,
-    StyleSheet,
-    Platform,
-    TouchableWithoutFeedback,
     Dimensions,
 } from 'react-native'
 import Api from '../API'
 import Carousel from 'react-native-snap-carousel'
-import Banner from '../assets/main/baner.svg'
+
 import BannerCard from '../components/BannerCard'
 import PopularMedicine from '../components/PopularMedicine'
 

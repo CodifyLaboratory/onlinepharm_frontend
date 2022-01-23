@@ -24,14 +24,9 @@ export default function MedicineInfo({navigation, route}) {
 
     const { medId } = route.params
 
-
-
     const [medData, setMedData] = useState(null)
 
-    console.log('MED DATA', medData)
     const dispatch = useDispatch()
-
-
 
     const { cart, is_guest } = useSelector(state => state.data)
 

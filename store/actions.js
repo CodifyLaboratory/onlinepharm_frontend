@@ -12,3 +12,11 @@ export const setGuest = createAction('SET_GUEST')
 
 export const setCoordinates = createAction('SET_COORDINATES')
 
+export const setFavorite = createAction('SET_FAVORITE')
+
+export const deleteFavorite = createAction('DELETE_FAVORITE')
+
+export const setMedicineFavorite = createAction('SET_MEDICINE_FAVORITE')
+
+export const setPharmacyFavorite = createAction('SET_PHARMACY_FAVORITE')
+

@@ -5,7 +5,6 @@ import {
     StyleSheet,
     Image,
     useWindowDimensions,
-    TouchableOpacity,
 } from 'react-native'
 
 const OnBoardingItem = ({ item, index }) => {

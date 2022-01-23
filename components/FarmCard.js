@@ -25,7 +25,7 @@ function FarmCard({ navigation, data }) {
                 <Text style={farm.farmCount}>{data.title}</Text>
                 <View style={farm.farmLocation}>
                     <Location style={{ marginRight: 8 }} />
-                    <CalculateDistance />
+                    {/*<CalculateDistance data={data} />*/}
                     {/*<Text style={farm.farmClose}>4 km {strings.main.away}</Text>*/}
                 </View>
             </View>

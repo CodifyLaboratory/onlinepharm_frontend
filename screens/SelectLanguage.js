@@ -28,7 +28,7 @@ const SelectLanguage = ({navigation}) => {
 
 
     useEffect(()=> {
-       getStorageValue()
+       getStorageValue().then(r => r)
     }, [])
 
    function handleChange() {

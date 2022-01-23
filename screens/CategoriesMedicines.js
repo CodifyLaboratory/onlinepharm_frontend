@@ -12,13 +12,12 @@ import {useSelector, useDispatch} from 'react-redux'
 
 import {getFavoritesProducts, getAllBasket} from "../api";
 
-import {loadCart} from "../store/actions";
+import {loadCart, setAllFavorites, setMedicineFavorite} from "../store/actions";
 
 function CategoriesMedicines({navigation, route}) {
     const category = route.params
-    const [medicines, setMedicines] = useState(null)
-    const [favorites, setFavorites] = useState(null)
 
+    const [medicines, setMedicines] = useState(null)
     const [changed, setChanged] = useState(false)
 
     const dispatch = useDispatch()
@@ -26,16 +25,16 @@ function CategoriesMedicines({navigation, route}) {
     const state = useSelector((state) => state.data)
 
     useEffect(() => {
-        getAllFavorites()
-        getBasket()
+        getAllFavorites().then(r => r)
+        getBasket().then(r => r)
         Api.getData('medications/').then((res) => setMedicines(res.data))
-    }, [changed])
+    }, [changed, dispatch])
 
 
     const getAllFavorites = async () => {
         try {
             const res = await getFavoritesProducts()
-            setFavorites(res)
+            dispatch(setMedicineFavorite(res))
         } catch (e) {
             console.log(e)
         }
@@ -51,7 +50,7 @@ function CategoriesMedicines({navigation, route}) {
     }
 
     const isSelected = (id) => {
-        return favorites?.find(item => (item.medication.id === id))
+        return state.favorites_medicine?.find(item => (item.medication.id === id))
     }
 
     const findBasketProduct = (id) => {

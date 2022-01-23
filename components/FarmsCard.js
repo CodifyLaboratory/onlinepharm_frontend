@@ -3,7 +3,7 @@ import { farms } from '../styles/farms'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { createPharmFavorite, getFavorites, deletePharmFavorite } from '../api'
 import {useDispatch, useSelector} from "react-redux";
-import {setAuthorization} from "../store/actions";
+import {setAuthorization, setPharmacyFavorite} from "../store/actions";
 
 import Tag from '../assets/farms/tag.svg'
 import {farm} from "../styles/farm";
@@ -15,19 +15,20 @@ const FarmsCard = ({ navigation, data }) => {
 
     const dispatch = useDispatch()
 
-    const {is_guest} = useSelector(state => state.data)
+    const {is_guest, favorites_pharmacy} = useSelector(state => state.data)
 
-    const [favorite, setFavorite] = useState([])
+    // const [favorite, setFavorite] = useState([])
     const [isChecked, setChecked] = useState(null)
 
     useEffect(() => {
-        getAllFavorites()
+        getAllFavorites().then(r => r)
     }, [isChecked])
 
     const getAllFavorites = async () => {
         try {
             const res = await getFavorites()
-            setFavorite(res)
+            // setFavorite(res)
+            dispatch(setPharmacyFavorite(res))
             setChecked(isSelected())
         } catch (e) {
             console.log(e)
@@ -35,10 +36,10 @@ const FarmsCard = ({ navigation, data }) => {
     }
 
     const isSelected = () => {
-        return favorite.some((item) => item.pharmacy.id === data.id)
+        return favorites_pharmacy.some((item) => item.pharmacy.id === data.id)
     }
 
-    const findId = favorite.find((item) => item.pharmacy.id === data.id)
+    const findId = favorites_pharmacy.find((item) => item.pharmacy.id === data.id)
 
     const handleChange = async () => {
         if(is_guest) dispatch(setAuthorization(false))
@@ -64,8 +65,7 @@ const FarmsCard = ({ navigation, data }) => {
                 <Text style={farms.farmAdress}>{data?.location?.address}</Text>
                 <View style={farm.farmLocation}>
                     <Tag style={{marginRight: 6}} />
-                    <CalculateDistance />
-                    {/*<Text style={farm.farmClose}>4km {strings.main.away}</Text>*/}
+                    <CalculateDistance data={data} />
                 </View>
             </View>
             <View style={{ alignItems: 'space-between', height: '100%' }}>
@@ -82,7 +82,7 @@ const FarmsCard = ({ navigation, data }) => {
                 <TouchableOpacity
                     activeOpacity={0.6}
                     style={farms.farmFind}
-                    onPress={() => navigation.navigate('FarmInfo', data.id)}
+                    onPress={() => navigation.navigate('FarmInfo', {pharmacy_id: data.id})}
                 >
                     <Text style={farms.farmFindText}>{strings.main.more}</Text>
                 </TouchableOpacity>

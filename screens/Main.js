@@ -22,8 +22,8 @@ import NewsCard from '../components/NewsCard'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 
 import {useDispatch, useSelector} from 'react-redux'
-import {loadCart} from "../store/actions";
-import {getAllBasket} from "../api";
+import {loadCart, setAllFavorites} from "../store/actions";
+import {getAllBasket, getFavoritesProducts} from "../api";
 import {strings} from "../localization";
 
 export default function Main({ navigation }) {
@@ -38,7 +38,6 @@ export default function Main({ navigation }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-
         Api.getData('pharm-brands/').then((res) => setFarmCardData(res.data))
         Api.getData('banners/').then((res) => setBannerData(res.data))
         Api.getData('categories/').then((res) => setCategoryData(res.data))
@@ -107,46 +106,7 @@ export default function Main({ navigation }) {
                 <View style={main.container}>
                     <View style={main.header}>
                         <Logo />
-                        {/*<SelectDropdown*/}
-                        {/*  data={countries}*/}
-                        {/*  defaultValueByIndex={0}*/}
-                        {/*  buttonTextStyle={{*/}
-                        {/*    color: '#1F8BA7',*/}
-                        {/*    fontSize: 17,*/}
-                        {/*  }}*/}
-                        {/*  renderDropdownIcon={() => {*/}
-                        {/*    return (*/}
-                        {/*      <Arrow/>*/}
-                        {/*    );*/}
-                        {/*  }}*/}
-                        {/*  buttonStyle={{*/}
-                        {/*    width: 130,*/}
-                        {/*    backgroundColor: 'transparent'*/}
-                        {/*  }}*/}
-                        {/*  rowStyle={{*/}
-                        {/*    borderBottomWidth: 0,*/}
-                        {/*    textAlign: 'center'*/}
-                        {/*  }}*/}
-                        {/*  rowTextStyle={{*/}
-                        {/*    color: '#1F8BA7',*/}
-                        {/*    fontSize: 17,*/}
-                        {/*  }}*/}
-                        {/*  dropdownStyle={{*/}
-                        {/*    borderRadius: 10,*/}
-                        {/*    marginTop: Platform.OS == 'ios' ? -10 : -50,*/}
-                        {/*  }}*/}
-                        {/*  onSelect={(selectedItem, index) => {*/}
-                        {/*    console.log(selectedItem, index);*/}
-                        {/*  }}*/}
-                        {/*  buttonTextAfterSelection={(selectedItem, index) => {*/}
-                        {/*    return selectedItem;*/}
-                        {/*  }}*/}
-                        {/*  rowTextForSelection={(item, index) => {*/}
-                        {/*    return item;*/}
-                        {/*  }}*/}
-                        {/*/>*/}
                     </View>
-
                     <View style={main.banner}>
                         <Carousel
                             onBeforeSnapToItem={(e) => setCurrent(e)}
@@ -225,14 +185,6 @@ export default function Main({ navigation }) {
                         </View>
                     </View>
                 </View>
-                {/*<View style={main.appInfo}>*/}
-                {/*  <Logo style={{marginBottom: 16}}/>*/}
-                {/*  <Text style={main.appInfoText}>MyMed— знак качества, который обеспечивает высокое качество, безопасность*/}
-                {/*    лекарств и оптимальные цены</Text>*/}
-                {/*  <Text style={main.appInfoText}>Это значит, что покупатели могут получить отличное обслуживание в аптеке и*/}
-                {/*    приобрести качественные лекарства по доступным ценам.*/}
-                {/*    Вы можете быть уверены в профессионализме аптек, входящих в союз MyMed</Text>*/}
-                {/*</View>*/}
             </SafeAreaView>
         </ScrollView>
     )

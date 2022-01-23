@@ -7,18 +7,24 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import AppLoading from 'expo-app-loading';
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import {applyMiddleware, createStore} from 'redux'
 import reducers from "./store/reducers";
-import {setAuthorization, setCoordinates, setGuest, setPosition} from "./store/actions";
+import {setAuthorization, setCoordinates, setGuest } from "./store/actions";
 import {useFonts} from "expo-font";
 import {strings} from "./localization";
+import {StatusBar, View} from "react-native";
+import {Colors} from "./constants/colors";
 
 export default function App() {
     const [location, setLocation] = useState(null)
     const [hasToken, setToken] = useState(false)
     const [is_guest, setGuestUser] = useState(false)
 
-    console.log('LOCATION', location?.coords)
+    useEffect(() => {
+        initLanguage()
+        _getLocation()
+        me()
+    }, [])
 
     const initLanguage = async () => {
         const lang = await AsyncStorage.getItem('lang')
@@ -34,12 +40,6 @@ export default function App() {
     store.dispatch(setGuest(is_guest))
 
 
-    useEffect(() => {
-        initLanguage()
-        _getLocation()
-        me()
-    }, [])
-
     const _getLocation = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync()
         if (status !== 'granted') {
@@ -47,7 +47,7 @@ export default function App() {
             return
         }
 
-        let location = await Location.getCurrentPositionAsync({})
+        let location = await Location.getCurrentPositionAsync()
         await store.dispatch(setCoordinates(location?.coords))
     }
 
@@ -83,6 +83,7 @@ export default function App() {
     return (
         <Provider store={store}>
             <NavigationContainer>
+                <StatusBar barStyle={'dark-content'} backgroundColor={Colors.white} />
                 <Navigator />
             </NavigationContainer>
         </Provider>

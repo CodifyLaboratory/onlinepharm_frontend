@@ -8,7 +8,7 @@ const CategoryCard = ({ data, navigation }) => {
         <TouchableOpacity
             style={main.categoriesItem}
             activeOpacity={0.8}
-            onPress={() => navigation.navigate('Categories', data.id)}
+            onPress={() => navigation.navigate('Categories', data)}
         >
             <ImageBackground
                 style={{

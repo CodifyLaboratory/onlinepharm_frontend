@@ -67,7 +67,8 @@ export let strings = new LocalizedStrings({
             pharmacy_count: 'Количество аптек',
             pcs: 'шт',
             from: 'c',
-            to: 'по'
+            to: 'по',
+            title: 'Главная',
         },
         news: {
             news: 'Новости',
@@ -75,6 +76,7 @@ export let strings = new LocalizedStrings({
             stocks: 'Акции',
             discounts: 'Скидки',
             new_products: 'Новинки',
+            title: 'Новости'
         },
         cart: {
             cart: 'Корзина',
@@ -112,7 +114,8 @@ export let strings = new LocalizedStrings({
             successfully_placed: 'Ваш заказ успешно оформлен! Ожидайте курьера он с вами свяжется в ближайшее время! ',
             in_cart: 'В корзине',
             to_main: 'На главную',
-            empty_basket: 'Корзина пуста'
+            empty_basket: 'Корзина пуста',
+            title: 'Корзина'
         },
         profile: {
             profile: 'Профиль',
@@ -134,10 +137,12 @@ export let strings = new LocalizedStrings({
             password_changed: 'Ваш пароль был успешно изменен',
             delete_your_account: 'Вы точно хотите удалить ваш аккаунт и все данные?',
             address: 'Адрес',
+            title: 'Профиль',
         },
         search: {
             search: 'Поиск',
             find_product: 'Найдите желаемый продукт',
+            title: 'Поиск',
         },
         modals: {
             cancel: 'Отмена',
@@ -239,7 +244,7 @@ export let strings = new LocalizedStrings({
             from: 'c',
             to: 'по',
             in_cart: 'В корзине',
-
+            title: 'Башкы',
         },
         news: {
             news: 'Жаңылыктар',
@@ -247,6 +252,7 @@ export let strings = new LocalizedStrings({
             stocks: 'Акциялар',
             discounts: 'Арзандатуулар',
             new_products: 'Жаңылар',
+            title: 'Жаңылыктар',
         },
         cart: {
             cart: 'Себет',
@@ -284,7 +290,8 @@ export let strings = new LocalizedStrings({
             successfully_placed: 'Буйрутмаңыз ийгиликтүү жайгаштырылды! Курьерди күтүңүз, ал сиз менен жакында байланышат',
             in_cart: 'В корзине',
             to_main: 'Башкы',
-            empty_basket: 'Бош себет'
+            empty_basket: 'Бош себет',
+            title: 'Себет',
         },
         profile: {
             profile: 'Профиль',
@@ -306,10 +313,12 @@ export let strings = new LocalizedStrings({
             password_changed: 'Сиздин сырсөз ийгиликтүү өзгөрдү',
             delete_your_account: 'Аккаунттузду жана бардык дайындарды чын эле жок кылгыңыз келеби?',
             address: 'Адрес',
+            title: 'Профиль',
         },
         search: {
             search: 'Издөө',
             find_product: 'Каалаган продуктту табуу',
+            title: 'Издөө',
         },
         modals: {
             cancel: 'Жокко чыгаруу',
@@ -411,7 +420,7 @@ export let strings = new LocalizedStrings({
             from: 'from',
             to: 'to',
             in_cart: 'In the basket',
-
+            title: 'Main',
         },
         news: {
             news: 'News',
@@ -419,6 +428,7 @@ export let strings = new LocalizedStrings({
             stocks: 'Stocks',
             discounts: 'Discounts',
             new_products: 'New products',
+            title: 'News',
         },
         cart: {
             cart: 'Basket',
@@ -456,7 +466,8 @@ export let strings = new LocalizedStrings({
             successfully_placed: 'Your order has been successfully placed! Wait for the courier, he will contact you shortly!',
             in_cart: 'In the basket',
             to_main: 'To main',
-            empty_basket: 'Empty shopping cart'
+            empty_basket: 'Empty shopping cart',
+            title: 'Basket',
         },
         profile: {
             profile: 'Profile',
@@ -478,10 +489,12 @@ export let strings = new LocalizedStrings({
             password_changed: 'Your password has been successfully changed',
             delete_your_account: 'Are you sure you want to delete your account and all data?',
             address: 'Address',
+            title: 'Profile',
         },
         search: {
             search: 'Search',
             find_product: 'Find the desired product',
+            title: 'Search',
         },
         modals: {
             cancel: 'Cancel',

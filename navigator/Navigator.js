@@ -55,6 +55,7 @@ import Settings from "../screens/Settings";
 import ChangeLanguage from "../screens/ChangeLanguage";
 import SelectLanguage from "../screens/SelectLanguage";
 import {strings} from "../localization";
+import Header from "../components/Header";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -80,75 +81,41 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 name="MyProfile"
                 component={MyProfile}
                 options={{
-                    title: 'Профиль',
-                    headerRight: () => (
-                        <TouchableOpacity onPress={() => alert('Save!')}>
-                            <Text
-                                style={{
-                                    color: mainTextColor,
-                                    marginRight: 10,
-                                    fontSize: 15,
-                                }}
-                            >
-                                Сохранить
-                            </Text>
-                        </TouchableOpacity>
-                    ),
-                    headerBackTitle: 'Назад',
-                    headerStyle: {backgroundColor: mainBgColor},
-                    headerBackTitleStyle: {fontSize: 15},
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.profile.my_account} />,
                 }}
             />
             <Stack.Screen
                 name="MyMedicine"
                 component={MyMedicine}
                 options={{
-                    headerBackTitle: 'Назад',
-                    headerStyle: {backgroundColor: mainBgColor},
-                    headerBackTitleStyle: {fontSize: 15},
-                    headerTitleStyle: {color: mainTextColor},
-                    title: 'Мои лекарства',
+                    header: (props) => <Header {...props} title={strings.profile.my_drugs} />,
                 }}
             />
             <Stack.Screen
                 name="MyFarms"
                 component={MyFarms}
                 options={{
-                    headerBackTitle: 'Назад',
-                    headerStyle: {backgroundColor: mainBgColor},
-                    headerBackTitleStyle: {fontSize: 15},
-                    headerTitleStyle: {color: mainTextColor},
-                    title: 'Мои аптеки',
+                    header: (props) => <Header {...props} title={strings.profile.my_pharmacies} />,
                 }}
             />
             <Stack.Screen
                 name="Settings"
                 component={Settings}
                 options={{
-                    headerBackTitle: 'Назад',
-                    headerStyle: {backgroundColor: mainBgColor},
-                    headerBackTitleStyle: {fontSize: 15},
-                    headerTitleStyle: {color: mainTextColor},
-                    title: 'Настройки',
+                    header: (props) => <Header {...props} title={strings.profile.settings} />,
                 }}
             />
             <Stack.Screen
                 name="ChangeLanguage"
                 component={ChangeLanguage}
                 options={{
-                    headerBackTitle: 'Назад',
-                    headerStyle: {backgroundColor: mainBgColor},
-                    headerBackTitleStyle: {fontSize: 15},
-                    headerTitleStyle: {color: mainTextColor},
-                    title: 'Сменить язык',
+                    header: (props) => <Header {...props} title={strings.profile.choose_language} />,
                 }}
             />
             <Stack.Screen
                 name="Login"
                 options={{
-                    headerTitle: 'Войти',
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.auth.enter} />,
                 }}
             >
                 {(props) => (
@@ -177,17 +144,14 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 name="MedicineInfo"
                 component={MedicineInfo}
                 options={{
-                    headerBackTitle: 'Назад',
-                    title: 'О продукте',
+                    header: (props) => <Header {...props} title={strings.main.about_product} about_product />,
                 }}
             />
             <Stack.Screen
                 name="FarmInfo"
                 component={FarmInfo}
                 options={{
-                    title: 'Об аптеке',
-                    headerStyle: {backgroundColor: '#F4F5F6'},
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.main.about_pharmacy} about_pharmacy />,
                 }}
             />
             <Stack.Screen
@@ -197,8 +161,7 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                     keyboardHidesTabBar: true
                 }}
                 options={{
-                    headerBackTitle: 'Назад',
-                    title: 'Новый отзыв',
+                    header: (props) => <Header {...props} title={strings.main.new_feedback} />,
                 }}
             />
         </Stack.Navigator>
@@ -217,33 +180,32 @@ const MainNav = () => {
                 name="Farms"
                 component={Farms}
                 options={{
-                    title: 'Аптеки',
-                    headerBackTitle: 'Назад',
-                    headerStyle: {backgroundColor: mainBgColor},
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.main.pharmacies} />,
+                    // title: 'Аптеки',
+                    // headerBackTitle: 'Назад',
+                    // headerStyle: {backgroundColor: mainBgColor},
+                    // headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
                 name="News"
                 component={News}
-                options={{headerShown: false}}
+                options={{
+                    header: (props) => <Header {...props} title={strings.news.title} />,
+                }}
             />
             <Stack.Screen
                 name="Farm"
                 component={Farm}
                 options={{
-                    title: 'Аптеки',
-                    headerStyle: {backgroundColor: mainBgColor},
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.main.pharmacies} />,
                 }}
             />
             <Stack.Screen
                 name="FarmInfo"
                 component={FarmInfo}
                 options={{
-                    title: 'Об аптеке',
-                    headerStyle: {backgroundColor: '#F4F5F6'},
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.main.about_pharmacy} about_pharmacy />,
                 }}
             />
             <Stack.Screen
@@ -255,54 +217,35 @@ const MainNav = () => {
                 name="Categories"
                 component={Categories}
                 options={{
-                    title: 'Лекарственные препараты',
-                    headerBackTitle: 'Назад',
-                    headerStyle: {
-                        backgroundColor: mainBgColor,
-                    },
-                    headerTitleStyle: {
-                        color: mainTextColor,
-                        fontSize: 17,
-                    },
+                    header: (props) => <Header {...props} />,
                 }}
             />
             <Stack.Screen
                 name="CategoriesMedicines"
                 component={CategoriesMedicines}
                 options={{
-                    title: 'Антибиотики',
-                    headerBackTitle: 'Назад',
-                    headerStyle: {
-                        backgroundColor: mainBgColor,
-                    },
-                    headerTitleStyle: {
-                        color: mainTextColor,
-                        fontSize: 17,
-                    },
+                    header: (props) => <Header {...props} />,
                 }}
             />
             <Stack.Screen
                 name="BannerInfo"
                 component={BannerInfo}
                 options={{
-                    title: 'Подробнее',
-                    headerBackTitle: 'Назад',
+                    header: (props) => <Header {...props} title={strings.main.more} />,
                 }}
             />
             <Stack.Screen
                 name="NewsInfo"
                 component={NewsInfo}
                 options={{
-                    headerBackTitle: 'Назад',
-                    title: 'Подробнее',
+                    header: (props) => <Header {...props} title={strings.news.title} />,
                 }}
             />
             <Stack.Screen
                 name="SelectionInfo"
                 component={SelectionInfo}
                 options={{
-                    headerBackTitle: 'Назад',
-                    title: 'Подборки',
+                    header: (props) => <Header {...props} title={'+++'} />,
                 }}
             />
 
@@ -313,8 +256,7 @@ const MainNav = () => {
                     keyboardHidesTabBar: true
                 }}
                 options={{
-                    headerBackTitle: 'Назад',
-                    title: 'Новый отзыв',
+                    header: (props) => <Header {...props} title={strings.main.new_feedback} />,
                 }}
             />
 
@@ -322,8 +264,7 @@ const MainNav = () => {
                 name="MedicineInfo"
                 component={MedicineInfo}
                 options={{
-                    headerBackTitle: 'Назад',
-                    title: 'О продукте',
+                    header: (props) => <Header {...props} title={strings.main.about_product} about_product />,
                 }}
             />
         </Stack.Navigator>
@@ -336,16 +277,16 @@ const NewsNav = () => {
             <Stack.Screen
                 name="News"
                 component={News}
-                options={{headerShown: true, headerTitle: 'Новости'}}
+                options={{
+                    headerShown: true,
+                    header: (props) => <Header {...props} title={strings.news.title} />,
+                }}
             />
             <Stack.Screen
                 name="NewsInfo"
                 component={NewsInfo}
                 options={{
-                    headerTitle: 'Подробнее',
-                    // headerLeft: () => ( <HeaderBackButton />
-                    // ),
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.main.more} />,
                 }}
             />
         </Stack.Navigator>
@@ -360,15 +301,18 @@ const CartNav = ({isSignIn}) => {
                 name="Cart"
                 component={Cart}
                 options={{
-                    title: 'Корзина',
-                    headerBackTitle: 'Назад',
-                    headerTitleStyle: {color: mainTextColor},
+                    headerStyle: {
+                        elevation: 0,
+                        shadowOpacity: 0,
+                    },
+                    header: (props) => <Header {...props} title={strings.cart.title} />,
                 }}
             />
             <Stack.Screen
                 name="Ordering"
                 component={Ordering}
                 options={{
+                    header: (props) => <Header {...props} title={strings.cart.title} />,
                     title: 'Оформление заказа',
                     headerBackTitle: 'Назад',
                     headerTitleStyle: {color: mainTextColor},
@@ -379,8 +323,7 @@ const CartNav = ({isSignIn}) => {
                 name="MedicineInfo"
                 component={MedicineInfo}
                 options={{
-                    headerBackTitle: 'Назад',
-                    title: 'О продукте',
+                    header: (props) => <Header {...props} title={strings.main.about_product} />,
                 }}
             />
 
@@ -416,16 +359,13 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
                 name="Registration"
                 component={Registration}
                 options={{
-                    headerTitle: 'Регистрация',
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.auth.registration} />,
                 }}
             />
             <Stack.Screen
                 name="RegistrationData"
                 options={{
-                    headerBackTitle: 'Назад',
-                    headerTitle: 'Регистрация',
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.auth.registration} />,
                 }}
             >
                 {(props) => (
@@ -439,8 +379,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
             <Stack.Screen
                 name="Login"
                 options={{
-                    headerTitle: 'Войти',
-                    headerTitleStyle: {color: mainTextColor},
+                    header: (props) => <Header {...props} title={strings.auth.enter} />,
                 }}
             >
                 {(props) => (
@@ -471,7 +410,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
 }
 
 
-export default function Navigator({isSignIn, setIsSignIn, navigation}) {
+export default function Navigator() {
 
     const {cart, authorized } = useSelector((state => state.data))
 
@@ -497,7 +436,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                 name="News"
                 component={NewsNav}
                 options={{
-                    title: strings.news.news,
+                    title: strings.news.title,
                     tabBarIcon: ({focused}) => (
                         <View
                             style={{
@@ -514,7 +453,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                 name="Cart"
                 component={CartNav}
                 options={{
-                    title: strings.cart.cart,
+                    title: strings.cart.title,
                     unmountOnBlur: true,
                     tabBarIcon: ({focused}) => (
                         <View
@@ -553,7 +492,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                 })}
                 component={MainNav}
                 options={{
-                    title: strings.main.main,
+                    title: strings.main.title,
                     unmountOnBlur: true,
                     tabBarIcon: ({focused}) => (
                         <View
@@ -588,7 +527,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
             <Tab.Screen
                 name="Profile"
                 options={{
-                    title: strings.profile.profile,
+                    title: strings.profile.title,
                     unmountOnBlur: true,
                     tabBarIcon: ({focused}) => (
                         <View
@@ -602,7 +541,7 @@ export default function Navigator({isSignIn, setIsSignIn, navigation}) {
                     headerShown: false,
                 }}
             >
-                {props => <ProfileNav {...props} setIsSignIn={setIsSignIn} isSignIn={isSignIn}/>}
+                {props => <ProfileNav {...props} />}
             </Tab.Screen>
         </Tab.Navigator>
     ) : (

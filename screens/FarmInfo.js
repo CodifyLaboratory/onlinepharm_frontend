@@ -26,17 +26,11 @@ function FarmInfo({navigation, route}) {
 
     const { is_guest } = useSelector(state => state.data)
 
+    const id = route.params.pharmacy_id
 
     const [farmData, setFarmData] = useState(null)
 
-    console.log("FARM DATA", farmData)
-
-    const id = route.params
-
     useEffect(() => {
-        // Api.getData(`pharms/${id}`)
-        //   .then(res => setFarmData(res.data))
-        //   .catch(e => console.log(e))
         loadFarmInfo()
     }, [])
 
@@ -86,7 +80,7 @@ function FarmInfo({navigation, route}) {
                         onPress={() => navigation.navigate('Map')}
                     >
                         {farmData?.location?.address}
-                        {/*  add adress from back */}
+                        {/*  add address from back */}
                     </Text>
                 </View>
                 <View
