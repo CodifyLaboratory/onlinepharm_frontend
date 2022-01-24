@@ -28,6 +28,7 @@ import Loader from '../components/Loader'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../store/actions";
 import {strings} from "../localization";
+import {getProfile} from "../api";
 
 export default function Profile({navigation, setIsSignIn}) {
 

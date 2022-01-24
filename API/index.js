@@ -1,6 +1,9 @@
 import axios from 'axios'
+import {strings} from "../localization";
 
-const baseUrl = 'http://164.90.192.245/api/'
+const lang = strings.getLanguage()
+
+const baseUrl = `http://164.90.192.245/${lang}/api/`
 
 const http = axios.create({
     baseURL: baseUrl,

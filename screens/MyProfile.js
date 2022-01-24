@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Image, ScrollView, TouchableOpacity, Platform, Button} from 'react-native'
+import {View, Image, ScrollView, TouchableOpacity, Button, Alert} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import {Input} from 'react-native-elements'
 import {myProfile} from '../styles/myProfile'
@@ -17,7 +17,7 @@ export default function MyProfile({route, navigation}) {
 
     const [image, setImage] = useState(null);
     const [state, setState] = useState(data)
-    console.log('DATA+++++++++++++', data)
+
     useEffect(() => {
         cameraPermission()
     }, []);
@@ -42,41 +42,28 @@ export default function MyProfile({route, navigation}) {
             })}
         }
 
-    // const toFormData = () => {
-    //     const formData = new FormData();
-    //
-    //     for (let key in data) {
-    //         let data
-    //         if (typeof (data) === 'object') {
-    //             data = new Blob([JSON.stringify(data)], {type: 'application/json'});// or just JSON.stringify(value)
-    //         }
-    //         formData.append(key, data);
-    //     }
-    //     return formData
-    // }
-    //
-    //
-    // const form = toFormData()
-    // const options = {
-    //     dotsForObjectNotation: true,
-    //     noFilesWithArrayNotation : true,
-    //     indexes : true
-    // }
-    const formData = serialize(
-        state
-        // options
-        // existingFormData, // optional
-        // keyPrefix, // optional
-    );
+
+
+        // const formData = serialize(
+    //     state
+    //     // options
+    //     // existingFormData, // optional
+    //     // keyPrefix, // optional
+    // );
 
 
 
     const update = async () => {
-        console.log('FORM', formData)
+        let formData = new FormData();
+
+        formData.append("user_profile[photo]", state.user_profile.photo);
+        formData.append("user_profile[first_name]", state.user_profile.first_name)
+
         try {
-         await updateProfile(data.id, formData)
+            console.log('form data', formData)
+            await updateProfile(data.id, formData)
         } catch (e) {
-            throw new Error(e)
+           console.log('ERROR', e)
         } finally {
             navigation.push('Profile')
         }

@@ -1,34 +1,50 @@
-import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import React, {useState} from 'react'
+import {View, Text, TouchableOpacity, TextInput} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { registration } from '../styles/registration'
+import {registration} from '../styles/registration'
 import Api from '../API'
 import Logo from '../assets/header/logo.svg'
 import {strings} from "../localization";
+import {Controller, useForm} from "react-hook-form";
+import {Colors} from "../constants/colors";
 
-function Registration({ navigation }) {
+function Registration({navigation}) {
     const [initialState, setInitialState] = useState({
         email: '',
         password: '',
         confirm_password: '',
     })
-    const [passwordCheck, setPasswordCheck] = useState(false)
 
-    const handleChangeEmail = (text) => {
-        setInitialState({ ...initialState, email: text })
-    }
-    const handleChangePassword = (text) => {
-        setInitialState({ ...initialState, password: text })
-        setPasswordCheck(false)
-    }
-    const handleChangeConfirm = (text) => {
-        setInitialState({ ...initialState, confirm_password: text })
-        setPasswordCheck(false)
-    }
+    const {control, handleSubmit, setError, formState: {errors}} = useForm({
+        defaultValues: {
+            email: '',
+            password: '',
+            confirm_password: '',
 
-    const validatePasswords = () => {
-        if (initialState.password !== initialState.confirm_password) {
-            setPasswordCheck(true)
+        }
+    });
+
+    // const [passwordCheck, setPasswordCheck] = useState(false)
+    //
+    // const handleChangeEmail = (text) => {
+    //     setInitialState({ ...initialState, email: text })
+    // }
+    // const handleChangePassword = (text) => {
+    //     setInitialState({ ...initialState, password: text })
+    //     setPasswordCheck(false)
+    // }
+    // const handleChangeConfirm = (text) => {
+    //     setInitialState({ ...initialState, confirm_password: text })
+    //     setPasswordCheck(false)
+    // }
+    //
+    const validatePasswords = (data) => {
+        if (data.password !== data.confirm_password) {
+            console.log('true !!!!!!!!!')
+            setError(
+                'password',
+                {message: 'Пароли должны совпадать', type: 'focus'},
+                {shouldFocus: true})
         }
     }
 
@@ -41,9 +57,9 @@ function Registration({ navigation }) {
         }
     }
 
-    const handleSubmit = () => {
-        validatePasswords()
-        Api.postData('/auth/users/create/', initialState)
+    const onSubmit = (data) => {
+        validatePasswords(data)
+        Api.postData('/auth/users/create/', data)
             .then((res) => {
                 if (res.status === 201) {
                     navigation.push('RegistrationData')
@@ -55,56 +71,98 @@ function Registration({ navigation }) {
 
     return (
         <View style={registration.container}>
-            <Logo style={{ marginTop: 30 }} />
+            <Logo style={{marginTop: 30}}/>
 
-            <View style={{ width: '100%' }}>
+            <View style={{width: '100%'}}>
                 <View>
-                    <TextInput
-                        placeholder={'Email'}
-                        placeholderTextColor={'#333333'}
-                        style={registration.input}
-                        textContentType={'emailAddress'}
-                        onChangeText={handleChangeEmail}
-                    />
-                    <TextInput
-                        placeholder={strings.auth.password}
-                        placeholderTextColor={'#333333'}
-                        style={registration.input}
-                        secureTextEntry={true}
-                        onChangeText={handleChangePassword}
-                        autoCorrect={false}
-                    />
-                    {passwordCheck ? (
-                        <Text
-                            style={{
-                                marginLeft: 15,
-                                marginTop: -27,
-                                color: 'red',
-                            }}
-                        >
-                            Пароли не совпадают
-                        </Text>
-                    ) : null}
-                    <TextInput
-                        placeholder={strings.auth.confirm_password}
-                        placeholderTextColor={'#333333'}
-                        style={registration.input}
-                        secureTextEntry={true}
-                        onChangeText={handleChangeConfirm}
-                        autoCorrect={false}
-                    />
+                    <Controller
+                        control={control}
+                        rules={{required: true,
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: "invalid email address"
+                            }
+                    }}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <View>
+                                <TextInput
+                                    placeholder={'Email'}
+                                    placeholderTextColor={Colors.black}
+                                    style={{
+                                        ...registration.input,
+                                        borderBottomColor: errors.email ? Colors.error : Colors.gray_secondary
+                                    }}
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                />
+                                {errors.email &&
+                                    <Text style={registration.errorText}>
+                                        {errors.email?.message
+                                            ? errors.email.message
+                                            : 'This is required.'
+                                        }
+                                    </Text>}
+                            </View>
 
-                    {passwordCheck ? (
-                        <Text
-                            style={{
-                                marginLeft: 15,
-                                marginTop: -27,
-                                color: 'red',
-                            }}
-                        >
-                            Пароли не совпадают
-                        </Text>
-                    ) : null}
+                        )}
+                        name="email"
+                    />
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <View>
+                                <TextInput
+                                    placeholder={strings.auth.password}
+                                    placeholderTextColor={Colors.black}
+                                    style={{
+                                        ...registration.input,
+                                        borderBottomColor: errors.password ? Colors.error : Colors.gray_secondary
+                                    }}
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    secureTextEntry={true}
+                                />
+                                {errors.password && <Text
+                                    style={registration.errorText}>
+                                    {errors.password?.message
+                                        ? errors.password.message
+                                        : 'This is required.'
+                                    }
+                                </Text>}
+                            </View>
+                        )}
+                        name="password"
+                    />
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <View>
+                                <TextInput
+                                    placeholder={strings.auth.password}
+                                    placeholderTextColor={Colors.black}
+                                    style={{
+                                        ...registration.input,
+                                        borderBottomColor: errors.password ? Colors.error : Colors.gray_secondary
+                                    }}
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    secureTextEntry={true}
+                                />
+                                {errors.confirm_password &&
+                                    <Text style={registration.errorText}>This is required.</Text>}
+                            </View>
+                        )}
+                        name="confirm_password"
+                    />
                 </View>
 
                 <View style={registration.forgotContainer}>
@@ -122,10 +180,7 @@ function Registration({ navigation }) {
 
             <TouchableOpacity
                 style={registration.next}
-                onPress={() => {
-                    handleSubmit()
-                    // navigation.push('RegistrationData')
-                }}
+                onPress={handleSubmit(onSubmit)}
                 activeOpacity={0.8}
             >
                 <Text style={registration.nextText}>{strings.auth.next}</Text>

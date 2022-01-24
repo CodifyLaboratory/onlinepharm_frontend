@@ -17,7 +17,6 @@ const FarmsCard = ({ navigation, data }) => {
 
     const {is_guest, favorites_pharmacy} = useSelector(state => state.data)
 
-    // const [favorite, setFavorite] = useState([])
     const [isChecked, setChecked] = useState(null)
 
     useEffect(() => {
@@ -27,7 +26,6 @@ const FarmsCard = ({ navigation, data }) => {
     const getAllFavorites = async () => {
         try {
             const res = await getFavorites()
-            // setFavorite(res)
             dispatch(setPharmacyFavorite(res))
             setChecked(isSelected())
         } catch (e) {

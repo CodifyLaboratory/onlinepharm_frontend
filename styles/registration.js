@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import {Colors} from "../constants/colors";
 
 export const registration = StyleSheet.create({
     container: {
@@ -49,4 +50,21 @@ export const registration = StyleSheet.create({
         color: '#ffffff',
         fontSize: 20,
     },
+    errorText: {
+        color: Colors.error,
+        position: 'absolute',
+        bottom: 5
+    },
+    phoneInput: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal: 10,
+    },
+    prefix: {
+        position: 'absolute',
+        paddingHorizontal: 10,
+        fontWeight: 'bold',
+        top: 22,
+
+    }
 })

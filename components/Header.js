@@ -4,11 +4,11 @@ import {Colors} from "../constants/colors";
 import ArrowBack from '../assets/header/header_arrow.svg'
 import {strings} from "../localization";
 import {myMedicine} from "../styles/components/myMedicine";
-
 import {
     createPharmFavorite,
-    createProductFavorite, deletePharmFavorite,
+    createProductFavorite,
     deleteProductFavorite,
+    deletePharmFavorite,
     getFavorites,
     getFavoritesProducts
 } from "../api";
@@ -20,19 +20,11 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
 
     const { favorites_medicine, favorites_pharmacy } = useSelector(state => state.data)
 
-    // const medId = about_product ? route.params?.medId : null
-    //
-    // const title_category = route.params.title || null
-
     const {title_category, medId, pharmacy_id } = route?.params || ''
 
     const dispatch = useDispatch()
 
-
-
     const [updated, setUpdate] = useState(false)
-
-    console.log('PHARTM', pharmacy_id)
 
     useEffect(() => {
         initFavorites().then(r => r)
@@ -119,9 +111,7 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
                         }
                     />
                 </TouchableOpacity> : null}
-
         </View>
-
     )
 }
 
@@ -135,7 +125,6 @@ export const header = StyleSheet.create({
         height: 52,
         flexDirection: 'row',
         backgroundColor: Colors.white,
-        // marginTop: StatusBarHeight
     },
     text: {
         color: '#999999',

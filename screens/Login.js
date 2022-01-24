@@ -1,35 +1,32 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {
     View,
-    ScrollView,
     Text,
     TouchableOpacity,
     TextInput,
 } from 'react-native'
-import { registration } from '../styles/registration'
+import {registration} from '../styles/registration'
 import Logo from '../assets/header/logo.svg'
-import { API } from 'react-native-web/dist/vendor/react-native/Animated/NativeAnimatedHelper'
+import {API} from 'react-native-web/dist/vendor/react-native/Animated/NativeAnimatedHelper'
 import Api from '../API'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {setAuthorization, setGuest} from "../store/actions";
 import {useDispatch} from "react-redux";
 import {strings} from "../localization";
+import {useForm, Controller} from "react-hook-form";
+import {Colors} from "../constants/colors";
+import {login} from "../api";
 
-function Login({ navigation }) {
+function Login({navigation}) {
+
+    const {control, handleSubmit, setError, formState: {errors}} = useForm({
+        defaultValues: {
+            email: '',
+            password: ''
+        }
+    });
 
     const dispatch = useDispatch()
-
-    const [formData, setFormData] = useState({
-        email: null,
-        password: null,
-    })
-
-    const handleChangeEmail = (text) => {
-        setFormData({ ...formData, email: text })
-    }
-    const handleChangePassword = (text) => {
-        setFormData({ ...formData, password: text })
-    }
 
     const saveData = async (data) => {
         try {
@@ -40,8 +37,8 @@ function Login({ navigation }) {
         }
     }
 
-    const handleSubmit = () => {
-        Api.postData('auth/users/token/', formData)
+    const onSubmit = async (data) => {
+        Api.postData('auth/users/token/', data)
             .then((res) => {
                 if (res.status === 200) {
                     saveData(res.data)
@@ -49,32 +46,74 @@ function Login({ navigation }) {
                     dispatch(setAuthorization(true))
                 }
             })
-            .catch((e) => console.log(e))
+            .catch((e) => setError("email", {
+                message: 'Email or password is wrong',
+                type: "focus"
+            }, {shouldFocus: true}))
     }
 
     return (
         <View style={registration.container}>
-            <Logo style={{ marginTop: 65, marginBottom: 60 }} />
-            <View style={{ width: '100%' }}>
-                <TextInput
-                    placeholder={'Email'}
-                    placeholderTextColor={'#333333'}
-                    style={registration.input}
-                    onChangeText={handleChangeEmail}
+            <Logo style={{marginTop: 65, marginBottom: 60}}/>
+            <View style={{width: '100%'}}>
+                <Controller
+                    control={control}
+                    rules={{required: true}}
+                    render={({field: {onChange, onBlur, value}}) => (
+                        <View>
+                            <TextInput
+                                placeholder={'Email'}
+                                placeholderTextColor={Colors.black}
+                                style={{
+                                    ...registration.input,
+                                    borderBottomColor: errors.email ? Colors.error : Colors.gray_secondary
+                                }}
+                                onBlur={onBlur}
+                                onChangeText={onChange}
+                                value={value}
+                            />
+                            {errors.email &&
+                                <Text style={registration.errorText}>
+                                {errors.email?.message
+                                    ? errors.email.message
+                                    : 'Field is required'
+                                }.
+                            </Text>}
+                        </View>
+
+                    )}
+                    name="email"
                 />
-                <TextInput
-                    placeholder={strings.auth.password}
-                    placeholderTextColor={'#333333'}
-                    style={registration.input}
-                    onChangeText={handleChangePassword}
-                    secureTextEntry={true}
+                <Controller
+                    control={control}
+                    rules={{
+                        required: true,
+                    }}
+                    render={({field: {onChange, onBlur, value}}) => (
+                        <View>
+                            <TextInput
+                                placeholder={strings.auth.password}
+                                placeholderTextColor={Colors.black}
+                                style={{
+                                    ...registration.input,
+                                    borderBottomColor: errors.password ? Colors.error : Colors.gray_secondary
+                                }}
+                                onBlur={onBlur}
+                                onChangeText={onChange}
+                                value={value}
+                                secureTextEntry={true}
+                            />
+                            {errors.password && <Text style={registration.errorText}>This is required.</Text>}
+                        </View>
+                    )}
+                    name="password"
                 />
+
                 <TouchableOpacity onPress={() => navigation.push('Login')}>
-                    <Text
-                        style={[
-                            registration.forgotPassword,
-                            { textAlign: 'center' },
-                        ]}
+                    <Text style={[
+                        registration.forgotPassword,
+                        {textAlign: 'center'},
+                    ]}
                     >
                         {strings.auth.forgot_your_password}
                     </Text>
@@ -97,9 +136,7 @@ function Login({ navigation }) {
 
             <TouchableOpacity
                 style={registration.next}
-                onPress={() => {
-                    handleSubmit()
-                }}
+                onPress={handleSubmit(onSubmit)}
                 activeOpacity={0.8}
             >
                 <Text style={registration.nextText}>{strings.auth.enter}</Text>

@@ -14,7 +14,7 @@ const defaultState = {
     cart: [],
     favorites_medicine: [],
     favorites_pharmacy: [],
-    coordinates: {},
+    coordinates: null,
     authorized: false,
     is_guest: false,
     loader: false
@@ -38,7 +38,6 @@ const setGuestHandler = (state, {payload: status}) => {
 }
 
 const setUserCoordinatesHandler = (state, { payload: coords }) => {
-    console.log('REDUCER', coords)
     return {...state, coordinates: coords}
 }
 

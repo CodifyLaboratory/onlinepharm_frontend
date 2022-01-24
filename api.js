@@ -1,5 +1,6 @@
 import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import {strings} from "./localization";
 
 export const request = async (url, method, payload) => {
     const data = await AsyncStorage.getItem('userData')
@@ -7,7 +8,9 @@ export const request = async (url, method, payload) => {
     const parsed = JSON.parse(data)
     const token = parsed?.access
 
-    const api = 'http://164.90.192.245'
+    const lang = strings.getLanguage() || 'ru'
+
+    const api = `http://164.90.192.245/${lang}`
     try {
         const res = await axios({
             url: `${api}${url}`,
@@ -96,9 +99,16 @@ export async function deleteAllBasket() {
 }
 
 export async function getAllBasket() {
-    return request(`/api/basket-medications/`, 'GET')
+    return await request(`/api/basket-medications/`, 'GET')
 }
 
 export async function updateProfile(id, data) {
-    return request(`/api/auth/users/update/${id}/`, 'PUT', data)
+    return await request(`/api/auth/users/update/${id}/`, 'PUT', data)
+}
+
+export async function login(data) {
+    return request(`/api/auth/users/token/`, 'POST', data)
+}
+export async function getProfile(id) {
+    return request(`/api/auth/users/${id}/`, 'GET')
 }
