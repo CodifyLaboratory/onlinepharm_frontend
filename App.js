@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
+import React, {useEffect, useState} from 'react'
+import {NavigationContainer} from '@react-navigation/native'
 import * as Location from 'expo-location'
 import Navigator from './navigator/Navigator'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import AppLoading from 'expo-app-loading';
 
-import { Provider } from 'react-redux'
-import {applyMiddleware, createStore} from 'redux'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
 import reducers from "./store/reducers";
-import {setAuthorization, setCoordinates, setGuest } from "./store/actions";
+import {setAuthorization, setCoordinates, setGuest} from "./store/actions";
 import {useFonts} from "expo-font";
 import {strings} from "./localization";
-import {StatusBar, View} from "react-native";
+import {StatusBar} from "react-native";
 import {Colors} from "./constants/colors";
 
 export default function App() {
@@ -21,16 +21,16 @@ export default function App() {
     const [is_guest, setGuestUser] = useState(false)
 
     useEffect(() => {
-        initLanguage()
-        _getLocation()
-        me()
+        initLanguage().then(r => strings.setLanguage(r || 'ru'))
+        _getLocation().then(r => store.dispatch(setCoordinates(r?.coords)))
+        me().then(r => setToken(!!r))
     }, [])
 
     const initLanguage = async () => {
-        const lang = await AsyncStorage.getItem('lang')
-        lang
-            ? strings.setLanguage(lang)
-            : strings.setLanguage('ru')
+        return await AsyncStorage.getItem('lang')
+        // lang
+        //     ? strings.setLanguage(lang)
+        //     : strings.setLanguage('ru')
     }
 
 
@@ -43,20 +43,17 @@ export default function App() {
     const _getLocation = async () => {
         let { status } = await Location.requestForegroundPermissionsAsync()
         if (status !== 'granted') {
-            setErrorMsg('Permission to access location was denied')
             return
         }
 
         let location = await Location.getCurrentPositionAsync()
-        await store.dispatch(setCoordinates(location?.coords))
+        return location
     }
 
     const me = async () => {
         const data = await AsyncStorage.getItem('userData')
         const parsed = JSON.parse(data)
-        const token = parsed?.access
-        setToken(!!token)
-        // setIsSignIn(!!token)
+        return parsed?.access
     }
 
 

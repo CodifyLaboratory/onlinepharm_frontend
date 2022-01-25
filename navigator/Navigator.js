@@ -56,6 +56,9 @@ import ChangeLanguage from "../screens/ChangeLanguage";
 import SelectLanguage from "../screens/SelectLanguage";
 import {strings} from "../localization";
 import Header from "../components/Header";
+import PasswordRecoveryEmail from "../screens/PasswordRecoveryEmail";
+import PasswordRecoveryCode from "../screens/recoveryPasswordCode";
+import CreateNewPassword from "../screens/createNewPassword";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -405,6 +408,27 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
                     />
                 )}
             </Stack.Screen>
+            <Stack.Screen
+                name="RecoveryPasswordEmail"
+                component={PasswordRecoveryEmail}
+                options={{
+                    header: (props) => <Header {...props} title={strings.auth.password_recovery} />,
+                }}
+            />
+            <Stack.Screen
+                name="RecoveryPasswordCode"
+                component={PasswordRecoveryCode}
+                options={{
+                    header: (props) => <Header {...props} title={strings.auth.password_recovery} />,
+                }}
+            />
+            <Stack.Screen
+                name="CreateNewPassword"
+                component={CreateNewPassword}
+                options={{
+                    header: (props) => <Header {...props} title={strings.auth.create_password} />,
+                }}
+            />
         </Stack.Navigator>
     )
 }

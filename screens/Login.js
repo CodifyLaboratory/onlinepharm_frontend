@@ -109,7 +109,7 @@ function Login({navigation}) {
                     name="password"
                 />
 
-                <TouchableOpacity onPress={() => navigation.push('Login')}>
+                <TouchableOpacity onPress={() => navigation.push('RecoveryPasswordEmail')}>
                     <Text style={[
                         registration.forgotPassword,
                         {textAlign: 'center'},

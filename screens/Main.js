@@ -38,19 +38,18 @@ export default function Main({ navigation }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Api.getData('pharm-brands/').then((res) => setFarmCardData(res.data))
-        Api.getData('banners/').then((res) => setBannerData(res.data))
-        Api.getData('categories/').then((res) => setCategoryData(res.data))
-        Api.getData('selections/').then((res) => setSelectionsData(res.data))
-        Api.getData('news/').then((res) => setNewsData(res.data))
-        getBasket().then(r => r)
+        Api.getData('pharm-brands/').then(async (res) => await setFarmCardData(res.data))
+        Api.getData('banners/').then(async (res) => await setBannerData(res.data))
+        Api.getData('categories/').then(async (res) => await setCategoryData(res.data))
+        Api.getData('selections/').then(async (res) => await setSelectionsData(res.data))
+        Api.getData('news/').then(async (res) => await setNewsData(res.data))
+        getBasket().then(r => dispatch(loadCart(r)))
     }, [dispatch])
 
 
     const getBasket = async () => {
         try {
-            const res = await getAllBasket()
-            await dispatch(loadCart(res))
+            return await getAllBasket()
         } catch (e) {
             console.log('e', e)
         }

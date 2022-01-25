@@ -112,3 +112,14 @@ export async function login(data) {
 export async function getProfile(id) {
     return request(`/api/auth/users/${id}/`, 'GET')
 }
+
+export async function resetPassword(data) {
+    return request('/api/auth/reset-password/', 'POST', data)
+}
+export async function verifyCode(data) {
+    return request('/api/auth/reset-password/verify/', 'POST', data)
+}
+export async function setNewPassword(data) {
+    return request('/api/auth/reset-password/complete/', 'PATCH', data)
+}
+

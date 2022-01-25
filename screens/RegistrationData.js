@@ -25,6 +25,7 @@ function RegistrationData({ navigation }) {
 
     const [userData, setUserData] = useState(null)
     const [visible, setVisible] = useState(false)
+    const [phonePlaceholder, setPlaceholder] = useState(strings.auth.phone)
 
     const loadData = async () => {
         try {
@@ -41,8 +42,8 @@ function RegistrationData({ navigation }) {
         Api.putData(`auth/users/update/${userData.id}/`, data, userData.access)
             .then((res) => {
                 if (res.status === 200) {
-                    navigation.push('Login')
                     setVisible(true)
+                    setTimeout(()=>navigation.push('Login'), 2000)
                 }
             })
             .catch((e) => console.log(e))
@@ -75,7 +76,7 @@ function RegistrationData({ navigation }) {
                                 onChangeText={onChange}
                                 value={value}
                             />
-                            {errors.last_name &&
+                            {errors.first_name &&
                                 <Text style={registration.errorText}>
                                     {errors.first_name?.message
                                         ? errors.first_name.message
@@ -116,36 +117,23 @@ function RegistrationData({ navigation }) {
                 />
                 <Controller
                     control={control}
-                    rules={{required: true, minLength: 6, maxLength: 12}}
+                    rules={{required: true, minLength: 8}}
                     render={({field: {onChange, onBlur, value}}) => (
                         <View>
-                            {/*<Text style={registration.prefix}>+996</Text>*/}
                             <MaskInput
                                 value={value}
-                                onBlur={onBlur}
+                                onBlur={()=>setPlaceholder(strings.auth.phone)}
+                                onFocus={()=>setPlaceholder('(996) xxx-xxx-xxx')}
                                 onChangeText={onChange}
-                                placeholder={strings.auth.phone}
+                                placeholder={phonePlaceholder}
                                 placeholderTextColor={Colors.black}
                                 keyboardType="number-pad"
                                 style={{
                                     ...registration.input,
                                     borderBottomColor: errors.phone ? Colors.error : Colors.gray_secondary,
                                 }}
-                                mask={['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+                                mask={['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
                             />
-                            {/*<TextInput*/}
-                            {/*    placeholder={strings.auth.phone}*/}
-                            {/*    placeholderTextColor={Colors.black}*/}
-                            {/*    keyboardType="number-pad"*/}
-                            {/*    style={{*/}
-                            {/*        ...registration.input,*/}
-                            {/*        borderBottomColor: errors.phone ? Colors.error : Colors.gray_secondary,*/}
-                            {/*        paddingLeft: 50*/}
-                            {/*    }}*/}
-                            {/*    onBlur={onBlur}*/}
-                            {/*    onChangeText={onChange}*/}
-                            {/*    value={value}*/}
-                            {/*/>*/}
                             {errors.phone &&
                                 <Text style={registration.errorText}>
                                     {errors.phone?.message
@@ -190,7 +178,6 @@ const SuccessModal = ({visible, setVisible, handleChange }) => {
                             style={styles.modalViewClose}
                             onPress={() => {
                                 setVisible(!visible)
-                                // navigation.navigate(is_medication ? 'MedicineInfo' : 'FarmInfo', id)
                             }}
                         >
                             <Close />

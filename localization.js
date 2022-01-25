@@ -3,6 +3,13 @@ import LocalizedStrings from 'react-localization';
 
 export let strings = new LocalizedStrings({
     ru: {
+        validation: {
+            password_must_match: 'Пароли должны совпадать',
+            required_field: 'Обязательное поле',
+            invalid_email: 'Некорректный email',
+            simple_password: 'Слишком простой пароль',
+            password_rule: 'Пароль должен содержать от 8 до 16 символов, включая как минимум одну строчную букву, одну заглавную букву и одну цифру.'
+        },
         auth: {
             unauthorized: 'Войдите или зарегистрируйтесь,\n чтобы не потерять данные аккаунта,\n и иметь доступ с другого устройства',
             login: 'Войдите в профиль',
@@ -20,7 +27,7 @@ export let strings = new LocalizedStrings({
             confirm_password: 'Подтвердите пароль',
             login_via: 'Или войти через',
             already_have_account: 'Уже есть аккаунт?',
-            confirm_code: 'Введите код подтверждения, отправленный на ваш email',
+            confirm_code: 'Введите код подтверждения, отправленный \n на ваш email',
             enter_the_code: 'Введите код',
             personal_data: 'Укажите личные данные',
             name: 'Имя',
@@ -31,7 +38,7 @@ export let strings = new LocalizedStrings({
             forgot_your_password: 'Забыли пароль?',
             dont_have_account: 'Еще нет аккаунта?',
             password_recovery: 'Восстановление пароля',
-            enter_your_email: 'Введите ваш email, на который был зарегистрирован аккаунт. Мы отправим вам код для восстановления  доступа к аккаунту.',
+            enter_your_email: 'Введите ваш email, на который был \n зарегистрирован аккаунт. Мы отправим вам \n код для восстановления  доступа к аккаунту.',
             registration: 'Регистрация',
             code_from_email: 'Введите код, отправленный  вам на email.',
             resend_code: 'Отправить код еще раз',
@@ -178,6 +185,13 @@ export let strings = new LocalizedStrings({
         }
     },
     kg: {
+        validation: {
+            password_must_match: 'Сырсөздөр дал келиши керек',
+            required_field: 'Милдеттүү талаа',
+            invalid_email: 'Туура эмес email',
+            simple_password: 'Өтө жөнөкөй сырсөз',
+            password_rule: 'Сырсөз кеминде бир кичине тамга, бир чоң тамга жана бир санды камтыган 8 жана 16 белгиден турушу керек.'
+        },
         auth: {
             unauthorized: 'Кирүү же эсеп айрылып калбаш\n үчүн катталып жана башка түзмөктө мүмкүнчүлүк бар',
             login: 'Профильге кирүү',
@@ -195,7 +209,7 @@ export let strings = new LocalizedStrings({
             confirm_password: 'Сырсөздү ырастаңыз',
             login_via: 'Же кирүү',
             already_have_account: 'Аккаунт бар',
-            confirm_code: 'Электрондук почтаңызга жөнөтүлгөн ырастоо кодун киргизиңиз',
+            confirm_code: 'Электрондук почтаңызга жөнөтүлгөн \n ырастоо кодун киргизиңиз',
             enter_the_code: 'Код киргизиңиз',
             personal_data: 'Жеке маалыматтарды киргизүү',
             name: 'Аты',
@@ -354,6 +368,13 @@ export let strings = new LocalizedStrings({
         }
     },
     en: {
+        validation: {
+            password_must_match: 'Passwords must match',
+            required_field: 'Required field',
+            invalid_email: 'Invalid email',
+            simple_password: 'Too simple password',
+            password_rule: 'The password must be between 8 and 16 characters long, including at least one lowercase letter, one uppercase letter, and one number.'
+        },
         auth: {
             unauthorized: 'Login or register in order\n not to lose your account data and have access from another device',
             login: 'Login to your profile',

@@ -10,16 +10,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LanguageSelector = ({next}) => {
 
-    async function initLanguage() {
-        let value = await AsyncStorage.getItem('lang')
-        setLanguage(value ? value : 'ru')
-        strings.setLanguage(value)
-    }
-
     const [language, setLanguage] = useState('')
 
     useEffect(() => {
-        initLanguage().then(r => r)
+        initLanguage().then(async (r) => {
+            await setLanguage(r ? r : 'ru')
+            strings.setLanguage(r ? r : 'ru' )
+        })
     }, [language])
 
     const languages = [
@@ -27,6 +24,10 @@ const LanguageSelector = ({next}) => {
         {lang: 'ru', text: 'Русский', icon: <FlagRu/>},
         {lang: 'en', text: 'English', icon: <FlagGB/>},
     ]
+
+    async function initLanguage() {
+        return await AsyncStorage.getItem('lang')
+    }
 
 
     const handleChange = async (lang) => {
