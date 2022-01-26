@@ -81,9 +81,9 @@ export default Search
 const NotFound = () => {
     return (
         <View style={search.nothing_wrap}>
-            <Text style={search.nothing_text}>По вашему запросу ничего не найдено</Text>
-            <Text style={search.nothing_text_secondary}>Попробуйте изменить ваш запрос</Text>
-            <Text style={search.nothing_text_secondary}>Проверьте, нет ли ошибок или опечаток</Text>
+            <Text style={search.nothing_text}>{strings.search.nothing}</Text>
+            <Text style={search.nothing_text_secondary}>{strings.search.change_query}</Text>
+            <Text style={search.nothing_text_secondary}>{strings.search.check_query}</Text>
         </View>
     )
 }

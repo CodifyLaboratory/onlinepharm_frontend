@@ -42,12 +42,12 @@ const setUserCoordinatesHandler = (state, { payload: coords }) => {
 }
 
 const setFavoriteHandler = (state, payload) => {
-    console.log('add to favorite', payload)
+    // console.log('add to favorite', payload)
     return state
 }
 
 const deleteFavoriteHandler = (state, payload) => {
-    console.log("delete favorites", payload)
+    // console.log("delete favorites", payload)
     return state
 }
 
@@ -58,7 +58,6 @@ const setMedicineFavoritesHandler = (state, {payload: favorites_medicine}) => {
 const setPharmacyFavoritesHandler = (state, {payload: favorites_pharmacy}) => {
     return {...state, favorites_pharmacy}
 }
-
 
 const handlers = {
     [loadCart]: loadCartHandler,

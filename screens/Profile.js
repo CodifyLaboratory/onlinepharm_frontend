@@ -66,7 +66,7 @@ export default function Profile({navigation, setIsSignIn}) {
                 <View style={profile.container}>
                     <Image
                         style={profile.profileAvatar}
-                        source={require('../assets/auth/defaultPhoto.png')}
+                        source={{uri: userInfo?.user_profile?.photo}}
                     />
                     <Text style={profile.profileName}>
                         {userInfo?.user_profile?.first_name +

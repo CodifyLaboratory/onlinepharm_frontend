@@ -13,7 +13,6 @@ export const myProfile = StyleSheet.create({
         width: 120,
         height: 120,
         borderRadius: 60,
-        resizeMode: 'cover',
     },
     avatar_camera: {
       position: 'absolute',

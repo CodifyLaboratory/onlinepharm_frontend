@@ -59,6 +59,7 @@ import Header from "../components/Header";
 import PasswordRecoveryEmail from "../screens/PasswordRecoveryEmail";
 import PasswordRecoveryCode from "../screens/recoveryPasswordCode";
 import CreateNewPassword from "../screens/createNewPassword";
+import ChangePasswordProfile from "../screens/ChangePasswordProfile";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -165,6 +166,13 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 }}
                 options={{
                     header: (props) => <Header {...props} title={strings.main.new_feedback} />,
+                }}
+            />
+            <Stack.Screen
+                name="ChangePasswordProfile"
+                component={ChangePasswordProfile}
+                options={{
+                    header: (props) => <Header {...props} title={strings.profile.change_password} />,
                 }}
             />
         </Stack.Navigator>
@@ -436,7 +444,7 @@ const AuthNav = ({isSignIn, setIsSignIn}) => {
 
 export default function Navigator() {
 
-    const {cart, authorized } = useSelector((state => state.data))
+    const { cart = [], authorized } = useSelector((state => state.data))
 
     return authorized ? (
         <Tab.Navigator

@@ -28,6 +28,7 @@ const Settings = ({navigation}) => {
                             <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={()=>navigation.navigate('ChangePasswordProfile')}
                             style={profile.profileLink}
                             activeOpacity={0.6}
                         >

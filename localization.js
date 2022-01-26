@@ -150,6 +150,9 @@ export let strings = new LocalizedStrings({
             search: 'Поиск',
             find_product: 'Найдите желаемый продукт',
             title: 'Поиск',
+            nothing: 'По вашему запросу ничего не найдено',
+            change_query: 'Попробуйте изменить ваш запрос',
+            check_query: 'Проверьте, нет ли ошибок или опечаток'
         },
         modals: {
             cancel: 'Отмена',
@@ -333,6 +336,9 @@ export let strings = new LocalizedStrings({
             search: 'Издөө',
             find_product: 'Каалаган продуктту табуу',
             title: 'Издөө',
+            nothing: 'Сурамыңыз боюнча эч нерсе табылган жок',
+            change_query: 'Өтүнүчүңүздү өзгөртүп көрүңүз',
+            check_query: 'Мүчүлүштүктөр же каталар бар болсо, текшерүү'
         },
         modals: {
             cancel: 'Жокко чыгаруу',
@@ -516,6 +522,9 @@ export let strings = new LocalizedStrings({
             search: 'Search',
             find_product: 'Find the desired product',
             title: 'Search',
+            nothing: 'Nothing found for your request',
+            change_query: 'Try changing your request',
+            check_query: 'Check for errors or typos'
         },
         modals: {
             cancel: 'Cancel',

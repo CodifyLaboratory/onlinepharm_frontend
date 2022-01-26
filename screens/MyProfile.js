@@ -3,13 +3,14 @@ import {View, Image, ScrollView, TouchableOpacity, Button, Alert} from 'react-na
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import {Input} from 'react-native-elements'
 import {myProfile} from '../styles/myProfile'
-import { serialize } from 'object-to-formdata'
+
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 import Camera from '../assets/profile/camera.svg'
 
 import * as ImagePicker from 'expo-image-picker';
 import {cameraPermission} from "../permissions/camera";
-import {updateProfile} from "../api";
+import {updateProfile, updateUserPhoto} from "../api";
 import {strings} from "../localization";
 
 export default function MyProfile({route, navigation}) {
@@ -22,6 +23,9 @@ export default function MyProfile({route, navigation}) {
         cameraPermission()
     }, []);
 
+    console.log('STATE', state)
+
+
     const callCamera = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -30,8 +34,6 @@ export default function MyProfile({route, navigation}) {
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
             setImage(result.uri);
             setState({
@@ -39,45 +41,58 @@ export default function MyProfile({route, navigation}) {
                     ...state.user_profile,
                     photo: result.uri
                 }
-            })}
+            })
         }
-
-
-
-        // const formData = serialize(
-    //     state
-    //     // options
-    //     // existingFormData, // optional
-    //     // keyPrefix, // optional
-    // );
-
-
+    }
 
     const update = async () => {
-        let formData = new FormData();
 
-        formData.append("user_profile[photo]", state.user_profile.photo);
-        formData.append("user_profile[first_name]", state.user_profile.first_name)
+
+
+        const user = {
+            email: state.email,
+            user_profile: {
+                first_name: state.user_profile.first_name,
+                last_name: state.user_profile.last_name,
+                phone: state.user_profile.phone
+            },
+            location: {
+                address: state.location.address
+            }
+        }
 
         try {
-            console.log('form data', formData)
-            await updateProfile(data.id, formData)
+            if (image) {
+                const formData = new FormData()
+                formData.append('photo', {
+                    uri: image,
+                    type: 'image/jpg',
+                    name: 'image.jpg',
+                })
+                await updateUserPhoto(formData)
+            }
+
+            await updateProfile(data.id, user)
         } catch (e) {
-           console.log('ERROR', e)
+            console.log('e', e)
         } finally {
             navigation.push('Profile')
         }
     }
 
     return (
-        <ScrollView>
+        <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>
             <View style={myProfile.container}>
                 <Button title={'SAVE'} onPress={update}/>
                 <View style={{alignItems: 'center'}}>
                     <TouchableOpacity style={{marginBottom: 32}} onPress={callCamera}>
                         <Image
                             style={myProfile.profileAvatar}
-                            source={image ? {uri: image} : require('../assets/auth/defaultPhoto.png')}
+                            source={image
+                                ? {uri: image}
+                                : (state?.user_profile?.photo
+                                    ? {uri: state?.user_profile?.photo}
+                                    : require('../assets/auth/defaultPhoto.png'))}
                         />
                         <Camera style={myProfile.avatar_camera}/>
                     </TouchableOpacity>
@@ -99,6 +114,7 @@ export default function MyProfile({route, navigation}) {
                         defaultValue={state?.user_profile?.first_name}
                         inputStyle={{fontSize: 14}}
                         inputContainerStyle={myProfile.input}
+                        placeholder={strings.auth.name}
                     />
                     <Input
                         keyboardType="default"
@@ -117,6 +133,7 @@ export default function MyProfile({route, navigation}) {
                         defaultValue={state?.user_profile?.last_name}
                         inputStyle={{fontSize: 14}}
                         inputContainerStyle={myProfile.input}
+                        placeholder={strings.auth.surname}
                     />
                     <Input
                         keyboardType="email-address"
@@ -129,6 +146,7 @@ export default function MyProfile({route, navigation}) {
                         onChangeText={(e) => setState({...state, email: e})}
                         inputStyle={{fontSize: 14}}
                         inputContainerStyle={myProfile.input}
+                        placeholder={strings.auth.email}
                     />
                     <Input
                         keyboardType="numeric"
@@ -146,26 +164,56 @@ export default function MyProfile({route, navigation}) {
                         defaultValue={state?.user_profile?.phone}
                         inputStyle={{fontSize: 14}}
                         inputContainerStyle={myProfile.input}
+                        placeholder={strings.auth.phone}
                     />
-                    <Input
-                        keyboardType="default"
-                        label={strings.profile.address}
-                        labelStyle={myProfile.label}
-                        rightIcon={
-                            <Icon name="pen" size={14} color="#cccccc"/>
-                        }
-                        onChangeText={(e) => setState({
-                            ...state, location: {
-                                ...state.location,
-                                address: e
+                    <GooglePlacesAutocomplete
+                        onPress={(data, details = null) => {
+                            setState({
+                                ...state, location: {
+                                    ...state.location,
+                                    address: data.description
+                                }
+                            })
+                        }}
+                        styles={{
+                            listView: {
+                                // color: 'black',
+                                zIndex: 999,
+                                position: 'absolute',
+                                top: -280,
                             }
-                        })}
-                        defaultValue={
-                            state?.location === null ? '' : state?.location.address
-                        }
-                        inputStyle={{fontSize: 14}}
-                        inputContainerStyle={myProfile.input}
+                        }}
+                        textInputProps={{
+                            value: state?.location?.address,
+                            onChangeText: (e) => setState({
+                            ...state, location: {
+                            ...state.location,
+                            address: e}
+                        }),
+
+                            InputComp: (props) => <Input
+                                keyboardType="default"
+                                label={strings.profile.address}
+                                labelStyle={myProfile.label}
+                                rightIcon={
+                                    <Icon name="pen" size={14} color="#cccccc"/>
+                                }
+                                defaultValue={
+                                    state?.location === null ? '' : state?.location.address
+                                }
+                                inputStyle={{fontSize: 14}}
+                                inputContainerStyle={myProfile.input}
+                                {...props}
+                            />,
+                            errorStyle: {color: 'red'},
+                        }}
+                        placeholder={strings.search.title}
+                        query={{
+                            key: 'AIzaSyA8qTJSkhgaHWljBupetyS4jrk4YW7QtlY',
+                            language: strings.getLanguage() || 'ru',
+                        }}
                     />
+
                 </View>
             </View>
         </ScrollView>

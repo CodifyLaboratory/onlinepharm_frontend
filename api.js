@@ -2,11 +2,13 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {strings} from "./localization";
 
-export const request = async (url, method, payload) => {
+export const request = async (url, method, payload, formData) => {
     const data = await AsyncStorage.getItem('userData')
 
     const parsed = JSON.parse(data)
     const token = parsed?.access
+
+    console.log('TOLEN', token)
 
     const lang = strings.getLanguage() || 'ru'
 
@@ -15,7 +17,9 @@ export const request = async (url, method, payload) => {
         const res = await axios({
             url: `${api}${url}`,
             headers: {
+                ...(formData && { 'Content-Type': 'multipart/form-data'}),
                 ...(token && { Authorization: `JWT ${token}` }),
+
             },
             method,
             data: payload,
@@ -121,5 +125,10 @@ export async function verifyCode(data) {
 }
 export async function setNewPassword(data) {
     return request('/api/auth/reset-password/complete/', 'PATCH', data)
+}
+
+export async function updateUserPhoto(data) {
+    console.log('DATA', data)
+    return request('/api/auth/users/change-photo/', 'PUT', data)
 }
 
