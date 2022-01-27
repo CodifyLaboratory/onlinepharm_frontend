@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Image, ScrollView, TouchableOpacity, Button, Alert} from 'react-native'
+import {View, Image, ScrollView, TouchableOpacity, Button, Alert, TextInput, Text} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import {Input} from 'react-native-elements'
 import {myProfile} from '../styles/myProfile'
@@ -12,12 +12,27 @@ import * as ImagePicker from 'expo-image-picker';
 import {cameraPermission} from "../permissions/camera";
 import {updateProfile, updateUserPhoto} from "../api";
 import {strings} from "../localization";
+import {Colors} from "../constants/colors";
+import {registration} from "../styles/registration";
+import {Controller, useForm} from "react-hook-form";
 
 export default function MyProfile({route, navigation}) {
     const data = route.params
+    console.log('data', data)
+
 
     const [image, setImage] = useState(null);
-    const [state, setState] = useState(data)
+    const [state, setState] = useState({...data})
+
+    const {control, handleSubmit, setError, formState: {errors}} = useForm({
+        defaultValues: {
+            email: '',
+            first_name: data.user_profile.first_name,
+            last_name: '',
+            phone: '',
+            address: ''
+        }
+    });
 
     useEffect(() => {
         cameraPermission()
@@ -57,7 +72,7 @@ export default function MyProfile({route, navigation}) {
                 phone: state.user_profile.phone
             },
             location: {
-                address: state.location.address
+                address: state?.location?.address
             }
         }
 
@@ -71,7 +86,7 @@ export default function MyProfile({route, navigation}) {
                 })
                 await updateUserPhoto(formData)
             }
-
+            console.log('USER', user)
             await updateProfile(data.id, user)
         } catch (e) {
             console.log('e', e)
@@ -97,56 +112,73 @@ export default function MyProfile({route, navigation}) {
                         <Camera style={myProfile.avatar_camera}/>
                     </TouchableOpacity>
 
-                    <Input
-                        keyboardType="default"
-                        label={strings.auth.name}
-                        labelStyle={myProfile.label}
-                        rightIcon={
-                            <Icon name="pen" size={14} color="#cccccc"/>
-                        }
-                        onChangeText={(e) => setState({
-                            ...state, user_profile: {
-                                ...state.user_profile,
-                                first_name: e
-                            }
-                        })}
-                        value={state?.user_profile?.first_name}
-                        defaultValue={state?.user_profile?.first_name}
-                        inputStyle={{fontSize: 14}}
-                        inputContainerStyle={myProfile.input}
-                        placeholder={strings.auth.name}
+
+                    <Controller
+                        control={control}
+                        rules={{required: true}}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <View>
+                                <Input
+                                    keyboardType="default"
+                                    label={strings.auth.name}
+                                    labelStyle={myProfile.label}
+                                    rightIcon={
+                                        <Icon name="pen" size={14} color="#cccccc"/>
+                                    }
+                                    onChangeText={onChange}
+                                    // value={value}
+                                    defaultValue={data.user_profile.first_name}
+                                    inputStyle={{fontSize: 14}}
+                                    inputContainerStyle={myProfile.input}
+                                    placeholder={strings.auth.name}
+                                />
+                                {errors.first_name &&
+                                <Text style={registration.errorText}>
+                                    {errors.first_name?.message
+                                        ? errors.first_name.message
+                                        : 'Field is required'
+                                    }.
+                                </Text>}
+                            </View>
+                        )}
+                        name="first_name"
                     />
-                    <Input
-                        keyboardType="default"
-                        label={strings.auth.surname}
-                        labelStyle={myProfile.label}
-                        rightIcon={
-                            <Icon name="pen" size={14} color="#cccccc"/>
-                        }
-                        onChangeText={(e) => setState({
-                            ...state, user_profile: {
-                                ...state.user_profile,
-                                last_name: e
+
+                    <Controller
+                        control={control}
+                        rules={{required: true,
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                message: strings.validation.invalid_email
                             }
-                        })}
-                        value={state?.user_profile?.last_name}
-                        defaultValue={state?.user_profile?.last_name}
-                        inputStyle={{fontSize: 14}}
-                        inputContainerStyle={myProfile.input}
-                        placeholder={strings.auth.surname}
-                    />
-                    <Input
-                        keyboardType="email-address"
-                        label={strings.auth.email}
-                        labelStyle={myProfile.label}
-                        rightIcon={
-                            <Icon name="pen" size={14} color="#cccccc"/>
-                        }
-                        value={state?.email}
-                        onChangeText={(e) => setState({...state, email: e})}
-                        inputStyle={{fontSize: 14}}
-                        inputContainerStyle={myProfile.input}
-                        placeholder={strings.auth.email}
+                        }}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <View>
+                                <Input
+                                    keyboardType="default"
+                                    label={strings.auth.surname}
+                                    labelStyle={myProfile.label}
+                                    rightIcon={
+                                        <Icon name="pen" size={14} color="#cccccc"/>
+                                    }
+                                    onChangeText={onChange}
+                                    value={value}
+                                    // defaultValue={state?.user_profile?.last_name}
+                                    inputStyle={{fontSize: 14}}
+                                    inputContainerStyle={myProfile.input}
+                                    placeholder={strings.auth.surname}
+                                />
+                                {errors.email &&
+                                <Text style={registration.errorText}>
+                                    {errors.email?.message
+                                        ? errors.email.message
+                                        : strings.validation.required_field
+                                    }.
+                                </Text>}
+                            </View>
+
+                        )}
+                        name="email"
                     />
                     <Input
                         keyboardType="numeric"
