@@ -6,11 +6,11 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "mdpi": "assets/splash/mdpi/splash.png",
-      "hdpi": "assets/splash/hdpi/splash.png",
-      "xhdpi": "assets/splash/xhdpi/splash.png",
-      "xxhdpi": "assets/splash/xxhdpi/splash.png",
-      "xxxhdpi": "assets/splash/xxxhdpi/splash.png",
+      "mdpi": "assets/splash/mdpi/LOGO.png",
+      "hdpi": "assets/splash/hdpi/LOGO.png",
+      "xhdpi": "assets/splash/xhdpi/LOGO.png",
+      "xxhdpi": "assets/splash/xxhdpi/LOGO.png",
+      "xxxhdpi": "assets/splash/xxxhdpi/LOGO.png",
       "resizeMode": "contain",
       "backgroundColor": "#FFFFFF"
     },
