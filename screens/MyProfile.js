@@ -27,8 +27,8 @@ export default function MyProfile({route, navigation}) {
     const {control, handleSubmit, setError, formState: {errors}} = useForm({
         defaultValues: {
             email: '',
-            first_name: data.user_profile.first_name,
-            last_name: '',
+            first_name: data.user_profile.first_name || '',
+            last_name: data.user_profile.last_name || '',
             phone: '',
             address: ''
         }
@@ -38,8 +38,7 @@ export default function MyProfile({route, navigation}) {
         cameraPermission()
     }, []);
 
-    console.log('STATE', state)
-
+   
 
     const callCamera = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -60,15 +59,15 @@ export default function MyProfile({route, navigation}) {
         }
     }
 
-    const update = async () => {
+    const update = async (data) => {
 
 
 
         const user = {
             email: state.email,
             user_profile: {
-                first_name: state.user_profile.first_name,
-                last_name: state.user_profile.last_name,
+                first_name: data.first_name,
+                last_name: data.last_name,
                 phone: state.user_profile.phone
             },
             location: {
@@ -98,7 +97,7 @@ export default function MyProfile({route, navigation}) {
     return (
         <ScrollView keyboardShouldPersistTaps='always' listViewDisplayed={false}>
             <View style={myProfile.container}>
-                <Button title={'SAVE'} onPress={update}/>
+                <Button title={'SAVE'} onPress={handleSubmit(update)}/>
                 <View style={{alignItems: 'center'}}>
                     <TouchableOpacity style={{marginBottom: 32}} onPress={callCamera}>
                         <Image
@@ -147,10 +146,10 @@ export default function MyProfile({route, navigation}) {
                     <Controller
                         control={control}
                         rules={{required: true,
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: strings.validation.invalid_email
-                            }
+                            // pattern: {
+                            //     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                            //     message: strings.validation.invalid_email
+                            // }
                         }}
                         render={({field: {onChange, onBlur, value}}) => (
                             <View>
@@ -168,7 +167,7 @@ export default function MyProfile({route, navigation}) {
                                     inputContainerStyle={myProfile.input}
                                     placeholder={strings.auth.surname}
                                 />
-                                {errors.email &&
+                                {errors.last_name &&
                                 <Text style={registration.errorText}>
                                     {errors.email?.message
                                         ? errors.email.message

@@ -7,8 +7,7 @@ import {Colors} from "../constants/colors";
 import {strings} from "../localization";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-const LanguageSelector = ({next}) => {
+const LanguageSelector = ({next, navigation}) => {
 
     const [language, setLanguage] = useState('')
 
@@ -32,8 +31,9 @@ const LanguageSelector = ({next}) => {
 
     const handleChange = async (lang) => {
         await AsyncStorage.setItem('lang', lang)
-        next && next()
+        next ? next() : navigation.navigate('Main')
         setLanguage(lang)
+        strings.setLanguage(lang)
     }
 
     return (

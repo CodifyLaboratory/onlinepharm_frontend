@@ -4,11 +4,11 @@ import LanguageSelector from "../components/LanguageSelector";
 import Logo from '../assets/auth/logo-2.svg'
 import {Colors} from "../constants/colors";
 
-const ChangeLanguage = () => {
+const ChangeLanguage = ({navigation}) => {
     return (
         <View style={styles.container}>
             <Logo style={styles.logo} />
-            <LanguageSelector />
+            <LanguageSelector navigation={navigation} />
         </View>
     )
 }
