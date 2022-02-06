@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import FlagKg from '../assets/profile/KG.svg'
 import FlagRu from '../assets/profile/RU.svg'
@@ -9,13 +9,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LanguageSelector = ({next, navigation}) => {
 
+    const _isMounted = useRef(true);
+
     const [language, setLanguage] = useState('')
 
     useEffect(() => {
-        initLanguage().then(async (r) => {
-            await setLanguage(r ? r : 'ru')
-            strings.setLanguage(r ? r : 'ru' )
-        })
+        initLanguage().then(r => r)
+        return () => { // ComponentWillUnmount in Class Component
+            _isMounted.current = false;
+        }
     }, [language])
 
     const languages = [
@@ -25,7 +27,11 @@ const LanguageSelector = ({next, navigation}) => {
     ]
 
     async function initLanguage() {
-        return await AsyncStorage.getItem('lang')
+        const lang = AsyncStorage.getItem('lang')
+        if(_isMounted.current) {
+            lang ? strings.setLanguage(lang) : strings.setLanguage('ru')
+        }
+
     }
 
 
@@ -43,7 +49,7 @@ const LanguageSelector = ({next, navigation}) => {
                 <TouchableOpacity key={i} onPress={() => handleChange(item.lang)} style={styles.lang_row}>
                     <View>{item.icon}</View>
                     <Text
-                        style={{...styles.langText, color: (item.lang === language) ? Colors.light : Colors.gray}}>
+                        style={{...styles.langText, color: (item.lang === strings.getLanguage()) ? Colors.light : Colors.gray}}>
                         {item.text}
                     </Text>
                 </TouchableOpacity>

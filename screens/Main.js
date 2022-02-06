@@ -5,7 +5,7 @@ import {
     TouchableWithoutFeedback,
     ScrollView,
     SafeAreaView,
-    Dimensions, Button,
+    Dimensions
 } from 'react-native'
 import Carousel from 'react-native-snap-carousel'
 
@@ -22,7 +22,7 @@ import NewsCard from '../components/NewsCard'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 
 import {useDispatch, useSelector} from 'react-redux'
-import {loadCart, setAllFavorites} from "../store/actions";
+import {loadCart} from "../store/actions";
 import {getAllBasket, getFavoritesProducts} from "../api";
 import {strings} from "../localization";
 

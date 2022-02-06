@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import OnBoardingItem from '../components/OnBoardingItem'
 import Paginator from '../components/Paginator'
-import slidesData from '../data/slidesData'
+import slidesData, {getSlideData} from '../data/slidesData'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization, setGuest} from "../store/actions";
@@ -24,21 +24,6 @@ const OnBoarding = ({ navigation }) => {
     const dispatch = useDispatch()
 
     const state = useSelector(state => state.data)
-
-    // const loadData = async () => {
-    //     try {
-    //         let data = await AsyncStorage.getItem('userData')
-    //         if (data !== null) {
-    //             setUserData(JSON.parse(data))
-    //         }
-    //     } catch (err) {
-    //         console.log(err)
-    //     }
-    // }
-    //
-    // useEffect(() => {
-    //     loadData().then(r => r)
-    // }, [])
 
     const item = useRef(0)
     const scrollX = useRef(new Animated.Value(0)).current
@@ -57,12 +42,12 @@ const OnBoarding = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <View style={{ flex: 3 }}>
                 <FlatList
-                    data={slidesData}
+                    data={getSlideData()}
                     renderItem={({ item, index }) => (
                         <OnBoardingItem item={item} index={index} />
                     )}
                     horizontal
-                    showsHorizontalScrollIndicator
+                    showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     bounces={false}
                     keyExtractor={(item) => item.id}
@@ -80,7 +65,7 @@ const OnBoarding = ({ navigation }) => {
             </View>
 
             {currentIndex === 3 ? null : (
-                <Paginator data={slidesData} scrollX={scrollX} />
+                <Paginator data={getSlideData()} scrollX={scrollX} />
             )}
 
             {currentIndex === 3 ? (

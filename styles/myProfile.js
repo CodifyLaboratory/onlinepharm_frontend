@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native'
+import {StyleSheet, Platform, Dimensions} from 'react-native'
 
 export const myProfile = StyleSheet.create({
     container: {
@@ -21,12 +21,13 @@ export const myProfile = StyleSheet.create({
     },
     input: {
         borderBottomWidth: 0,
-        width: '100%',
+        width: Dimensions.get('window').width - 32,
         backgroundColor: '#fff',
         borderRadius: 10,
         paddingVertical: 5,
         paddingLeft: 16,
         paddingRight: 23,
+        height: 50
     },
     label: {
         fontSize: 14,
@@ -35,4 +36,11 @@ export const myProfile = StyleSheet.create({
         color: '#35364F',
         opacity: 0.6,
     },
+    phone_pen: {
+        position: 'absolute',
+        right: 25,
+        top: 42,
+        zIndex: 1
+    }
+
 })

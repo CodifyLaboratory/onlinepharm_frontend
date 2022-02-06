@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {NavigationContainer} from '@react-navigation/native'
 import * as Location from 'expo-location'
 import Navigator from './navigator/Navigator'
@@ -20,17 +20,23 @@ export default function App() {
     const [hasToken, setToken] = useState(false)
     const [is_guest, setGuestUser] = useState(false)
 
+    const _isMounted = useRef(true);
+
+
     useEffect(() => {
         initLanguage().then(r => strings.setLanguage(r || 'ru'))
         _getLocation().then(r => store.dispatch(setCoordinates(r?.coords)))
-        me().then(r => setToken(!!r))
+        me().then(r => r)
+        return () => {
+            _isMounted.current = false;
+        }
     }, [])
 
     const initLanguage = async () => {
-        return await AsyncStorage.getItem('lang')
-        // lang
-        //     ? strings.setLanguage(lang)
-        //     : strings.setLanguage('ru')
+        if (_isMounted.current) { // Check always mounted component
+            return await AsyncStorage.getItem('lang')
+        }
+
     }
 
 
@@ -53,14 +59,14 @@ export default function App() {
     const me = async () => {
         const data = await AsyncStorage.getItem('userData')
         const parsed = JSON.parse(data)
-        return parsed?.access
+        setToken(!!parsed)
     }
 
 
 
     store.subscribe(()=>{
-        setToken(store.getState().data.authorized)
-        setGuestUser(store.getState().data.is_guest)
+        // setToken(store.getState().data.authorized)
+        // setGuestUser(store.getState().data.is_guest)
     })
 
     let [fontsLoaded] = useFonts({

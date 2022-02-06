@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {View, Image, ScrollView, TouchableOpacity, Button, Alert, TextInput, Text} from 'react-native'
+import {View, Image, ScrollView, TouchableOpacity, Button, Alert, TextInput, Text, Dimensions} from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import {Input} from 'react-native-elements'
 import {myProfile} from '../styles/myProfile'
@@ -15,6 +15,7 @@ import {strings} from "../localization";
 import {Colors} from "../constants/colors";
 import {registration} from "../styles/registration";
 import {Controller, useForm} from "react-hook-form";
+import MaskInput from "react-native-mask-input/src/MaskInput";
 
 export default function MyProfile({route, navigation}) {
     const data = route.params
@@ -23,12 +24,13 @@ export default function MyProfile({route, navigation}) {
 
     const [image, setImage] = useState(null);
     const [state, setState] = useState({...data})
+    const [phonePlaceholder, setPlaceholder] = useState(strings.auth.phone)
 
-    const {control, handleSubmit, setError, formState: {errors}} = useForm({
+    const {control, handleSubmit, setError, setValue, formState: {errors}} = useForm({
         defaultValues: {
             email: '',
-            first_name: data.user_profile.first_name || '',
-            last_name: data.user_profile.last_name || '',
+            first_name: '',
+            last_name: '',
             phone: '',
             address: ''
         }
@@ -38,7 +40,7 @@ export default function MyProfile({route, navigation}) {
         cameraPermission()
     }, []);
 
-   
+
 
     const callCamera = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -125,14 +127,15 @@ export default function MyProfile({route, navigation}) {
                                         <Icon name="pen" size={14} color="#cccccc"/>
                                     }
                                     onChangeText={onChange}
-                                    // value={value}
-                                    defaultValue={data.user_profile.first_name}
+                                    value={value}
+                                    // defaultValue={data.user_profile.first_name}
                                     inputStyle={{fontSize: 14}}
                                     inputContainerStyle={myProfile.input}
                                     placeholder={strings.auth.name}
+                                    placeholderTextColor={Colors.gray_medium}
                                 />
                                 {errors.first_name &&
-                                <Text style={registration.errorText}>
+                                <Text style={{...registration.errorText, marginLeft: 10, bottom: 0}}>
                                     {errors.first_name?.message
                                         ? errors.first_name.message
                                         : 'Field is required'
@@ -146,10 +149,6 @@ export default function MyProfile({route, navigation}) {
                     <Controller
                         control={control}
                         rules={{required: true,
-                            // pattern: {
-                            //     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            //     message: strings.validation.invalid_email
-                            // }
                         }}
                         render={({field: {onChange, onBlur, value}}) => (
                             <View>
@@ -162,40 +161,54 @@ export default function MyProfile({route, navigation}) {
                                     }
                                     onChangeText={onChange}
                                     value={value}
-                                    // defaultValue={state?.user_profile?.last_name}
                                     inputStyle={{fontSize: 14}}
                                     inputContainerStyle={myProfile.input}
+                                    placeholderTextColor={Colors.gray_medium}
                                     placeholder={strings.auth.surname}
                                 />
                                 {errors.last_name &&
-                                <Text style={registration.errorText}>
-                                    {errors.email?.message
-                                        ? errors.email.message
+                                <Text style={{...registration.errorText, marginLeft: 10, bottom: 0}}>
+                                    {errors.last_name?.message
+                                        ? errors.last_name.message
                                         : strings.validation.required_field
                                     }.
                                 </Text>}
                             </View>
 
                         )}
-                        name="email"
+                        name="last_name"
                     />
-                    <Input
-                        keyboardType="numeric"
-                        label={strings.auth.phone}
-                        labelStyle={myProfile.label}
-                        rightIcon={
-                            <Icon name="pen" size={14} color="#cccccc"/>
-                        }
-                        onChangeText={(e) => setState({
-                            ...state, user_profile: {
-                                ...state.user_profile,
-                                phone: e
-                            }
-                        })}
-                        defaultValue={state?.user_profile?.phone}
-                        inputStyle={{fontSize: 14}}
-                        inputContainerStyle={myProfile.input}
-                        placeholder={strings.auth.phone}
+                    <Controller
+                        control={control}
+                        rules={{required: true, minLength: 8}}
+                        render={({field: {onChange, value}}) => (
+                            <View style={{marginBottom: 20}}>
+                                <Text style={myProfile.label}>Phone</Text>
+                                <Icon style={myProfile.phone_pen} name="pen" size={14} color="#cccccc"/>
+                                <MaskInput
+                                    value={value}
+                                    onBlur={()=>setPlaceholder(strings.auth.phone)}
+                                    onFocus={()=>setPlaceholder('(996) xxx-xxx-xxx')}
+                                    onChangeText={onChange}
+                                    label={strings.auth.phone}
+                                    placeholder={phonePlaceholder}
+                                    placeholderTextColor={Colors.gray_medium}
+                                    labelStyle={myProfile.label}
+                                    keyboardType="number-pad"
+                                    style={{...myProfile.input }}
+                                    mask={['(', /\d/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/]}
+                                />
+                                {errors.phone &&
+                                <Text style={{...registration.errorText, marginLeft: 0, bottom: -24}}>
+                                    {errors.phone?.message
+                                        ? errors.phone.message
+                                        : 'Field is required'
+                                    }.
+                                </Text>}
+                            </View>
+
+                        )}
+                        name="phone"
                     />
                     <GooglePlacesAutocomplete
                         onPress={(data, details = null) => {
@@ -222,7 +235,7 @@ export default function MyProfile({route, navigation}) {
                             address: e}
                         }),
 
-                            InputComp: (props) => <Input
+                            InputComp: (props) => <View><Input
                                 keyboardType="default"
                                 label={strings.profile.address}
                                 labelStyle={myProfile.label}
@@ -233,9 +246,17 @@ export default function MyProfile({route, navigation}) {
                                     state?.location === null ? '' : state?.location.address
                                 }
                                 inputStyle={{fontSize: 14}}
-                                inputContainerStyle={myProfile.input}
+                                inputContainerStyle={{...myProfile.input}}
                                 {...props}
-                            />,
+                            />
+                                {errors.phone &&
+                                <Text style={{...registration.errorText, marginLeft: 10, bottom: 0}}>
+                                    {errors.phone?.message
+                                        ? errors.phone.message
+                                        : 'Field is required'
+                                    }.
+                                </Text>}
+                            </View>,
                             errorStyle: {color: 'red'},
                         }}
                         placeholder={strings.search.title}
