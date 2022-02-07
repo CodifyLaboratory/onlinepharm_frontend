@@ -138,8 +138,8 @@ export default function MyProfile({route, navigation}) {
                                 <Text style={{...registration.errorText, marginLeft: 10, bottom: 0}}>
                                     {errors.first_name?.message
                                         ? errors.first_name.message
-                                        : 'Field is required'
-                                    }.
+                                        : strings.validation.required_field
+                                    }
                                 </Text>}
                             </View>
                         )}
@@ -171,7 +171,7 @@ export default function MyProfile({route, navigation}) {
                                     {errors.last_name?.message
                                         ? errors.last_name.message
                                         : strings.validation.required_field
-                                    }.
+                                    }
                                 </Text>}
                             </View>
 
@@ -202,8 +202,8 @@ export default function MyProfile({route, navigation}) {
                                 <Text style={{...registration.errorText, marginLeft: 0, bottom: -24}}>
                                     {errors.phone?.message
                                         ? errors.phone.message
-                                        : 'Field is required'
-                                    }.
+                                        : strings.validation.required_field
+                                    }
                                 </Text>}
                             </View>
 
@@ -221,7 +221,6 @@ export default function MyProfile({route, navigation}) {
                         }}
                         styles={{
                             listView: {
-                                // color: 'black',
                                 zIndex: 999,
                                 position: 'absolute',
                                 top: -280,
@@ -253,8 +252,8 @@ export default function MyProfile({route, navigation}) {
                                 <Text style={{...registration.errorText, marginLeft: 10, bottom: 0}}>
                                     {errors.phone?.message
                                         ? errors.phone.message
-                                        : 'Field is required'
-                                    }.
+                                        : strings.validation.required_field
+                                    }
                                 </Text>}
                             </View>,
                             errorStyle: {color: 'red'},
