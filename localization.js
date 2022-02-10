@@ -4,6 +4,7 @@ import LocalizedStrings from 'react-localization';
 export let strings = new LocalizedStrings({
     ru: {
         validation: {
+            old_password: 'Старый пароль',
             password_must_match: 'Пароли должны совпадать',
             required_field: 'Обязательное поле',
             invalid_email: 'Некорректный email',
@@ -189,6 +190,7 @@ export let strings = new LocalizedStrings({
     },
     kg: {
         validation: {
+            old_password: 'Старый пароль',
             password_must_match: 'Сырсөздөр дал келиши керек',
             required_field: 'Милдеттүү талаа',
             invalid_email: 'Туура эмес email',
@@ -375,6 +377,7 @@ export let strings = new LocalizedStrings({
     },
     en: {
         validation: {
+            old_password: 'Old password',
             password_must_match: 'Passwords must match',
             required_field: 'Required field',
             invalid_email: 'Invalid email',
@@ -416,7 +419,7 @@ export let strings = new LocalizedStrings({
             create_password: 'Create a password',
             new_password: 'New password ',
             send: 'Send',
-            password_changed: 'our password has been successfully changed',
+            password_changed: 'Your password has been successfully changed',
             phone: 'Phone',
         },
         main: {

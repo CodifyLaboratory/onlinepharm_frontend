@@ -100,7 +100,7 @@ function Registration({navigation}) {
                                     <Text style={registration.errorText}>
                                         {errors.email?.message
                                             ? errors.email.message
-                                            : 'This is required.'
+                                            : strings.validation.required_field
                                         }
                                     </Text>}
                             </View>
@@ -131,7 +131,7 @@ function Registration({navigation}) {
                                     style={registration.errorText}>
                                     {errors.password?.message
                                         ? errors.password.message
-                                        : 'This is required.'
+                                        : strings.validation.required_field
                                     }
                                 </Text>}
                             </View>
@@ -146,7 +146,7 @@ function Registration({navigation}) {
                         render={({field: {onChange, onBlur, value}}) => (
                             <View>
                                 <TextInput
-                                    placeholder={strings.auth.password}
+                                    placeholder={strings.auth.confirm_password}
                                     placeholderTextColor={Colors.black}
                                     style={{
                                         ...registration.input,
@@ -158,7 +158,7 @@ function Registration({navigation}) {
                                     secureTextEntry={true}
                                 />
                                 {errors.confirm_password &&
-                                    <Text style={registration.errorText}>This is required.</Text>}
+                                    <Text style={registration.errorText}>{strings.validation.required_field}</Text>}
                             </View>
                         )}
                         name="confirm_password"

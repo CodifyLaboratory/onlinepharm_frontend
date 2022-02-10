@@ -79,7 +79,7 @@ export default function Profile({navigation, setIsSignIn}) {
                     <View style={profile.profileLinks}>
                         <TouchableOpacity
                             onPress={() => {
-                                navigation.navigate('MyProfile', userInfo)
+                                navigation.push('MyProfile', userInfo)
                             }}
                             style={profile.profileLink}
                             activeOpacity={0.6}

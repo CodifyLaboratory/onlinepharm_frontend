@@ -120,6 +120,11 @@ export async function getProfile(id) {
 export async function resetPassword(data) {
     return request('/api/auth/reset-password/', 'POST', data)
 }
+
+export async function changePassword(data) {
+    return request('/api/auth/change-password/', 'PUT', data)
+}
+
 export async function verifyCode(data) {
     return request('/api/auth/reset-password/verify/', 'POST', data)
 }

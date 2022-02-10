@@ -8,6 +8,7 @@ export const myProfile = StyleSheet.create({
         paddingRight: 22,
         justifyContent: 'center',
         paddingTop: 20,
+        paddingBottom: 50
     },
     profileAvatar: {
         width: 120,
@@ -26,7 +27,7 @@ export const myProfile = StyleSheet.create({
         borderRadius: 10,
         paddingVertical: 5,
         paddingLeft: 16,
-        paddingRight: 23,
+        paddingRight: 50,
         height: 50
     },
     label: {

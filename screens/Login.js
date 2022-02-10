@@ -76,7 +76,7 @@ function Login({navigation}) {
                                 <Text style={registration.errorText}>
                                 {errors.email?.message
                                     ? errors.email.message
-                                    : 'Field is required'
+                                    : strings.validation.required_field
                                 }.
                             </Text>}
                         </View>
@@ -103,7 +103,7 @@ function Login({navigation}) {
                                 value={value}
                                 secureTextEntry={true}
                             />
-                            {errors.password && <Text style={registration.errorText}>This is required.</Text>}
+                            {errors.password && <Text style={registration.errorText}>{strings.validation.required_field}</Text>}
                         </View>
                     )}
                     name="password"

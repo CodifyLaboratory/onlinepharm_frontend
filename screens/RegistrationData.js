@@ -80,7 +80,7 @@ function RegistrationData({ navigation }) {
                                 <Text style={registration.errorText}>
                                     {errors.first_name?.message
                                         ? errors.first_name.message
-                                        : 'Field is required'
+                                        : strings.validation.required_field
                                     }.
                                 </Text>}
                         </View>
@@ -107,7 +107,7 @@ function RegistrationData({ navigation }) {
                                 <Text style={registration.errorText}>
                                     {errors.last_name?.message
                                         ? errors.last_name.message
-                                        : 'Field is required'
+                                        : strings.validation.required_field
                                     }.
                                 </Text>}
                         </View>
@@ -138,7 +138,7 @@ function RegistrationData({ navigation }) {
                                 <Text style={registration.errorText}>
                                     {errors.phone?.message
                                         ? errors.phone.message
-                                        : 'Field is required'
+                                        : strings.validation.required_field
                                     }.
                                 </Text>}
                         </View>

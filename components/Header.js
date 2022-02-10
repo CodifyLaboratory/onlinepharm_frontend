@@ -20,7 +20,9 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
 
     const { favorites_medicine, favorites_pharmacy } = useSelector(state => state.data)
 
-    const {title_category, medId, pharmacy_id } = route?.params || ''
+    const {title_category, medId, pharmacy_id, updateProfile } = route?.params || ''
+
+    console.log('update profile', updateProfile)
 
     const dispatch = useDispatch()
 
@@ -76,8 +78,8 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
                 <Text style={header.text}>{strings.auth.back}</Text>
             </TouchableOpacity>
             <View><Text style={header.title}>{title ? title : title_category}</Text></View>
-            {profile ? <TouchableOpacity
-                onPress={handleChange}
+            {updateProfile ? <TouchableOpacity
+                onPress={() => updateProfile()}
                 style={header.save_button}
             >
                 <Text style={header.save_text}>{strings.profile.save}</Text>
