@@ -91,13 +91,13 @@ export default function Main({ navigation }) {
         [selectionsData]
     )
 
-    const newsList = useMemo(
-        () =>
-            newsData.map((item) => (
-                <NewsCard data={item} key={item.id} navigation={navigation} />
-            )),
-        [newsData]
-    )
+    // const newsList = useMemo(
+    //     () =>
+    //         newsData && newsData.map((item) => (
+    //             <NewsCard data={item} key={item.id} navigation={navigation} />
+    //         )),
+    //     [newsData]
+    // )
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -179,7 +179,7 @@ export default function Main({ navigation }) {
                                 horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                {newsList}
+                                {/* {newsList} */}
                             </ScrollView>
                         </View>
                     </View>
