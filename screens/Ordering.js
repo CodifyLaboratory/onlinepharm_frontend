@@ -10,7 +10,7 @@ import {
 import { Radio, NativeBaseProvider } from 'native-base'
 
 import { ordering } from '../styles/ordering'
-import { cart } from '../styles/cart'
+import { cartStyle } from '../styles/cart'
 
 function Ordering({ navigation }) {
     const [deliveryOptionsValue, setDeliveryOptionsValue] =
@@ -141,8 +141,8 @@ function Ordering({ navigation }) {
                     <Text style={ordering.text}>К оплате</Text>
                     <Text style={ordering.text}>3206 с</Text>
                 </View>
-                <TouchableOpacity style={cart.btn} activeOpacity={0.8}>
-                    <Text style={cart.btnText}>Оформить заказ</Text>
+                <TouchableOpacity style={cartStyle.btn} activeOpacity={0.8}>
+                    <Text style={cartStyle.btnText}>Оформить заказ</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>

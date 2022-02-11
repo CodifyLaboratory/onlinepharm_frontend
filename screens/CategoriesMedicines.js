@@ -1,20 +1,20 @@
-import React, {useState, useEffect} from 'react'
-import {
-    ScrollView,
-    SafeAreaView,
-} from 'react-native'
-import {categoriesMedicines} from '../styles/categoriesMedicines'
+import React, { useState, useEffect } from 'react'
+import { ScrollView, SafeAreaView } from 'react-native'
+import { categoriesMedicines } from '../styles/categoriesMedicines'
 import MedicineCard from './../components/MedicineCard'
 import Api from '../API'
-import Loader from "../components/Loader";
+import Loader from '../components/Loader'
 
-import {useSelector, useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-import {getFavoritesProducts, getAllBasket} from "../api";
+import { getFavoritesProducts, getAllBasket } from '../api'
 
-import {loadCart, setAllFavorites, setMedicineFavorite} from "../store/actions";
+import {
+    loadCart,
+    setMedicineFavorite,
+} from '../store/actions'
 
-function CategoriesMedicines({navigation, route}) {
+function CategoriesMedicines({ navigation, route }) {
     const category = route.params
 
     const [medicines, setMedicines] = useState(null)
@@ -25,11 +25,10 @@ function CategoriesMedicines({navigation, route}) {
     const state = useSelector((state) => state.data)
 
     useEffect(() => {
-        getAllFavorites().then(r => r)
-        getBasket().then(r => r)
+        getAllFavorites().then((r) => r)
+        getBasket().then((r) => r)
         Api.getData('medications/').then((res) => setMedicines(res.data))
     }, [changed, dispatch])
-
 
     const getAllFavorites = async () => {
         try {
@@ -43,24 +42,26 @@ function CategoriesMedicines({navigation, route}) {
     const getBasket = async () => {
         try {
             const res = await getAllBasket()
-            await dispatch(loadCart(res))
+            dispatch(loadCart(res))
         } catch (e) {
             throw new Error(e)
         }
     }
 
     const isSelected = (id) => {
-        return state.favorites_medicine?.find(item => (item.medication.id === id))
+        return state.favorites_medicine?.find(
+            (item) => item.medication.id === id
+        )
     }
 
     const findBasketProduct = (id) => {
-        return state.cart?.find(item => item.medication.id === id)
+        return state.cart?.find((item) => item.medication.id === id)
     }
 
-    if (!medicines) return <Loader/>
+    if (!medicines) return <Loader />
 
     return (
-        <ScrollView style={{backgroundColor: '#E6EFF9'}}>
+        <ScrollView style={{ backgroundColor: '#E6EFF9' }}>
             <SafeAreaView style={categoriesMedicines.container}>
                 {medicines
                     .filter((el) => {

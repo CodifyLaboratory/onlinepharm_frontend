@@ -1,7 +1,7 @@
 import {StyleSheet, Platform} from 'react-native'
 import {Colors} from "../constants/colors";
 
-export const cart = StyleSheet.create({
+export const cartStyle = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',

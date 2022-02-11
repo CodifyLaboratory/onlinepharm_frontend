@@ -16,7 +16,7 @@ const PasswordInput = ({errors, onChange, onBlur, value, placeholder}) => {
 
     return (
                 <View>
-                    <TouchableOpacity style={{width: 20, height: 20, position: "absolute", top: 30, right: 10, zIndex: 1}} onPress={()=>setVisible(!visible)}>
+                    <TouchableOpacity style={{width: 30, height: 30, position: "absolute", top: 20, right: 10, zIndex: 1}} onPress={()=>setVisible(!visible)}>
                         {visible ? <OpenEye /> : <CloseEye />}
                     </TouchableOpacity>
                     <TextInput

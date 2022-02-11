@@ -6,7 +6,7 @@ const MainSymptomsCard = ({ data, navigation }) => {
     return (
         <TouchableOpacity
             style={main.symptomsSliderElem}
-            onPress={() => navigation.navigate('SelectionInfo', data.id)}
+            onPress={() => navigation.push('SelectionInfo', data.id)}
         >
             <Image
                 style={{ width: 36, height: 36 }}

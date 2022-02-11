@@ -6,14 +6,14 @@ import {
     ScrollView,
     TouchableOpacity,
 } from 'react-native'
-import {cart} from '../styles/cart'
+import {cartStyle} from '../styles/cart'
 import MedicineCard from '../components/MedicineCard'
 import NoCart from './../assets/noCart.svg'
 import Trash from './../assets/icons/trash.svg'
 
 import ClearCart from "../components/modals/ClearCart";
 import {deleteAllBasket, getAllBasket, getFavoritesProducts} from "../api";
-import {loadCart} from "../store/actions";
+import {loadCart, setAuthorization} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {strings} from "../localization";
 
@@ -25,14 +25,16 @@ const Cart = ({navigation}) => {
 
     const dispatch = useDispatch()
 
-    const cartItems = useSelector(state => state.data.cart)
+    const {cart = [], is_guest} = useSelector(state => state.data)
+
 
     const sumTotal = arr =>
-        arr.reduce((sum, { all_price, count }) => sum + all_price * count, 0)
+       arr ? arr.reduce((sum, { all_price, count }) => sum + all_price * count, 0) : 0
 
-    const total = sumTotal(cartItems)
+    const total = sumTotal(cart)
 
-    useEffect(() => {
+    useEffect(() => { 
+        is_guest && dispatch(setAuthorization(false))
         getAllFavorites()
         getBasket()
     }, [changed])
@@ -40,7 +42,7 @@ const Cart = ({navigation}) => {
     const getBasket = async () => {
         try {
             const res = await getAllBasket()
-            await dispatch(loadCart(res))
+            dispatch(loadCart(res))
         } catch (e) {
             throw new Error(e)
         }
@@ -72,24 +74,24 @@ const Cart = ({navigation}) => {
     }
 
     const findBasketProduct = (id) => {
-        return cartItems?.find(item => item.medication.id === id)
+        return cart?.find(item => item.medication.id === id)
     }
 
     return (
-        <View style={cart.container}>
+        <View style={cartStyle.container}>
             <ScrollView>
-                <SafeAreaView style={cart.productList}>
-                    {cartItems.length ? (
+                <SafeAreaView style={cartStyle.productList}>
+                    {cart.length ? (
                         <TouchableOpacity
-                            style={cart.clearBtn}
+                            style={cartStyle.clearBtn}
                             onPress={() => setVisible(true)}
                         >
                             <Trash/>
-                            <Text style={cart.clearBtnText}>{strings.cart.clear_basket}</Text>
+                            <Text style={cartStyle.clearBtnText}>{strings.cart.clear_basket}</Text>
                         </TouchableOpacity>
                     ) : null}
-                    {cartItems.length ? (
-                        cartItems.map((item) => {
+                    {cart.length ? (
+                        cart.sort((a, b) => a.id - b.id).map((item) => {
                             const selected = isSelected(item?.medication.id)
                             const basketObj = findBasketProduct(item?.medication.id)
                             return (
@@ -106,8 +108,8 @@ const Cart = ({navigation}) => {
                             )
                         })
                     ) : (
-                        <View style={cart.emptyCart}>
-                            <Text style={cart.emptyCartText}>
+                        <View style={cartStyle.emptyCart}>
+                            <Text style={cartStyle.emptyCartText}>
                                 {strings.cart.empty_basket}
                             </Text>
                             <NoCart/>
@@ -115,18 +117,18 @@ const Cart = ({navigation}) => {
                     )}
                 </SafeAreaView>
             </ScrollView>
-        <View style={cart.bottomButton}>
-            {cartItems.length
-                ? <View style={cart.total}><Text style={cart.total_text}>{strings.cart.total}</Text><Text style={cart.total_text} >{strings.main.from} {total} с</Text></View>
+        <View style={cartStyle.bottomButton}>
+            {cart.length
+                ? <View style={cartStyle.total}><Text style={cartStyle.total_text}>{strings.cart.total}</Text><Text style={cartStyle.total_text} >{strings.main.from} {total} с</Text></View>
                 : null }
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate(cartItems.length ? 'Ordering' : 'Main')
+                    navigation.navigate(cart.length ? 'Ordering' : 'Main')
                 }}
-                style={cart.btn}
+                style={cartStyle.btn}
                 activeOpacity={0.8}
             >
-                <Text style={cart.btnText}>{cartItems.length ? strings.cart.checkout : strings.cart.to_main}</Text>
+                <Text style={cartStyle.btnText}>{cart.length ? strings.cart.checkout : strings.cart.to_main}</Text>
             </TouchableOpacity>
         </View>
 

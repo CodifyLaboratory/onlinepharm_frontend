@@ -28,7 +28,7 @@ export default function MedicineInfo({navigation, route}) {
 
     const dispatch = useDispatch()
 
-    const { cart, is_guest } = useSelector(state => state.data)
+    const { cart = [], is_guest } = useSelector(state => state.data)
 
     const find_basket = cart.find(item => item.medication?.id === medId)
 

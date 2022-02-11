@@ -26,6 +26,8 @@ function FarmInfo({navigation, route}) {
 
     const { is_guest } = useSelector(state => state.data)
 
+    console.log("route params", route.params)
+
     const id = route.params.pharmacy_id
 
     const [farmData, setFarmData] = useState(null)
@@ -39,7 +41,7 @@ function FarmInfo({navigation, route}) {
             const res = await getFarmInformation(id)
             setFarmData(res)
         } catch (e) {
-            console.log(e)
+            console.log(e.response)
         }
     }
 

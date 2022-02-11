@@ -256,7 +256,7 @@ const MainNav = () => {
                 name="SelectionInfo"
                 component={SelectionInfo}
                 options={{
-                    header: (props) => <Header {...props} title={'+++'} />,
+                    header: (props) => <Header {...props} title={strings.main.collections} />,
                 }}
             />
 
@@ -304,7 +304,7 @@ const NewsNav = () => {
     )
 }
 
-const CartNav = ({isSignIn}) => {
+const CartNav = () => {
 
     return (
         <Stack.Navigator>

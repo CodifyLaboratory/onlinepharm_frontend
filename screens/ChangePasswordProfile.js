@@ -107,7 +107,7 @@ const ChangePasswordProfile = ({navigation}) => {
                         onPress={handleSubmit(onSubmit)}
                         activeOpacity={0.8}
                     >
-                        <Text style={registration.nextText}>{strings.auth.send}</Text>
+                        <Text style={registration.nextText}>{strings.profile.save}</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </View>

@@ -15,7 +15,7 @@ export const registration = StyleSheet.create({
     input: {
         width: '100%',
         padding: 17,
-        paddingBottom: 22,
+        paddingBottom: 8,
         borderBottomWidth: 1,
         borderBottomColor: '#BCBCBC',
         marginBottom: 35,

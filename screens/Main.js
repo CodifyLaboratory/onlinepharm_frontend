@@ -38,14 +38,16 @@ export default function Main({ navigation }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Api.getData('pharm-brands/').then(async (res) => await setFarmCardData(res.data))
-        Api.getData('banners/').then(async (res) => await setBannerData(res.data))
-        Api.getData('categories/').then(async (res) => await setCategoryData(res.data))
-        Api.getData('selections/').then(async (res) => await setSelectionsData(res.data))
-        Api.getData('news/').then(async (res) => await setNewsData(res.data))
+        Api.getData('pharm-brands/').then((res) => setFarmCardData(res.data))
+        Api.getData('banners/').then((res) => setBannerData(res.data))
+        Api.getData('categories/').then((res) => setCategoryData(res.data))
+        Api.getData('selections/').then((res) => setSelectionsData(res.data))
+        Api.getData('news/').then((res) => setNewsData(res.data?.results))
         getBasket().then(r => dispatch(loadCart(r)))
     }, [dispatch])
 
+
+    console.log('news++++++++++', newsData)
 
     const getBasket = async () => {
         try {
@@ -91,13 +93,13 @@ export default function Main({ navigation }) {
         [selectionsData]
     )
 
-    // const newsList = useMemo(
-    //     () =>
-    //         newsData && newsData.map((item) => (
-    //             <NewsCard data={item} key={item.id} navigation={navigation} />
-    //         )),
-    //     [newsData]
-    // )
+    const newsList = useMemo(
+        () =>
+            newsData.map((item) => (
+                <NewsCard data={item} key={item.id} navigation={navigation} />
+            )),
+        [newsData]
+    )
 
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -106,7 +108,7 @@ export default function Main({ navigation }) {
                     <View style={main.header}>
                         <Logo />
                     </View>
-                    <View style={main.banner}>
+                    <View style={{...main.banner, paddingBottom: (bannerData.length < 2) ? 20 : 0}}>
                         <Carousel
                             onBeforeSnapToItem={(e) => setCurrent(e)}
                             sliderWidth={Dimensions.get('screen').width}
@@ -179,7 +181,7 @@ export default function Main({ navigation }) {
                                 horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                {/* {newsList} */}
+                                {newsList}
                             </ScrollView>
                         </View>
                     </View>
