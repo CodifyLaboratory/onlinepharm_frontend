@@ -1,4 +1,5 @@
 import { StyleSheet, Platform } from 'react-native'
+import { Colors } from '../constants/colors'
 
 export const ordering = StyleSheet.create({
     container: {
@@ -25,7 +26,7 @@ export const ordering = StyleSheet.create({
         fontWeight: '500',
         color: '#1A1717',
         marginBottom: 16,
-        marginTop: 24,
+        // marginTop: 24,
     },
     label: {
         color: '#999999',
@@ -54,4 +55,18 @@ export const ordering = StyleSheet.create({
         fontWeight: '500',
         color: '#000',
     },
+    mapSelectBtn: {
+        width: '100%',
+        height: 40,
+        backgroundColor: Colors.light,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    mapSelectBtnText: {
+        color: Colors.white,
+        fontSize: 14,
+        lineHeight: 24,
+        fontFamily: 'SF-Pro-Regular'
+    }
 })

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     View,
     Text,
@@ -6,34 +6,33 @@ import {
     ScrollView,
     TouchableOpacity,
 } from 'react-native'
-import {cartStyle} from '../styles/cart'
+import { cartStyle } from '../styles/cart'
 import MedicineCard from '../components/MedicineCard'
 import NoCart from './../assets/noCart.svg'
 import Trash from './../assets/icons/trash.svg'
 
-import ClearCart from "../components/modals/ClearCart";
-import {deleteAllBasket, getAllBasket, getFavoritesProducts} from "../api";
-import {loadCart, setAuthorization} from "../store/actions";
-import {useDispatch, useSelector} from "react-redux";
-import {strings} from "../localization";
+import ClearCart from '../components/modals/ClearCart'
+import { deleteAllBasket, getAllBasket, getFavoritesProducts } from '../api'
+import { loadCart, setAuthorization } from '../store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { strings } from '../localization'
 
-const Cart = ({navigation}) => {
-
+const Cart = ({ navigation }) => {
     const [favorites, setFavorites] = useState(null)
     const [visibleModal, setVisible] = useState(false)
     const [changed, setChanged] = useState(false)
 
     const dispatch = useDispatch()
 
-    const {cart = [], is_guest} = useSelector(state => state.data)
+    const { cart = [], is_guest } = useSelector((state) => state.data)
 
-
-    const sumTotal = arr =>
-       arr ? arr.reduce((sum, { all_price, count }) => sum + all_price * count, 0) : 0
+    const sumTotal = (arr) =>
+        arr ? arr.reduce( (sum, { all_price, count }) => sum + all_price * count,  0 )
+            : 0
 
     const total = sumTotal(cart)
 
-    useEffect(() => { 
+    useEffect(() => {
         is_guest && dispatch(setAuthorization(false))
         getAllFavorites()
         getBasket()
@@ -47,7 +46,6 @@ const Cart = ({navigation}) => {
             throw new Error(e)
         }
     }
-
 
     const _clear = async () => {
         try {
@@ -70,11 +68,11 @@ const Cart = ({navigation}) => {
     }
 
     const isSelected = (id) => {
-        return favorites?.find(item => (item.medication.id === id))
+        return favorites?.find((item) => item.medication.id === id)
     }
 
     const findBasketProduct = (id) => {
-        return cart?.find(item => item.medication.id === id)
+        return cart?.find((item) => item.medication.id === id)
     }
 
     return (
@@ -86,53 +84,85 @@ const Cart = ({navigation}) => {
                             style={cartStyle.clearBtn}
                             onPress={() => setVisible(true)}
                         >
-                            <Trash/>
-                            <Text style={cartStyle.clearBtnText}>{strings.cart.clear_basket}</Text>
+                            <Trash />
+                            <Text style={cartStyle.clearBtnText}>
+                                {strings.cart.clear_basket}
+                            </Text>
                         </TouchableOpacity>
                     ) : null}
                     {cart.length ? (
-                        cart.sort((a, b) => a.id - b.id).map((item) => {
-                            const selected = isSelected(item?.medication.id)
-                            const basketObj = findBasketProduct(item?.medication.id)
-                            return (
-                                <MedicineCard
-                                    basketObj={basketObj}
-                                    isSelected={selected}
-                                    key={item.medication.id}
-                                    data={item?.medication}
-                                    navigation={navigation}
-                                    setChanged={(e) => setChanged(e)}
-                                    changed={changed}
-                                    type={'cart'}
-                                />
-                            )
-                        })
+                        cart
+                            .sort((a, b) => a.id - b.id)
+                            .map((item) => {
+                                const selected = isSelected(item?.medication.id)
+                                const basketObj = findBasketProduct(
+                                    item?.medication.id
+                                )
+                                return (
+                                    <MedicineCard
+                                        basketObj={basketObj}
+                                        isSelected={selected}
+                                        key={item.medication.id}
+                                        data={item?.medication}
+                                        navigation={navigation}
+                                        setChanged={(e) => setChanged(e)}
+                                        changed={changed}
+                                        type={'cart'}
+                                    />
+                                )
+                            })
                     ) : (
                         <View style={cartStyle.emptyCart}>
                             <Text style={cartStyle.emptyCartText}>
                                 {strings.cart.empty_basket}
                             </Text>
-                            <NoCart/>
+                            <NoCart />
                         </View>
                     )}
                 </SafeAreaView>
             </ScrollView>
-        <View style={cartStyle.bottomButton}>
-            {cart.length
-                ? <View style={cartStyle.total}><Text style={cartStyle.total_text}>{strings.cart.total}</Text><Text style={cartStyle.total_text} >{strings.main.from} {total} с</Text></View>
-                : null }
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate(cart.length ? 'Ordering' : 'Main')
-                }}
-                style={cartStyle.btn}
-                activeOpacity={0.8}
-            >
-                <Text style={cartStyle.btnText}>{cart.length ? strings.cart.checkout : strings.cart.to_main}</Text>
-            </TouchableOpacity>
-        </View>
+            <View style={cartStyle.bottomButton}>
+                {cart.length ? (
+                    <View style={cartStyle.total}>
+                        <Text style={cartStyle.total_text}>
+                            {strings.cart.total}
+                        </Text>
+                        <Text style={cartStyle.total_text}>
+                            {strings.main.from} {total} с
+                        </Text>
+                    </View>
+                ) : null}
 
-            <ClearCart visible={visibleModal} setVisible={(e) => setVisible(e)} handleChange={_clear}/>
+                {!cart.length ? (
+                    <View>
+                          <View>
+                              <View><Text></Text></View>
+                          </View>
+                          <View></View>
+                    </View>
+                ) : (
+                    <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate('Ordering')
+                    }}
+                    style={cartStyle.btn}
+                    activeOpacity={0.8}
+                >
+                    <Text style={cartStyle.btnText}>
+                        {cart.length
+                            ? strings.cart.checkout
+                            : strings.cart.to_main}
+                    </Text>
+                </TouchableOpacity>
+                )}
+            
+            </View>
+
+            <ClearCart
+                visible={visibleModal}
+                setVisible={(e) => setVisible(e)}
+                handleChange={_clear}
+            />
         </View>
     )
 }

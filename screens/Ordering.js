@@ -21,7 +21,7 @@ function Ordering({ navigation }) {
     return (
         <ScrollView style={{ backgroundColor: '#fff' }}>
             <View style={ordering.container}>
-                <View style={ordering.box}>
+                {/* <View style={ordering.box}>
                     <Text style={ordering.boxText}>
                         У вас 5 товаров на сумму 3050 с{' '}
                     </Text>
@@ -32,8 +32,40 @@ function Ordering({ navigation }) {
                     >
                         <Text style={ordering.boxBtn}>К списку товаров</Text>
                     </TouchableOpacity>
-                </View>
-                <Text style={ordering.title}>Доставка</Text>
+                </View> */}
+                <Text style={ordering.title}>Контактные данные</Text>
+                <Text style={ordering.label}>ФИО</Text>
+                <TextInput style={ordering.input} />
+                <Text style={ordering.label}>Email</Text>
+                <TextInput style={ordering.input} />
+                <Text style={ordering.label}>Телефон</Text>
+                <TextInput style={ordering.input} />
+                <Text style={ordering.label}>Комментарии к заказу</Text>
+                <TextInput
+                    style={[ordering.input, { marginBottom: 24 }]}
+                    multiline
+                />
+
+                <Text style={ordering.title}>Тип доставки</Text>
+                <NativeBaseProvider>
+                    <Radio.Group
+                        style={ordering.radioBtns}
+                        name="deliveryOptions"
+                        accessibilityLabel="Delivery options"
+                        value={deliveryOptionsValue}
+                        onChange={(nextValue) => {
+                            setDeliveryOptionsValue(nextValue)
+                        }}
+                    >
+                        <Radio
+                            style={ordering.radioBtn}
+                            value="Доставка"
+                            my={1}
+                        >
+                            Доставка
+                        </Radio>
+                    </Radio.Group>
+                </NativeBaseProvider>
                 <Text style={ordering.label}>Город:</Text>
                 <TextInput style={ordering.input} />
                 <Text style={ordering.label}>Адрес:</Text>
@@ -42,16 +74,13 @@ function Ordering({ navigation }) {
                     <View style={{ width: '45%' }}>
                         <Text style={ordering.label}>Квартира:</Text>
                         <TextInput style={ordering.input} />
-                        <Text style={ordering.label}>Этаж:</Text>
-                        <TextInput style={ordering.input} />
                     </View>
                     <View style={{ width: '45%' }}>
                         <Text style={ordering.label}>Подъезд:</Text>
                         <TextInput style={ordering.input} />
-                        <Text style={ordering.label}>Домофон:</Text>
-                        <TextInput style={ordering.input} />
                     </View>
                 </View>
+                <TouchableOpacity style={ordering.mapSelectBtn}><Text style={ordering.mapSelectBtnText}>Выбрать на карте</Text></TouchableOpacity>
                 <Text style={ordering.title}>Варианты доставки</Text>
                 <NativeBaseProvider>
                     <Radio.Group
@@ -117,18 +146,7 @@ function Ordering({ navigation }) {
                         </Text>
                     </View>
                 </View>
-                <Text style={ordering.title}>Контактное лицо</Text>
-                <Text style={ordering.label}>ФИО</Text>
-                <TextInput style={ordering.input} />
-                <Text style={ordering.label}>Email</Text>
-                <TextInput style={ordering.input} />
-                <Text style={ordering.label}>Телефон</Text>
-                <TextInput style={ordering.input} />
-                <Text style={ordering.label}>Комментарии к заказу</Text>
-                <TextInput
-                    style={[ordering.input, { marginBottom: 24 }]}
-                    multiline
-                />
+
                 <View style={[ordering.boxes, { marginBottom: 16 }]}>
                     <Text style={ordering.text}>Стоимость товара</Text>
                     <Text style={ordering.text}>3050 с</Text>
