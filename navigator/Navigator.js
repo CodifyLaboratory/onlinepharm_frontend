@@ -10,22 +10,22 @@ import {createStackNavigator} from '@react-navigation/stack'
 
 import IconBadge from 'react-native-icon-badge';
 
-import Main from '../screens/Main'
-import Search from '../screens/Search'
-import News from '../screens/News'
-import Cart from '../screens/Cart'
-import Profile from '../screens/Profile'
-import Farms from '../screens/Farms'
-import Farm from '../screens/Farm'
-import FarmInfo from '../screens/FarmInfo'
-import MyProfile from '../screens/MyProfile'
-import Categories from '../screens/Categories'
-import CategoriesMedicines from '../screens/CategoriesMedicines'
-import NewsInfo from '../screens/NewsInfo'
-import Login from '../screens/Login'
-import Ordering from '../screens/Ordering'
-import OnBoarding from '../screens/OnBoarding'
-import Map from '../screens/Map'
+import Main from '../screens/Main/Main'
+import Search from '../screens/Search/Search'
+import News from '../screens/News/News'
+import Cart from '../screens/Cart/Cart'
+import Profile from '../screens/Profile/Profile'
+import Farms from '../screens/Main/Farms'
+import Farm from '../screens/Main/Farm'
+import FarmInfo from '../screens/Main/FarmInfo'
+import MyProfile from '../screens/Profile/MyProfile'
+import Categories from '../screens/Main/Categories'
+import CategoriesMedicines from '../screens/Main/CategoriesMedicines'
+import NewsInfo from '../screens/News/NewsInfo'
+import Login from '../screens/Auth/Login'
+import Ordering from '../screens/Cart/Ordering'
+import OnBoarding from '../screens/Auth/OnBoarding'
+import Map from '../screens/Main/Map'
 
 import MainSvg from '../assets/icons/main.svg'
 import SearchSvg from '../assets/icons/search.svg'
@@ -38,28 +38,28 @@ import SearchWhiteSvg from '../assets/icons/searchWhite.svg'
 import ProfileWhiteSvg from '../assets/icons/profileWhite.svg'
 import NewsWhiteSvg from '../assets/icons/newsWhite.svg'
 
-import Registration from '../screens/Registration'
-import RegistrationData from '../screens/RegistrationData'
-import MyMedicine from '../screens/MyMedicine'
-import MyFarms from '../screens/MyFarms'
-import BannerInfo from '../screens/BannerInfo'
-import SelectionInfo from '../screens/SelectionInfo'
-import LeaveReview from '../screens/LeaveReview'
-import MedicineInfo from '../screens/MedicineInfo'
-import Unauthorized from "../screens/Unauthorized";
+import Registration from '../screens/Auth/Registration'
+import RegistrationData from '../screens/Auth/RegistrationData'
+import MyMedicine from '../screens/Profile/MyMedicine'
+import MyFarms from '../screens/Profile/MyFarms'
+import BannerInfo from '../screens/Main/BannerInfo'
+import SelectionInfo from '../screens/Main/SelectionInfo'
+import LeaveReview from '../screens/Main/LeaveReview'
+import MedicineInfo from '../screens/Main/MedicineInfo'
+import Unauthorized from "../screens/Auth/Unauthorized";
 
 import {mainBgColor, mainTextColor} from '../constants'
 
 import {useSelector} from "react-redux";
-import Settings from "../screens/Settings";
-import ChangeLanguage from "../screens/ChangeLanguage";
-import SelectLanguage from "../screens/SelectLanguage";
+import Settings from "../screens/Profile/Settings";
+import ChangeLanguage from "../screens/Profile/ChangeLanguage";
+import SelectLanguage from "../screens/Auth/SelectLanguage";
 import {strings} from "../localization";
 import Header from "../components/Header";
-import PasswordRecoveryEmail from "../screens/PasswordRecoveryEmail";
-import PasswordRecoveryCode from "../screens/recoveryPasswordCode";
-import CreateNewPassword from "../screens/createNewPassword";
-import ChangePasswordProfile from "../screens/ChangePasswordProfile";
+import PasswordRecoveryEmail from "../screens/Auth/PasswordRecoveryEmail";
+import PasswordRecoveryCode from "../screens/Auth/recoveryPasswordCode";
+import CreateNewPassword from "../screens/Auth/createNewPassword";
+import ChangePasswordProfile from "../screens/Profile/ChangePasswordProfile";
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()

@@ -6,7 +6,7 @@ import {
     setAuthorization,
     setCoordinates,
     setFavorite,
-    setGuest, setMedicineFavorite, setPharmacyFavorite
+    setGuest, setMedicineFavorite, setPharmacyFavorite, setUser
 } from './actions';
 
 
@@ -17,7 +17,8 @@ const defaultState = {
     coordinates: null,
     authorized: false,
     is_guest: false,
-    loader: false
+    loader: false,
+    user: null
 };
 
 
@@ -59,6 +60,10 @@ const setPharmacyFavoritesHandler = (state, {payload: favorites_pharmacy}) => {
     return {...state, favorites_pharmacy}
 }
 
+const setUserHandler = (state, {payload: user}) => {
+    return {...state, user}
+}
+
 const handlers = {
     [loadCart]: loadCartHandler,
     [setAuthorization]: authHandler,
@@ -67,7 +72,8 @@ const handlers = {
     [setFavorite]: setFavoriteHandler,
     [deleteFavorite]: deleteFavoriteHandler,
     [setMedicineFavorite]: setMedicineFavoritesHandler,
-    [setPharmacyFavorite]: setPharmacyFavoritesHandler
+    [setPharmacyFavorite]: setPharmacyFavoritesHandler,
+    [setUser]: setUserHandler,
 };
 
 const cartReducer = handleActions(handlers, defaultState);

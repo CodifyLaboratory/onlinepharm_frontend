@@ -5,6 +5,80 @@ export const ordering = StyleSheet.create({
     container: {
         padding: 16,
     },
+    productRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between',
+        marginBottom: 12,
+    },
+    productListTitle: {
+       fontSize: 17,
+       fontFamily: 'SF-Pro-Medium',
+       marginBottom: 20,
+        marginTop: 40
+    },
+    radioText: {
+        fontSize: 15,
+        fontFamily: 'SF-Pro-Regular',
+        lineHeight: 18,
+        marginLeft: 7
+    },
+    paymentCardWrap: {
+      display: 'flex',
+      width: '100%',
+      height: 56,
+      flexDirection: 'row',
+      backgroundColor: Colors.background,
+        alignItems: 'flex-start',
+        paddingLeft: 8,
+        borderRadius: 8,
+        paddingTop: 4,
+        marginBottom: 12
+    },
+    paymentIcon: {
+        backgroundColor: Colors.white,
+        width: 50,
+        height: 48,
+        borderRadius: 8,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 8,
+    },
+    listPrice: {
+        fontSize: 15,
+        lineHeight: 18,
+        fontFamily: 'SF-Pro-Medium'
+    },
+    cardName: {
+        fontSize: 16,
+        lineHeight: 19,
+        fontFamily: 'SF-Pro-Regular',
+        color: Colors.gray
+    },
+    cardNumber: {
+        fontSize: 12,
+        lineHeight: 14,
+        fontFamily: 'SF-Pro-Regular',
+        color: Colors.gray_medium,
+        marginTop: 4
+    },
+    listCount: {
+        fontSize: 15,
+        lineHeight: 18,
+        fontFamily: 'SF-Pro-Regular',
+    },
+    productList: {
+        paddingLeft: 16,
+        paddingBottom: 24
+    },
+    productRowPrice: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '30%',
+        justifyContent: 'space-between'
+    },
     box: {
         width: '100%',
         backgroundColor: '#E6EFF9',
@@ -31,7 +105,6 @@ export const ordering = StyleSheet.create({
     label: {
         color: '#999999',
         fontSize: 13,
-        marginBottom: 16,
     },
     input: {
         borderBottomWidth: 1,
@@ -45,10 +118,14 @@ export const ordering = StyleSheet.create({
     },
     radioBtns: {
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     radioBtn: {
-        marginRight: 26,
+        marginRight: 5,
         marginLeft: 5,
+
+
     },
     text: {
         fontSize: 15,
@@ -61,7 +138,8 @@ export const ordering = StyleSheet.create({
         backgroundColor: Colors.light,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderRadius: 5
     },
     mapSelectBtnText: {
         color: Colors.white,

@@ -14,6 +14,7 @@ export const cartStyle = StyleSheet.create({
         paddingRight: 16,
         paddingBottom: 50
     },
+
     total: {
         display: 'flex',
         flexDirection: 'row',

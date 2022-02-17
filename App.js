@@ -9,28 +9,30 @@ import AppLoading from 'expo-app-loading';
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import reducers from "./store/reducers";
-import {setAuthorization, setCoordinates, setGuest} from "./store/actions";
+import {setAuthorization, setCoordinates, setGuest, setUser} from "./store/actions";
 import {useFonts} from "expo-font";
 import {strings} from "./localization";
 import {StatusBar} from "react-native";
 import {Colors} from "./constants/colors";
+import {getProfile} from "./api";
 
 export default function App() {
-    const [location, setLocation] = useState(null)
+
     const [hasToken, setToken] = useState(false)
     const [is_guest, setGuestUser] = useState(false)
 
     const _isMounted = useRef(true);
 
+    const store = createStore(reducers)
 
     useEffect(() => {
         initLanguage().then(r => strings.setLanguage(r || 'ru'))
         _getLocation().then(r => store.dispatch(setCoordinates(r?.coords)))
-        me().then(r => r)
+        me().then(r => initProfile(r?.user_id))
         return () => {
             _isMounted.current = false;
         }
-    }, [])
+    }, [store.dispatch])
 
     const initLanguage = async () => {
         if (_isMounted.current) { // Check always mounted component
@@ -40,7 +42,15 @@ export default function App() {
     }
 
 
-    const store = createStore(reducers)
+   const initProfile = async (id) => {
+        console.log('id', id)
+        try {
+            const res = await getProfile(id)
+            store.dispatch(setUser(res))
+        } catch (e) {
+            console.log('e', e)
+        }
+   }
 
     store.dispatch(setAuthorization(hasToken))
     store.dispatch(setGuest(is_guest))
@@ -60,6 +70,7 @@ export default function App() {
         const data = await AsyncStorage.getItem('userData')
         const parsed = JSON.parse(data)
         setToken(!!parsed)
+        return parsed
     }
 
 

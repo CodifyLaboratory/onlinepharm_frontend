@@ -8,8 +8,6 @@ export const request = async (url, method, payload, formData) => {
     const parsed = JSON.parse(data)
     const token = parsed?.access
 
-    console.log('TOLEN', token)
-
     const lang = strings.getLanguage() || 'ru'
 
     const api = `http://164.90.192.245/${lang}`
