@@ -111,7 +111,7 @@ export let strings = new LocalizedStrings({
             select_delivery_time: 'Выбрать время и дату доставки',
             list_of_products: 'Список товаров',
             payment_methods: 'Способ оплаты',
-            in_cash: 'Наличными при получении',
+            in_cash: `Наличными при \nполучении`,
             online_payment: 'Онлайн оплата',
             delivery_times: 'Срок доставки',
             shipping_cost: 'Стоимость доставки',
