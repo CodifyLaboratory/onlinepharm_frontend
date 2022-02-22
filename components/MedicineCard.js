@@ -62,6 +62,8 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
     }
 
 
+    console.log('data', data)
+
     return (
         <>
             <DeleteProductModal visible={modalVisible} setVisible={(e)=>setVisible(e)} handleChange={_delete} />
@@ -73,7 +75,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                 <View>
                     <View style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between' }}>
                         <View>
-                            <Text style={myMedicine.name}>{data.title}</Text>
+                            <Text style={myMedicine.name}>{data?.title.length > 23 ? data?.title.slice(0, 23).concat('...') : data?.title}</Text>
                             <Text style={myMedicine.category}>
                                 {strings.cart.price}:{' '}
                                 <Text style={myMedicine.price}>{data.price} <Text style={myMedicine.kg_symbol}>c̲ </Text></Text>{' '}

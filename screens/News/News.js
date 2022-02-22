@@ -16,6 +16,8 @@ export default function News({ navigation }) {
     const [categoryDataId, setCategoryDataId] = useState([])
     const [newsItems, setNewsItems] = useState([])
 
+    console.log('newsItems,', newsItems)
+
     useEffect(() => {
         Api.getData('news/').then((res) => setNewsItems(res.data))
         Api.getData('news-categories/').then((res) =>
@@ -29,8 +31,7 @@ export default function News({ navigation }) {
 
     const newsList = useMemo(
         () =>
-            newsItems
-                .filter((item) => item.category === category)
+            newsItems?.results?.filter((item) => item.category === category)
                 .map((item) => (
                     <NewsCard
                         navigation={navigation}
@@ -69,7 +70,7 @@ export default function News({ navigation }) {
     )
 
     return (
-        <SafeAreaView style={{ backgroundColor: '#E6EFF9', flex: 1 }}>
+        <SafeAreaView style={{ backgroundColor: '#E6EFF9', flex: 1, paddingBottom: 24 }}>
             <View style={news.newsInner}>
                 <View style={{ height: 31 }}>
                     <ScrollView

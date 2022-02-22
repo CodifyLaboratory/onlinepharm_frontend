@@ -60,6 +60,10 @@ import PasswordRecoveryEmail from "../screens/Auth/PasswordRecoveryEmail";
 import PasswordRecoveryCode from "../screens/Auth/recoveryPasswordCode";
 import CreateNewPassword from "../screens/Auth/createNewPassword";
 import ChangePasswordProfile from "../screens/Profile/ChangePasswordProfile";
+import MyPaymentMethods from "../screens/Profile/MyPaymentMethods";
+import AddPaymentCard from "../screens/Profile/AddPaymentCard";
+import AboutUs from "../screens/Profile/AboutUs";
+
 
 const Tab = createBottomTabNavigator()
 const Stack = createStackNavigator()
@@ -88,6 +92,30 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                     header: (props) => <Header {...props} title={strings.profile.my_account} />,
                 }}
             />
+            <Stack.Screen
+                name="MyPaymentMethods"
+                component={MyPaymentMethods}
+                options={{
+                    header: (props) => <Header {...props} title={strings.profile.my_payment_methods} />,
+                }}
+            />
+
+            <Stack.Screen
+                name="AboutUs"
+                component={AboutUs}
+                options={{
+                    header: (props) => <Header {...props} title={strings.profile.about_application} />,
+                }}
+            />
+
+            <Stack.Screen
+                name="AddPaymentCard"
+                component={AddPaymentCard}
+                options={{
+                    header: (props) => <Header {...props} title={strings.cart.add_card} />,
+                }}
+            />
+
             <Stack.Screen
                 name="MyMedicine"
                 component={MyMedicine}
@@ -450,6 +478,7 @@ export default function Navigator() {
         <Tab.Navigator
             initialRouteName="Main"
             screenOptions={{
+                tabBarHideOnKeyboard: true,
                 unmountOnBlur: true,
                 tabBarStyle: {
                     backgroundColor: mainTextColor,

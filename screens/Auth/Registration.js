@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {View, Text, TouchableOpacity, TextInput} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {registration} from '../../styles/registration'
@@ -9,11 +9,6 @@ import {Controller, useForm} from "react-hook-form";
 import {Colors} from "../../constants/colors";
 
 function Registration({navigation}) {
-    const [initialState, setInitialState] = useState({
-        email: '',
-        password: '',
-        confirm_password: '',
-    })
 
     const {control, handleSubmit, setError, formState: {errors}} = useForm({
         defaultValues: {
@@ -24,20 +19,7 @@ function Registration({navigation}) {
         }
     });
 
-    // const [passwordCheck, setPasswordCheck] = useState(false)
-    //
-    // const handleChangeEmail = (text) => {
-    //     setInitialState({ ...initialState, email: text })
-    // }
-    // const handleChangePassword = (text) => {
-    //     setInitialState({ ...initialState, password: text })
-    //     setPasswordCheck(false)
-    // }
-    // const handleChangeConfirm = (text) => {
-    //     setInitialState({ ...initialState, confirm_password: text })
-    //     setPasswordCheck(false)
-    // }
-    //
+
     const validatePasswords = (data) => {
         if (data.password !== data.confirm_password) {
 

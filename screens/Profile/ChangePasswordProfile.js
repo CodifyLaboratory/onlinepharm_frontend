@@ -59,7 +59,10 @@ const ChangePasswordProfile = ({navigation}) => {
                         rules={{required: true}}
                         render={({field: {onChange, onBlur, value}}) => (
                             <PasswordInput value={value} onChange={onChange} onBlur={onBlur}
-                                           errors={errors.old_password && (errors.old_password?.message ? errors.old_password?.message : strings.validation.required_field)}
+                                           errors={errors.old_password
+                                           && (errors.old_password?.message
+                                               ? errors.old_password?.message
+                                               : strings.validation.required_field)}
                                            placeholder={strings.validation.old_password}/>
                         )}
                         name="old_password"
@@ -76,7 +79,10 @@ const ChangePasswordProfile = ({navigation}) => {
                         }}
                         render={({field: {onChange, onBlur, value}}) => (
                             <PasswordInput value={value} onChange={onChange} onBlur={onBlur}
-                                           errors={errors?.password && (errors.password?.message ? errors.password?.message : strings.validation.required_field)}
+                                           errors={errors?.password
+                                           && (errors.password?.message
+                                               ? errors.password?.message
+                                               : strings.validation.required_field)}
                                            placeholder={strings.auth.password}/>
 
                         )}
@@ -93,7 +99,10 @@ const ChangePasswordProfile = ({navigation}) => {
                         }}
                         render={({field: {onChange, onBlur, value}}) => (
                             <PasswordInput value={value} onChange={onChange} onBlur={onBlur}
-                                           errors={errors?.confirm_password && (errors.confirm_password?.message ? errors.confirm_password?.message : strings.validation.required_field)}
+                                           errors={errors?.confirm_password
+                                           && (errors.confirm_password?.message
+                                               ? errors.confirm_password?.message
+                                               : strings.validation.required_field)}
                                            placeholder={strings.auth.new_password}/>
 
                         )}

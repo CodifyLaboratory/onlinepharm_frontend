@@ -39,8 +39,18 @@ function RegistrationData({ navigation }) {
     }
 
     const onSubmit = (data) => {
-        Api.putData(`auth/users/update/${userData.id}/`, data, userData.access)
+
+        const userForm = {
+            "user_profile": {
+                "first_name": data?.first_name,
+                "last_name": data?.last_name,
+                "phone": data?.phone
+            },
+        }
+
+        Api.putData(`auth/users/update/${userData.id}/`, userForm, userData.access)
             .then((res) => {
+                console.log('RES', res)
                 if (res.status === 200) {
                     setVisible(true)
                     setTimeout(()=>navigation.push('Login'), 2000)

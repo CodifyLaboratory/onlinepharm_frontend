@@ -106,6 +106,7 @@ export default function Main({ navigation }) {
                     <View style={main.header}>
                         <Logo />
                     </View>
+                    {bannerData?.length ?
                     <View style={{...main.banner, paddingBottom: (bannerData.length < 2) ? 20 : 0}}>
                         <Carousel
                             onBeforeSnapToItem={(e) => setCurrent(e)}
@@ -127,7 +128,8 @@ export default function Main({ navigation }) {
                             dotsLength={bannerData.length}
                             activeDotIndex={current}
                         />
-                    </View>
+                    </View> : null}
+
                     <View>
                         <View style={main.title}>
                             <Text style={main.title_text}>{strings.main.pharmacies}</Text>
@@ -154,17 +156,20 @@ export default function Main({ navigation }) {
                         </View>
                         <View style={main.categories}>{categoryList}</View>
 
-                        <View style={main.title}>
-                            <Text style={main.title_text}>{strings.main.collections}</Text>
-                        </View>
-                        <View style={{ height: 100 }}>
-                            <ScrollView
-                                horizontal={true}
-                                showsHorizontalScrollIndicator={false}
-                            >
-                                {selectionsList}
-                            </ScrollView>
-                        </View>
+                        {selectionsData?.length ? <>
+                            <View style={main.title}>
+                                <Text style={main.title_text}>{strings.main.collections}</Text>
+                            </View>
+                            <View style={{ height: 100 }}>
+                                <ScrollView
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                >
+                                    {selectionsList}
+                                </ScrollView>
+                            </View>
+                        </> : null}
+
 
                         <View style={main.title}>
                             <Text style={main.title_text}>{strings.news.news}</Text>

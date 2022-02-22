@@ -20,9 +20,9 @@ const ReviewCard = ({ data }) => {
             </View>
             <View style={{marginLeft: 16}}>
                 <Text style={farmInfo.reviewsElemName}>
-                    {data.user.user_profile.first_name +
+                    {data?.user.user_profile?.first_name +
                         ' ' +
-                        data.user.user_profile.last_name}{' '}
+                        data?.user?.user_profile?.last_name}{' '}
                     ({data.pub_date.replace(replacedStr, '.')})
                 </Text>
                 <Text style={farmInfo.reviewsElemText}>{data.text}</Text>

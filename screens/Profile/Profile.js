@@ -28,7 +28,8 @@ import Loader from '../../components/Loader'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../../store/actions";
 import {strings} from "../../localization";
-import {getProfile} from "../../api";
+
+const emptyAvatar = require('../../assets/profile/blank-user.jpg')
 
 export default function Profile({navigation, setIsSignIn}) {
 
@@ -60,13 +61,15 @@ export default function Profile({navigation, setIsSignIn}) {
 
     if (!userData || !userInfo) return <Loader/>
 
+    console.log('user', userInfo)
+
     return (
         <ScrollView>
             <SafeAreaView>
                 <View style={profile.container}>
                     <Image
                         style={profile.profileAvatar}
-                        source={{uri: userInfo?.user_profile?.photo}}
+                        source={userInfo?.user_profile?.photo ? {uri: userInfo?.user_profile?.photo} : emptyAvatar}
                     />
                     <Text style={profile.profileName}>
                         {userInfo?.user_profile?.first_name +
@@ -135,6 +138,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={()=>navigation.navigate('MyPaymentMethods')}
                             style={profile.profileLink}
                             activeOpacity={0.6}
                         >
@@ -160,6 +164,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={()=>navigation.navigate('AboutUs')}
                             style={profile.profileLink}
                             activeOpacity={0.6}
                         >

@@ -4,11 +4,7 @@ import {
     Image,
     ScrollView,
     TouchableOpacity,
-    Button,
-    Alert,
-    TextInput,
     Text,
-    Dimensions,
     SafeAreaView
 } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
@@ -118,7 +114,7 @@ export default function MyProfile({route, navigation}) {
                                         ? {uri: image}
                                         : data?.user_profile?.photo
                                         ? {uri: data?.user_profile?.photo}
-                                        : require('../../assets/auth/defaultPhoto.png')
+                                        : require('../../assets/profile/blank-user.jpg')
                                 }
                             />
                             <Camera style={myProfile.avatar_camera}/>
