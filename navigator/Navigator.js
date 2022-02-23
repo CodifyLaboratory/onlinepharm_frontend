@@ -63,6 +63,7 @@ import ChangePasswordProfile from "../screens/Profile/ChangePasswordProfile";
 import MyPaymentMethods from "../screens/Profile/MyPaymentMethods";
 import AddPaymentCard from "../screens/Profile/AddPaymentCard";
 import AboutUs from "../screens/Profile/AboutUs";
+import SelectPharmacy from '../screens/Cart/SelectPharm';
 
 
 const Tab = createBottomTabNavigator()
@@ -220,10 +221,6 @@ const MainNav = () => {
                 component={Farms}
                 options={{
                     header: (props) => <Header {...props} title={strings.main.pharmacies} />,
-                    // title: 'Аптеки',
-                    // headerBackTitle: 'Назад',
-                    // headerStyle: {backgroundColor: mainBgColor},
-                    // headerTitleStyle: {color: mainTextColor},
                 }}
             />
             <Stack.Screen
@@ -352,9 +349,15 @@ const CartNav = () => {
                 component={Ordering}
                 options={{
                     header: (props) => <Header {...props} title={strings.cart.title} />,
-                    title: 'Оформление заказа',
-                    headerBackTitle: 'Назад',
-                    headerTitleStyle: {color: mainTextColor},
+                }}
+            />
+
+
+<Stack.Screen
+                name="SelectPharmacy"
+                component={SelectPharmacy}
+                options={{
+                    header: (props) => <Header {...props} title={'Выбор аптеки'} />,
                 }}
             />
 

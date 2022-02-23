@@ -143,7 +143,7 @@ const Cart = ({ navigation }) => {
                 ) : (
                     <TouchableOpacity
                     onPress={() => {
-                        navigation.navigate('Ordering')
+                        navigation.push('SelectPharmacy')
                     }}
                     style={cartStyle.btn}
                     activeOpacity={0.8}

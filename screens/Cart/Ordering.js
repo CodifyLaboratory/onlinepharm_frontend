@@ -48,7 +48,7 @@ function Ordering({navigation}) {
     });
 
     const submit = (data) => {
-        console.log('data')
+        // console.log('data', data)
     }
 
     const cards = [
@@ -224,7 +224,7 @@ function Ordering({navigation}) {
                 <Text style={ordering.productListTitle}>{strings.cart.list_of_products}</Text>
                 <View style={ordering.productList}>
                     {cart?.map(({medication, count}) => <View style={ordering.productRow}>
-                        <Text style={ordering.listCount}>{medication?.title}</Text>
+                        <Text style={{...ordering.listCount, width: '70%'}}>{medication?.title}</Text>
                         <View style={ordering.productRowPrice}>
                             <Text style={ordering.listCount}>{count} {strings.main.pcs}</Text>
                             <Text style={ordering.listPrice}>{medication?.price} c</Text>

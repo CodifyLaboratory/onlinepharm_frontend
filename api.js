@@ -131,7 +131,14 @@ export async function setNewPassword(data) {
 }
 
 export async function updateUserPhoto(data) {
-    console.log('DATA', data)
     return request('/api/auth/users/change-photo/', 'PUT', data)
 }
 
+export async function createOrder(data) {
+    return request('/api/orders/create/', 'POST', data)
+}
+
+
+export async function getDeliveryPharmacy() {
+    return request('/api/basket-medications/delivery_pharm/', 'GET')
+}

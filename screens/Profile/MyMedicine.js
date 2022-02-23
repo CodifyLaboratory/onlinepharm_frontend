@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setMedicineFavorite, loadCart } from '../../store/actions'
 
 function MyMedicine({ navigation }) {
+    
     const { favorites_medicine, cart } = useSelector((state) => state.data)
 
     const dispatch = useDispatch()

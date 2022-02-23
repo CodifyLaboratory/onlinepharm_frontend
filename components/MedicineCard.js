@@ -62,8 +62,6 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
     }
 
 
-    console.log('data', data)
-
     return (
         <>
             <DeleteProductModal visible={modalVisible} setVisible={(e)=>setVisible(e)} handleChange={_delete} />
