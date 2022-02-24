@@ -10,6 +10,7 @@ import { cartStyle } from '../../styles/cart'
 import MedicineCard from '../../components/MedicineCard'
 import NoCart from '../../assets/noCart.svg'
 import Trash from '../../assets/icons/trash.svg'
+import Truck from '../../assets/cart/Delivery&Order.svg'
 
 import ClearCart from '../../components/modals/ClearCart'
 import { deleteAllBasket, getAllBasket, getFavoritesProducts } from '../../api'
@@ -135,25 +136,42 @@ const Cart = ({ navigation }) => {
 
                 {!cart.length ? (
                     <View>
-                          <View>
-                              <View><Text></Text></View>
-                          </View>
-                          <View></View>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate('Main')
+                            }}
+                            style={{...cartStyle.btn}}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={cartStyle.btnText}>
+                                {strings.cart.to_main}
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 ) : (
-                    <TouchableOpacity
-                    onPress={() => {
-                        navigation.push('SelectPharmacy')
-                    }}
-                    style={cartStyle.btn}
-                    activeOpacity={0.8}
-                >
-                    <Text style={cartStyle.btnText}>
-                        {cart.length
-                            ? strings.cart.checkout
-                            : strings.cart.to_main}
-                    </Text>
-                </TouchableOpacity>
+                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 24}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
+                            <Truck />
+                            <Text style={cartStyle.orderDelivery}>
+                                {`Заказать\nдоставку`}
+                            </Text>
+                        </View>
+
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigation.push('SelectPharmacy')
+                            }}
+                            style={{...cartStyle.btn, width: '70%'}}
+                            activeOpacity={0.8}
+                        >
+                            <Text style={cartStyle.btnText}>
+                                {cart.length
+                                    ? strings.cart.checkout
+                                    : strings.cart.to_main}
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+
                 )}
 
             </View>

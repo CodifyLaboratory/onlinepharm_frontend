@@ -9,5 +9,6 @@ export const Colors = {
     gray_secondary: '#BCBCBC',
     light: '#4BCCED',
     background: '#F3F3F3',
-    error: '#E00000'
+    error: '#E00000',
+    red: '#F04438'
 }

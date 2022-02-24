@@ -1,13 +1,14 @@
 import {StyleSheet} from 'react-native'
+import {Colors} from "../../constants/colors";
 
 export const selectPharmCard = StyleSheet.create({
     container: {
         width: '100%',
-        height: 135,
+        // height: 127,
         backgroundColor: '#fff',
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        // justifyContent: 'space-bete',
         borderRadius: 10,
         marginBottom: 16,
         padding: 16,
@@ -19,6 +20,30 @@ export const selectPharmCard = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 1.41,
         elevation: 2,
+    },
+    list_row: {
+        display: 'flex',
+        flexDirection: 'row'
+
+    },
+    columnCenter: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    content: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        // backgroundColor: 'green',
+        width: '100%'
+    },
+    productList: {
+      width: '100%',
+      marginTop: 24
+    },
+    stockStatus: {
+        color: Colors.gray_medium
     },
     farmImg: {
         height: 70,
@@ -37,16 +62,36 @@ export const selectPharmCard = StyleSheet.create({
         fontFamily: 'SF-Pro-Medium',
         lineHeight: 15.5
     },
-    farmAdress: {
+    farmAddress: {
         color: '#1F8BA7',
         fontSize: 11,
-        marginBottom: 10,
+        // marginBottom: 10,
         width: 90,
         fontFamily: 'SF-Pro-Regular',
-        lineHeight: 14.3
+        lineHeight: 14.3,
+        maxHeight: 47
     },
     farmLocation: {
         flexDirection: 'row',
-        alignItems: 'center',
     },
+    notAvailable: {
+        fontFamily: 'SF-Pro-Regular',
+        fontSize: 15,
+        lineHeight: 18,
+        color: Colors.red
+    },
+    totalRow: {
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 12,
+    },
+    total: {
+        fontFamily: 'SF-Pro-SemiBold',
+        fontSize: 17,
+        lineHeight: 20,
+        color: Colors.gray
+    }
 })

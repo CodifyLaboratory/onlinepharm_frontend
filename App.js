@@ -26,7 +26,7 @@ export default function App() {
     const store = createStore(reducers)
 
     useEffect(() => {
-        initLanguage().then(r => strings.setLanguage(r || 'ru'))
+        initLanguage().then(r => strings.setLanguage(r))
         _getLocation().then(r => store.dispatch(setCoordinates(r?.coords)))
         me().then(r => initProfile(r?.user_id))
         return () => {
@@ -37,6 +37,7 @@ export default function App() {
     const initLanguage = async () => {
         if (_isMounted.current) { // Check always mounted component
             return await AsyncStorage.getItem('lang')
+
         }
 
     }

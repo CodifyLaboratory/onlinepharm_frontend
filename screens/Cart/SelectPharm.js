@@ -65,7 +65,6 @@ const SelectPharmacy = ({ navigation, route }) => {
 
     return (
         <ScrollView style={{ backgroundColor: Colors.background }}>
-            <Text>fds</Text>
             <View style={farms.container}>
                 <View style={farms.type}>
                     <TouchableOpacity

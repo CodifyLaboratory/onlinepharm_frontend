@@ -7,12 +7,19 @@ export const cartStyle = StyleSheet.create({
         backgroundColor: '#fff',
         paddingTop: Platform.OS == 'android' ? 0 : 0,
         // padding: 16,
-        paddingBottom: 70,
+        paddingBottom: 90,
     },
     productList: {
         paddingLeft: 16,
         paddingRight: 16,
         paddingBottom: 50
+    },
+    orderDelivery: {
+        fontSize: 12,
+        lineHeight: 14,
+        color: Colors.gray,
+        fontFamily: 'SF-Pro-Medium',
+        marginLeft: 6
     },
 
     total: {

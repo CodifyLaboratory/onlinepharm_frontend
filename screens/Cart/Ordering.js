@@ -16,8 +16,9 @@ import {Controller, useForm} from "react-hook-form";
 import {strings} from "../../localization";
 import PrimaryInput from "../../components/PrimaryInput";
 import {useDispatch, useSelector} from "react-redux";
+import {createOrder} from "../../api";
 
-function Ordering({navigation}) {
+function Ordering({navigation, route}) {
     const [deliveryOptionsValue, setDeliveryOptionsValue] =
         React.useState('delivery')
     const [paymentMethodsValue, setPaymentMethodsValue] = React.useState(1)
@@ -26,6 +27,12 @@ function Ordering({navigation}) {
     useEffect(()=> {
 
     }, [])
+
+    // console.log('ROUITE', route.params)
+
+    const { basket, id } = route.params
+
+    console.log('basket', basket)
 
     const dispatch = useDispatch()
 
@@ -47,8 +54,31 @@ function Ordering({navigation}) {
         }
     });
 
-    const submit = (data) => {
+
+    // console.log('formState,')
+    const submit = async (data) => {
         // console.log('data', data)
+        const form = {
+            "pharmacy": id,
+            "comment": data.comment,
+            "delivery_method": "Доставка",
+            "payment_method": "При получении заказа",
+            "address": data.address,
+            "apartment": data.apartment,
+            "entrance": data.entrance,
+            "total_price": 444,
+            "order_medications": basket
+        }
+
+        try {
+            const res = await createOrder(form)
+            console.log('res', res)
+        } catch (e) {
+            console.log('E', e.message)
+            throw new Error(e)
+        } finally {
+
+        }
     }
 
     const cards = [
@@ -57,12 +87,12 @@ function Ordering({navigation}) {
     ]
 
     const sumTotal = (arr) =>
-        arr ? arr.reduce((sum, {all_price, count}) => sum + all_price * count, 0)
+        arr ? arr.reduce((sum, {medication, count}) => sum + medication?.price * count, 0)
             : 0
 
     const delivery_price = 156
 
-    const total = sumTotal(cart)
+    const total = sumTotal(basket)
 
     return (
         <ScrollView style={{backgroundColor: '#fff'}}>
@@ -71,7 +101,7 @@ function Ordering({navigation}) {
                 <Text style={ordering.label}>{strings.auth.name}</Text>
                 <Controller
                     control={control}
-                    rules={{required: true}}
+                    rules={{required: false}}
                     render={({field: {onChange, onBlur, value}}) => (
                         <PrimaryInput
                             onChange={onChange}
@@ -86,7 +116,7 @@ function Ordering({navigation}) {
                 <Text style={ordering.label}>{strings.auth.email}</Text>
                 <Controller
                     control={control}
-                    rules={{required: true}}
+                    rules={{required: false}}
                     render={({field: {onChange, onBlur, value}}) => (
 
                         <PrimaryInput
@@ -116,7 +146,7 @@ function Ordering({navigation}) {
                 <Text style={ordering.label}>{strings.cart.order_comments}</Text>
                 <Controller
                     control={control}
-                    rules={{required: true}}
+                    rules={{required: false}}
                     render={({field: {onChange, onBlur, value}}) => (
                         <PrimaryInput
                             onChange={onChange}
@@ -153,7 +183,7 @@ function Ordering({navigation}) {
                 <Text style={{...ordering.label, marginTop: 20}}>{strings.cart.city}:</Text>
                 <Controller
                     control={control}
-                    rules={{required: true}}
+                    rules={{required: false}}
                     render={({field: {onChange, onBlur, value}}) => (
                         <PrimaryInput
                             onChange={onChange}
@@ -185,7 +215,7 @@ function Ordering({navigation}) {
                         <Text style={ordering.label}>{strings.cart.apartment}:</Text>
                         <Controller
                             control={control}
-                            rules={{required: true}}
+                            rules={{required: false}}
                             render={({field: {onChange, onBlur, value}}) => (
                                 <PrimaryInput
                                     onChange={onChange}
@@ -202,7 +232,7 @@ function Ordering({navigation}) {
                         <Text style={ordering.label}>{strings.cart.entrance}:</Text>
                         <Controller
                             control={control}
-                            rules={{required: true}}
+                            rules={{required: false}}
                             render={({field: {onChange, onBlur, value}}) => (
                                 <PrimaryInput
                                     onChange={onChange}
@@ -223,7 +253,7 @@ function Ordering({navigation}) {
 
                 <Text style={ordering.productListTitle}>{strings.cart.list_of_products}</Text>
                 <View style={ordering.productList}>
-                    {cart?.map(({medication, count}) => <View style={ordering.productRow}>
+                    {basket?.map(({medication, count}) => <View style={ordering.productRow}>
                         <Text style={{...ordering.listCount, width: '70%'}}>{medication?.title}</Text>
                         <View style={ordering.productRowPrice}>
                             <Text style={ordering.listCount}>{count} {strings.main.pcs}</Text>
@@ -266,16 +296,15 @@ function Ordering({navigation}) {
                         >
                             <Text style={ordering.radioText}>{strings.cart.in_cash}</Text>
                         </Radio>
-                        <Radio
-                            style={ordering.radioBtn}
-                            value={2}
-                            my={1}
-                        >
-                            <Text style={ordering.radioText}>
-                                {strings.cart.online_payment}
-                            </Text>
-
-                        </Radio>
+                        {/*<Radio*/}
+                        {/*    style={ordering.radioBtn}*/}
+                        {/*    value={2}*/}
+                        {/*    my={1}*/}
+                        {/*>*/}
+                        {/*    <Text style={ordering.radioText}>*/}
+                        {/*        {strings.cart.online_payment}*/}
+                        {/*    </Text>*/}
+                        {/*</Radio>*/}
                     </Radio.Group>
                 </NativeBaseProvider>
 
