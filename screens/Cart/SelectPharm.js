@@ -36,7 +36,7 @@ const SelectPharmacy = ({ navigation, route }) => {
     const getPharmacies = async() => {
         try {
          const res = await getDeliveryPharmacy()
-         console.log('res', res)
+         console.log('res++++++++++++++++++++++++++', res)
          return res
         } catch(e) {
              console.log('e', e)

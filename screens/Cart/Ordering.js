@@ -32,8 +32,6 @@ function Ordering({navigation, route}) {
 
     const { basket, id } = route.params
 
-    console.log('basket', basket)
-
     const dispatch = useDispatch()
 
     const {cart, user} = useSelector(state => state.data)
@@ -59,19 +57,24 @@ function Ordering({navigation, route}) {
     const submit = async (data) => {
         // console.log('data', data)
         const form = {
+            "name": data.name,
+            "email": data.email,
+            "phone": data.phone,
             "pharmacy": id,
             "comment": data.comment,
-            "delivery_method": "Доставка",
-            "payment_method": "При получении заказа",
+            "payment_method": "sffasffa",
             "address": data.address,
             "apartment": data.apartment,
             "entrance": data.entrance,
-            "total_price": 444,
-            "order_medications": basket
+            "total_price": 324,
+            "delivery_price": 325,
+            "order_medications": basket.map(item => {medication: item.medication.id} )
         }
 
+        console.log('FORM +++', form)
+
         try {
-            const res = await createOrder(form)
+            const res = await createOrder(JSON.stringify(form))
             console.log('res', res)
         } catch (e) {
             console.log('E', e.message)

@@ -126,6 +126,7 @@ export default function Profile({navigation, setIsSignIn}) {
                             <Arrow/>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={()=>navigation.navigate('MyOrders')}
                             style={profile.profileLink}
                             activeOpacity={0.6}
                         >

@@ -64,6 +64,8 @@ import MyPaymentMethods from "../screens/Profile/MyPaymentMethods";
 import AddPaymentCard from "../screens/Profile/AddPaymentCard";
 import AboutUs from "../screens/Profile/AboutUs";
 import SelectPharmacy from '../screens/Cart/SelectPharm';
+import MyOrders from '../screens/Profile/MyOrders';
+import OrderDetails from '../screens/Profile/OrderDetails';
 
 
 const Tab = createBottomTabNavigator()
@@ -91,6 +93,20 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 component={MyProfile}
                 options={{
                     header: (props) => <Header {...props} title={strings.profile.my_account} />,
+                }}
+            />
+             <Stack.Screen
+                name="MyOrders"
+                component={MyOrders}
+                options={{
+                    header: (props) => <Header {...props} title={strings.profile.my_orders} />,
+                }}
+            />
+              <Stack.Screen
+                name="OrderDetails"
+                component={OrderDetails}
+                options={{
+                    header: (props) => <Header {...props} title={strings.profile.my_orders} />,
                 }}
             />
             <Stack.Screen

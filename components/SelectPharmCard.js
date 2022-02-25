@@ -129,7 +129,7 @@ const SelectPharmCard = ({navigation, data}) => {
                     <TouchableOpacity
                         activeOpacity={0.6}
                         style={farms.farmFind}
-                        onPress={() => navigation.push('Ordering', {basket: countStockPositions(), id: 26})}
+                        onPress={() => navigation.push('Ordering', {basket: countStockPositions(), id: data?.id})}
                     >
                         <Text style={farms.farmFindText}>{strings.cart.choose}</Text>
                     </TouchableOpacity>
