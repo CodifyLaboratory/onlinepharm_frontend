@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import {View, StyleSheet} from "react-native";
-import ChangeLanguage from "../Profile/ChangeLanguage";
 import LanguageSelector from "../../components/LanguageSelector";
 import Logo from '../../assets/auth/logo-2.svg'
 import {Colors} from "../../constants/colors";
@@ -32,14 +31,14 @@ const SelectLanguage = ({navigation}) => {
     }, [])
 
    function handleChange() {
-        navigation.navigate('Unauthorized')
+        navigation.push('Unauthorized')
     }
 
-    if(loading) return <Loader />
+    if (loading) return <Loader />
 
     return <View style={styles.container}>
         <Logo style={styles.logo} />
-        <LanguageSelector next={handleChange} />
+        <LanguageSelector navigation={navigation} next={handleChange} />
     </View>
 }
 

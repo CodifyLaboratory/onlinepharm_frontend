@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect } from 'react'
 import {
     View,
     Text,
@@ -15,29 +15,24 @@ import VisaIcon from '../../assets/icons/visa.svg'
 import {Controller, useForm} from "react-hook-form";
 import {strings} from "../../localization";
 import PrimaryInput from "../../components/PrimaryInput";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import {createOrder} from "../../api";
 
 function Ordering({navigation, route}) {
     const [deliveryOptionsValue, setDeliveryOptionsValue] =
         React.useState('delivery')
     const [paymentMethodsValue, setPaymentMethodsValue] = React.useState(1)
-    const [currentCard, setCurrentCard] = useState(0)
+    // const [currentCard, setCurrentCard] = useState(0)
 
     useEffect(()=> {
 
     }, [])
 
-    // console.log('ROUITE', route.params)
 
     const { basket, id } = route.params
 
-    const dispatch = useDispatch()
 
     const {cart, user} = useSelector(state => state.data)
-
-
-    // console.log('user!~!!!', user)
 
     const {control, handleSubmit, setError, formState: {errors}} = useForm({
         defaultValues: {
@@ -56,19 +51,19 @@ function Ordering({navigation, route}) {
     // console.log('formState,')
     const submit = async (data) => {
         // console.log('data', data)
-        const form = {
+        let form = {
             "name": data.name,
             "email": data.email,
             "phone": data.phone,
             "pharmacy": id,
             "comment": data.comment,
-            "payment_method": "sffasffa",
+            "payment_method": "Delivery",
             "address": data.address,
             "apartment": data.apartment,
             "entrance": data.entrance,
-            "total_price": 324,
+            "total_price": total,
             "delivery_price": 325,
-            "order_medications": basket.map(item => {medication: item.medication.id} )
+            "order_medications": basket.map(item => ({medication: item.medication.id}))
         }
 
         console.log('FORM +++', form)
@@ -77,7 +72,7 @@ function Ordering({navigation, route}) {
             const res = await createOrder(JSON.stringify(form))
             console.log('res', res)
         } catch (e) {
-            console.log('E', e.message)
+            console.log('E', e)
             throw new Error(e)
         } finally {
 

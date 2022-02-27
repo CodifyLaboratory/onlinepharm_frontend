@@ -27,20 +27,19 @@ const LanguageSelector = ({next, navigation}) => {
     ]
 
     async function initLanguage() {
-        const lang = AsyncStorage.getItem('lang')
-        console.log('lang', lang)
         if(_isMounted.current) {
-            lang ? strings.setLanguage(lang) : strings.setLanguage('ru')
+            const lang = await AsyncStorage.getItem('lang')
+            strings.setLanguage(lang)
         }
 
     }
 
 
     const handleChange = async (lang) => {
-        await AsyncStorage.setItem('lang', lang)
         next ? next() : navigation.navigate('Main')
         setLanguage(lang)
         strings.setLanguage(lang)
+        await AsyncStorage.setItem('lang', lang)
     }
 
     return (

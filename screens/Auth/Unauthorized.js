@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import Logo from '../../assets/auth/logo-2.svg'
 import {Colors} from "../../constants/colors";
 import {strings} from "../../localization";
