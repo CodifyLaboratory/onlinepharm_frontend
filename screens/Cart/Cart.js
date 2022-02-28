@@ -28,8 +28,10 @@ const Cart = ({ navigation }) => {
     const { cart = [], is_guest } = useSelector((state) => state.data)
 
     const sumTotal = (arr) =>
-        arr ? arr.reduce( (sum, { all_price, count }) => sum + all_price * count,  0 )
+        arr ? arr.reduce( (sum, { medication, count }) => sum + medication.price * count,  0 )
             : 0
+
+            console.log('CART', cart)
 
     const total = sumTotal(cart)
 

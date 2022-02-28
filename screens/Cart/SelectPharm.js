@@ -16,9 +16,6 @@ const SelectPharmacy = ({ navigation, route }) => {
     const [brands, setBrands] = useState([])
     const [selectedFarm, setSelectedFarm] = useState(0)
 
-
-
-
     useEffect(() => {
        getPharmacies().then(res => setPharmacies(res))
         Api.getData('pharm-brands/').then((res) => setBrands(res.data))
@@ -35,9 +32,7 @@ const SelectPharmacy = ({ navigation, route }) => {
 
     const getPharmacies = async() => {
         try {
-         const res = await getDeliveryPharmacy()
-         console.log('res++++++++++++++++++++++++++', res)
-         return res
+        return await getDeliveryPharmacy()
         } catch(e) {
              console.log('e', e)
         }

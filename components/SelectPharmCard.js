@@ -60,7 +60,12 @@ const SelectPharmCard = ({navigation, data}) => {
         arr ? arr.reduce((sum, {medication, count}) => sum + medication.price * count, 0)
             : 0
 
-    const medicationTotal = (arr) => {
+    const countTotal = (arr) => {
+        arr ? arr.reduce((sum, {medication, count}) => sum + medication.price * count, 0)
+        : 0
+    }        
+
+    const filterBasket = (arr) => {
         return arr.map(item => {
             const hasMedication =
                 store_medications.some(store => store.medication.id === item.medication.id)
@@ -74,10 +79,13 @@ const SelectPharmCard = ({navigation, data}) => {
         return basket_medications.filter(item => store_medications.some(s => item.medication.id === s.medication.id))
     }
 
+    const total = sumTotal(basket_medications)
+    
+    const countMedication = filterBasket(basket_medications)
+    
+    const totalMedications = countTotal(countStockPositions())
 
-    const total = sumTotal(store_medications)
-
-    const countMedication = medicationTotal(basket_medications)
+    console.log('++++++++++++++++++++', totalMedications)
 
     return (
         <View style={selectPharmCard.container}>
@@ -158,7 +166,7 @@ const SelectPharmCard = ({navigation, data}) => {
                 <View style={selectPharmCard.totalRow}>
                     <Text style={selectPharmCard.total}>{strings.cart.total}</Text>
                     <View style={ordering.productRowPrice}>
-                        <Text style={ordering.listCount}>{countMedication.length} {strings.main.pcs}</Text>
+                        <Text style={ordering.listCount}>{totalMedications} {strings.main.pcs}</Text>
                         <Text style={selectPharmCard.total}>{total} с</Text>
                     </View>
 

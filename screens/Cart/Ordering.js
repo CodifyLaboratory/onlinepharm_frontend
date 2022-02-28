@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     View,
     Text,
@@ -17,12 +17,14 @@ import {strings} from "../../localization";
 import PrimaryInput from "../../components/PrimaryInput";
 import { useSelector } from "react-redux";
 import {createOrder} from "../../api";
+import SuccessModalComponent from '../../components/modals/successModal'
 
 function Ordering({navigation, route}) {
     const [deliveryOptionsValue, setDeliveryOptionsValue] =
         React.useState('delivery')
     const [paymentMethodsValue, setPaymentMethodsValue] = React.useState(1)
     // const [currentCard, setCurrentCard] = useState(0)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(()=> {
 
@@ -30,7 +32,7 @@ function Ordering({navigation, route}) {
 
 
     const { basket, id } = route.params
-
+    const delivery_price = 160
 
     const {cart, user} = useSelector(state => state.data)
 
@@ -47,32 +49,37 @@ function Ordering({navigation, route}) {
         }
     });
 
-
-    // console.log('formState,')
     const submit = async (data) => {
-        // console.log('data', data)
+    
         let form = {
-            "name": data.name,
-            "email": data.email,
-            "phone": data.phone,
-            "pharmacy": id,
-            "comment": data.comment,
-            "payment_method": "Delivery",
-            "address": data.address,
-            "apartment": data.apartment,
-            "entrance": data.entrance,
-            "total_price": total,
-            "delivery_price": 325,
-            "order_medications": basket.map(item => ({medication: item.medication.id}))
+            name: data.name,
+            email: data.email,
+            phone: data.phone,
+            pharmacy: id,
+            comment: data.comment,
+            payment_method: "Delivery",
+            address: data.address,
+            apartment: data.apartment,
+            entrance: data.entrance,
+            total_price: total,
+            delivery_price: delivery_price,
+            order_medications: basket.map(item => ({medication: item.medication.id}))
         }
 
         console.log('FORM +++', form)
 
         try {
-            const res = await createOrder(JSON.stringify(form))
-            console.log('res', res)
+            const res = await createOrder(form)
+            if (res) {
+                setShowModal(true)
+               
+                setTimeout(() => {
+ navigation.navigate('Main')
+                    setShowModal(false)
+                }, 3000)
+            }
         } catch (e) {
-            console.log('E', e)
+            console.log('E!!!!', e)
             throw new Error(e)
         } finally {
 
@@ -88,7 +95,7 @@ function Ordering({navigation, route}) {
         arr ? arr.reduce((sum, {medication, count}) => sum + medication?.price * count, 0)
             : 0
 
-    const delivery_price = 156
+    
 
     const total = sumTotal(basket)
 
@@ -330,6 +337,7 @@ function Ordering({navigation, route}) {
                     <Text style={cartStyle.btnText}>{strings.cart.checkout}</Text>
                 </TouchableOpacity>
             </View>
+            <SuccessModalComponent text={strings.cart.successfully_placed} visible={showModal} setVisible={(e)=>setShowModal(e)} />
         </ScrollView>
     )
 }

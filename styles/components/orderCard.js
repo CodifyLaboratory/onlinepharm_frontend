@@ -14,6 +14,7 @@ export const orderCard = StyleSheet.create({
         paddingLeft: 14,
         justifyContent: 'space-between',
         paddingRight: 14,
+        marginBottom: 16
     },
     imageContainer: {},
     image: {

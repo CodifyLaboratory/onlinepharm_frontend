@@ -5,7 +5,7 @@ import MedicineCard from '../../components/MedicineCard'
 
 import Loader from '../../components/Loader'
 import { Colors } from '../../constants/colors'
-import { getFavoritesProducts, getAllBasket } from '../../api'
+import { getFavoritesProducts, getAllBasket, getOrders } from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMedicineFavorite, loadCart } from '../../store/actions'
 import OrderCard from '../../components/OrderCard'
@@ -16,25 +16,42 @@ function MyOrders({ navigation }) {
 
     const dispatch = useDispatch()
     const [changed, setChanged] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [orders, setOrders] = useState(null)
 
-    // useEffect(() => {
-    //     getAllFavorites()
-    //     getBasket()
-    // }, [changed])
+    const getMyOrders = async () => {
+        setLoading(true)
+        try {
+           const res = await getOrders()
+           console.log('++__', res)
+           return res
+        } catch(e) {
+           throw new Error(e)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+  
+    useEffect(()=>{
+        getMyOrders().then(res => setOrders(res))
+    }, [])
 
    
     // const isSelected = (id) => {
     //     return favorites_medicine?.find((item) => item.medication.id === id)
     // }
 
+    console.log('res', orders)
 
-    // if (!favorites_medicine) return <Loader />
+    if (loading) return <Loader />
 
     return (
         <ScrollView style={{ backgroundColor: Colors.background }}>
             <View style={{ paddingHorizontal: 16, marginTop: 25 }}>
+                {orders?.map(item => <OrderCard status={item?.order_status} data={item.pharmacy} navigation={navigation} />)}
                 
-                       <OrderCard navigation={navigation} />
+                       
              
             </View>
         </ScrollView>
