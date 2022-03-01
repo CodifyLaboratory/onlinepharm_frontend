@@ -50,7 +50,7 @@ function Ordering({navigation, route}) {
     });
 
     const submit = async (data) => {
-    
+
         let form = {
             name: data.name,
             email: data.email,
@@ -66,20 +66,19 @@ function Ordering({navigation, route}) {
             order_medications: basket.map(item => ({medication: item.medication.id}))
         }
 
-        console.log('FORM +++', form)
 
+       console.log('form', form)
         try {
             const res = await createOrder(form)
             if (res) {
                 setShowModal(true)
-               
+
                 setTimeout(() => {
  navigation.navigate('Main')
                     setShowModal(false)
                 }, 3000)
             }
         } catch (e) {
-            console.log('E!!!!', e)
             throw new Error(e)
         } finally {
 
@@ -95,7 +94,7 @@ function Ordering({navigation, route}) {
         arr ? arr.reduce((sum, {medication, count}) => sum + medication?.price * count, 0)
             : 0
 
-    
+
 
     const total = sumTotal(basket)
 

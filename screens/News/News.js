@@ -16,8 +16,6 @@ export default function News({ navigation }) {
     const [categoryDataId, setCategoryDataId] = useState([])
     const [newsItems, setNewsItems] = useState([])
 
-    console.log('newsItems,', newsItems)
-
     useEffect(() => {
         Api.getData('news/').then((res) => setNewsItems(res.data))
         Api.getData('news-categories/').then((res) =>

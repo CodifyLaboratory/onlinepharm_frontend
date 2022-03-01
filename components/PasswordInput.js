@@ -10,7 +10,6 @@ import CloseEye from '../assets/icons/closed_eye.svg'
 
 const PasswordInput = ({errors, onChange, onBlur, value, placeholder}) => {
 
-    console.log('errors', errors)
 
     const [visible, setVisible] = useState(false)
 

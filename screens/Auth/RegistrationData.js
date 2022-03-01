@@ -50,7 +50,6 @@ function RegistrationData({ navigation }) {
 
         Api.putData(`auth/users/update/${userData.id}/`, userForm, userData.access)
             .then((res) => {
-                console.log('RES', res)
                 if (res.status === 200) {
                     setVisible(true)
                     setTimeout(()=>navigation.push('Login'), 2000)

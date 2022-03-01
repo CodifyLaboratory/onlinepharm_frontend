@@ -8,7 +8,7 @@ export const request = async (url, method, payload, formData) => {
     const parsed = JSON.parse(data)
     const token = parsed?.access
 
-    console.log('token', token)
+   console.log('token', token)
 
     const lang = strings.getLanguage() || 'ru'
 
@@ -147,4 +147,8 @@ export async function getDeliveryPharmacy() {
 
 export async function getOrders() {
     return request('/api/orders/', 'GET')
+}
+
+export async function getOrdersById(id) {
+    return request(`/api/orders/${id}/`, 'GET')
 }

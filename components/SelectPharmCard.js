@@ -37,7 +37,6 @@ const SelectPharmCard = ({navigation, data}) => {
     }
 
 
-    console.log('basket', data)
     const isSelected = () => {
         return favorites_pharmacy.some((item) => item.pharmacy.id === data.location.user)
     }
@@ -63,7 +62,7 @@ const SelectPharmCard = ({navigation, data}) => {
     const countTotal = (arr) => {
         arr ? arr.reduce((sum, {medication, count}) => sum + medication.price * count, 0)
         : 0
-    }        
+    }
 
     const filterBasket = (arr) => {
         return arr.map(item => {
@@ -80,12 +79,11 @@ const SelectPharmCard = ({navigation, data}) => {
     }
 
     const total = sumTotal(basket_medications)
-    
+
     const countMedication = filterBasket(basket_medications)
-    
+
     const totalMedications = countTotal(countStockPositions())
 
-    console.log('++++++++++++++++++++', totalMedications)
 
     return (
         <View style={selectPharmCard.container}>

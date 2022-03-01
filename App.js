@@ -44,7 +44,7 @@ export default function App() {
 
 
    const initProfile = async (id) => {
-        console.log('id', id)
+
         try {
             const res = await getProfile(id)
             store.dispatch(setUser(res))

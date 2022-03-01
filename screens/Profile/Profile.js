@@ -61,8 +61,6 @@ export default function Profile({navigation, setIsSignIn}) {
 
     if (!userData || !userInfo) return <Loader/>
 
-    console.log('user', userInfo)
-
     return (
         <ScrollView>
             <SafeAreaView>

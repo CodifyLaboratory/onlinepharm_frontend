@@ -31,7 +31,7 @@ const Cart = ({ navigation }) => {
         arr ? arr.reduce( (sum, { medication, count }) => sum + medication.price * count,  0 )
             : 0
 
-            console.log('CART', cart)
+
 
     const total = sumTotal(cart)
 

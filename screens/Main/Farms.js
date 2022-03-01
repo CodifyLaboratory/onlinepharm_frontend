@@ -19,7 +19,6 @@ const Farms = ({ navigation, route }) => {
         Api.getData('pharm-brands/').then((res) => setBrands(res.data))
     }, [])
 
-    console.log('+++++++++++', pharmacies)
 
     const pickerRef = useRef()
     function open() {
