@@ -78,7 +78,7 @@ const SelectPharmCard = ({navigation, data}) => {
         return basket_medications.filter(item => store_medications.some(s => item.medication.id === s.medication.id))
     }
 
-    const total = sumTotal(basket_medications)
+    const total = sumTotal(countStockPositions())
 
     const countMedication = filterBasket(basket_medications)
 

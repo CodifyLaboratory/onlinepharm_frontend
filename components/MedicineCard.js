@@ -21,6 +21,7 @@ import {setAuthorization} from "../store/actions";
 import {strings} from "../localization";
 
 function MedicineCard({ navigation, data, isSelected, setChanged, changed, basketObj, type }) {
+    console.log('DATA +++ ', data)
     const dispatch = useDispatch()
     const [modalVisible, setVisible] = useState(false)
 
@@ -98,7 +99,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                             activeOpacity={0.6}
                             style={myMedicine.find}
                             onPress={() =>
-                                navigation.navigate('MedicineInfo', {medId: data.id})
+                                navigation.navigate('MedicineInfo', {medId: data?.id})
                             }
                         >
                             <Text style={myMedicine.findText}>{strings.main.more}</Text>

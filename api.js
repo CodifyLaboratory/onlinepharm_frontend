@@ -152,3 +152,11 @@ export async function getOrders() {
 export async function getOrdersById(id) {
     return request(`/api/orders/${id}/`, 'GET')
 }
+
+export async function getMedication(id) {
+    return request(`/api/medications/${id}/`, 'GET')
+}
+
+export async function getNews() {
+    return request(`/api/news/`, 'GET')
+}

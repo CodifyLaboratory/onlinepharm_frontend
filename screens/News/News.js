@@ -10,6 +10,7 @@ import { news } from '../../styles/news'
 import Api from '../../API'
 import NewsCard from '../../components/NewsCard'
 import { Colors } from '../../constants/colors'
+import {getNews} from '../../api'
 
 export default function News({ navigation }) {
     const [category, setCategory] = useState(1)
@@ -17,12 +18,26 @@ export default function News({ navigation }) {
     const [newsItems, setNewsItems] = useState([])
 
     useEffect(() => {
-        Api.getData('news/').then((res) => setNewsItems(res.data))
+        getNewsItems().then(r => setNewsItems(r))
         Api.getData('news-categories/').then((res) =>
             setCategoryDataId(res.data)
         )
     }, [])
 
+
+    const getNewsItems = async() => {
+        try {
+           return await getNews()
+        } catch(e) {
+
+        } finally {
+
+        }
+    }
+
+
+
+    
     const changeCategory = (id) => {
         setCategory(id)
     }

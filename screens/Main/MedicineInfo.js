@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import {
     View,
     Text,
@@ -12,44 +12,52 @@ import ReviewCard from '../../components/ReviewCard'
 import Api from '../../API'
 import Stars from 'react-native-stars'
 import Faq from '../../components/Faq'
-import {Colors} from "../../constants/colors";
-import Loader from "../../components/Loader";
-import {useDispatch, useSelector} from "react-redux";
-import Counter from "../../components/Counter";
-import {addToBasket, getAllBasket, updateBasket} from "../../api";
-import {loadCart, setAuthorization} from "../../store/actions";
-import {strings} from "../../localization";
+import { Colors } from '../../constants/colors'
+import Loader from '../../components/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import Counter from '../../components/Counter'
+import { addToBasket, getAllBasket, updateBasket } from '../../api'
+import { loadCart, setAuthorization } from '../../store/actions'
+import { strings } from '../../localization'
+import { getMedication } from '../../api'
 
-export default function MedicineInfo({navigation, route}) {
-
+export default function MedicineInfo({ navigation, route }) {
     const { medId } = route.params
 
     const [medData, setMedData] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch()
 
-    const { cart = [], is_guest } = useSelector(state => state.data)
+    const { cart = [], is_guest } = useSelector((state) => state.data)
 
-    const find_basket = cart.find(item => item.medication?.id === medId)
+    const find_basket = cart.find((item) => item.medication?.id === medId)
 
     useEffect(() => {
-        Api.getData(`medications/${medId}/`)
-            .then((res) => setMedData(res.data))
-            .catch((e) => console.error(e))
+        getData().then((r) => setMedData(r))
     }, [])
+
+    const getData = async () => {
+        setLoading(true)
+        try {
+            return await getMedication(medId)
+        } catch (e) {
+            throw new Error(e)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     const reviewsList = useMemo(
         () =>
             medData?.feedbacks?.map((item) => (
-                <ReviewCard data={item} key={item.id}/>
+                <ReviewCard data={item} key={item.id} />
             )),
         [medData?.feedbacks]
     )
 
-
-
     async function _create() {
-        if(is_guest) dispatch(setAuthorization(false))
+        if (is_guest) dispatch(setAuthorization(false))
         await addToBasket(medId, 1)
         const basket = await getAllBasket()
         await dispatch(loadCart(basket))
@@ -65,10 +73,9 @@ export default function MedicineInfo({navigation, route}) {
         await updateBasket(find_basket.id, find_basket.count - 1)
         const basket = await getAllBasket()
         await dispatch(loadCart(basket))
-
     }
 
-    if (!medData) return <Loader />
+    if (loading) return <Loader />
 
     return (
         <ScrollView>
@@ -76,7 +83,7 @@ export default function MedicineInfo({navigation, route}) {
                 <View style={styles.imageBox}>
                     <Image
                         style={styles.image}
-                        source={{uri: medData?.image}}
+                        source={{ uri: medData?.image }}
                     />
                 </View>
                 <Text style={styles.title}>{medData?.title}</Text>
@@ -92,7 +99,7 @@ export default function MedicineInfo({navigation, route}) {
                     }}
                 >
                     <Stars
-                        display={medData.middle_star}
+                        display={medData?.middle_star}
                         spacing={8}
                         count={5}
                         disabled={true}
@@ -101,11 +108,21 @@ export default function MedicineInfo({navigation, route}) {
                         emptyStar={require('../../assets/icons/emptyStar.png')}
                     />
                     <Text
-                        style={[styles.reviewsCount, {color: !medData?.feedbacks_count ? Colors.gray_light : Colors.black}]}>
+                        style={[
+                            styles.reviewsCount,
+                            {
+                                color: !medData?.feedbacks_count
+                                    ? Colors.gray_light
+                                    : Colors.black,
+                            },
+                        ]}
+                    >
                         отзывов: {medData?.feedbacks_count}
                     </Text>
                 </View>
-                <Text style={styles.blockTitle}>{strings.product.description}</Text>
+                <Text style={styles.blockTitle}>
+                    {strings.product.description}
+                </Text>
                 <View style={styles.description}>
                     {!medData?.description?.manufacturer ? null : (
                         <View style={styles.descriptionElem}>
@@ -119,7 +136,9 @@ export default function MedicineInfo({navigation, route}) {
                     )}
                     {!medData?.description?.inn ? null : (
                         <View style={styles.descriptionElem}>
-                            <Text style={styles.descriptionElemTitle}>{strings.product.INN}</Text>
+                            <Text style={styles.descriptionElemTitle}>
+                                {strings.product.INN}
+                            </Text>
                             <Text style={styles.descriptionElemDesc}>
                                 {medData?.description?.inn}
                             </Text>
@@ -186,7 +205,9 @@ export default function MedicineInfo({navigation, route}) {
                         </View>
                     )}
                 </View>
-                <Text style={styles.blockTitle}>{strings.product.instructions}</Text>
+                <Text style={styles.blockTitle}>
+                    {strings.product.instructions}
+                </Text>
                 <View>
                     {!medData?.instruction?.description ? null : (
                         <Faq
@@ -286,36 +307,66 @@ export default function MedicineInfo({navigation, route}) {
                         emptyStar={require('../../assets/icons/emptyStar.png')}
                     />
                     <Text
-                        style={[styles.reviewsCount, {color: !medData?.feedbacks_count ? Colors.gray_light : Colors.black}]}>
+                        style={[
+                            styles.reviewsCount,
+                            {
+                                color: !medData?.feedbacks_count
+                                    ? Colors.gray_light
+                                    : Colors.black,
+                            },
+                        ]}
+                    >
                         {strings.main.review_count}: {medData?.feedbacks_count}
                     </Text>
                 </View>
 
-                {medData?.feedbacks_count
-                    ? <Text style={styles.blockTitle}>{strings.main.reviews}</Text>
-                    : <Text style={styles.withoutFeedbacks}>{strings.main.without_feedbacks_pharmacy}</Text>}
+                {medData?.feedbacks_count ? (
+                    <Text style={styles.blockTitle}>
+                        {strings.main.reviews}
+                    </Text>
+                ) : (
+                    <Text style={styles.withoutFeedbacks}>
+                        {strings.main.without_feedbacks_pharmacy}
+                    </Text>
+                )}
                 <TouchableOpacity
                     style={styles.reviewBtn}
                     activeOpacity={0.8}
-                    onPress={() => {is_guest
-                        ? dispatch(setAuthorization(false))
-                        : navigation.navigate('LeaveReview', {id: medData.id, type: 'medication'})}}
+                    onPress={() => {
+                        is_guest
+                            ? dispatch(setAuthorization(false))
+                            : navigation.navigate('LeaveReview', {
+                                  id: medData.id,
+                                  type: 'medication',
+                              })
+                    }}
                 >
-                    <Text style={styles.reviewBtnText}>{strings.main.leave_feedback}</Text>
+                    <Text style={styles.reviewBtnText}>
+                        {strings.main.leave_feedback}
+                    </Text>
                 </TouchableOpacity>
-                <View style={{marginBottom: medData?.feedbacks_count ? 10 : 0}}>
+                <View
+                    style={{ marginBottom: medData?.feedbacks_count ? 10 : 0 }}
+                >
                     {reviewsList}
                 </View>
-                {find_basket
-                    ? <Counter increment={_increment} decrement={_decrement} data={find_basket} />
-                    : <TouchableOpacity
-                    style={styles.reviewBtn}
-                    activeOpacity={0.8}
-                    onPress={() => _create()}
-                >
-                        <Text style={styles.reviewBtnText}>{strings.main.add_to_cart}</Text>
-                </TouchableOpacity>}
-
+                {find_basket ? (
+                    <Counter
+                        increment={_increment}
+                        decrement={_decrement}
+                        data={find_basket}
+                    />
+                ) : (
+                    <TouchableOpacity
+                        style={styles.reviewBtn}
+                        activeOpacity={0.8}
+                        onPress={() => _create()}
+                    >
+                        <Text style={styles.reviewBtnText}>
+                            {strings.main.add_to_cart}
+                        </Text>
+                    </TouchableOpacity>
+                )}
             </SafeAreaView>
         </ScrollView>
     )
@@ -324,7 +375,7 @@ export default function MedicineInfo({navigation, route}) {
 const styles = StyleSheet.create({
     container: {
         padding: 16,
-        backgroundColor: Colors.white
+        backgroundColor: Colors.white,
     },
     imageBox: {
         width: '100%',
@@ -344,26 +395,26 @@ const styles = StyleSheet.create({
         color: '#4B4747',
         marginBottom: 25,
         fontFamily: 'SF-Pro-SemiBold',
-        lineHeight: 24
+        lineHeight: 24,
     },
     price: {
         fontSize: 14,
         color: '#999999',
         fontFamily: 'SF-Pro-Regular',
-        lineHeight: 17
+        lineHeight: 17,
     },
     soms: {
         fontSize: 17,
         color: '#1F8BA7',
         fontFamily: 'SF-Pro-SemiBold',
-        lineHeight: 20
+        lineHeight: 20,
     },
     reviewsCount: {
         fontSize: 15,
         color: '#4B4747',
         marginLeft: 14,
         fontFamily: 'Poppins-Medium',
-        lineHeight: 22
+        lineHeight: 22,
     },
     blockTitle: {
         color: '#4B4747',
@@ -371,16 +422,16 @@ const styles = StyleSheet.create({
         marginTop: 24,
         marginBottom: 20,
         fontFamily: 'SF-Pro-SemiBold',
-        fontWeight: '600'
+        fontWeight: '600',
     },
     withoutFeedbacks: {
         fontSize: 18,
-        fontWeight: "500",
+        fontWeight: '500',
         color: Colors.gray_light,
         marginTop: 30,
         marginBottom: 16,
         fontFamily: 'Poppins-Medium',
-        lineHeight: 27
+        lineHeight: 27,
     },
     description: {},
     descriptionElem: {
@@ -392,14 +443,14 @@ const styles = StyleSheet.create({
         color: '#999999',
         fontFamily: 'SF-Pro-Regular',
         fontSize: 14,
-        lineHeight: 17
+        lineHeight: 17,
     },
     descriptionElemDesc: {
         width: 200,
         color: '#4B4747',
         fontFamily: 'SF-Pro-Regular',
         fontSize: 14,
-        lineHeight: 17
+        lineHeight: 17,
     },
     reviewBtn: {
         justifyContent: 'center',
@@ -408,12 +459,12 @@ const styles = StyleSheet.create({
         padding: 13,
         borderRadius: 20,
         marginBottom: 10,
-        marginTop: 10
+        marginTop: 10,
     },
     reviewBtnText: {
         color: '#ffffff',
         fontSize: 17,
         fontFamily: 'SF-Pro-SemiBold',
-        lineHeight: 20
+        lineHeight: 20,
     },
 })
