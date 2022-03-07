@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
+import {Colors} from "../../constants/colors";
 
 export const myFarms = StyleSheet.create({
     container: {
-        backgroundColor: '#E6EFF9',
+        backgroundColor: Colors.background,
         alignItems: 'center',
         borderRadius: 10,
         paddingTop: 30,

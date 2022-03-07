@@ -100,7 +100,7 @@ export default OnBoarding
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 45,
+        // marginTop: 45,
         backgroundColor: '#ffffff',
         display: 'flex',
         alignItems: 'center',

@@ -26,20 +26,20 @@ function FarmInfo({navigation, route}) {
 
     const { is_guest } = useSelector(state => state.data)
 
-    const id = route.params.pharmacy_id
+    const { medId, pharmacy_id } = route.params
 
     const [farmData, setFarmData] = useState(null)
 
     useEffect(() => {
-        loadFarmInfo()
+        loadFarmInfo().then(res => setFarmData(res))
     }, [])
 
     const loadFarmInfo = async () => {
         try {
-            const res = await getFarmInformation(id)
-            setFarmData(res)
+            return await getFarmInformation(pharmacy_id)
+
         } catch (e) {
-            console.log(e.response)
+            throw new Error(e)
         }
     }
 
@@ -130,7 +130,7 @@ function FarmInfo({navigation, route}) {
                         activeOpacity={0.7}
                         onPress={() => {
                             !is_guest
-                                ? navigation.navigate('LeaveReview', farmData)
+                                ? navigation.push('LeaveReview', farmData)
                                 : dispatch(setAuthorization(false))
                         }
                     }

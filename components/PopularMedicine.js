@@ -36,13 +36,16 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
         setChanged(!changed)
     }
 
+
+     console.log('DATA!!!!!!!!!!!!!!', data)
+
     return (
         <View style={styles.container}>
             <View style={styles.top}>
                 <Image style={styles.image} source={{ uri: data?.image }} />
             </View>
             <View style={styles.bottom}>
-                <Text style={styles.title}>{data?.title}</Text>
+                <Text style={styles.title}>{data?.title?.length > 14 ? data?.title.substring(0, 14).concat('...') : data?.title}</Text>
                 <View
                     style={{
                         alignItems: 'flex-start',

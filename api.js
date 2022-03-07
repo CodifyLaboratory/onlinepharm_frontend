@@ -107,12 +107,14 @@ export async function getAllBasket() {
 }
 
 export async function updateProfile(id, data) {
+    console.log('UD', id, 'DAAAATAA', data)
     return await request(`/api/auth/users/update/${id}/`, 'PUT', data)
 }
 
 export async function login(data) {
     return request(`/api/auth/users/token/`, 'POST', data)
 }
+
 export async function getProfile(id) {
     return request(`/api/auth/users/${id}/`, 'GET')
 }
@@ -153,6 +155,15 @@ export async function getOrdersById(id) {
     return request(`/api/orders/${id}/`, 'GET')
 }
 
+export async function getAllMedication() {
+    return request(`/api/medications/`, 'GET')
+}
+
+export async function searchMedication(value) {
+    return request(`/api/medications/?search=${value}`, 'GET')
+}
+
+
 export async function getMedication(id) {
     return request(`/api/medications/${id}/`, 'GET')
 }
@@ -168,3 +179,34 @@ export async function getNewsCategories() {
 export async function getNewsById(id) {
     return request(`/api/news/${id}/`, 'GET')
 }
+
+export async function getPharmBrands() {
+    return request(`/api/pharm-brands/`, 'GET')
+}
+
+export async function getPharms() {
+    return request(`/api/pharms/`, 'GET')
+}
+
+
+export async function getBanners() {
+    return request(`/api/banners/`, 'GET')
+}
+
+export async function getSubcategories(id) {
+    return request(`/api/subcategories/${id}/`, 'GET')
+}
+
+export async function getPopularMedications() {
+    return request(`/api/popular-medications/`, 'GET')
+}
+
+
+export async function getCategories() {
+    return request(`/api/categories/`, 'GET')
+}
+
+export async function getSelections() {
+    return request(`/api/selections/`, 'GET')
+}
+

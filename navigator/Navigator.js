@@ -368,6 +368,17 @@ const CartNav = () => {
                 }}
             />
 
+            <Stack.Screen
+                name="LeaveReview"
+                component={LeaveReview}
+                tabBarOptions={{
+                    keyboardHidesTabBar: true
+                }}
+                options={{
+                    header: (props) => <Header {...props} title={strings.main.new_feedback} />,
+                }}
+            />
+
 
 <Stack.Screen
                 name="SelectPharmacy"
@@ -606,9 +617,15 @@ export default function Navigator() {
 
             <Tab.Screen
                 name="Profile"
+                listeners={({navigation}) =>({
+                    tabPress: (event) => {
+                        event.preventDefault()
+                        navigation.navigate('Profile')
+                    }
+                })}
                 options={{
                     title: strings.profile.title,
-                    unmountOnBlur: true,
+                    // unmountOnBlur: true,
                     tabBarIcon: ({focused}) => (
                         <View
                             style={{

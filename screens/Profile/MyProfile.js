@@ -85,7 +85,8 @@ export default function MyProfile({route, navigation}) {
                 })
                 await updateUserPhoto(formData)
             }
-            await updateProfile(data.id, user)
+            console.log('@@@@@@@', data?.id, '$$$$$$$$$$$$$', user)
+            await updateProfile(data?.id, user)
         } catch (e) {
             console.log('e', e)
         } finally {
@@ -136,7 +137,6 @@ export default function MyProfile({route, navigation}) {
                                         keyboardType="default"
                                         onChangeText={onChange}
                                         value={value}
-                                        // defaultValue={data.user_profile.first_name}
                                         inputStyle={{fontSize: 14}}
                                         inputContainerStyle={{...myProfile.input}}
                                         placeholder={strings.auth.name}

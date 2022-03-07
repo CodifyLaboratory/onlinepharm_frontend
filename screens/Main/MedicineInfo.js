@@ -335,7 +335,7 @@ export default function MedicineInfo({ navigation, route }) {
                     onPress={() => {
                         is_guest
                             ? dispatch(setAuthorization(false))
-                            : navigation.navigate('LeaveReview', {
+                            : navigation.push('LeaveReview', {
                                   id: medData.id,
                                   type: 'medication',
                               })

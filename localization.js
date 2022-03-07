@@ -302,7 +302,7 @@ export let strings = new LocalizedStrings({
             online_payment: 'Онлайн төлөм',
             delivery_times: 'Жеткирүү мөөнөтү',
             shipping_cost: 'Жеткирүү акысы',
-            checkout: 'Тапшырык жол-жоболоштуруу',
+            checkout: 'Тапшырык \n жол-жоболоштуруу',
             to_pay: 'Төлөөгө',
             list: 'Тизме',
             clear_basket: 'Себетти тазалоо',

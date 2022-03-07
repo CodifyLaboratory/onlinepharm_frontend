@@ -43,7 +43,7 @@ const NewsCard = ({navigation, data}) => {
                 source={
                     data.image
                         ? {uri: data.image}
-                        : require('../assets/news/cardLogo.png')
+                        : require('../assets/news/emptynews.png')
                 }
             />
         </TouchableOpacity>

@@ -7,6 +7,7 @@ import Api from '../../API'
 import FarmsCard from '../../components/FarmsCard'
 import { Colors } from '../../constants/colors'
 import {strings} from "../../localization";
+import {getPharmBrands, getPharms} from "../../api";
 
 const Farms = ({ navigation, route }) => {
     const [type, setType] = useState(true)
@@ -15,8 +16,8 @@ const Farms = ({ navigation, route }) => {
     const [selectedFarm, setSelectedFarm] = useState(route.params)
 
     useEffect(() => {
-        Api.getData('pharms/').then((res) => setPharmacies(res.data))
-        Api.getData('pharm-brands/').then((res) => setBrands(res.data))
+        getPharms().then((res) => setPharmacies(res))
+        getPharmBrands().then((res) => setBrands(res))
     }, [])
 
 

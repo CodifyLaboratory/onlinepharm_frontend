@@ -22,6 +22,8 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
 
     const {title_category, medId, pharmacy_id, updateProfile } = route?.params || ''
 
+    console.log('MED ID', medId)
+
     const dispatch = useDispatch()
 
     const [updated, setUpdate] = useState(false)

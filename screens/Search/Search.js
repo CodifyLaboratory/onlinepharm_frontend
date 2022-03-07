@@ -11,6 +11,7 @@ import SearchImg from '../../assets/search/search.svg'
 import { search } from '../../styles/search'
 import Api from '../../API'
 import {strings} from "../../localization";
+import {searchMedication} from "../../api";
 
 const Search = (props) => {
     const [searchValue, setSearchValue] = useState('')
@@ -19,9 +20,9 @@ const Search = (props) => {
 
 
     useEffect(() => {
-        Api.getData(`medications/?search=${searchValue}`).then((res) => {
-            setNothing(searchValue && !res.data.length)
-            searchValue.length > 0 ? setSearchData(res.data) : setSearchData([]) }
+        searchMedication(searchValue).then((res) => {
+            setNothing(searchValue && !res.length)
+            searchValue.length > 0 ? setSearchData(res) : setSearchData([]) }
         )
     }, [searchValue])
 

@@ -5,6 +5,7 @@ import { myFarms } from '../../styles/components/myFarms'
 import { getFavorites } from '../../api'
 import Loader from '../../components/Loader'
 import {useSelector} from "react-redux";
+import {Colors} from "../../constants/colors";
 
 function MyFarms({ navigation }) {
     const { favorites_pharmacy } = useSelector(state => state.data)
@@ -27,7 +28,7 @@ function MyFarms({ navigation }) {
     if (!favorites_pharmacy) return <Loader />
 
     return (
-        <ScrollView style={{ flex: 1, backgroundColor: '#E6EFF9' }}>
+        <ScrollView style={{ flex: 1, backgroundColor: Colors.background }}>
             <View style={myFarms.container}>
                 {favorites_pharmacy &&
                 favorites_pharmacy.map((item) => (

@@ -1,11 +1,12 @@
 import { Platform, StyleSheet } from 'react-native'
+import {Colors} from "../constants/colors";
 
 export const categoriesMedicines = StyleSheet.create({
     text: {
         color: 'red',
     },
     container: {
-        backgroundColor: '#E6EFF9',
+        backgroundColor: Colors.white,
         paddingRight: 16,
         paddingLeft: 16,
         paddingTop: Platform.OS == 'android' ? 21 : 0,
@@ -48,4 +49,11 @@ export const categoriesMedicines = StyleSheet.create({
         color: '#1A1717',
         fontWeight: 'bold',
     },
+    title: {
+        fontSize: 20,
+        lineHeight: 30,
+        fontFamily: 'SF-Pro-Regular',
+        color: Colors.primary,
+        marginLeft: 16
+    }
 })

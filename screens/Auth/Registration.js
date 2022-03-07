@@ -33,7 +33,7 @@ function Registration({navigation}) {
     const saveData = async (data) => {
         try {
             const jsonValue = JSON.stringify(data)
-            await AsyncStorage.setItem('user', jsonValue)
+            await AsyncStorage.setItem('userData', jsonValue)
         } catch (err) {
             console.log(err)
         }
@@ -44,11 +44,15 @@ function Registration({navigation}) {
         Api.postData('/auth/users/create/', data)
             .then((res) => {
                 if (res.status === 201) {
+                    console.log('RES', res)
+                    saveData(res.data).then(r => r)
                     navigation.push('RegistrationData')
-                    saveData(res.data)
                 }
             })
-            .catch((e) => console.log(e))
+            .catch((e) =>  setError(
+                'email',
+                {message: e?.response?.data?.email[0], type: 'focus'},
+                {shouldFocus: true}))
     }
 
     return (
@@ -62,7 +66,7 @@ function Registration({navigation}) {
                         rules={{required: true,
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                message: "invalid email address"
+                                message: "Email адрес не корректный"
                             }
                     }}
                         render={({field: {onChange, onBlur, value}}) => (

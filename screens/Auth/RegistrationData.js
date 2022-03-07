@@ -12,6 +12,7 @@ import {styles} from "../../styles/components/modals";
 import Close from "../../assets/icons/close.svg";
 import Success from "../../assets/icons/success.svg";
 import MaskInput from "react-native-mask-input/src/MaskInput";
+import {updateProfile} from "../../api";
 
 function RegistrationData({ navigation }) {
 
@@ -29,7 +30,8 @@ function RegistrationData({ navigation }) {
 
     const loadData = async () => {
         try {
-            let data = await AsyncStorage.getItem('user')
+            let data = await AsyncStorage.getItem('userData')
+            console.log('________________', data)
             if (data !== null) {
                 setUserData(JSON.parse(data))
             }
@@ -38,24 +40,23 @@ function RegistrationData({ navigation }) {
         }
     }
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
 
         const userForm = {
-            "user_profile": {
-                "first_name": data?.first_name,
-                "last_name": data?.last_name,
-                "phone": data?.phone
+            user_profile: {
+                first_name: data?.first_name,
+                last_name: data?.last_name,
+                phone: data?.phone
             },
         }
 
-        Api.putData(`auth/users/update/${userData.id}/`, userForm, userData.access)
-            .then((res) => {
-                if (res.status === 200) {
+        updateProfile(userData?.id, userForm).then((res) => {
+                if (res?.id) {
                     setVisible(true)
                     setTimeout(()=>navigation.push('Login'), 2000)
                 }
             })
-            .catch((e) => console.log(e))
+            .catch((e) => console.log(e.response))
     }
 
     useEffect(() => {

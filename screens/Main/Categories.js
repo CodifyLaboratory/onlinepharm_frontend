@@ -16,7 +16,7 @@ import PopularMedicine from '../../components/PopularMedicine'
 import { main } from '../../styles/main'
 import { categories } from '../../styles/categories'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
-import {getAllBasket} from "../../api";
+import {getAllBasket, getBanners, getPopularMedications, getSubcategories} from "../../api";
 import {loadCart} from "../../store/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {strings} from "../../localization";
@@ -27,7 +27,10 @@ function Categories({ navigation, route }) {
 
     const { cart } = useSelector(state => state.data)
 
-    const id = route.params
+    const {id, title} = route.params
+
+    console.log('id', title)
+
     const [changed, setChanged] = useState(false)
     const [bannerData, setBannerData] = useState([])
     const [popularData, setPopularData] = useState([])
@@ -36,14 +39,16 @@ function Categories({ navigation, route }) {
     const [popularIndex, setPopularIndex] = useState(0)
 
     useEffect(() => {
-        Api.getData('banners/').then((res) => setBannerData(res.data))
-        Api.getData('subcategories/').then((res) => setSubCategory(res.data))
+        navigation.setParams({title_category: title})
+        getBanners().then((res) => setBannerData(res))
+        getSubcategories(id).then((res) => setSubCategory(res))
     }, [])
 
+
     useEffect(()=>{
-        getBasket()
-        Api.getData('popular-medications/').then((res) =>
-            setPopularData(res.data)
+        getBasket().then(r => r)
+        getPopularMedications().then((res) =>
+            setPopularData(res)
         )
     }, [changed])
 
@@ -65,7 +70,7 @@ function Categories({ navigation, route }) {
     return (
         <ScrollView>
             <SafeAreaView style={categories.container}>
-                <View style={main.banner}>
+                <View style={{...main.banner, paddingBottom: (bannerData.length < 2) ? 20 : 0}}>
                     <Carousel
                         onBeforeSnapToItem={(e) => setCurrent(e)}
                         sliderWidth={Dimensions.get('screen').width}
@@ -129,7 +134,7 @@ function Categories({ navigation, route }) {
                                     }
                                     sliderWidth={Dimensions.get('window').width}
                                     itemWidth={167}
-                                    data={popularData}
+                                    data={popularData?.slice(0, 10)}
                                     renderItem={(item) => {
                                         const basketObj = findBasketProduct(item.item.id)
                                         return (
@@ -145,10 +150,11 @@ function Categories({ navigation, route }) {
                                     layout={'default'}
                                 />
                             </View>
+
                             <Pagination
                                 inactiveDotStyle={main.inactiveBullet}
                                 dotStyle={main.dotStyle}
-                                dotsLength={popularData.length}
+                                dotsLength={10}
                                 activeDotIndex={popularIndex}
                             />
                         </View>

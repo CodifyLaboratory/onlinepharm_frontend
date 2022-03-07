@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ScrollView, SafeAreaView } from 'react-native'
+import {ScrollView, SafeAreaView, Text} from 'react-native'
 import { categoriesMedicines } from '../../styles/categoriesMedicines'
 import MedicineCard from '../../components/MedicineCard'
 import Api from '../../API'
@@ -7,12 +7,13 @@ import Loader from '../../components/Loader'
 
 import { useSelector, useDispatch } from 'react-redux'
 
-import { getFavoritesProducts, getAllBasket } from '../../api'
+import {getFavoritesProducts, getAllBasket, getAllMedication} from '../../api'
 
 import {
     loadCart,
     setMedicineFavorite,
 } from '../../store/actions'
+import {Colors} from "../../constants/colors";
 
 function CategoriesMedicines({ navigation, route }) {
     const category = route.params
@@ -25,9 +26,10 @@ function CategoriesMedicines({ navigation, route }) {
     const state = useSelector((state) => state.data)
 
     useEffect(() => {
+        navigation.setParams({title_category: category.title})
         getAllFavorites().then((r) => r)
         getBasket().then((r) => r)
-        Api.getData('medications/').then((res) => setMedicines(res.data))
+            getAllMedication().then((res) => setMedicines(res))
     }, [changed, dispatch])
 
     const getAllFavorites = async () => {
@@ -61,7 +63,7 @@ function CategoriesMedicines({ navigation, route }) {
     if (!medicines) return <Loader />
 
     return (
-        <ScrollView style={{ backgroundColor: '#E6EFF9' }}>
+        <ScrollView style={{ backgroundColor: Colors.white }}>
             <SafeAreaView style={categoriesMedicines.container}>
                 {medicines
                     .filter((el) => {

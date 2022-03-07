@@ -49,7 +49,7 @@ const LeaveReview = ({ route, navigation }) => {
         } finally {
             setModalVisible(true)
             setTimeout(() => {
-                navigation.navigate(is_medication ? 'MedicineInfo' : 'FarmInfo', id)
+                navigation.push((is_medication ? 'MedicineInfo' : 'FarmInfo'), is_medication ? {medId: id} : {pharmacy_id: id})
             }, 3000)
         }
     }

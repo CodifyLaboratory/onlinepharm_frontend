@@ -23,11 +23,19 @@ import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 
 import {useDispatch, useSelector} from 'react-redux'
 import {loadCart} from "../../store/actions";
-import {getAllBasket, getFavoritesProducts} from "../../api";
+import {
+    getAllBasket,
+    getBanners,
+    getCategories,
+    getFavoritesProducts,
+    getNews,
+    getPharmBrands,
+    getSelections
+} from "../../api";
 import {strings} from "../../localization";
 
 export default function Main({ navigation }) {
-    
+
 
     const [farmCardData, setFarmCardData] = useState([])
     const [bannerData, setBannerData] = useState([])
@@ -39,11 +47,11 @@ export default function Main({ navigation }) {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        Api.getData('pharm-brands/').then((res) => setFarmCardData(res.data))
-        Api.getData('banners/').then((res) => setBannerData(res.data))
-        Api.getData('categories/').then((res) => setCategoryData(res.data))
-        Api.getData('selections/').then((res) => setSelectionsData(res.data))
-        Api.getData('news/').then((res) => setNewsData(res.data?.results))
+        getPharmBrands().then((res) => setFarmCardData(res))
+        getBanners().then((res) => setBannerData(res))
+        getCategories().then((res) => setCategoryData(res))
+        getSelections().then((res) => setSelectionsData(res))
+        getNews().then((res) => setNewsData(res))
         getBasket().then(r => dispatch(loadCart(r)))
     }, [dispatch])
 
@@ -55,6 +63,9 @@ export default function Main({ navigation }) {
             console.log('e', e)
         }
     }
+
+
+
 
     const farmCardList = useMemo(
         () =>
@@ -82,7 +93,7 @@ export default function Main({ navigation }) {
 
     const selectionsList = useMemo(
         () =>
-            selectionsData.map((item) => (
+            selectionsData?.map((item) => (
                 <MainSymptomsCard
                     data={item}
                     key={item.id}
@@ -135,7 +146,7 @@ export default function Main({ navigation }) {
                         <View style={main.title}>
                             <Text style={main.title_text}>{strings.main.pharmacies}</Text>
                             <TouchableWithoutFeedback
-                                onPress={() => navigation.push('Farm')}
+                                onPress={() => navigation.push('Farms', 0)}
                             >
                                 <Text style={main.watchAll}>{strings.main.show_all}</Text>
                             </TouchableWithoutFeedback>

@@ -28,6 +28,7 @@ import Loader from '../../components/Loader'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization} from "../../store/actions";
 import {strings} from "../../localization";
+import {getProfile} from "../../api";
 
 const emptyAvatar = require('../../assets/profile/blank-user.jpg')
 
@@ -53,9 +54,8 @@ export default function Profile({navigation, setIsSignIn}) {
     }
 
     useEffect(() => {
-        loadData()
-        Api.getData(`auth/users/${userData?.user_id}/`, userData?.access)
-            .then((res) => setUserInfo(res.data))
+        loadData().then(r => r)
+        getProfile(userData?.user_id).then((res) => setUserInfo(res))
             .catch((e) => console.log(e))
     }, [userData?.access])
 
