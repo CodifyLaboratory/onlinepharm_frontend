@@ -1,29 +1,24 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import {
-    View,
-    Text,
-    ScrollView,
-    SafeAreaView,
-    Image,
-    StyleSheet,
-    Platform,
-    Dimensions,
-} from 'react-native'
-import Api from '../../API'
+import { Text, ScrollView, Image, StyleSheet, Dimensions } from 'react-native'
+
 import { newsInfo } from '../../styles/newsInfo'
 import MedicineCard from '../../components/MedicineCard'
-import {strings} from "../../localization";
+import { strings } from '../../localization'
+import { getNewsById } from '../../api'
+import Loader from '../../components/Loader'
 
-const replacedStr = /-/gi;
+
+const replacedStr = /-/gi
 
 function NewsInfo({ route }) {
     const [newsData, setNewsData] = useState({})
+    const [loading, setLoading] = useState(false)
+
     let id = route.params
 
+
     useEffect(() => {
-        Api.getData(`news/${id}`)
-            .then((res) => setNewsData(res.data))
-            .catch((e) => console.log(e))
+        getNewsList().then(r => setNewsData(r))
     }, [])
 
     const medicationList = useMemo(
@@ -34,16 +29,35 @@ function NewsInfo({ route }) {
         [newsData]
     )
 
+    const getNewsList = async () => {
+        setLoading(true)
+        try {
+            return await getNewsById(id)
+        } catch (e) {
+            throw new Error(e)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    console.log('news+++++++++++', newsData)
+
+    if (loading) return <Loader />
+
     return (
         <ScrollView style={styles.container}>
             <Image
                 resizeMode="contain"
                 style={styles.image}
-                source={{ uri: newsData?.image }}
+                source={newsData.image
+                    ? {uri: newsData.image}
+                    : require('../../assets/LOGO.png') }
             />
             <Text style={styles.title}>{newsData?.title}</Text>
             <Text style={styles.date}>
-                {strings.main.from} {newsData?.start_date?.replace(replacedStr, '.')} {strings.main.to}{' '}
+                {strings.main.from}{' '}
+                {newsData?.start_date?.replace(replacedStr, '.')}{' '}
+                {strings.main.to}{' '}
                 {newsData?.end_date?.replace(replacedStr, '.')}
             </Text>
             <Text style={styles.description}>{newsData?.description}</Text>
@@ -71,7 +85,7 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         lineHeight: 30,
         fontStyle: 'normal',
-        fontFamily: 'Poppins-Regular'
+        fontFamily: 'Poppins-Regular',
     },
     date: {
         color: '#999999',
@@ -79,7 +93,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
         fontStyle: 'normal',
         lineHeight: 21,
-        fontFamily: 'Poppins-Regular'
+        fontFamily: 'Poppins-Regular',
     },
     description: {
         color: '#4B4747',
@@ -87,6 +101,6 @@ const styles = StyleSheet.create({
         marginBottom: 24,
         fontStyle: 'normal',
         lineHeight: 24,
-        fontFamily: 'Poppins-Regular'
+        fontFamily: 'Poppins-Regular',
     },
 })

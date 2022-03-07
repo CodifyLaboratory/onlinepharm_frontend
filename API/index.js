@@ -1,7 +1,9 @@
 import axios from 'axios'
-import {strings} from "../localization";
+import {strings} from "../localization"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const lang = strings.getLanguage()
+
 
 const baseUrl = `http://164.90.192.245/${lang}/api/`
 
@@ -9,7 +11,12 @@ const http = axios.create({
     baseURL: baseUrl,
 })
 
-const setHeaders = (token) => {
+const setHeaders = async () => {
+    const data = await AsyncStorage.getItem('userData')
+
+const parsed = JSON.parse(data)
+const token = parsed?.access
+console.log('TOKEN', token)
     return {
         headers: {
             Authorization: token ? `JWT ${token}` : '',
@@ -18,9 +25,9 @@ const setHeaders = (token) => {
 }
 
 const Api = {
-    getData: (url, token) => http.get(url, setHeaders(token)),
-    postData: (url, body, token) => http.post(url, body, setHeaders(token)),
-    putData: (url, article, token) => http.put(url, article, setHeaders(token)),
+    getData: (url, token) => http.get(url),
+    postData: (url, body, token) => http.post(url, body),
+    putData: (url, article, token) => http.put(url, article),
     deleteData: (url, token, options) =>
         http.delete(url, setHeaders(token), options),
 }

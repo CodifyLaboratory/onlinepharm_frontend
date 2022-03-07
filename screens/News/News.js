@@ -7,44 +7,59 @@ import {
     SafeAreaView,
 } from 'react-native'
 import { news } from '../../styles/news'
-import Api from '../../API'
+
 import NewsCard from '../../components/NewsCard'
 import { Colors } from '../../constants/colors'
-import {getNews} from '../../api'
+import {getNews, getNewsCategories} from '../../api'
+import Loader from '../../components/Loader'
 
 export default function News({ navigation }) {
-    const [category, setCategory] = useState(1)
     const [categoryDataId, setCategoryDataId] = useState([])
     const [newsItems, setNewsItems] = useState([])
+    const [category, setCategory] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         getNewsItems().then(r => setNewsItems(r))
-        Api.getData('news-categories/').then((res) =>
-            setCategoryDataId(res.data)
-        )
+        getCategories().then(r => setCategoryDataId(r))
+      
     }, [])
 
 
     const getNewsItems = async() => {
+        setLoading(true)
         try {
            return await getNews()
+        } catch(e) {
+
+        } finally {
+          setLoading(false)
+        }
+    }
+ 
+    const getCategories = async () => {
+        try {
+            const res = await getNewsCategories() 
+        
+            changeCategory(res[0]?.id)
+            return res
+           
         } catch(e) {
 
         } finally {
 
         }
     }
-
-
-
     
     const changeCategory = (id) => {
         setCategory(id)
     }
 
+    // console.log('RES', newsItems)
+
     const newsList = useMemo(
         () =>
-            newsItems?.results?.filter((item) => item.category === category)
+            newsItems?.filter((item) => item.category === category)
                 .map((item) => (
                     <NewsCard
                         navigation={navigation}
@@ -55,9 +70,11 @@ export default function News({ navigation }) {
         [newsItems, category]
     )
 
+    // console.log('category id', newsItems)
+
     const categoryList = useMemo(
         () =>
-            categoryDataId.map((item) => (
+            categoryDataId?.map((item) => (
                 <TouchableOpacity
                     onPress={() => changeCategory(item.id)}
                     activeOpacity={0.5}
@@ -81,6 +98,8 @@ export default function News({ navigation }) {
             )),
         [categoryDataId, category]
     )
+
+    if (loading) return <Loader />
 
     return (
         <SafeAreaView style={{ backgroundColor: '#E6EFF9', flex: 1, paddingBottom: 24 }}>

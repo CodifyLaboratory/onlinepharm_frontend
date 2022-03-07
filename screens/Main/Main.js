@@ -27,6 +27,7 @@ import {getAllBasket, getFavoritesProducts} from "../../api";
 import {strings} from "../../localization";
 
 export default function Main({ navigation }) {
+    
 
     const [farmCardData, setFarmCardData] = useState([])
     const [bannerData, setBannerData] = useState([])

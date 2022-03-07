@@ -24,8 +24,8 @@ const NewsCard = ({navigation, data}) => {
                 </View>
                 <Text style={news.farmDesc}>{data.title}</Text>
                 <Text style={news.farmDate}>
-                    {strings.main.from} {data.start_date.replace(re, '.')} {strings.main.to}{' '}
-                    {data.end_date.replace(re, '.')}
+                    {strings.main.from} {data?.start_date?.replace(re, '.')} {strings.main.to}{' '}
+                    {data?.end_date?.replace(re, '.')}
                 </Text>
                 <TouchableOpacity
                     style={news.farmCardBtn}

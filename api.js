@@ -160,3 +160,11 @@ export async function getMedication(id) {
 export async function getNews() {
     return request(`/api/news/`, 'GET')
 }
+
+export async function getNewsCategories() {
+    return request(`/api/news-categories/`, 'GET')
+}
+
+export async function getNewsById(id) {
+    return request(`/api/news/${id}/`, 'GET')
+}
