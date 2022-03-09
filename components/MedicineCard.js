@@ -21,7 +21,7 @@ import {setAuthorization} from "../store/actions";
 import {strings} from "../localization";
 
 function MedicineCard({ navigation, data, isSelected, setChanged, changed, basketObj, type }) {
-    console.log('DATA +++ ', data)
+  
     const dispatch = useDispatch()
     const [modalVisible, setVisible] = useState(false)
 
@@ -77,7 +77,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                             <Text style={myMedicine.name}>{data?.title.length > 23 ? data?.title.slice(0, 23).concat('...') : data?.title}</Text>
                             <Text style={myMedicine.category}>
                                 {strings.cart.price}:{' '}
-                                <Text style={myMedicine.price}>{data.price} <Text style={myMedicine.kg_symbol}>c̲ </Text></Text>{' '}
+                                <Text style={myMedicine.price}>{data.price} <Text style={myMedicine.kg_symbol}>c̲</Text></Text>{' '}
                             </Text>
                         </View>
                         <TouchableOpacity

@@ -1,32 +1,64 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Text, StyleSheet, ScrollView } from 'react-native'
-import Api from '../../API'
+import { getBannerById, getAllBasket, getFavoritesProducts } from '../../api';
 import MedicineCard from '../../components/MedicineCard'
 import {strings} from "../../localization";
+import { useSelector, useDispatch } from 'react-redux';
+import { loadCart, setMedicineFavorite } from '../../store/actions';
 
 var replacedStr = /-/gi
 
 const MyComponent = ({ route, navigation }) => {
+
+    const { favorites_medicine, cart } = useSelector((state) => state.data)
+
+    const dispatch = useDispatch()
+
     const [bannerData, setBannerData] = useState({})
+    const [changed, setChanged] = useState(false)
 
     useEffect(() => {
-        Api.getData(`banners/${route.params}`)
-            .then((res) => setBannerData(res.data))
+        getBannerById(route.params)
+            .then((res) => setBannerData(res))
             .catch((e) => console.log(e))
-    }, [])
+    }, [changed])
 
-    //
-    const medicationList = useMemo(
-        () =>
-            bannerData?.medications?.map((item) => (
-                <MedicineCard
-                    key={item.id}
-                    data={item}
-                    navigation={navigation}
-                />
-            )),
-        [bannerData]
-    )
+    useEffect(() => {
+        getAllFavorites()
+        getBasket()
+    }, [changed])
+
+    
+    const isSelected = (id) => {
+        return favorites_medicine?.find((item) => item.medication.id === id)
+    }
+
+    const findBasketProduct = (id) => {
+        return cart?.find((item) => item.medication.id === id)
+    }
+
+
+    
+
+    const getBasket = async () => {
+        try {
+            const res = await getAllBasket()
+            dispatch(loadCart(res))
+        } catch (e) {
+            throw new Error(e)
+        }
+    }
+
+    const getAllFavorites = async () => {
+        try {
+            const res = await getFavoritesProducts()
+            dispatch(setMedicineFavorite(res))
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+   
 
     return (
         <ScrollView style={styles.container}>
@@ -37,7 +69,21 @@ const MyComponent = ({ route, navigation }) => {
             </Text>
             <Text style={styles.description}>{bannerData?.description}</Text>
 
-            {medicationList}
+            {bannerData?.medications?.map((item) => {
+            const selected = isSelected(item.id)
+            const basketObj = findBasketProduct(item.id)
+            return (
+                <MedicineCard
+                    basketObj={basketObj}
+                    isSelected={selected}
+                    key={item.id}
+                    data={item}
+                    navigation={navigation}
+                    setChanged={(e) => setChanged(e)}
+                    changed={changed}
+                />
+            )
+        })}
         </ScrollView>
     )
 }

@@ -193,6 +193,10 @@ export async function getBanners() {
     return request(`/api/banners/`, 'GET')
 }
 
+export async function getBannerById(id) {
+    return request(`/api/banners/${id}/`, 'GET')
+}
+
 export async function getSubcategories(id) {
     return request(`/api/subcategories/${id}/`, 'GET')
 }
