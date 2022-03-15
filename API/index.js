@@ -16,7 +16,7 @@ const setHeaders = async () => {
 
 const parsed = JSON.parse(data)
 const token = parsed?.access
-console.log('TOKEN', token)
+
     return {
         headers: {
             Authorization: token ? `JWT ${token}` : '',

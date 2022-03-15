@@ -37,8 +37,6 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
     }
 
 
-     console.log('DATA!!!!!!!!!!!!!!', data)
-
     return (
         <View style={styles.container}>
             <View style={styles.top}>

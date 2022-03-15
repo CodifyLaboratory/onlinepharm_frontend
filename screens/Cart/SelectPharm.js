@@ -34,7 +34,7 @@ const SelectPharmacy = ({ navigation, route }) => {
         try {
         return await getDeliveryPharmacy()
         } catch(e) {
-             console.log('e', e)
+            throw new Error(e)
         }
     }
 

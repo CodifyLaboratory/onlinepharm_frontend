@@ -85,7 +85,7 @@ export default function MyProfile({route, navigation}) {
                 })
                 await updateUserPhoto(formData)
             }
-            console.log('@@@@@@@', data?.id, '$$$$$$$$$$$$$', user)
+
             await updateProfile(data?.id, user)
         } catch (e) {
             console.log('e', e)

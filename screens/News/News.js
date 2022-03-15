@@ -22,7 +22,7 @@ export default function News({ navigation }) {
     useEffect(() => {
         getNewsItems().then(r => setNewsItems(r))
         getCategories().then(r => setCategoryDataId(r))
-      
+
     }, [])
 
 
@@ -36,26 +36,24 @@ export default function News({ navigation }) {
           setLoading(false)
         }
     }
- 
+
     const getCategories = async () => {
         try {
-            const res = await getNewsCategories() 
-        
+            const res = await getNewsCategories()
+
             changeCategory(res[0]?.id)
             return res
-           
+
         } catch(e) {
 
         } finally {
 
         }
     }
-    
+
     const changeCategory = (id) => {
         setCategory(id)
     }
-
-    // console.log('RES', newsItems)
 
     const newsList = useMemo(
         () =>
@@ -69,8 +67,6 @@ export default function News({ navigation }) {
                 )),
         [newsItems, category]
     )
-
-    // console.log('category id', newsItems)
 
     const categoryList = useMemo(
         () =>

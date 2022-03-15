@@ -136,19 +136,19 @@ export default function Profile({navigation, setIsSignIn}) {
                             </View>
                             <Arrow/>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={()=>navigation.navigate('MyPaymentMethods')}
-                            style={profile.profileLink}
-                            activeOpacity={0.6}
-                        >
-                            <View style={profile.profileLinkInner}>
-                                <Payment style={{width: 30, height: 30}}/>
-                                <Text style={profile.profileLinkText}>
-                                    {strings.profile.my_payment_methods}
-                                </Text>
-                            </View>
-                            <Arrow/>
-                        </TouchableOpacity>
+                        {/*<TouchableOpacity*/}
+                        {/*    onPress={()=>navigation.navigate('MyPaymentMethods')}*/}
+                        {/*    style={profile.profileLink}*/}
+                        {/*    activeOpacity={0.6}*/}
+                        {/*>*/}
+                        {/*    <View style={profile.profileLinkInner}>*/}
+                        {/*        <Payment style={{width: 30, height: 30}}/>*/}
+                        {/*        <Text style={profile.profileLinkText}>*/}
+                        {/*            {strings.profile.my_payment_methods}*/}
+                        {/*        </Text>*/}
+                        {/*    </View>*/}
+                        {/*    <Arrow/>*/}
+                        {/*</TouchableOpacity>*/}
                         <TouchableOpacity
                             onPress={()=>navigation.navigate('Settings')}
                             style={profile.profileLink}

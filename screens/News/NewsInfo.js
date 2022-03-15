@@ -40,8 +40,6 @@ function NewsInfo({ route }) {
         }
     }
 
-    console.log('news+++++++++++', newsData)
-
     if (loading) return <Loader />
 
     return (

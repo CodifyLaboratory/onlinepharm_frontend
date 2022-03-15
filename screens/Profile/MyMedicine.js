@@ -11,7 +11,7 @@ import { setMedicineFavorite, loadCart } from '../../store/actions'
 import EmptyList from "../../components/ListEmpty";
 
 function MyMedicine({ navigation }) {
-    
+
     const { favorites_medicine, cart } = useSelector((state) => state.data)
 
     const dispatch = useDispatch()
@@ -52,7 +52,7 @@ function MyMedicine({ navigation }) {
         return cart?.find((item) => item.medication.id === id)
     }
 
-    if (loading) return <Loader />
+    // if (loading) return <Loader />
 
     if (!favorites_medicine.length) return <EmptyList />
 

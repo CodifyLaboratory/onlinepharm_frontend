@@ -18,6 +18,7 @@ import PrimaryInput from "../../components/PrimaryInput";
 import { useSelector } from "react-redux";
 import {createOrder} from "../../api";
 import SuccessModalComponent from '../../components/modals/successModal'
+import MapModal from "../../components/modals/MapModal";
 
 function Ordering({navigation, route}) {
     const [deliveryOptionsValue, setDeliveryOptionsValue] =
@@ -25,6 +26,7 @@ function Ordering({navigation, route}) {
     const [paymentMethodsValue, setPaymentMethodsValue] = React.useState(1)
     // const [currentCard, setCurrentCard] = useState(0)
     const [showModal, setShowModal] = useState(false)
+    const [showMap, setShowMap] = useState(false)
 
     useEffect(()=> {
 
@@ -36,7 +38,7 @@ function Ordering({navigation, route}) {
 
     const {cart, user} = useSelector(state => state.data)
 
-    const {control, handleSubmit, setError, formState: {errors}} = useForm({
+    const {control, handleSubmit, setError, formState: {errors}, setValue} = useForm({
         defaultValues: {
             name: user?.user_profile?.first_name ? user?.user_profile?.first_name : '',
             email: user?.email ? user?.email : '',
@@ -250,7 +252,8 @@ function Ordering({navigation, route}) {
                         />
                     </View>
                 </View>
-                <TouchableOpacity style={ordering.mapSelectBtn}>
+
+                <TouchableOpacity onPress={()=>setShowMap(true)} style={ordering.mapSelectBtn}>
                     <Text style={ordering.mapSelectBtnText}>{strings.cart.choose_on_map}</Text>
                 </TouchableOpacity>
 
@@ -337,6 +340,7 @@ function Ordering({navigation, route}) {
                 </TouchableOpacity>
             </View>
             <SuccessModalComponent text={strings.cart.successfully_placed} visible={showModal} setVisible={(e)=>setShowModal(e)} />
+            <MapModal setValue={(e)=>setValue('address', e)} visible={showMap} setShow={(e)=>setShowMap(e)}  />
         </ScrollView>
     )
 }
