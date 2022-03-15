@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { registrationData } from '../../styles/registrationData'
 import Logo from '../../assets/header/logo.svg'
 import { registration } from '../../styles/registration'
-import Api from '../../API'
+
 import {strings} from "../../localization";
 import {Controller, useForm} from "react-hook-form";
 import {Colors} from "../../constants/colors";
@@ -31,7 +31,6 @@ function RegistrationData({ navigation }) {
     const loadData = async () => {
         try {
             let data = await AsyncStorage.getItem('userData')
-            console.log('________________', data)
             if (data !== null) {
                 setUserData(JSON.parse(data))
             }
