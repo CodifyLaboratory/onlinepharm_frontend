@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, ScrollView } from 'react-native'
+import {View, ScrollView, Text} from 'react-native'
 
 import MedicineCard from '../../components/MedicineCard'
 
@@ -8,6 +8,7 @@ import { Colors } from '../../constants/colors'
 import { getFavoritesProducts, getAllBasket } from '../../api'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMedicineFavorite, loadCart } from '../../store/actions'
+import EmptyList from "../../components/ListEmpty";
 
 function MyMedicine({ navigation }) {
     
@@ -15,6 +16,7 @@ function MyMedicine({ navigation }) {
 
     const dispatch = useDispatch()
     const [changed, setChanged] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         getAllFavorites()
@@ -31,11 +33,14 @@ function MyMedicine({ navigation }) {
     }
 
     const getAllFavorites = async () => {
+        setLoading(true)
         try {
             const res = await getFavoritesProducts()
             dispatch(setMedicineFavorite(res))
         } catch (e) {
             console.log(e)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -47,7 +52,9 @@ function MyMedicine({ navigation }) {
         return cart?.find((item) => item.medication.id === id)
     }
 
-    if (!favorites_medicine) return <Loader />
+    if (loading) return <Loader />
+
+    if (!favorites_medicine.length) return <EmptyList />
 
     return (
         <ScrollView style={{ backgroundColor: Colors.background }}>

@@ -1,31 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import FarmsCard from '../../components/FarmsCard'
-import { View, ScrollView, Text } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { myFarms } from '../../styles/components/myFarms'
-import { getFavorites } from '../../api'
 import Loader from '../../components/Loader'
 import {useSelector} from "react-redux";
 import {Colors} from "../../constants/colors";
+import EmptyList from "../../components/ListEmpty";
 
 function MyFarms({ navigation }) {
     const { favorites_pharmacy } = useSelector(state => state.data)
-    const [data, setData] = useState(null)
-
-
-    // useEffect(() => {
-    //     getMyPharmacy()
-    // }, [])
-    //
-    // const getMyPharmacy = async () => {
-    //     try {
-    //         const res = await getFavorites()
-    //
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
 
     if (!favorites_pharmacy) return <Loader />
+
+    if(!favorites_pharmacy.length) return <EmptyList />
 
     return (
         <ScrollView style={{ flex: 1, backgroundColor: Colors.background }}>

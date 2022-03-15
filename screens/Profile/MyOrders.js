@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { View, ScrollView } from 'react-native'
-
-import MedicineCard from '../../components/MedicineCard'
+import React, {useEffect, useState} from 'react'
+import {ScrollView, View} from 'react-native'
 
 import Loader from '../../components/Loader'
-import { Colors } from '../../constants/colors'
-import { getFavoritesProducts, getAllBasket, getOrders } from '../../api'
-import { useDispatch, useSelector } from 'react-redux'
-import { setMedicineFavorite, loadCart } from '../../store/actions'
+import {Colors} from '../../constants/colors'
+import {getOrders} from '../../api'
 import OrderCard from '../../components/OrderCard'
+import EmptyList from "../../components/ListEmpty";
 
 function MyOrders({ navigation }) {
 
@@ -18,8 +15,7 @@ function MyOrders({ navigation }) {
     const getMyOrders = async () => {
         setLoading(true)
         try {
-           const res = await getOrders()
-           return res
+            return await getOrders()
         } catch(e) {
            throw new Error(e)
         } finally {
@@ -32,9 +28,11 @@ function MyOrders({ navigation }) {
         getMyOrders().then(res => setOrders(res))
     }, [])
 
-    console.log('RES', orders)
+
 
     if (loading) return <Loader />
+
+    if(!orders?.length) return <EmptyList />
 
     return (
         <ScrollView style={{ backgroundColor: Colors.background }}>

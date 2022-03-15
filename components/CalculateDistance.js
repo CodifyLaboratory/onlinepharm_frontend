@@ -11,7 +11,7 @@ const CalculateDistance = ({data}) => {
 
     let distance;
 
-    if (coordinates.length && location.length) {
+    if (coordinates?.length && location?.length) {
         distance = getDistance(
             {latitude: coordinates?.latitude, longitude: coordinates?.longitude},
             {latitude: location?.latitude, longitude: location?.longitude}

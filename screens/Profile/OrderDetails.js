@@ -1,27 +1,33 @@
-import React, { useState, useEffect } from 'react'
-import { View, ScrollView, Text, Image } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {Image, ScrollView, Text, View} from 'react-native'
 
 import Loader from '../../components/Loader'
-import { Colors } from '../../constants/colors'
-import { getOrdersById } from '../../api'
-import { orderDetails } from '../../styles/orderDetails'
+import {Colors} from '../../constants/colors'
+import {getOrdersById} from '../../api'
+import {orderDetails} from '../../styles/orderDetails'
 import moment from 'moment'
 import 'moment/locale/ru'
-// import 'moment/locale/en'
-import { strings } from '../../localization'
+
+import {strings} from '../../localization'
 
 
+function OrderDetails({ route }) {
 
-function OrderDetails({ navigation, route }) {
+    const statusColor = {
+        1: '#4BCCED',
+        2: '#FFC90A',
+        3: '#883BC5',
+        4: '#4B8819',
+        5: '#F44336',
+    }
 
-  
 
     const { id } = route.params
 
     const [order, setOrder] = useState({})
     const [loading, setLoading] = useState(false)
 
-    const { order_status, created_date, order_medications } = order
+    const { order_status, created_date, order_medications, pharmacy } = order
 
     useEffect(() => {
         getOrderDetails().then((r) => setOrder(r))
@@ -30,9 +36,7 @@ function OrderDetails({ navigation, route }) {
     const getOrderDetails = async () => {
         setLoading(true)
         try {
-            const res = await getOrdersById(id)
-
-            return res
+            return await getOrdersById(id)
         } catch (e) {
             throw new Error(e)
         } finally {
@@ -50,7 +54,7 @@ function OrderDetails({ navigation, route }) {
                         <Text style={orderDetails.orderDate}>
                             Заказ создан {moment(created_date).format('DD MM YYYY HH:mm:ss')}
                         </Text>
-                        <Text style={orderDetails.status}>
+                        <Text style={{...orderDetails.status, color: statusColor[order_status?.id]}}>
                             {order_status?.title}
                         </Text>
                     </View>
@@ -62,7 +66,7 @@ function OrderDetails({ navigation, route }) {
                         flexDirection: 'row',
                     }}
                 >
-                    <Image style={orderDetails.image} />
+                    <Image source={{uri: pharmacy?.pharmacy_profile?.logo}} style={orderDetails.image} />
                     <View>
                         <View
                             style={{

@@ -50,7 +50,7 @@ function RegistrationData({ navigation }) {
             },
         }
 
-        updateProfile(userData?.id, userForm).then((res) => {
+        await updateProfile(userData?.id, userForm).then((res) => {
                 if (res?.id) {
                     setVisible(true)
                     setTimeout(()=>navigation.push('Login'), 2000)
