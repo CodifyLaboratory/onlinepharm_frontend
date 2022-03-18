@@ -8,12 +8,10 @@ import {
     Image,
 } from 'react-native'
 import MapView, { Marker, CalloutSubview, Callout } from 'react-native-maps'
-import CustomMarker from '../../components/CustomMarker'
-import MarkerSvg from '../../assets/marker2.svg'
-import PhoneSvg from '../../assets/phoneIcon.svg'
-import ClockIcon from '../../assets/clockIcon.svg'
+import PharmMapMarker from '../../components/pharmMapMarker'
 
-function Map({ pharmacies, selectedFarm, navigation }) {
+function PharmacyMap({ pharmacies, selectedFarm, navigation }) {
+
     const [pharmaData, setPharmaData] = useState([])
 
     console.log('PHARM', pharmaData)
@@ -54,7 +52,7 @@ function Map({ pharmacies, selectedFarm, navigation }) {
                         }
                     })
                     .map((item) => (
-                        <CustomMarker
+                        <PharmMapMarker
                             item={item}
                             key={item.id}
                             navigation={navigation}
@@ -64,7 +62,7 @@ function Map({ pharmacies, selectedFarm, navigation }) {
         </SafeAreaView>
     )
 }
-export default Map
+export default PharmacyMap
 
 const styles = StyleSheet.create({
     map: {

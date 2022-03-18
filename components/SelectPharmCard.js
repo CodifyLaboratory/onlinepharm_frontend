@@ -10,7 +10,7 @@ import ArrowTop from '../assets/icons/arrow_top.svg'
 import {ordering} from "../styles/ordering";
 import {Colors} from "../constants/colors";
 
-const SelectPharmCard = ({navigation, data}) => {
+const SelectPharmCard = ({navigation, data, key}) => {
 
     const dispatch = useDispatch()
 

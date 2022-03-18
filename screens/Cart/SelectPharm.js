@@ -3,12 +3,12 @@ import { View, ScrollView, Text, TouchableOpacity, Image } from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import Map from '../Main/Map'
 import { farms } from '../../styles/farms'
-import Api from '../../API'
 import SelectPharmCard from '../../components/SelectPharmCard'
 import { Colors } from '../../constants/colors'
 import {strings} from "../../localization";
 import { selectPharm } from '../../styles/selectPharm'
-import { getDeliveryPharmacy } from '../../api'
+import { getDeliveryPharmacy, getPharmBrands } from '../../api'
+import PharmacyMap from './PharmacyMap'
 
 const SelectPharmacy = ({ navigation, route }) => {
     const [type, setType] = useState(true)
@@ -18,7 +18,7 @@ const SelectPharmacy = ({ navigation, route }) => {
 
     useEffect(() => {
        getPharmacies().then(res => setPharmacies(res))
-        Api.getData('pharm-brands/').then((res) => setBrands(res.data))
+       getPharmBrands().then((res) => setBrands(res))
     }, [])
 
     const pickerRef = useRef()
@@ -122,7 +122,7 @@ const SelectPharmacy = ({ navigation, route }) => {
                 {type ? (
                     farmsList
                 ) : (
-                    <Map
+                    <PharmacyMap
                         pharmacies={pharmacies}
                         selectedFarm={selectedFarm}
                         navigation={navigation}

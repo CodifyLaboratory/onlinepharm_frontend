@@ -97,7 +97,7 @@ export default function App() {
 
     return (
         <Provider store={store}>
-            <NavigationContainer>
+            <NavigationContainer barStyle={{backgroundColor: Colors.white}}>
                 <StatusBar barStyle={'dark-content'} backgroundColor={Colors.white} />
                 <Navigator />
             </NavigationContainer>

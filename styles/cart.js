@@ -6,12 +6,11 @@ export const cartStyle = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         paddingTop: Platform.OS == 'android' ? 0 : 0,
-        // padding: 16,
+        paddingLeft: 16,
+        paddingRight: 16,
         paddingBottom: 90,
     },
     productList: {
-        paddingLeft: 16,
-        paddingRight: 16,
         paddingBottom: 50
     },
     orderDelivery: {
@@ -39,8 +38,8 @@ export const cartStyle = StyleSheet.create({
         position: "absolute",
         width: '100%',
         bottom: 0,
-        paddingLeft: 16,
-        paddingRight: 16,
+        // paddingLeft: 16,
+        // paddingRight: 16,
         backgroundColor: Colors.white,
         alignSelf: 'center',
         paddingTop: 10

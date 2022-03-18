@@ -1,23 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
-    SafeAreaView,
     StyleSheet,
-    Dimensions,
     View,
     Text,
     Image,
-    TouchableOpacity,
-    Pressable,
+    TouchableOpacity
 } from 'react-native'
-import MapView, { Marker, CalloutSubview, Callout } from 'react-native-maps'
+import { Marker, MapView, Callout } from 'react-native-maps'
 import MarkerSvg from './../assets/marker2.svg'
 import PhoneSvg from './../assets/phoneIcon.svg'
 import ClockIcon from './../assets/clockIcon.svg'
 
-const CustomMarker = ({ item, navigation }) => {
+const PharmMapMarker = ({ item, navigation }) => {
     const [descStatus, setDescStatus] = useState(false)
 
-    const changeStatus = () => setDescStatus(!descStatus)
+    const changeStatus = () => setDescStatus(true)
+
+    const {basket_medications, store_medications} = item
+
+    const countStockPositions = () => {
+        return basket_medications.filter(item => store_medications.some(s => item.medication.id === s.medication.id))
+    }
+
 
     return (
         <Marker
@@ -28,9 +32,12 @@ const CustomMarker = ({ item, navigation }) => {
             onPress={changeStatus}
             style={styles.marker}
             key={item.id}
+            icon={require('./../assets/marker.png')}
         >
             {descStatus ? (
-                <View style={styles.description}>
+                <Callout onPress={()=>navigation.push('Ordering', {basket: countStockPositions(), id: item?.id})} tooltip={true}>
+                <TouchableOpacity
+                style={styles.description}>
                     <View style={styles.box}>
                         <MarkerSvg /> 
                         <Text style={styles.text}>
@@ -46,19 +53,9 @@ const CustomMarker = ({ item, navigation }) => {
                         <ClockIcon />
                         <Text style={styles.text}>Сегодня 08:00 - 18:00</Text>
                     </View>
-
-                    <TouchableOpacity
-                        style={styles.btn}
-                        onPress={() => {
-                            navigation.navigate(
-                                'FarmInfo',
-                                item?.pharmacy_profile?.id
-                            )
-                        }}
-                    >
-                        <Text style={styles.textBtn}>Подробнее</Text>
-                    </TouchableOpacity>
-                </View>
+                </TouchableOpacity>
+                </Callout>
+              
             ) : (
                 <Image
                     source={require('./../assets/marker.png')}
@@ -69,7 +66,7 @@ const CustomMarker = ({ item, navigation }) => {
     )
 }
 
-export default CustomMarker
+export default PharmMapMarker
 
 const styles = StyleSheet.create({
     marker: {
@@ -83,6 +80,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#1F8BA7',
         borderRadius: 10,
         padding: 6,
+        zIndex: 33
     },
     box: {
         display: 'flex',

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Image, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {Colors} from "../constants/colors";
 import ArrowBack from '../assets/header/header_arrow.svg'
 import {strings} from "../localization";
@@ -15,6 +15,7 @@ import {
 
 import {useDispatch, useSelector} from "react-redux";
 import {setPharmacyFavorite, setMedicineFavorite} from "../store/actions";
+import { StatusBarHeight } from '../constants/statusbarHeigth';
 
 const Header = ({title, navigation, handleChange, profile, about_pharmacy, about_product, route}) => {
 
@@ -122,6 +123,7 @@ export const header = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
+        marginTop: Platform.OS === 'android' ? 0 : 50,
         height: 52,
         flexDirection: 'row',
         backgroundColor: Colors.white,
