@@ -17,7 +17,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "packagerOpts": { "config": "metro.config.js", "sourceExts": [ "js","jsx","svg","ts","tsx"] },
+    "packagerOpts": {
+      "config": "metro.config.js",
+      "sourceExts": [
+        "js",
+        "jsx",
+        "svg",
+        "ts",
+        "tsx"
+      ]
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
