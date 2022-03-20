@@ -78,7 +78,7 @@ export default function MedicineInfo({ navigation, route }) {
     if (loading) return <Loader />
 
     return (
-        <ScrollView>
+        <ScrollView style={{paddingLeft: 16, paddingRight: 16, backgroundColor: Colors.white}}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.imageBox}>
                     <Image
@@ -374,7 +374,8 @@ export default function MedicineInfo({ navigation, route }) {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 16,
+        paddingBottom: 16,
+        paddingTop: 16,
         backgroundColor: Colors.white,
     },
     imageBox: {

@@ -17,6 +17,7 @@ import { deleteAllBasket, getAllBasket, getFavoritesProducts } from '../../api'
 import { loadCart, setAuthorization } from '../../store/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import { strings } from '../../localization'
+import { Colors } from '../../constants/colors'
 
 const Cart = ({ navigation }) => {
     const [favorites, setFavorites] = useState(null)
@@ -28,10 +29,13 @@ const Cart = ({ navigation }) => {
     const { cart = [], is_guest } = useSelector((state) => state.data)
 
     const sumTotal = (arr) =>
-        arr ? arr.reduce( (sum, { medication, count }) => sum + medication.price * count,  0 )
+        arr
+            ? arr.reduce(
+                  (sum, { medication, count }) =>
+                      sum + medication.price * count,
+                  0
+              )
             : 0
-
-
 
     const total = sumTotal(cart)
 
@@ -79,8 +83,8 @@ const Cart = ({ navigation }) => {
     }
 
     return (
-        <View style={cartStyle.container}>
-            <ScrollView>
+        <View style={{ ...cartStyle.container }}>
+            <ScrollView style={{ backgroundColor: Colors.white }}>
                 <SafeAreaView style={cartStyle.productList}>
                     {cart.length ? (
                         <TouchableOpacity
@@ -142,7 +146,7 @@ const Cart = ({ navigation }) => {
                             onPress={() => {
                                 navigation.navigate('Main')
                             }}
-                            style={{...cartStyle.btn}}
+                            style={{ ...cartStyle.btn }}
                             activeOpacity={0.8}
                         >
                             <Text style={cartStyle.btnText}>
@@ -151,8 +155,21 @@ const Cart = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
                 ) : (
-                    <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 24}}>
-                        <View style={{flexDirection: 'row', alignItems: 'center', marginBottom: 10}}>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            paddingBottom: 24,
+                        }}
+                    >
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                marginBottom: 10,
+                            }}
+                        >
                             <Truck />
                             <Text style={cartStyle.orderDelivery}>
                                 {`Заказать\nдоставку`}
@@ -163,7 +180,7 @@ const Cart = ({ navigation }) => {
                             onPress={() => {
                                 navigation.push('SelectPharmacy')
                             }}
-                            style={{...cartStyle.btn, width: '70%'}}
+                            style={{ ...cartStyle.btn, width: '70%' }}
                             activeOpacity={0.8}
                         >
                             <Text style={cartStyle.btnText}>
@@ -173,9 +190,7 @@ const Cart = ({ navigation }) => {
                             </Text>
                         </TouchableOpacity>
                     </View>
-
                 )}
-
             </View>
 
             <ClearCart

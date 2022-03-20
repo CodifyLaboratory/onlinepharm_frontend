@@ -11,7 +11,7 @@ import Location from "../assets/farms/location.svg";
 import {strings} from "../localization";
 import CalculateDistance from "./CalculateDistance";
 
-const FarmsCard = ({ navigation, data }) => {
+const FarmsCard = ({ navigation, data, favorites }) => {
 
     const dispatch = useDispatch()
 
@@ -19,19 +19,16 @@ const FarmsCard = ({ navigation, data }) => {
 
     const [isChecked, setChecked] = useState(null)
 
-    useEffect(() => {
-        getAllFavorites().then(r => r)
-    }, [isChecked])
 
-    const getAllFavorites = async () => {
-        try {
-            const res = await getFavorites()
-            dispatch(setPharmacyFavorite(res))
-            setChecked(isSelected())
-        } catch (e) {
-            console.log(e)
-        }
-    }
+    // const getAllFavorites = async () => {
+    //     try {
+    //         const res = await getFavorites()
+    //         dispatch(setPharmacyFavorite(res))
+    //         setChecked(isSelected())
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
 
     const isSelected = () => {
         return favorites_pharmacy.some((item) => item.pharmacy.id === data.id)
@@ -41,12 +38,13 @@ const FarmsCard = ({ navigation, data }) => {
 
     const handleChange = async () => {
         if(is_guest) dispatch(setAuthorization(false))
-        if (isChecked) {
+        if (isSelected()) {
             await deletePharmFavorite(findId.id)
-            setChecked(false)
+            console.log(async ()=> await  getFavorites())
+            await dispatch(setPharmacyFavorite(await getFavorites()))
         } else {
             await createPharmFavorite(data.id)
-            setChecked(true)
+            await dispatch(setPharmacyFavorite(await getFavorites()))
         }
     }
 

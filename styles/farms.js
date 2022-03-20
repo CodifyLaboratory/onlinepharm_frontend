@@ -62,8 +62,8 @@ export const farms = StyleSheet.create({
     picker_container: {
         width: '100%',
         borderWidth: 1,
-        borderRadius: 5,
-        height: 42,
+        // borderRadius: 5,
+        // height: 42,
         marginBottom: 24,
         borderColor: Colors.white,
         elevation: 2,
@@ -124,4 +124,16 @@ export const farms = StyleSheet.create({
         fontFamily: 'SF-Pro-Medium',
         lineHeight: 17
     },
+    customDropdown: {
+        borderWidth: 0,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+        elevation: 1,
+
+    }
 })

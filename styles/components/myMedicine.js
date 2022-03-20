@@ -19,7 +19,7 @@ export const myMedicine = StyleSheet.create({
     },
     medicineCard: {
         width: '100%',
-        height: 120,
+        // height: 120,
         backgroundColor: '#fff',
         flexDirection: 'row',
         justifyContent: 'space-between',

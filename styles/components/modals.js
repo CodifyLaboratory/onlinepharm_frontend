@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         lineHeight: 20,
+        height: 20
     },
     btn_leave: {
         width: 128,
@@ -45,6 +46,7 @@ export const styles = StyleSheet.create({
         textShadowColor: 'rgba(0, 0, 0, 0.25)',
         textShadowOffset: { width: -1, height: 1 },
         textShadowRadius: 9,
+        height: 20
     },
     centeredView: {
         flex: 1,

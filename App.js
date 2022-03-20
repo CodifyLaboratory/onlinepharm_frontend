@@ -12,9 +12,10 @@ import reducers from "./store/reducers";
 import {setAuthorization, setCoordinates, setGuest, setUser} from "./store/actions";
 import {useFonts} from "expo-font";
 import {strings} from "./localization";
-import {StatusBar} from "react-native";
+import {Platform, StatusBar, View} from "react-native";
 import {Colors} from "./constants/colors";
 import {getProfile} from "./api";
+import {StatusBarHeight} from "./constants/statusbarHeigth";
 
 export default function App() {
 
@@ -95,10 +96,22 @@ export default function App() {
         return <AppLoading />;
     }
 
+    const CustomStatusBar = () => {
+        return (
+            <View style={{
+                height: Platform.OS === 'ios' ? StatusBarHeight : 0,
+                backgroundColor: Colors.white
+            }}>
+                <StatusBar barStyle="dark-content" backgroundColor={Colors.white} />
+            </View>
+        )
+    }
+
     return (
         <Provider store={store}>
-            <NavigationContainer barStyle={{backgroundColor: Colors.white}}>
-                <StatusBar barStyle={'dark-content'} backgroundColor={Colors.white} />
+            <NavigationContainer>
+                {/*<StatusBar barStyle={'dark-content'} backgroundColor={Colors.primary} />*/}
+                <CustomStatusBar />
                 <Navigator />
             </NavigationContainer>
         </Provider>

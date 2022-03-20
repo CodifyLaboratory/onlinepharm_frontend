@@ -112,8 +112,8 @@ export default function Main({ navigation }) {
     )
 
     return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <SafeAreaView>
+        <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+            <SafeAreaView style={{flex: 1}}>
                 <View style={main.container}>
                     <View style={main.header}>
                         <Logo />

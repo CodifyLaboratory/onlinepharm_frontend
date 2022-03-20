@@ -5,13 +5,17 @@ export const cartStyle = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        paddingTop: Platform.OS == 'android' ? 0 : 0,
-        paddingLeft: 16,
-        paddingRight: 16,
+        // paddingTop: Platform.OS == 'android' ? 0 : 0,
+        // paddingLeft: 16,
+        // paddingRight: 16,
         paddingBottom: 90,
     },
     productList: {
-        paddingBottom: 50
+        paddingBottom: 50,
+        // paddingLeft: 16,
+        // paddingRight: 16,
+        paddingHorizontal: 16,
+        flex: 1,
     },
     orderDelivery: {
         fontSize: 12,
@@ -42,7 +46,8 @@ export const cartStyle = StyleSheet.create({
         // paddingRight: 16,
         backgroundColor: Colors.white,
         alignSelf: 'center',
-        paddingTop: 10
+        paddingTop: 10,
+        paddingHorizontal: 16
     },
     btn: {
         backgroundColor: '#4BCCED',

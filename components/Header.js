@@ -67,6 +67,8 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
         }
     }
 
+    console.log('statatus', StatusBarHeight)
+
     return (
         <View style={header.container}>
             <TouchableOpacity
@@ -123,7 +125,6 @@ export const header = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        marginTop: Platform.OS === 'android' ? 0 : 50,
         height: 52,
         flexDirection: 'row',
         backgroundColor: Colors.white,
@@ -151,9 +152,10 @@ export const header = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
-        alignSelf: 'center',
+        alignSelf: 'flex-end',
         left: 0,
-        position: 'absolute'
+        position: 'absolute',
+        bottom: 15
     },
     save_button: {
         display: 'flex',

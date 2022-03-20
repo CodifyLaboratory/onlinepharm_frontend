@@ -56,7 +56,7 @@ const LeaveReview = ({ route, navigation }) => {
 
     return (
 
-            <View style={styles.container}>
+            <TouchableOpacity activeOpacity={1} onPress={Keyboard.dismiss} style={styles.container}>
                     <View
                         onPress={Keyboard.dismiss}
                         style={{
@@ -127,7 +127,7 @@ const LeaveReview = ({ route, navigation }) => {
                         </View>
                     </Modal>
                 </View>
-            </View>
+            </TouchableOpacity>
     )
 }
 
