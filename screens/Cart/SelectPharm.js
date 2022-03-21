@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react'
-import { View, ScrollView, Text, TouchableOpacity, Image } from 'react-native'
+import {View, ScrollView, Text, TouchableOpacity, Image, StyleSheet} from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import Map from '../Main/Map'
 import { farms } from '../../styles/farms'
@@ -9,38 +9,37 @@ import {strings} from "../../localization";
 import { selectPharm } from '../../styles/selectPharm'
 import { getDeliveryPharmacy, getPharmBrands } from '../../api'
 import PharmacyMap from './PharmacyMap'
+import SelectDropdown from "react-native-select-dropdown";
+import Loader from "../../components/Loader";
+import EmptyList from "../../components/ListEmpty";
 
 const SelectPharmacy = ({ navigation, route }) => {
     const [type, setType] = useState(true)
     const [pharmacies, setPharmacies] = useState([])
     const [brands, setBrands] = useState([])
     const [selectedFarm, setSelectedFarm] = useState(0)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
        getPharmacies().then(res => setPharmacies(res))
        getPharmBrands().then((res) => setBrands(res))
     }, [])
 
-    const pickerRef = useRef()
-    function open() {
-        pickerRef.current.focus()
-    }
-    function close() {
-        pickerRef.current.blur()
-    }
-
 
     const getPharmacies = async() => {
+        setLoading(true)
         try {
         return await getDeliveryPharmacy()
         } catch(e) {
             throw new Error(e)
+        } finally {
+            setLoading(false)
         }
     }
 
     const farmsList = useMemo(
         () =>
-            pharmacies
+             pharmacies
                 .filter((item) => {
                     if (selectedFarm === 0) {
                         return item
@@ -57,6 +56,8 @@ const SelectPharmacy = ({ navigation, route }) => {
                 )),
         [pharmacies, selectedFarm]
     )
+
+    if (loading) return <Loader />
 
     return (
         <ScrollView style={{ backgroundColor: Colors.background }}>
@@ -85,42 +86,38 @@ const SelectPharmacy = ({ navigation, route }) => {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                <View style={farms.picker_container}>
-                    <Image
-                        style={farms.picker_icon}
-                        source={require('../../assets/farms/picker_arrow.png')}
-                    />
-                    <Picker
-                        style={{
-                            width: '100%',
-                            height: 40,
-                            backgroundColor: '#fff',
-                            borderRadius: 20,
-                            marginBottom: 24,
-                        }}
-                        ref={pickerRef}
-                        selectedValue={selectedFarm}
-                        onValueChange={(itemValue, itemIndex) =>
-                            setSelectedFarm(itemValue)
-                        }
-                    >
-                        <Picker.Item
-                            mode={'dropdown'}
-                            label={strings.main.select_pharmacy}
-                            value={0}
-                        />
-                        {brands.map((item) => (
-                            <Picker.Item
-                                label={item.title}
-                                value={item.id}
-                                key={item.id}
+                <SelectDropdown
+                    data={brands.map(item => item.title)}
+                    defaultValue={0}
+                    onSelect={(selectedItem, index) => {
+                        setSelectedFarm(brands[index].id)
+
+                    }}
+                    defaultButtonText={strings.main.select_pharmacy}
+                    buttonTextAfterSelection={(selectedItem, index) => {
+                        return selectedItem;
+                    }}
+                    rowTextForSelection={(item, index) => {
+                        return item;
+                    }}
+                    buttonStyle={styles.dropdown1BtnStyle}
+                    buttonTextStyle={styles.dropdown1BtnTxtStyle}
+                    renderDropdownIcon={(isOpened) => {
+                        return (
+                            <Image
+                                // style={farms.picker_icon}
+                                source={require('../../assets/farms/picker_arrow.png')}
                             />
-                        ))}
-                    </Picker>
-                </View>
+                        );
+                    }}
+                    dropdownIconPosition={"right"}
+                    dropdownStyle={styles.dropdown1DropdownStyle}
+                    rowStyle={styles.dropdown1RowStyle}
+                    rowTextStyle={styles.dropdown1RowTxtStyle}
+                />
 
                 {type ? (
-                    farmsList
+                    farmsList.length ? farmsList : <EmptyList />
                 ) : (
                     <PharmacyMap
                         pharmacies={pharmacies}
@@ -134,3 +131,32 @@ const SelectPharmacy = ({ navigation, route }) => {
 }
 
 export default SelectPharmacy
+
+const styles = StyleSheet.create({
+
+    dropdown1BtnStyle: {
+        width: "100%",
+        height: 50,
+        backgroundColor: "#FFF",
+        borderRadius: 8,
+        // borderWidth: 1,
+        // borderColor: "#444",
+        marginBottom: 24,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 1,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 1.41,
+        elevation: 2,
+    },
+    dropdown1BtnTxtStyle: { color: "#444", textAlign: "left" },
+    dropdown1DropdownStyle: { backgroundColor: Colors.white, marginTop: 8, borderRadius: 8 },
+    dropdown1RowStyle: {
+        backgroundColor: "#EFEFEF",
+        borderBottomColor: "#C5C5C5",
+    },
+    dropdown1RowTxtStyle: { color: "#444", textAlign: "left" }
+});
+

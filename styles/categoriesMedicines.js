@@ -7,9 +7,9 @@ export const categoriesMedicines = StyleSheet.create({
     },
     container: {
         backgroundColor: Colors.white,
-        paddingRight: 16,
-        paddingLeft: 16,
-        paddingTop: Platform.OS == 'android' ? 21 : 0,
+        // paddingRight: 16,
+        // paddingLeft: 16,
+        paddingTop: 20,
     },
     banner: {
         borderRadius: 20,

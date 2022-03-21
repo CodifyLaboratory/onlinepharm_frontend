@@ -67,7 +67,7 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
         }
     }
 
-    console.log('statatus', StatusBarHeight)
+    const titleCategory = title_category?.length > 33 ? title_category?.substring(0, 33).concat('...') : title_category
 
     return (
         <View style={header.container}>
@@ -78,7 +78,7 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
                 <ArrowBack style={header.icon}/>
                 <Text style={header.text}>{strings.auth.back}</Text>
             </TouchableOpacity>
-            <View><Text style={header.title}>{title ? title : title_category}</Text></View>
+            <View><Text style={header.title}>{title ? title : titleCategory}</Text></View>
             {updateProfile ? <TouchableOpacity
                 onPress={() => updateProfile()}
                 style={header.save_button}

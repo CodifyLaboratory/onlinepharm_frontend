@@ -63,7 +63,7 @@ function CategoriesMedicines({ navigation, route }) {
     if (!medicines) return <Loader />
 
     return (
-        <ScrollView style={{ backgroundColor: Colors.white }}>
+        <ScrollView style={{ backgroundColor: Colors.white, paddingHorizontal: 16, width: '100%' }}>
             <SafeAreaView style={categoriesMedicines.container}>
                 {medicines
                     .filter((el) => {

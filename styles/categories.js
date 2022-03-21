@@ -57,7 +57,8 @@ export const categories = StyleSheet.create({
         color: '#1F8BA7',
         fontSize: 13,
         fontFamily: 'SF-Pro-Medium',
-        lineHeight: 17
+        lineHeight: 17,
+        height: 17
     },
     popular: {
         // paddingRight: 16,
