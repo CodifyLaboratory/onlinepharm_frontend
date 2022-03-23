@@ -13,6 +13,8 @@ import SelectDropdown from "react-native-select-dropdown";
 import Loader from "../../components/Loader";
 import EmptyList from "../../components/ListEmpty";
 
+import ArrowDown from '../../assets/icons/arrow_down.svg'
+
 const SelectPharmacy = ({ navigation, route }) => {
     const [type, setType] = useState(true)
     const [pharmacies, setPharmacies] = useState([])
@@ -104,10 +106,7 @@ const SelectPharmacy = ({ navigation, route }) => {
                     buttonTextStyle={styles.dropdown1BtnTxtStyle}
                     renderDropdownIcon={(isOpened) => {
                         return (
-                            <Image
-                                // style={farms.picker_icon}
-                                source={require('../../assets/farms/picker_arrow.png')}
-                            />
+                            <ArrowDown style={{marginRight: 10}} />
                         );
                     }}
                     dropdownIconPosition={"right"}

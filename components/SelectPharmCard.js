@@ -60,19 +60,19 @@ const SelectPharmCard = ({navigation, data, key}) => {
             : 0
 
     const countTotal = (arr) => {
-        arr ? arr.reduce((sum, {medication, count}) => sum + medication.price * count, 0)
+       return arr ? arr.reduce((sum, {count}) => count + sum, 0)
         : 0
     }
 
-    const filterBasket = (arr) => {
-        return arr.map(item => {
-            const hasMedication =
-                store_medications.some(store => store.medication.id === item.medication.id)
-            if (hasMedication) {
-                return item
-            }
-        })
-    }
+    // const filterBasket = (arr) => {
+    //     return arr.map(item => {
+    //         const hasMedication =
+    //             store_medications.some(store => store.medication.id === item.medication.id)
+    //         if (hasMedication) {
+    //             return item
+    //         }
+    //     })
+    // }
 
     const countStockPositions = () => {
         return basket_medications.filter(item => store_medications.some(s => item.medication.id === s.medication.id))
@@ -80,10 +80,9 @@ const SelectPharmCard = ({navigation, data, key}) => {
 
     const total = sumTotal(countStockPositions())
 
-    const countMedication = filterBasket(basket_medications)
+    const totalCount = countStockPositions()
 
-    const totalMedications = countTotal(countStockPositions())
-
+    const totalMedications = countTotal(totalCount)
 
     return (
         <View style={selectPharmCard.container}>

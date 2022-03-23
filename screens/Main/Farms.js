@@ -8,11 +8,11 @@ import {
     SafeAreaView,
     StyleSheet,
 } from 'react-native'
-import { Picker } from '@react-native-picker/picker'
+
 import Map from './Map'
 import { farms } from '../../styles/farms'
 import SelectDropdown from 'react-native-select-dropdown'
-import Api from '../../API'
+import ArrowDown from '../../assets/icons/arrow_down.svg'
 import FarmsCard from '../../components/FarmsCard'
 import { Colors } from '../../constants/colors'
 import { strings } from '../../localization'
@@ -123,10 +123,7 @@ const Farms = ({ navigation, route }) => {
                         buttonTextStyle={styles.dropdown1BtnTxtStyle}
                         renderDropdownIcon={(isOpened) => {
                             return (
-                                <Image
-                                    // style={farms.picker_icon}
-                                    source={require('../../assets/farms/picker_arrow.png')}
-                                />
+                               <ArrowDown style={{marginRight: 10}} />
                             )
                         }}
                         dropdownIconPosition={'right'}
