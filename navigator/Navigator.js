@@ -66,6 +66,8 @@ import AboutUs from "../screens/Profile/AboutUs";
 import SelectPharmacy from '../screens/Cart/SelectPharm';
 import MyOrders from '../screens/Profile/MyOrders';
 import OrderDetails from '../screens/Profile/OrderDetails';
+import UserAgreement from '../screens/Profile/UserAgreement'
+import DataProcessing from '../screens/Profile/DataProcessing'
 
 
 const Tab = createBottomTabNavigator()
@@ -100,6 +102,20 @@ const ProfileNav = ({isSignIn, setIsSignIn}) => {
                 component={MyOrders}
                 options={{
                     header: (props) => <Header {...props} title={strings.profile.my_orders} />,
+                }}
+            />
+            <Stack.Screen
+                name="UserAgreement"
+                component={UserAgreement}
+                options={{
+                    header: (props) => <Header {...props} title={'Пользовательское соглашение'} />,
+                }}
+            />
+            <Stack.Screen
+                name="DataProcessing"
+                component={DataProcessing}
+                options={{
+                    header: (props) => <Header {...props} title={'Обработка персональных данных'} />,
                 }}
             />
               <Stack.Screen

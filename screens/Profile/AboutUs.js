@@ -10,7 +10,7 @@ import MailIcon from '../../assets/aboutus/mail.svg'
 import Logo from '../../assets/auth/logo-2.svg'
 import Arrow from '../../assets/profile/arrow.svg'
 
-const AboutUs = () => {
+const AboutUs = ({navigation}) => {
     return (
 
 
@@ -38,11 +38,11 @@ const AboutUs = () => {
                 </TouchableOpacity>
 
                 <View style={aboutUs.bottomLinks}>
-                    <TouchableOpacity style={aboutUs.link}>
+                    <TouchableOpacity onPress={()=>navigation.push('UserAgreement')} style={aboutUs.link}>
                         <Text style={aboutUs.textLink}>Пользовательское соглашение</Text>
                         <Arrow />
                     </TouchableOpacity>
-                    <TouchableOpacity style={aboutUs.link}>
+                    <TouchableOpacity onPress={()=>navigation.push('DataProcessing')} style={aboutUs.link}>
                         <Text style={aboutUs.textLink}>{`Политика обработки\nперсональных данных`}</Text>
                         <Arrow />
                     </TouchableOpacity>
