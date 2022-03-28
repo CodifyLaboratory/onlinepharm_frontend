@@ -1,10 +1,8 @@
 import React from "react";
-import {ScrollView, Text, TouchableOpacity, View} from "react-native";
+import {ScrollView, Text} from "react-native";
 
 const UserAgreement = () => {
     return (
-
-
       <ScrollView style={{paddingHorizontal: 16, paddingVertical: 16}}>
           <Text style={{textAlign: 'center', marginBottom: 20, fontSize: 16}}> Пользовательское соглашение.</Text>
             <Text>
