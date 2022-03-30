@@ -64,16 +64,6 @@ const SelectPharmCard = ({navigation, data, key}) => {
         : 0
     }
 
-    // const filterBasket = (arr) => {
-    //     return arr.map(item => {
-    //         const hasMedication =
-    //             store_medications.some(store => store.medication.id === item.medication.id)
-    //         if (hasMedication) {
-    //             return item
-    //         }
-    //     })
-    // }
-
     const countStockPositions = () => {
         return basket_medications.filter(item => store_medications.some(s => item.medication.id === s.medication.id))
     }
@@ -142,7 +132,7 @@ const SelectPharmCard = ({navigation, data, key}) => {
             </View>
             {showList && <View style={selectPharmCard.productList}>
                 {basket_medications?.map((item) => {
-                    const inStock = store_medications?.some(med => med?.medication?.id === item?.medication?.id)
+                    const inStock = store_medications?.find(med => med?.medication?.id === item?.medication?.id)
                     return (
                         <View style={ordering.productRow}>
                             <Text style={{
@@ -152,10 +142,9 @@ const SelectPharmCard = ({navigation, data, key}) => {
                             }}>{item?.medication?.title}</Text>
                             <View style={ordering.productRowPrice}>
                                 {!inStock ? <Text style={selectPharmCard.notAvailable}>Нет в наличии</Text> : <>
-                                    <Text style={ordering.listCount}>{item.count} {strings.main.pcs}</Text>
-                                    <Text style={ordering.listPrice}>{item.medication.price} c</Text>
+                                    <Text style={ordering.listCount}>{item?.count} {strings.main.pcs}</Text>
+                                    <Text style={ordering.listPrice}>{inStock?.medication.price} c</Text>
                                 </>}
-
                             </View>
                         </View>
                     )
@@ -166,7 +155,6 @@ const SelectPharmCard = ({navigation, data, key}) => {
                         <Text style={ordering.listCount}>{totalMedications} {strings.main.pcs}</Text>
                         <Text style={selectPharmCard.total}>{total} с</Text>
                     </View>
-
                 </View>
 
             </View>}

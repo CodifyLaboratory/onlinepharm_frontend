@@ -36,7 +36,7 @@ function Ordering({navigation, route}) {
     const { basket, id } = route.params
     const delivery_price = 160
 
-    const {cart, user} = useSelector(state => state.data)
+    const { user } = useSelector(state => state.data)
 
     const {control, handleSubmit, setError, formState: {errors}, setValue} = useForm({
         defaultValues: {
@@ -52,20 +52,19 @@ function Ordering({navigation, route}) {
     });
 
     const submit = async (data) => {
-
         let form = {
             name: data.name,
             email: data.email,
             phone: data.phone,
             pharmacy: id,
             comment: data.comment,
-            payment_method: "Delivery",
+            payment_method: "Оплата наличными",
             address: data.address,
             apartment: data.apartment,
             entrance: data.entrance,
             total_price: total,
             delivery_price: delivery_price,
-            order_medications: basket.map(item => ({medication: item.medication.id}))
+            order_medications: basket.map(item => ({medication: item.medication.id, count: item?.count}))
         }
 
 
@@ -95,8 +94,6 @@ function Ordering({navigation, route}) {
     const sumTotal = (arr) =>
         arr ? arr.reduce((sum, {medication, count}) => sum + medication?.price * count, 0)
             : 0
-
-
 
     const total = sumTotal(basket)
 
