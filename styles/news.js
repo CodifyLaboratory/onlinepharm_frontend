@@ -11,6 +11,7 @@ export const news = StyleSheet.create({
     newsInner: {
         paddingTop: Platform.OS === 'ios' ? 10 : 10,
         backgroundColor: Colors.background,
+        paddingBottom: 50
     },
     newsItem: {
         marginRight: 20,

@@ -32,7 +32,7 @@ const PharmMapMarker = ({ item, navigation }) => {
             onPress={changeStatus}
             style={styles.marker}
             key={item.id}
-            icon={require('./../assets/marker.png')}
+            // icon={require('./../assets/marker.png')}
         >
             {descStatus ? (
                 <Callout onPress={()=>navigation.push('Ordering', {basket: countStockPositions(), id: item?.id})} tooltip={true}>

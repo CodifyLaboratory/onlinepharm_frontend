@@ -1,124 +1,138 @@
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import {
-    View,
+    ActivityIndicator,
+    Dimensions,
+    FlatList,
+    SafeAreaView,
+    ScrollView,
     Text,
     TouchableOpacity,
-    ScrollView,
-    SafeAreaView,
+    View,
 } from 'react-native'
 import { news } from '../../styles/news'
 
 import NewsCard from '../../components/NewsCard'
 import { Colors } from '../../constants/colors'
-import {getNews, getNewsCategories} from '../../api'
+import { getNews, getNewsCategories } from '../../api'
 import Loader from '../../components/Loader'
 
 export default function News({ navigation }) {
     const [categoryDataId, setCategoryDataId] = useState([])
     const [newsItems, setNewsItems] = useState([])
-    const [category, setCategory] = useState(null)
     const [loading, setLoading] = useState(false)
+    const [more, setMore] = useState(false)
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const [filters, setFilters] = useState({
+        filterCategory: null,
+        page: currentPage,
+    })
+
+    // console.log('newsItems', newsItems)
 
     useEffect(() => {
-        getNewsItems().then(r => setNewsItems(r))
-        getCategories().then(r => setCategoryDataId(r))
-
+        getNewsItems().then((r) => setNewsItems(r))
+        getCategories().then((r) => setCategoryDataId(r))
     }, [])
 
-
-    const getNewsItems = async() => {
+    const getNewsItems = async () => {
         setLoading(true)
         try {
-           return await getNews()
-        } catch(e) {
-
+            console.log('filter', filters)
+            return await getNews({ ...filters })
+        } catch (e) {
+            throw new Error(e)
         } finally {
-          setLoading(false)
+            setLoading(false)
         }
     }
 
     const getCategories = async () => {
         try {
             const res = await getNewsCategories()
-
-            changeCategory(res[0]?.id)
+            !filters.filterCategory &&
+                setFilters({ ...filters, filterCategory: res[0]?.id })
             return res
-
-        } catch(e) {
-
-        } finally {
-
+        } catch (e) {
+            throw new Error(e)
         }
     }
-
     const changeCategory = (id) => {
-        setCategory(id)
+        setFilters({ ...filters, filterCategory: id, page: 1 })
     }
 
-    const newsList = useMemo(
-        () =>
-            newsItems?.filter((item) => item.category === category)
-                .map((item) => (
-                    <NewsCard
-                        navigation={navigation}
-                        data={item}
-                        key={item.id}
-                    />
-                )),
-        [newsItems, category]
-    )
+    const onScrollEnd = async () => {
+        try {
+            setMore(true)
+            setCurrentPage(currentPage + 1)
+            const res = await getNews({ ...filters, page: currentPage + 1 })
+            // console.log('res', res)
 
-    const categoryList = useMemo(
-        () =>
-            categoryDataId?.map((item) => (
-                <TouchableOpacity
-                    onPress={() => changeCategory(item.id)}
-                    activeOpacity={0.5}
-                    key={item.id}
-                    style={
-                        category === item.id
-                            ? news.newsItemActive
-                            : news.newsItem
-                    }
-                >
-                    <Text
-                        style={
-                            category === item.id
-                                ? news.newsNavTextActive
-                                : news.newsNavText
-                        }
-                    >
-                        {item.title}
-                    </Text>
-                </TouchableOpacity>
-            )),
-        [categoryDataId, category]
-    )
+            setNewsItems([...newsItems, res?.results])
+        } catch (e) {
+        } finally {
+            setMore(false)
+        }
+    }
 
     if (loading) return <Loader />
 
     return (
-        <SafeAreaView style={{ backgroundColor: '#E6EFF9', flex: 1, paddingBottom: 24 }}>
-            <View style={news.newsInner}>
-                <View style={{ height: 31 }}>
-                    <ScrollView
-                        horizontal={true}
-                        showsHorizontalScrollIndicator={false}
-                    >
-                        {categoryList}
-                    </ScrollView>
-                </View>
-
+        <View style={{ flex: 1, height: Dimensions.get('window').height }}>
+            <View style={{ height: 30, marginBottom: 20, marginTop: 20 }}>
                 <ScrollView
-                    style={{
-                        backgroundColor: Colors.background,
-                        height: '100%',
-                        marginTop: 24,
-                    }}
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
                 >
-                    <View style={news.container}>{newsList}</View>
+                    {categoryDataId?.map((item) => (
+                        <TouchableOpacity
+                            onPress={() => changeCategory(item.id)}
+                            activeOpacity={0.5}
+                            key={item.id}
+                            style={
+                                filters.filterCategory === item.id
+                                    ? news.newsItemActive
+                                    : news.newsItem
+                            }
+                        >
+                            <Text
+                                style={
+                                    filters.filterCategory === item.id
+                                        ? news.newsNavTextActive
+                                        : news.newsNavText
+                                }
+                            >
+                                {item.title}
+                            </Text>
+                        </TouchableOpacity>
+                    ))}
                 </ScrollView>
             </View>
-        </SafeAreaView>
+            <FlatList
+                style={{ flex: 1 }}
+                keyExtractor={(item, index) => index.toString()}
+                // numColumns={1}
+                pagingEnabled={false}
+                onEndReached={onScrollEnd}
+                onEndReachedThreshold={0.01}
+                data={newsItems?.results}
+                // extraData={newsItems?.results}
+                ListFooterComponent={
+                    more ? (
+                        <ActivityIndicator
+                            color={'#000000'}
+                            size={'large'}
+                        />
+                    ) : null
+                }
+                renderItem={({ item }) => (
+                    <NewsCard
+                        navigation={navigation}
+                        data={item}
+                        key={item?.id}
+                    />
+                )}
+            />
+        </View>
     )
 }

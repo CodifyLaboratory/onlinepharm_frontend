@@ -29,10 +29,10 @@ const Settings = ({navigation}) => {
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={()=>navigation.navigate('ChangePasswordProfile')}
-                            style={profile.profileLink}
+                            style={{...profile.profileLink, borderBottomWidth: 0}}
                             activeOpacity={0.6}
                         >
-                            <View style={profile.profileLinkInner}>
+                            <View style={{...profile.profileLinkInner}}>
                                 <Password />
                                 <Text style={profile.profileLinkText}>
                                     {strings.profile.change_password}

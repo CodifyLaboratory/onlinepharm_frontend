@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { View, Image, Text, ScrollView, StyleSheet } from 'react-native'
-import Api from '../../API'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
+
 import MedicineCard from '../../components/MedicineCard'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../components/Loader'
 import { setFavorite, setMedicineFavorite, loadCart } from '../../store/actions'
-import { getAllBasket } from '../../api'
+import {getAllBasket, getFavorites, getSelectionsById} from '../../api'
 
 const MyComponent = ({ navigation, route }) => {
     const [selectionData, setSelectionData] = useState(null)
@@ -14,43 +14,16 @@ const MyComponent = ({ navigation, route }) => {
 
     let id = route.params
 
-    const [userData, setUserData] = useState()
-
     const { cart, favorites_medicine } = useSelector((state) => state.data)
 
     const dispatch = useDispatch()
 
-    const loadData = async () => {
-        try {
-            let data = await AsyncStorage.getItem('userData')
-            if (data !== null) {
-                setUserData(JSON.parse(data))
-            }
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    const getBasket = async () => {
-        try {
-            const res = await getAllBasket()
-            dispatch(loadCart(res))
-        } catch (e) {
-            throw new Error(e)
-        }
-    }
-
     useEffect(() => {
-        getBasket()
-        loadData()
-        Api.getData(`selections/${id}`)
-            .then((res) => setSelectionData(res.data))
-            .catch((e) => console.log(e))
-
-        Api.getData(`favorite-medications/`, userData?.access)
-            .then((res) => dispatch(setMedicineFavorite(res.data)))
-            .catch((e) => console.log(e.data))
+        getAllBasket().then((r)=>dispatch(loadCart(r)))
+        getSelectionsById(id).then((r) => setSelectionData(r))
+        getFavorites().then((r)=>dispatch(setMedicineFavorite(r)))
     }, [changed, dispatch])
+
 
     const isSelected = (id) => {
         return favorites_medicine?.find((item) => item.medication.id === id)

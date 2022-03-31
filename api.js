@@ -2,7 +2,7 @@ import axios from 'axios'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {strings} from "./localization";
 
-export const request = async (url, method, payload, formData) => {
+export const request = async (url, method, payload, formData, params) => {
     const data = await AsyncStorage.getItem('userData')
 
     const parsed = JSON.parse(data)
@@ -21,6 +21,7 @@ export const request = async (url, method, payload, formData) => {
             },
             method,
             data: payload,
+            params: params
         })
         if (res.data && res.data.access) {
             AsyncStorage.setItem('userData', res.data.access)
@@ -165,8 +166,8 @@ export async function getMedication(id) {
     return request(`/api/medications/${id}/`, 'GET')
 }
 
-export async function getNews() {
-    return request(`/api/news/`, 'GET')
+export async function getNews(filters) {
+    return await request(`/api/news/`, 'GET', null, null, filters)
 }
 
 export async function getNewsCategories() {
@@ -209,5 +210,9 @@ export async function getCategories() {
 
 export async function getSelections() {
     return request(`/api/selections/`, 'GET')
+}
+
+export async function getSelectionsById(id) {
+    return request(`/api/selections/${id}/`, 'GET')
 }
 

@@ -24,7 +24,6 @@ function Ordering({navigation, route}) {
     const [deliveryOptionsValue, setDeliveryOptionsValue] =
         React.useState('delivery')
     const [paymentMethodsValue, setPaymentMethodsValue] = React.useState(1)
-    // const [currentCard, setCurrentCard] = useState(0)
     const [showModal, setShowModal] = useState(false)
     const [showMap, setShowMap] = useState(false)
 
