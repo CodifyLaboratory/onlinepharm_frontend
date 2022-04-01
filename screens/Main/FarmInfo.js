@@ -5,9 +5,8 @@ import {
     ScrollView,
     TouchableOpacity,
     Image,
-    StyleSheet,
 } from 'react-native'
-import Api from '../../API'
+
 import Stars from 'react-native-stars'
 import ReviewCard from '../../components/ReviewCard'
 import {farmInfo} from '../../styles/farmInfo'

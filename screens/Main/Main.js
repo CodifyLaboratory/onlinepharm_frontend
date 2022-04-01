@@ -11,7 +11,6 @@ import Carousel from 'react-native-snap-carousel'
 
 import Logo from '../../assets/header/logo.svg'
 
-import Api from '../../API'
 import { main } from '../../styles/main'
 import MainFarmCard from '../../components/MainFarmCard'
 import MainSymptomsCard from '../../components/MainSymptomsCard'

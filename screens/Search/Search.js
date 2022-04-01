@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/EvilIcons'
 import { Input } from 'react-native-elements'
 import SearchImg from '../../assets/search/search.svg'
 import { search } from '../../styles/search'
-import Api from '../../API'
+
 import {strings} from "../../localization";
 import {searchMedication} from "../../api";
 

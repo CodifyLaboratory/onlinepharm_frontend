@@ -9,7 +9,7 @@ import {
     Image,
     TouchableOpacity,
 } from 'react-native'
-import Api from '../../API'
+
 import User from '../../assets/profile/user.svg'
 import Pill from '../../assets/profile/medicine.svg'
 import Doctor from '../../assets/profile/hospital.svg'

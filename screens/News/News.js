@@ -3,7 +3,6 @@ import {
     ActivityIndicator,
     Dimensions,
     FlatList,
-    SafeAreaView,
     ScrollView,
     Text,
     TouchableOpacity,
@@ -13,34 +12,48 @@ import { news } from '../../styles/news'
 
 import NewsCard from '../../components/NewsCard'
 import { Colors } from '../../constants/colors'
-import { getNews, getNewsCategories } from '../../api'
+import { getNews, getNewsCategories } from '../../api.js'
 import Loader from '../../components/Loader'
 
 export default function News({ navigation }) {
     const [categoryDataId, setCategoryDataId] = useState([])
-    const [newsItems, setNewsItems] = useState([])
+    const [newsItems, setNewsItems] = useState({})
     const [loading, setLoading] = useState(false)
     const [more, setMore] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
 
+
     const [filters, setFilters] = useState({
-        filterCategory: null,
-        page: currentPage,
+        filterCategory: 1,
+        page: 1,
     })
 
     // console.log('newsItems', newsItems)
 
     useEffect(() => {
-        getNewsItems().then((r) => setNewsItems(r))
         getCategories().then((r) => setCategoryDataId(r))
+        getNews({...filters}).then(r => {
+
+            setNewsItems(r)})
     }, [])
+
+    console.log('NEWSITEMS', newsItems)
+
+    useEffect(() => {
+        getNewsItems().then((r) => r)
+    }, [filters.page])
 
     const getNewsItems = async () => {
         setLoading(true)
         try {
-            console.log('filter', filters)
-            return await getNews({ ...filters })
+            const res = await getNews({ ...filters })
+            const updated = []
+            // updated.push(res?.results)
+            // console.log('++++', updated)
+            // setNewsItems({...res, results: updated})
+            return res
         } catch (e) {
+            console.log('e', e)
             throw new Error(e)
         } finally {
             setLoading(false)
@@ -61,19 +74,13 @@ export default function News({ navigation }) {
         setFilters({ ...filters, filterCategory: id, page: 1 })
     }
 
-    const onScrollEnd = async () => {
-        try {
-            setMore(true)
-            setCurrentPage(currentPage + 1)
-            const res = await getNews({ ...filters, page: currentPage + 1 })
-            // console.log('res', res)
+     console.log('NEWS', newsItems?.results)
 
-            setNewsItems([...newsItems, res?.results])
-        } catch (e) {
-        } finally {
-            setMore(false)
-        }
+
+    const fetchMoreData = () => {
+        setFilters({ ...filters, page: filters.page + 1 })
     }
+
 
     if (loading) return <Loader />
 
@@ -95,6 +102,7 @@ export default function News({ navigation }) {
                                     : news.newsItem
                             }
                         >
+                            <Text>{filters.page}</Text>
                             <Text
                                 style={
                                     filters.filterCategory === item.id
@@ -109,22 +117,8 @@ export default function News({ navigation }) {
                 </ScrollView>
             </View>
             <FlatList
-                style={{ flex: 1 }}
-                keyExtractor={(item, index) => index.toString()}
-                // numColumns={1}
-                pagingEnabled={false}
-                onEndReached={onScrollEnd}
-                onEndReachedThreshold={0.01}
+                contentContainerStyle={{ flexGrow: 1 }}
                 data={newsItems?.results}
-                // extraData={newsItems?.results}
-                ListFooterComponent={
-                    more ? (
-                        <ActivityIndicator
-                            color={'#000000'}
-                            size={'large'}
-                        />
-                    ) : null
-                }
                 renderItem={({ item }) => (
                     <NewsCard
                         navigation={navigation}
@@ -132,6 +126,10 @@ export default function News({ navigation }) {
                         key={item?.id}
                     />
                 )}
+                // ListFooterComponent={renderFooter}
+                // ListEmptyComponent={renderEmpty}
+                onEndReachedThreshold={0.2}
+                onEndReached={fetchMoreData}
             />
         </View>
     )

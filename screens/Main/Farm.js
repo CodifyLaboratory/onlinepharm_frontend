@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import FarmCard from '../../components/FarmCard'
 import BrandCard from '../../components/BrandCard'
-import Api from '../../API'
+
 import { farm } from '../../styles/farm'
 import { Colors } from '../../constants/colors'
 
