@@ -121,4 +121,10 @@ export const news = StyleSheet.create({
         borderTopRightRadius: 20,
         borderBottomRightRadius: 20,
     },
+    footerText: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 10
+    },
 })

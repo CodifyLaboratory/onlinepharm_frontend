@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     ActivityIndicator,
     Dimensions,
@@ -11,56 +11,50 @@ import {
 import { news } from '../../styles/news'
 
 import NewsCard from '../../components/NewsCard'
-import { Colors } from '../../constants/colors'
+
 import { getNews, getNewsCategories } from '../../api.js'
 import Loader from '../../components/Loader'
+import center from "native-base/src/theme/components/center";
 
 export default function News({ navigation }) {
     const [categoryDataId, setCategoryDataId] = useState([])
     const [newsItems, setNewsItems] = useState({})
     const [loading, setLoading] = useState(false)
     const [more, setMore] = useState(false)
-    const [currentPage, setCurrentPage] = useState(1)
-
 
     const [filters, setFilters] = useState({
         filterCategory: 1,
         page: 1,
     })
 
-    // console.log('newsItems', newsItems)
-
     useEffect(() => {
         getCategories().then((r) => setCategoryDataId(r))
-        getNews({...filters}).then(r => {
-
-            setNewsItems(r)})
-    }, [])
-
-    console.log('NEWSITEMS', newsItems)
+        getNews({ ...filters, page: 1 }).then((r) => {
+            setNewsItems((prevState) => ({ ...prevState, ...r }))
+        })
+    }, [filters.filterCategory])
 
     useEffect(() => {
         getNewsItems().then((r) => r)
     }, [filters.page])
 
     const getNewsItems = async () => {
-        setLoading(true)
+        if (newsItems?.total_pages === filters.page) return
+
+        setMore(true)
         try {
             const res = await getNews({ ...filters })
-            const updated = []
-            // updated.push(res?.results)
-            // console.log('++++', updated)
-            // setNewsItems({...res, results: updated})
-            return res
+            const updated = [...newsItems?.results, ...res?.results]
+            setNewsItems({ ...newsItems, results: updated })
         } catch (e) {
-            console.log('e', e)
             throw new Error(e)
         } finally {
-            setLoading(false)
+            setMore(false)
         }
     }
 
     const getCategories = async () => {
+        setLoading(true)
         try {
             const res = await getNewsCategories()
             !filters.filterCategory &&
@@ -68,24 +62,33 @@ export default function News({ navigation }) {
             return res
         } catch (e) {
             throw new Error(e)
+        } finally {
+            setLoading(false)
         }
     }
     const changeCategory = (id) => {
         setFilters({ ...filters, filterCategory: id, page: 1 })
     }
 
-     console.log('NEWS', newsItems?.results)
-
-
     const fetchMoreData = () => {
-        setFilters({ ...filters, page: filters.page + 1 })
+        if (filters.page < newsItems?.total_pages) {
+            setFilters({ ...filters, page: filters.page + 1 })
+        }
     }
 
+    const renderFooter = () => (
+        <View style={{ paddingBottom: 20, ...news.footerText }}>
+            {more && <ActivityIndicator size="large" color="#1F8BA7" />}
+            {newsItems?.total_pages === filters.page && (
+                <Text>No more articles at the moment</Text>
+            )}
+        </View>
+    )
 
     if (loading) return <Loader />
 
     return (
-        <View style={{ flex: 1, height: Dimensions.get('window').height }}>
+        <View style={{ flex: 1, height: Dimensions.get('window').height}}>
             <View style={{ height: 30, marginBottom: 20, marginTop: 20 }}>
                 <ScrollView
                     horizontal={true}
@@ -102,7 +105,6 @@ export default function News({ navigation }) {
                                     : news.newsItem
                             }
                         >
-                            <Text>{filters.page}</Text>
                             <Text
                                 style={
                                     filters.filterCategory === item.id
@@ -117,18 +119,14 @@ export default function News({ navigation }) {
                 </ScrollView>
             </View>
             <FlatList
-                contentContainerStyle={{ flexGrow: 1 }}
+                contentContainerStyle={{ flexGrow: 1}}
                 data={newsItems?.results}
-                renderItem={({ item }) => (
-                    <NewsCard
-                        navigation={navigation}
-                        data={item}
-                        key={item?.id}
-                    />
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item, index }) => (
+                    <NewsCard navigation={navigation} data={item} />
                 )}
-                // ListFooterComponent={renderFooter}
-                // ListEmptyComponent={renderEmpty}
-                onEndReachedThreshold={0.2}
+                ListFooterComponent={renderFooter}
+                onEndReachedThreshold={0.01}
                 onEndReached={fetchMoreData}
             />
         </View>

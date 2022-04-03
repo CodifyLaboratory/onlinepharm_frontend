@@ -26,12 +26,12 @@ import {
     getAllBasket,
     getBanners,
     getCategories,
-    getFavoritesProducts,
     getNews,
     getPharmBrands,
     getSelections
 } from "../../api";
 import {strings} from "../../localization";
+import {filters} from "css-select";
 
 export default function Main({ navigation }) {
 
@@ -50,7 +50,7 @@ export default function Main({ navigation }) {
         getBanners().then((res) => setBannerData(res))
         getCategories().then((res) => setCategoryData(res))
         getSelections().then((res) => setSelectionsData(res))
-        getNews().then((res) => setNewsData(res))
+        getNews({page: 1, filtersCategory: 1}).then((res) => setNewsData(res?.results))
         getBasket().then(r => dispatch(loadCart(r)))
     }, [dispatch])
 
@@ -102,13 +102,13 @@ export default function Main({ navigation }) {
         [selectionsData]
     )
 
-    // const newsList = useMemo(
-    //     () =>
-    //         newsData?.map((item) => (
-    //             <NewsCard data={item} key={item.id} navigation={navigation} />
-    //         )),
-    //     [newsData]
-    // )
+    const newsList = useMemo(
+        () =>
+            newsData?.map((item) => (
+                <NewsCard data={item} key={item.id} navigation={navigation} />
+            )),
+        [newsData]
+    )
 
     return (
         <ScrollView style={{flex: 1}} showsVerticalScrollIndicator={false}>
@@ -195,7 +195,7 @@ export default function Main({ navigation }) {
                                 horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                {/*{newsList}*/}
+                                {newsList}
                             </ScrollView>
                         </View>
                     </View>

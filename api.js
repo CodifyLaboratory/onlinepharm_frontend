@@ -167,7 +167,6 @@ export async function getMedication(id) {
 }
 
 export async function getNews(filters) {
-    console.log('FILTERSSS', filters)
     return await request(`/api/news/`, 'GET', null, null, filters)
 }
 

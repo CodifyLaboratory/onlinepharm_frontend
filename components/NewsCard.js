@@ -14,7 +14,7 @@ const NewsCard = ({navigation, data}) => {
             }}
             style={news.farmCard}
             activeOpacity={0.85}
-            key={data.id}
+            key={data?.id}
         >
             <View style={news.farmCardInfo}>
                 <View style={news.nameFarm}>
