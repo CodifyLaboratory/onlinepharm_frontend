@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, TouchableOpacity, TextInput} from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {registration} from '../../styles/registration'
-import Api from '../../API'
+import Api from '../../API-old'
 import Logo from '../../assets/header/logo.svg'
 import {strings} from "../../localization";
 import {Controller, useForm} from "react-hook-form";

@@ -284,6 +284,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         lineHeight: 20,
+        height: 20
     },
     btn_leave: {
         width: 128,
@@ -300,6 +301,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         lineHeight: 20,
+        height: 20,
         textShadowColor: 'rgba(0, 0, 0, 0.25)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 9,

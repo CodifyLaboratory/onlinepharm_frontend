@@ -1,17 +1,21 @@
-import React, { useEffect, useMemo, useState, useRef } from 'react'
-import {View, ScrollView, Text, TouchableOpacity, Image, StyleSheet} from 'react-native'
-import { Picker } from '@react-native-picker/picker'
-import Map from '../Main/Map'
+import React, { useEffect, useMemo, useState } from 'react'
+import {
+    View,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+} from 'react-native'
 import { farms } from '../../styles/farms'
 import SelectPharmCard from '../../components/SelectPharmCard'
 import { Colors } from '../../constants/colors'
-import {strings} from "../../localization";
-import { selectPharm } from '../../styles/selectPharm'
+import { strings } from '../../localization'
+
 import { getDeliveryPharmacy, getPharmBrands } from '../../api'
 import PharmacyMap from './PharmacyMap'
-import SelectDropdown from "react-native-select-dropdown";
-import Loader from "../../components/Loader";
-import EmptyList from "../../components/ListEmpty";
+import SelectDropdown from 'react-native-select-dropdown'
+import Loader from '../../components/Loader'
+import EmptyList from '../../components/ListEmpty'
 
 import ArrowDown from '../../assets/icons/arrow_down.svg'
 
@@ -23,16 +27,15 @@ const SelectPharmacy = ({ navigation, route }) => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-       getPharmacies().then(res => setPharmacies(res))
-       getPharmBrands().then((res) => setBrands(res))
+        getPharmacies().then((res) => setPharmacies(res))
+        getPharmBrands().then((res) => setBrands(res))
     }, [])
 
-
-    const getPharmacies = async() => {
+    const getPharmacies = async () => {
         setLoading(true)
         try {
-        return await getDeliveryPharmacy()
-        } catch(e) {
+            return await getDeliveryPharmacy()
+        } catch (e) {
             throw new Error(e)
         } finally {
             setLoading(false)
@@ -41,7 +44,7 @@ const SelectPharmacy = ({ navigation, route }) => {
 
     const farmsList = useMemo(
         () =>
-             pharmacies
+            pharmacies
                 .filter((item) => {
                     if (selectedFarm === 0) {
                         return item
@@ -89,34 +92,35 @@ const SelectPharmacy = ({ navigation, route }) => {
                     </TouchableOpacity>
                 </View>
                 <SelectDropdown
-                    data={brands.map(item => item.title)}
+                    data={brands.map((item) => item.title)}
                     defaultValue={0}
                     onSelect={(selectedItem, index) => {
                         setSelectedFarm(brands[index].id)
-
                     }}
                     defaultButtonText={strings.main.select_pharmacy}
                     buttonTextAfterSelection={(selectedItem, index) => {
-                        return selectedItem;
+                        return selectedItem
                     }}
                     rowTextForSelection={(item, index) => {
-                        return item;
+                        return item
                     }}
                     buttonStyle={styles.dropdown1BtnStyle}
                     buttonTextStyle={styles.dropdown1BtnTxtStyle}
                     renderDropdownIcon={(isOpened) => {
-                        return (
-                            <ArrowDown style={{marginRight: 10}} />
-                        );
+                        return <ArrowDown style={{ marginRight: 10 }} />
                     }}
-                    dropdownIconPosition={"right"}
+                    dropdownIconPosition={'right'}
                     dropdownStyle={styles.dropdown1DropdownStyle}
                     rowStyle={styles.dropdown1RowStyle}
                     rowTextStyle={styles.dropdown1RowTxtStyle}
                 />
 
                 {type ? (
-                    farmsList.length ? farmsList : <EmptyList />
+                    farmsList.length ? (
+                        farmsList
+                    ) : (
+                        <EmptyList />
+                    )
                 ) : (
                     <PharmacyMap
                         pharmacies={pharmacies}
@@ -132,11 +136,10 @@ const SelectPharmacy = ({ navigation, route }) => {
 export default SelectPharmacy
 
 const styles = StyleSheet.create({
-
     dropdown1BtnStyle: {
-        width: "100%",
+        width: '100%',
         height: 50,
-        backgroundColor: "#FFF",
+        backgroundColor: '#FFF',
         borderRadius: 8,
         // borderWidth: 1,
         // borderColor: "#444",
@@ -150,12 +153,15 @@ const styles = StyleSheet.create({
         shadowRadius: 1.41,
         elevation: 2,
     },
-    dropdown1BtnTxtStyle: { color: "#444", textAlign: "left" },
-    dropdown1DropdownStyle: { backgroundColor: Colors.white, marginTop: 8, borderRadius: 8 },
-    dropdown1RowStyle: {
-        backgroundColor: "#EFEFEF",
-        borderBottomColor: "#C5C5C5",
+    dropdown1BtnTxtStyle: { color: '#444', textAlign: 'left' },
+    dropdown1DropdownStyle: {
+        backgroundColor: Colors.white,
+        marginTop: 8,
+        borderRadius: 8,
     },
-    dropdown1RowTxtStyle: { color: "#444", textAlign: "left" }
-});
-
+    dropdown1RowStyle: {
+        backgroundColor: '#EFEFEF',
+        borderBottomColor: '#C5C5C5',
+    },
+    dropdown1RowTxtStyle: { color: '#444', textAlign: 'left' },
+})

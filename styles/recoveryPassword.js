@@ -53,7 +53,6 @@ const recoveryPassword = StyleSheet.create({
         fontSize: 16,
         lineHeight: 22,
         color: Colors.gray_light,
-        marginLeft: 10
     },
     timerText: {
         fontFamily: 'SF-Pro-Medium',

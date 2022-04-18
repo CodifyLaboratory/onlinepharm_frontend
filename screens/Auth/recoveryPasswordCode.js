@@ -5,10 +5,13 @@ import recoveryPassword from "../../styles/recoveryPassword";
 import {Controller, useForm} from "react-hook-form";
 import {Colors} from "../../constants/colors";
 import {registration} from "../../styles/registration";
-import {Countdown} from "react-native-element-timer/index";
+// import {Countdown} from "react-native-element-timer/index";
 import {resetPassword, verifyCode} from "../../api";
 
 const PasswordRecoveryCode = ({navigation, route}) => {
+
+    const [counter, setCounter] = React.useState(30);
+    const [startCountdown, setStartCountdown] = React.useState(true);
 
     const {email} = route.params
 
@@ -18,12 +21,27 @@ const PasswordRecoveryCode = ({navigation, route}) => {
         }
     });
 
-    const [resend, setResend] = useState(false)
-    const countdownRef = useRef(null);
+    React.useEffect(() => {
+        if (startCountdown) {
+            const timer = counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
 
-    useEffect(() => {
-        !resend && countdownRef.current.start();
-    }, [resend])
+            if (counter === 0) {
+                // countdown is finished
+                setStartCountdown(false);
+                // update your redux state here
+                // updateReduxCounter(0);
+            }
+
+            return () => clearInterval(timer);
+        }
+    }, [counter, startCountdown]);
+
+    const [resend, setResend] = useState(false)
+    // const countdownRef = useRef(null);
+
+    // useEffect(() => {
+    //     !resend && countdownRef.current.start();
+    // }, [resend])
 
     const onSubmit = async (data) => {
         try {
@@ -38,7 +56,8 @@ const PasswordRecoveryCode = ({navigation, route}) => {
 
     const _resend = async () => {
         await resetPassword({email})
-        setResend(false)
+        setCounter(30)
+        setStartCountdown(true)
     }
 
     return (
@@ -84,27 +103,24 @@ const PasswordRecoveryCode = ({navigation, route}) => {
                     <Text style={registration.nextText}>{strings.auth.next}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    disabled={!resend}
+                    disabled={startCountdown}
                     style={{
                         ...recoveryPassword.group_button_resend,
-                        backgroundColor: resend ? Colors.light : Colors.background
+                        backgroundColor: !startCountdown ? Colors.light : Colors.background
                     }}
                     onPress={_resend}
                     activeOpacity={0.8}
                 >
                     <Text style={{
                         ...recoveryPassword.resendText,
-                        color: !resend ? Colors.gray_light : Colors.white
-                    }}>{strings.auth.resend_code} </Text>
-                    {resend ? null : <Text style={recoveryPassword.timer}>
-                        00:
-                        <Countdown
-                            ref={countdownRef}
-                            style={{position: 'absolute', paddingLeft: 19}}
-                            textStyle={recoveryPassword.timerText}
-                            initialSeconds={30}
-                            onEnd={(e) => setResend(true)}
-                        />
+                        color: startCountdown ? Colors.gray_light : Colors.white
+                    }}>{strings.auth.resend_code}</Text>
+
+                    {!startCountdown
+                        ? null
+                        : <Text style={recoveryPassword.timer}>:
+                            <Text style={recoveryPassword.timerText}>{counter}</Text> {strings.auth.seconds}
+
                     </Text>}
 
                 </TouchableOpacity>

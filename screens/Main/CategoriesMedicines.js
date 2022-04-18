@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {ScrollView, SafeAreaView, Text} from 'react-native'
 import { categoriesMedicines } from '../../styles/categoriesMedicines'
 import MedicineCard from '../../components/MedicineCard'
-import Api from '../../API'
+import Api from '../../API-old'
 import Loader from '../../components/Loader'
 
 import { useSelector, useDispatch } from 'react-redux'

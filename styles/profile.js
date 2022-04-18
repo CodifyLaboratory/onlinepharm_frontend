@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import {Platform, StyleSheet} from 'react-native'
 
 export const profile = StyleSheet.create({
     container: {
@@ -9,7 +9,7 @@ export const profile = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 20,
         paddingBottom: 20,
-        marginTop: Platform.OS == 'android' ? 40 : 0,
+        marginTop: Platform.OS === 'android' ? 40 : 0,
     },
     profileAvatar: {
         width: 88,

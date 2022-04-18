@@ -48,6 +48,7 @@ export let strings = new LocalizedStrings({
             send: 'Отправить',
             password_changed: 'Ваш пароль был успешно изменен',
             phone: 'Телефон',
+            seconds: 'сек.'
         },
         main: {
             main: 'Главная',
@@ -234,6 +235,7 @@ export let strings = new LocalizedStrings({
             send: 'Жөнөтүү',
             password_changed: 'Сиздин сырсөз ийгиликтүү өзгөрдү',
             phone: 'Телефон',
+            seconds: 'сек.'
         },
         main: {
             main: 'Башкы',
@@ -421,6 +423,7 @@ export let strings = new LocalizedStrings({
             send: 'Send',
             password_changed: 'Your password has been successfully changed',
             phone: 'Phone',
+            seconds: 's'
         },
         main: {
             main: 'Main',

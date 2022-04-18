@@ -7,7 +7,7 @@ export const categories = StyleSheet.create({
     },
     container: {
         backgroundColor: Colors.background,
-        paddingTop: Platform.OS == 'android' ? 2 : 0,
+        paddingTop: Platform.OS === 'android' ? 2 : 0,
     },
     banner: {
         borderRadius: 20,

@@ -3,18 +3,13 @@ import {
     SafeAreaView,
     StyleSheet,
     Dimensions,
-    View,
-    Text,
-    Image,
 } from 'react-native'
-import MapView, { Marker, CalloutSubview, Callout } from 'react-native-maps'
+import MapView  from 'react-native-maps'
 import PharmMapMarker from '../../components/pharmMapMarker'
 
 function PharmacyMap({ pharmacies, selectedFarm, navigation }) {
 
     const [pharmaData, setPharmaData] = useState([])
-
-    console.log('PHARM', pharmaData)
 
     useEffect(() => {
         setPharmaData(

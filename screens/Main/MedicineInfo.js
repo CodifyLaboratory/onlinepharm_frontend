@@ -9,7 +9,7 @@ import {
     StyleSheet,
 } from 'react-native'
 import ReviewCard from '../../components/ReviewCard'
-import Api from '../../API'
+import Api from '../../API-old'
 import Stars from 'react-native-stars'
 import Faq from '../../components/Faq'
 import { Colors } from '../../constants/colors'

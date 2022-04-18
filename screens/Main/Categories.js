@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native'
-import Api from '../../API'
+import Api from '../../API-old'
 import Carousel from 'react-native-snap-carousel'
 
 import BannerCard from '../../components/BannerCard'

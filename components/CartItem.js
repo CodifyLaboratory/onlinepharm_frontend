@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { myMedicine } from '../styles/components/myMedicine'
 import { cartItem } from '../styles/components/cartItem'
-import Api from './../API/index'
+import Api from '../API-old/index'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {strings} from "../localization";
 

@@ -2,9 +2,9 @@ import React from 'react'
 import {
     View,
     Platform,
-    TouchableOpacity,
-    Text,
+    Text
 } from 'react-native'
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from '@react-navigation/stack'
 
@@ -48,7 +48,7 @@ import LeaveReview from '../screens/Main/LeaveReview'
 import MedicineInfo from '../screens/Main/MedicineInfo'
 import Unauthorized from "../screens/Auth/Unauthorized";
 
-import {mainBgColor, mainTextColor} from '../constants'
+import {mainTextColor} from '../constants'
 
 import {useSelector} from "react-redux";
 import Settings from "../screens/Profile/Settings";

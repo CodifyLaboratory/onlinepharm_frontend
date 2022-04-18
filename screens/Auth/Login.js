@@ -8,7 +8,7 @@ import {
 import {registration} from '../../styles/registration'
 import Logo from '../../assets/header/logo.svg'
 import {API} from 'react-native-web/dist/vendor/react-native/Animated/NativeAnimatedHelper'
-import Api from '../../API'
+import Api from '../../API-old'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import {setAuthorization, setGuest} from "../../store/actions";
 import {useDispatch} from "react-redux";
