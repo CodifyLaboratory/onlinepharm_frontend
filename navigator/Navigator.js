@@ -400,7 +400,7 @@ const CartNav = () => {
                 name="SelectPharmacy"
                 component={SelectPharmacy}
                 options={{
-                    header: (props) => <Header {...props} title={'Выбор аптеки'} />,
+                    header: (props) => <Header {...props} title={strings.main.choice_of_pharmacy} />,
                 }}
             />
 

@@ -63,7 +63,8 @@ export const cartStyle = StyleSheet.create({
         fontWeight: '600',
         fontStyle: 'normal',
         fontFamily: 'SF-Pro-SemiBold',
-        lineHeight: 20
+        lineHeight: 20,
+        textAlign: 'center'
     },
     emptyCart: {
         marginTop: 120,

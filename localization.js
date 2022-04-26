@@ -78,6 +78,7 @@ export let strings = new LocalizedStrings({
             from: 'c',
             to: 'по',
             title: 'Главная',
+            choice_of_pharmacy: 'Выбор аптеки'
         },
         news: {
             news: 'Новости',
@@ -124,7 +125,8 @@ export let strings = new LocalizedStrings({
             in_cart: 'В корзине',
             to_main: 'На главную',
             empty_basket: 'Корзина пуста',
-            title: 'Корзина'
+            title: 'Корзина',
+            to_order: 'Заказать\n доставку'
         },
         profile: {
             profile: 'Профиль',
@@ -147,6 +149,8 @@ export let strings = new LocalizedStrings({
             delete_your_account: 'Вы точно хотите удалить ваш аккаунт и все данные?',
             address: 'Адрес',
             title: 'Профиль',
+            empty_list: 'Список пуст',
+            want_to_go_out: 'Вы точно хотите выйти?'
         },
         search: {
             search: 'Поиск',
@@ -266,6 +270,7 @@ export let strings = new LocalizedStrings({
             to: 'по',
             in_cart: 'В корзине',
             title: 'Башкы',
+            choice_of_pharmacy: 'Дарыкана тандоо'
         },
         news: {
             news: 'Жаңылыктар',
@@ -283,7 +288,7 @@ export let strings = new LocalizedStrings({
             price: 'Баасы',
             purchase: 'Сатып алуу',
             sum: 'Сумма',
-            remove_item: 'Удалить товар из корзины?',
+            remove_item: 'Себеттен буюмду алып саласызбы?',
             add_card: 'Картаны кошуу',
             contact_details: 'Байланыш маалыматы',
             order_comments: 'Тапшырыкка комментарийлер',
@@ -313,6 +318,7 @@ export let strings = new LocalizedStrings({
             to_main: 'Башкы',
             empty_basket: 'Бош себет',
             title: 'Себет',
+            to_order: 'жеткирүү \nтартиби'
         },
         profile: {
             profile: 'Профиль',
@@ -335,6 +341,8 @@ export let strings = new LocalizedStrings({
             delete_your_account: 'Аккаунттузду жана бардык дайындарды чын эле жок кылгыңыз келеби?',
             address: 'Адрес',
             title: 'Профиль',
+            empty_list: 'Тизме бош',
+            want_to_go_out: 'Сиз чын эле чыгууну каалайсызбы?'
         },
         search: {
             search: 'Издөө',
@@ -454,6 +462,7 @@ export let strings = new LocalizedStrings({
             to: 'to',
             in_cart: 'In the basket',
             title: 'Main',
+            choice_of_pharmacy: 'Choosing a pharmacy'
         },
         news: {
             news: 'News',
@@ -501,6 +510,7 @@ export let strings = new LocalizedStrings({
             to_main: 'To main',
             empty_basket: 'Empty shopping cart',
             title: 'Basket',
+            to_order: 'to order \ndelivery'
         },
         profile: {
             profile: 'Profile',
@@ -523,6 +533,8 @@ export let strings = new LocalizedStrings({
             delete_your_account: 'Are you sure you want to delete your account and all data?',
             address: 'Address',
             title: 'Profile',
+            empty_list: 'The list is empty',
+            want_to_go_out: 'Are you sure you want to get out?'
         },
         search: {
             search: 'Search',

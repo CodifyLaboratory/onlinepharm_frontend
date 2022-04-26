@@ -25,12 +25,12 @@ function FarmInfo({navigation, route}) {
 
     const { is_guest } = useSelector(state => state.data)
 
-    const { medId, pharmacy_id } = route.params
+    const { pharmacy_id } = route.params
 
     const [farmData, setFarmData] = useState(null)
 
     useEffect(() => {
-        loadFarmInfo().then(res => setFarmData(res))
+        loadFarmInfo().then(res => setFarmData(res)).catch((e) => console.log('e', e))
     }, [])
 
     const loadFarmInfo = async () => {

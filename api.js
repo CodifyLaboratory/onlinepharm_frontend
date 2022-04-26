@@ -82,7 +82,7 @@ export async function getFavoritesProducts() {
 }
 
 export async function getFarmInformation(id) {
-    return request(`/api/pharms/${id}`, 'GET')
+    return await request(`/api/pharms/${id}`, 'GET')
 }
 
 export async function addToBasket(id, count) {
@@ -90,7 +90,7 @@ export async function addToBasket(id, count) {
 }
 
 export async function deleteFromBasket(id) {
-    return request(`/api/basket-medications/delete/${id}/`, 'DELETE', {"status": true})
+    return await request(`/api/basket-medications/delete/${id}/`, 'DELETE', {"status": true})
 }
 
 export async function updateBasket(id, count) {

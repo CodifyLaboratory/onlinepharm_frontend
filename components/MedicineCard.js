@@ -72,26 +72,29 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                     <Basket />
                 </TouchableOpacity> : null }
                 <View>
-                    <View style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between' }}>
+                    <View style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between'}}>
                         <View>
-                            <Text style={myMedicine.name}>{data?.title.length > 23 ? data?.title.slice(0, 23).concat('...') : data?.title}</Text>
+                            <Text style={myMedicine.name}>{data?.title}</Text>
                             <Text style={myMedicine.category}>
                                 {strings.cart.price}:{' '}
                                 <Text style={myMedicine.price}>{data.price} <Text style={myMedicine.kg_symbol}>c̲</Text></Text>{' '}
                             </Text>
                         </View>
-                        <TouchableOpacity
-                            onPress={handleChange}
-                        >
-                            <Image
-                                style={myMedicine.heart}
-                                source={
-                                    isSelected
-                                        ? require('./../assets/icons/fullHeart.png')
-                                        : require('./../assets/icons/emptyHeart.png')
-                                }
-                            />
-                        </TouchableOpacity>
+                        <View style={{position: 'absolute', right: 0}}>
+                            <TouchableOpacity
+                                onPress={handleChange}
+                            >
+                                <Image
+                                    style={myMedicine.heart}
+                                    source={
+                                        isSelected
+                                            ? require('./../assets/icons/fullHeart.png')
+                                            : require('./../assets/icons/emptyHeart.png')
+                                    }
+                                />
+                            </TouchableOpacity>
+                        </View>
+
                     </View>
 
                     <View style={{ flexDirection: 'row' }}>

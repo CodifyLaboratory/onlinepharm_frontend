@@ -49,7 +49,8 @@ export const myMedicine = StyleSheet.create({
         fontWeight: '500',
         marginBottom: 6,
         fontFamily: 'SF-Pro-Medium',
-        lineHeight: 16
+        lineHeight: 16,
+        maxWidth: 150
     },
     category: {
         color: '#999999',

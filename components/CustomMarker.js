@@ -7,7 +7,7 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    Pressable,
+    Pressable, Platform,
 } from 'react-native'
 import MapView, { Marker, CalloutSubview, Callout } from 'react-native-maps'
 import MarkerSvg from './../assets/marker2.svg'
@@ -19,6 +19,7 @@ const CustomMarker = ({ item, navigation }) => {
 
     const changeStatus = () => setDescStatus(!descStatus)
 
+    if(!item?.location?.longitude || !item?.location?.latitude) return null
     return (
         <Marker
             coordinate={{
@@ -26,45 +27,38 @@ const CustomMarker = ({ item, navigation }) => {
                 longitude: item?.location?.longitude,
             }}
             onPress={changeStatus}
-            style={styles.marker}
             key={item.id}
+            anchor={{x: 1, y: 1}}
+            pointerEvents='auto'
         >
-            {descStatus ? (
-                <View style={styles.description}>
-                    <View style={styles.box}>
-                        <MarkerSvg /> 
-                        <Text style={styles.text}>
-                            {item?.location?.address}
-                        </Text>
-                    </View>
-                    <View style={styles.box}>
-                        <PhoneSvg />
-                        <Text style={styles.text}>+996 755 65 43 57</Text>
-                    </View>
 
-                    <View style={styles.box}>
-                        <ClockIcon />
-                        <Text style={styles.text}>Сегодня 08:00 - 18:00</Text>
-                    </View>
+                <Callout onPress={() => {
+                    navigation.navigate('FarmInfo', {pharmacy_id: item?.id})}}
+                         tooltip={true} style={{flex: 1, position: 'absolute'}}>
+                    <View style={styles.description}>
+                            <View style={styles.box}>
+                                <MarkerSvg />
+                                <Text style={styles.text}>
+                                    {item?.location?.address}
+                                </Text>
+                            </View>
+                            <View style={styles.box}>
+                                <PhoneSvg />
+                                <Text style={styles.text}>{'fds'}</Text>
+                            </View>
 
-                    <TouchableOpacity
-                        style={styles.btn}
-                        onPress={() => {
-                            navigation.navigate(
-                                'FarmInfo',
-                                item?.pharmacy_profile?.id
-                            )
-                        }}
-                    >
-                        <Text style={styles.textBtn}>Подробнее</Text>
-                    </TouchableOpacity>
-                </View>
-            ) : (
-                <Image
-                    source={require('./../assets/marker.png')}
-                    style={{ height: 35, width: 35, position: 'absolute', bottom: 0 }}
-                />
-            )}
+                            <View style={styles.box}>
+                                <ClockIcon />
+                                <Text style={styles.text}>Сегодня 08:00 - 18:00</Text>
+                            </View>
+
+                            <TouchableOpacity
+                                style={styles.btn}
+                            >
+                                <Text style={styles.textBtn}>Подробнее</Text>
+                            </TouchableOpacity>
+                        </View>
+                </Callout>
         </Marker>
     )
 }
@@ -73,16 +67,14 @@ export default CustomMarker
 
 const styles = StyleSheet.create({
     marker: {
-        height: 130,
-        zIndex: 1,
-        // position: 'relative'
+        height: 50,
+        width: 50,
     },
     description: {
-        // width: 200,
-        // height: 100,
+        width: Dimensions.get('screen').width - 100,
         backgroundColor: '#1F8BA7',
         borderRadius: 10,
-        padding: 6,
+        padding: 10
     },
     box: {
         display: 'flex',
@@ -100,13 +92,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: 90,
-        height: 20,
+        height: 24,
         position: 'relative',
         zIndex: 99,
+        padding: 10,
+        backgroundColor: '#fff',
+        borderRadius: 4
     },
     textBtn: {
-        color: '#ffffff',
+        color: '#000',
         fontSize: 11,
         marginTop: -5,
+        textAlign: 'center',
+        height: 13
     },
 })

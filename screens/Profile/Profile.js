@@ -234,7 +234,7 @@ const LeaveModal = ({navigation, visible, setVisible, setIsSignIn}) => {
                         </TouchableOpacity>
                         {/* <Success /> */}
                         <Text style={styles.modalText}>
-                            Вы точно хотите выйти?
+                            {strings.profile.want_to_go_out}
                         </Text>
                         <View style={styles.leave_btn_wrap}>
                             <TouchableOpacity
@@ -242,14 +242,14 @@ const LeaveModal = ({navigation, visible, setVisible, setIsSignIn}) => {
                                 style={styles.btn_cancel}
                             >
                                 <Text style={styles.btn_cancel_text}>
-                                    Отмена
+                                    {strings.modals.cancel}
                                 </Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={leave}
                                 style={styles.btn_leave}
                             >
-                                <Text style={styles.btn_leave_text}>Выход</Text>
+                                <Text style={styles.btn_leave_text}>{strings.modals.yes}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -284,7 +284,8 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         lineHeight: 20,
-        height: 20
+        height: 20,
+        textAlign: 'center'
     },
     btn_leave: {
         width: 128,

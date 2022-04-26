@@ -172,7 +172,7 @@ const Cart = ({ navigation }) => {
                         >
                             <Truck />
                             <Text style={cartStyle.orderDelivery}>
-                                {`Заказать\nдоставку`}
+                                {strings.cart.to_order}
                             </Text>
                         </View>
 

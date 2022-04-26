@@ -1,5 +1,6 @@
 import {StyleSheet} from "react-native";
 import {Colors} from "../../constants/colors";
+import {alignSelf, textAlign} from "styled-system";
 
 export const styles = StyleSheet.create({
     leave_btn_wrap: {
@@ -19,10 +20,11 @@ export const styles = StyleSheet.create({
         borderColor: Colors.light,
         padding: 13,
         borderRadius: 20,
-        margin: 8,
+        margin: 8
     },
     btn_cancel_text: {
         color: Colors.primary,
+        textAlign: 'center',
         fontSize: 14,
         fontWeight: '500',
         lineHeight: 20,

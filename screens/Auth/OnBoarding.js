@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import {
     View,
     Text,
@@ -6,12 +6,11 @@ import {
     StyleSheet,
     TouchableOpacity,
     FlatList,
-    Animated,
+    Animated, ScrollView,
 } from 'react-native'
 import OnBoardingItem from '../../components/OnBoardingItem'
 import Paginator from '../../components/Paginator'
-import slidesData, {getSlideData} from '../../data/slidesData'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import {getSlideData} from '../../data/slidesData'
 import {useDispatch, useSelector} from "react-redux";
 import {setAuthorization, setGuest} from "../../store/actions";
 import {Colors} from "../../constants/colors";
@@ -23,9 +22,6 @@ const OnBoarding = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
-    const state = useSelector(state => state.data)
-
-    const item = useRef(0)
     const scrollX = useRef(new Animated.Value(0)).current
     const slidesRef = useRef(null)
     const viewableItemsChanged = useRef(({ viewableItems }) => {
@@ -39,8 +35,8 @@ const OnBoarding = ({ navigation }) => {
     }
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={{ flex: 3 }}>
+        <View style={styles.container}>
+            <View style={{flex: 3}}>
                 <FlatList
                     data={getSlideData()}
                     renderItem={({ item, index }) => (
@@ -91,7 +87,7 @@ const OnBoarding = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
             ) : null}
-        </SafeAreaView>
+        </View>
     )
 }
 

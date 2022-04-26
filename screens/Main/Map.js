@@ -3,20 +3,13 @@ import {
     SafeAreaView,
     StyleSheet,
     Dimensions,
-    View,
-    Text,
-    Image,
 } from 'react-native'
-import MapView, { Marker, CalloutSubview, Callout } from 'react-native-maps'
+import MapView from 'react-native-maps'
 import CustomMarker from '../../components/CustomMarker'
-import MarkerSvg from '../../assets/marker2.svg'
-import PhoneSvg from '../../assets/phoneIcon.svg'
-import ClockIcon from '../../assets/clockIcon.svg'
+
 
 function Map({ pharmacies, selectedFarm, navigation }) {
     const [pharmaData, setPharmaData] = useState([])
-
-    console.log('PHARM', pharmaData)
 
     useEffect(() => {
         setPharmaData(
@@ -70,6 +63,7 @@ const styles = StyleSheet.create({
     map: {
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height - 40,
+        position: 'relative',
     },
     description: {
         width: 200,
