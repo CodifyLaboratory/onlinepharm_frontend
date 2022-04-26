@@ -1,34 +1,35 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { Text, StyleSheet, ScrollView } from 'react-native'
-import { getBannerById, getAllBasket, getFavoritesProducts } from '../../api';
+import { getBannerById, getAllBasket, getFavoritesProducts } from '../../api'
 import MedicineCard from '../../components/MedicineCard'
-import {strings} from "../../localization";
-import { useSelector, useDispatch } from 'react-redux';
-import { loadCart, setMedicineFavorite } from '../../store/actions';
+import { strings } from '../../localization'
+import { useSelector, useDispatch } from 'react-redux'
+import { loadCart, setMedicineFavorite } from '../../store/actions'
+import Loader from '../../components/Loader'
 
 var replacedStr = /-/gi
 
 const MyComponent = ({ route, navigation }) => {
-
     const { favorites_medicine, cart } = useSelector((state) => state.data)
 
     const dispatch = useDispatch()
-
+    const [loading, setLoading] = useState(false)
     const [bannerData, setBannerData] = useState({})
     const [changed, setChanged] = useState(false)
 
     useEffect(() => {
+        setLoading(true)
         getBannerById(route.params)
             .then((res) => setBannerData(res))
             .catch((e) => console.log(e))
-    }, [changed])
+            .finally(() => setLoading(false))
+    }, [])
 
     useEffect(() => {
         getAllFavorites()
         getBasket()
     }, [changed])
 
-    
     const isSelected = (id) => {
         return favorites_medicine?.find((item) => item.medication.id === id)
     }
@@ -36,9 +37,6 @@ const MyComponent = ({ route, navigation }) => {
     const findBasketProduct = (id) => {
         return cart?.find((item) => item.medication.id === id)
     }
-
-
-    
 
     const getBasket = async () => {
         try {
@@ -58,32 +56,34 @@ const MyComponent = ({ route, navigation }) => {
         }
     }
 
-   
+    if (loading) return <Loader />
 
     return (
         <ScrollView style={styles.container}>
             <Text style={styles.title}>{bannerData?.title}</Text>
             <Text style={styles.date}>
-                {strings.main.from} {bannerData?.start_date?.replace(replacedStr, '.')} {strings.main.to}{' '}
+                {strings.main.from}{' '}
+                {bannerData?.start_date?.replace(replacedStr, '.')}{' '}
+                {strings.main.to}{' '}
                 {bannerData?.end_date?.replace(replacedStr, '.')}
             </Text>
             <Text style={styles.description}>{bannerData?.description}</Text>
 
             {bannerData?.medications?.map((item) => {
-            const selected = isSelected(item.id)
-            const basketObj = findBasketProduct(item.id)
-            return (
-                <MedicineCard
-                    basketObj={basketObj}
-                    isSelected={selected}
-                    key={item.id}
-                    data={item}
-                    navigation={navigation}
-                    setChanged={(e) => setChanged(e)}
-                    changed={changed}
-                />
-            )
-        })}
+                const selected = isSelected(item.id)
+                const basketObj = findBasketProduct(item.id)
+                return (
+                    <MedicineCard
+                        basketObj={basketObj}
+                        isSelected={selected}
+                        key={item.id}
+                        data={item}
+                        navigation={navigation}
+                        setChanged={(e) => setChanged(e)}
+                        changed={changed}
+                    />
+                )
+            })}
         </ScrollView>
     )
 }
@@ -106,13 +106,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginBottom: 16,
         fontFamily: 'Poppins-Regular',
-        lineHeight: 21
+        lineHeight: 21,
     },
     description: {
         color: '#4B4747',
         fontSize: 16,
         marginBottom: 24,
         fontFamily: 'Poppins-Regular',
-        lineHeight: 24
+        lineHeight: 24,
     },
 })

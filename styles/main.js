@@ -135,6 +135,7 @@ export const main = StyleSheet.create({
         justifyContent: 'space-between',
         paddingRight: 8,
         paddingLeft: 8,
+        width: '100%'
     },
     categoriesItem: {
         width: '48%',

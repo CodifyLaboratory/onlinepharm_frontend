@@ -5,8 +5,8 @@ import MedicineCard from '../../components/MedicineCard'
 
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../../components/Loader'
-import { setFavorite, setMedicineFavorite, loadCart } from '../../store/actions'
-import {getAllBasket, getFavorites, getSelectionsById} from '../../api'
+import { setMedicineFavorite, loadCart } from '../../store/actions'
+import {getAllBasket, getFavoritesProducts, getSelectionsById} from '../../api'
 
 const MyComponent = ({ navigation, route }) => {
     const [selectionData, setSelectionData] = useState(null)
@@ -21,16 +21,15 @@ const MyComponent = ({ navigation, route }) => {
     useEffect(() => {
         getAllBasket().then((r)=>dispatch(loadCart(r)))
         getSelectionsById(id).then((r) => setSelectionData(r))
-        getFavorites().then((r)=>dispatch(setMedicineFavorite(r)))
+        getFavoritesProducts().then((r)=>dispatch(setMedicineFavorite(r)))
     }, [changed, dispatch])
-
 
     const isSelected = (id) => {
         return favorites_medicine?.find((item) => item.medication.id === id)
     }
 
     const findBasketProduct = (id) => {
-        return cart?.find((item) => item.medication.id === id)
+        return cart?.find((item) => item?.medication?.id === id)
     }
 
     if (!selectionData) return <Loader />
@@ -49,7 +48,7 @@ const MyComponent = ({ navigation, route }) => {
                             key={item.id}
                             data={item}
                             navigation={navigation}
-                            setChanged={(e) => setChanged(e)}
+                            setChanged={setChanged}
                             changed={changed}
                         />
                     )

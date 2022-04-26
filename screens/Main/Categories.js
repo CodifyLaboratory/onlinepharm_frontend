@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     View,
     Text,
@@ -7,7 +7,7 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native'
-import Api from '../../API-old'
+
 import Carousel from 'react-native-snap-carousel'
 
 import BannerCard from '../../components/BannerCard'
@@ -16,21 +16,24 @@ import PopularMedicine from '../../components/PopularMedicine'
 import { main } from '../../styles/main'
 import { categories } from '../../styles/categories'
 import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
-import {getAllBasket, getBanners, getPopularMedications, getSubcategories} from "../../api";
-import {loadCart} from "../../store/actions";
-import {useDispatch, useSelector} from "react-redux";
-import {strings} from "../../localization";
+import {
+    getAllBasket,
+    getBanners,
+    getPopularMedications,
+    getSubcategories,
+} from '../../api'
+import { loadCart } from '../../store/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { strings } from '../../localization'
+import Loader from '../../components/Loader'
 
 function Categories({ navigation, route }) {
-
     const dispatch = useDispatch()
 
-    const { cart } = useSelector(state => state.data)
+    const { cart } = useSelector((state) => state.data)
 
-    const {id, title} = route.params
-
-    console.log('id', title)
-
+    const { id, title } = route.params
+    const [loading, setLoading] = useState(false)
     const [changed, setChanged] = useState(false)
     const [bannerData, setBannerData] = useState([])
     const [popularData, setPopularData] = useState([])
@@ -39,19 +42,17 @@ function Categories({ navigation, route }) {
     const [popularIndex, setPopularIndex] = useState(0)
 
     useEffect(() => {
-        navigation.setParams({title_category: title})
-        getBanners().then((res) => setBannerData(res))
-        getSubcategories(id).then((res) => setSubCategory(res))
+            setLoading(true)
+            navigation.setParams({ title_category: title })
+            getBanners().then((res) => setBannerData(res))
+            getSubcategories(id).then((res) => {
+                setSubCategory(res)}).finally(()=>setLoading(false))
     }, [])
 
-
-    useEffect(()=>{
-        getBasket().then(r => r)
-        getPopularMedications().then((res) =>
-            setPopularData(res)
-        )
+    useEffect(() => {
+        getBasket().then((r) => r)
+        getPopularMedications().then((res) => setPopularData(res))
     }, [changed])
-
 
     const getBasket = async () => {
         try {
@@ -63,14 +64,18 @@ function Categories({ navigation, route }) {
     }
 
     const findBasketProduct = (id) => {
-        return cart?.find(item => item.medication.id === id)
+        return cart?.find((item) => item.medication.id === id)
     }
-
-
+    if (loading) return <Loader />
     return (
         <ScrollView>
             <SafeAreaView style={categories.container}>
-                <View style={{...main.banner, paddingBottom: (bannerData.length < 2) ? 20 : 0}}>
+                <View
+                    style={{
+                        ...main.banner,
+                        paddingBottom: bannerData.length < 2 ? 20 : 0,
+                    }}
+                >
                     <Carousel
                         onBeforeSnapToItem={(e) => setCurrent(e)}
                         sliderWidth={Dimensions.get('screen').width}
@@ -136,17 +141,22 @@ function Categories({ navigation, route }) {
                                     itemWidth={167}
                                     data={popularData?.slice(0, 10)}
                                     renderItem={(item) => {
-                                        const basketObj = findBasketProduct(item.item.id)
+                                        const basketObj = findBasketProduct(
+                                            item.item.id
+                                        )
                                         return (
-                                        <PopularMedicine
-                                            setChanged={(e)=>setChanged(e)}
-                                            changed={changed}
-                                            basketObj={basketObj}
-                                            navigation={navigation}
-                                            key={item.id}
-                                            data={item.item}
-                                        />
-                                    )}}
+                                            <PopularMedicine
+                                                setChanged={(e) =>
+                                                    setChanged(e)
+                                                }
+                                                changed={changed}
+                                                basketObj={basketObj}
+                                                navigation={navigation}
+                                                key={item.id}
+                                                data={item.item}
+                                            />
+                                        )
+                                    }}
                                     layout={'default'}
                                 />
                             </View>

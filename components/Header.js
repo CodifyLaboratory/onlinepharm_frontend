@@ -1,34 +1,50 @@
-import React, {useEffect, useState} from 'react'
-import {Image, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {Colors} from "../constants/colors";
+import React, { useEffect, useState } from 'react'
+import {
+    Image,
+    Platform,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View,
+} from 'react-native'
+import { Colors } from '../constants/colors'
 import ArrowBack from '../assets/header/header_arrow.svg'
-import {strings} from "../localization";
-import {myMedicine} from "../styles/components/myMedicine";
+import { strings } from '../localization'
+import { myMedicine } from '../styles/components/myMedicine'
 import {
     createPharmFavorite,
     createProductFavorite,
     deleteProductFavorite,
     deletePharmFavorite,
     getFavorites,
-    getFavoritesProducts
-} from "../api";
+    getFavoritesProducts,
+} from '../api'
 
-import {useDispatch, useSelector} from "react-redux";
-import {setPharmacyFavorite, setMedicineFavorite} from "../store/actions";
-import { StatusBarHeight } from '../constants/statusbarHeigth';
+import { useDispatch, useSelector } from 'react-redux'
+import { setPharmacyFavorite, setMedicineFavorite } from '../store/actions'
 
-const Header = ({title, navigation, handleChange, profile, about_pharmacy, about_product, route}) => {
+const Header = ({
+    title,
+    navigation,
+    handleChange,
+    profile,
+    about_pharmacy,
+    about_product,
+    route,
+}) => {
+    const { favorites_medicine, favorites_pharmacy } = useSelector(
+        (state) => state.data
+    )
 
-    const { favorites_medicine, favorites_pharmacy } = useSelector(state => state.data)
-
-    const {title_category, medId, pharmacy_id, updateProfile } = route?.params || ''
+    const { title_category, medId, pharmacy_id, updateProfile } =
+        route?.params || ''
 
     const dispatch = useDispatch()
 
     const [updated, setUpdate] = useState(false)
 
     useEffect(() => {
-        initFavorites().then(r => r)
+        initFavorites().then((r) => r)
     }, [updated])
 
     const initFavorites = async () => {
@@ -37,16 +53,20 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
         const pharmacy = await getFavorites()
         dispatch(setPharmacyFavorite(pharmacy))
     }
-    const product_checked = favorites_medicine.find(item => item.medication.id === medId)
+    const product_checked = favorites_medicine.find(
+        (item) => item?.medication?.id === medId
+    )
 
-    const pharmacy_checked = favorites_pharmacy.find(item => item.pharmacy.id === pharmacy_id)
+    const pharmacy_checked = favorites_pharmacy.find(
+        (item) => item.pharmacy.id === pharmacy_id
+    )
 
     const handlePharmacyChange = async () => {
         setUpdate(true)
         try {
-           !pharmacy_checked
-               ? await createPharmFavorite(pharmacy_id)
-               : await deletePharmFavorite(pharmacy_checked.id)
+            !pharmacy_checked
+                ? await createPharmFavorite(pharmacy_id)
+                : await deletePharmFavorite(pharmacy_checked.id)
         } catch (e) {
             console.log(e)
         } finally {
@@ -67,7 +87,10 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
         }
     }
 
-    const titleCategory = title_category?.length > 33 ? title_category?.substring(0, 33).concat('...') : title_category
+    const titleCategory =
+        title_category?.length > 33
+            ? title_category?.substring(0, 33).concat('...')
+            : title_category
 
     return (
         <View style={header.container}>
@@ -75,17 +98,23 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
                 onPress={() => navigation.goBack()}
                 style={header.back_button}
             >
-                <ArrowBack style={header.icon}/>
+                <ArrowBack style={header.icon} />
                 <Text style={header.text}>{strings.auth.back}</Text>
             </TouchableOpacity>
-            <View><Text style={header.title}>{title ? title : titleCategory}</Text></View>
-            {updateProfile ? <TouchableOpacity
-                onPress={() => updateProfile()}
-                style={header.save_button}
-            >
-                <Text style={header.save_text}>{strings.profile.save}</Text>
-            </TouchableOpacity> : null}
-            {about_product ?
+            <View>
+                <Text style={header.title}>
+                    {title ? title : titleCategory}
+                </Text>
+            </View>
+            {updateProfile ? (
+                <TouchableOpacity
+                    onPress={() => updateProfile()}
+                    style={header.save_button}
+                >
+                    <Text style={header.save_text}>{strings.profile.save}</Text>
+                </TouchableOpacity>
+            ) : null}
+            {about_product ? (
                 <TouchableOpacity
                     onPress={handleMedicineChange}
                     style={header.favorite}
@@ -93,14 +122,15 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
                     <Image
                         style={myMedicine.heart}
                         source={
-                            (product_checked)
+                            product_checked
                                 ? require('./../assets/icons/fullHeart.png')
                                 : require('./../assets/icons/emptyHeart.png')
                         }
                     />
-                </TouchableOpacity> : null}
+                </TouchableOpacity>
+            ) : null}
 
-            {about_pharmacy ?
+            {about_pharmacy ? (
                 <TouchableOpacity
                     onPress={handlePharmacyChange}
                     style={header.favorite}
@@ -108,12 +138,13 @@ const Header = ({title, navigation, handleChange, profile, about_pharmacy, about
                     <Image
                         style={myMedicine.heart}
                         source={
-                            (pharmacy_checked)
+                            pharmacy_checked
                                 ? require('./../assets/icons/fullHeart.png')
                                 : require('./../assets/icons/emptyHeart.png')
                         }
                     />
-                </TouchableOpacity> : null}
+                </TouchableOpacity>
+            ) : null}
         </View>
     )
 }
@@ -132,7 +163,7 @@ export const header = StyleSheet.create({
     text: {
         color: '#999999',
         fontSize: 15,
-        fontFamily: 'SF-Pro-Medium'
+        fontFamily: 'SF-Pro-Medium',
     },
     icon: {
         marginLeft: 16,
@@ -146,7 +177,7 @@ export const header = StyleSheet.create({
         marginTop: -10.5,
         width: 220,
         alignSelf: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     back_button: {
         display: 'flex',
@@ -155,7 +186,7 @@ export const header = StyleSheet.create({
         alignSelf: 'flex-end',
         left: 0,
         position: 'absolute',
-        bottom: 15
+        bottom: 15,
     },
     save_button: {
         display: 'flex',
@@ -163,12 +194,12 @@ export const header = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         right: 16,
-        position: 'absolute'
+        position: 'absolute',
     },
     save_text: {
         fontSize: 15,
         fontFamily: 'SF-Pro-Medium',
-        color: Colors.primary
+        color: Colors.primary,
     },
     favorite: {
         display: 'flex',
@@ -176,6 +207,6 @@ export const header = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         right: 18,
-        position: 'absolute'
-    }
+        position: 'absolute',
+    },
 })

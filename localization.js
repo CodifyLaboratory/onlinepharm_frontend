@@ -3,6 +3,15 @@ import LocalizedStrings from 'react-localization';
 
 export let strings = new LocalizedStrings({
     ru: {
+        schedule: {
+            monday: 'Пн',
+            tuesday: 'Вт',
+            wednesday: 'Ср',
+            thursday: 'Чт',
+            friday: 'Пт',
+            saturday: 'Сб',
+            sunday: 'Вc',
+        },
         validation: {
             old_password: 'Старый пароль',
             password_must_match: 'Пароли должны совпадать',
@@ -194,6 +203,15 @@ export let strings = new LocalizedStrings({
         }
     },
     kg: {
+        schedule: {
+            monday: 'Пн',
+            tuesday: 'Вт',
+            wednesday: 'Ср',
+            thursday: 'Чт',
+            friday: 'Пт',
+            saturday: 'Сб',
+            sunday: 'Вc',
+        },
         validation: {
             old_password: 'Старый пароль',
             password_must_match: 'Сырсөздөр дал келиши керек',
@@ -386,6 +404,15 @@ export let strings = new LocalizedStrings({
         }
     },
     en: {
+        schedule: {
+            monday: 'Mon.',
+            tuesday: 'Tues.',
+            wednesday: 'Wed.',
+            thursday: 'Thurs.',
+            friday: 'Fri.',
+            saturday: 'Sat.',
+            sunday: 'Sun.',
+        },
         validation: {
             old_password: 'Old password',
             password_must_match: 'Passwords must match',

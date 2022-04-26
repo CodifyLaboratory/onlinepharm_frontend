@@ -29,9 +29,10 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
 
     const handleChange = async () => {
         if (is_guest) dispatch(setAuthorization(false))
+
         try {
             if (isSelected) {
-                await deleteProductFavorite(isSelected.id)
+                await deleteProductFavorite(isSelected?.id)
             } else {
                 await createProductFavorite(data.id)
             }
