@@ -140,7 +140,8 @@ export let strings = new LocalizedStrings({
             empty_basket: 'Корзина пуста',
             title: 'Корзина',
             to_order: 'Заказать\n доставку',
-            select_place: 'Выберите место на карте'
+            select_place: 'Выберите место на карте',
+            cash_payment: 'Оплата наличными'
         },
         profile: {
             profile: 'Профиль',
@@ -346,7 +347,8 @@ export let strings = new LocalizedStrings({
             empty_basket: 'Бош себет',
             title: 'Себет',
             to_order: 'жеткирүү \nтартиби',
-            select_place: 'Kартадан жайгашкан жерди тандаңыз'
+            select_place: 'Kартадан жайгашкан жерди тандаңыз',
+            cash_payment: 'Накталай төлөм'
         },
         profile: {
             profile: 'Профиль',
@@ -552,7 +554,8 @@ export let strings = new LocalizedStrings({
             empty_basket: 'Empty shopping cart',
             title: 'Basket',
             to_order: 'to order \ndelivery',
-            select_place: 'Select a place on the map'
+            select_place: 'Select a place on the map',
+            cash_payment: 'Cash payment'
         },
         profile: {
             profile: 'Profile',

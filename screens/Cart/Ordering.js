@@ -56,7 +56,7 @@ function Ordering({ navigation, route }) {
             phone: data.phone,
             pharmacy: id,
             comment: data.comment,
-            payment_method: 'Оплата наличными',
+            payment_method: strings.cart.cash_payment,
             address: data.address,
             apartment: data.apartment,
             entrance: data.entrance,
