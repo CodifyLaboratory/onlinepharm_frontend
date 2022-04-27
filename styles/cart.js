@@ -11,7 +11,7 @@ export const cartStyle = StyleSheet.create({
         paddingBottom: 90,
     },
     productList: {
-        paddingBottom: 50,
+        marginBottom: 80,
         // paddingLeft: 16,
         // paddingRight: 16,
         paddingHorizontal: 16,

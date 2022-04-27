@@ -47,7 +47,7 @@ function Login({navigation}) {
                 }
             })
             .catch((e) => setError("email", {
-                message: 'Email or password is wrong',
+                message: strings.validation.wrong_credentials,
                 type: "focus"
             }, {shouldFocus: true}))
     }

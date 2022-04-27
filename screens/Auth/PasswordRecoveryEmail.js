@@ -20,7 +20,7 @@ const PasswordRecoveryEmail = ({navigation}) => {
             await resetPassword(data)
             navigation.navigate('RecoveryPasswordCode', { ...data })
         } catch (e) {
-            setError('email', {type: 'focus', message: 'Wrong email'})
+            setError('email', {type: 'focus', message: strings.validation.wrong_email})
         }
 
     }

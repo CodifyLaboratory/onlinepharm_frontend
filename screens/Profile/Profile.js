@@ -268,7 +268,8 @@ const styles = StyleSheet.create({
         // marginTop: 32
     },
     btn_cancel: {
-        width: 128,
+        // width: 128,
+        minWidth: 128,
         height: 36,
         alignItems: 'center',
         justifyContent: 'center',
@@ -288,7 +289,8 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     btn_leave: {
-        width: 128,
+        // width: 128,
+        minWidth: 128,
         height: 36,
         alignItems: 'center',
         justifyContent: 'center',

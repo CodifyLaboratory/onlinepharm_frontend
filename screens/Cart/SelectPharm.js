@@ -31,11 +31,15 @@ const SelectPharmacy = ({ navigation, route }) => {
         getPharmBrands().then((res) => setBrands(res))
     }, [])
 
+
     const getPharmacies = async () => {
         setLoading(true)
         try {
-            return await getDeliveryPharmacy()
+            const res = await getDeliveryPharmacy()
+            console.log('res++++++++++++++++++', res)
+            return res
         } catch (e) {
+            console.log('error++++++++++++++++++', e)
             throw new Error(e)
         } finally {
             setLoading(false)

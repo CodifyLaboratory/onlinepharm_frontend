@@ -32,7 +32,6 @@ function Ordering({ navigation, route }) {
     const {
         control,
         handleSubmit,
-        setError,
         formState: { errors },
         setValue,
     } = useForm({
@@ -68,7 +67,7 @@ function Ordering({ navigation, route }) {
                 count: item?.count,
             })),
         }
-
+        console.log('form', form)
         try {
             const res = await createOrder(form)
             if (res) {

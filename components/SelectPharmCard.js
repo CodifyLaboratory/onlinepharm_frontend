@@ -143,7 +143,7 @@ const SelectPharmCard = ({navigation, data, key}) => {
                             <View style={ordering.productRowPrice}>
                                 {!inStock ? <Text style={selectPharmCard.notAvailable}>Нет в наличии</Text> : <>
                                     <Text style={ordering.listCount}>{item?.count} {strings.main.pcs}</Text>
-                                    <Text style={ordering.listPrice}>{inStock?.medication.price} c</Text>
+                                    <Text style={ordering.listPrice}>{inStock?.price} c</Text>
                                 </>}
                             </View>
                         </View>
