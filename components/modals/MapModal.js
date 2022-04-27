@@ -1,24 +1,18 @@
-import React, {useState} from 'react';
-import {Button, Dimensions, Modal, Text, TouchableOpacity, View} from "react-native";
-import MapView, {Marker} from "react-native-maps";
-import {styles} from "../../styles/components/modals";
-import {alignSelf} from "styled-system";
-import {cartStyle} from "../../styles/cart";
-import {strings} from "../../localization";
-import {Colors} from "../../constants/colors";
-import {StatusBarHeight} from "../../constants/statusbarHeigth";
-import axios from "axios";
+import React, { useState } from 'react'
+import { Dimensions, Modal, Text, TouchableOpacity, View } from 'react-native'
+import MapView, { Marker } from 'react-native-maps'
+import { cartStyle } from '../../styles/cart'
+import { strings } from '../../localization'
+import { Colors } from '../../constants/colors'
+import { StatusBarHeight } from '../../constants/statusbarHeigth'
+import axios from 'axios'
 
-
-function MapModal({visible, setShow, setValue}) {
-
+function MapModal({ visible, setShow, setValue }) {
     const [address, setAddress] = useState('')
-    const [coords, setCoordinates] = useState(
-        {
-            latitude: 42.87337485103548,
-            longitude: 74.58667559756323
-        }
-    )
+    const [coords, setCoordinates] = useState({
+        latitude: 42.87337485103548,
+        longitude: 74.58667559756323,
+    })
 
     const getAddress = async ({ latitude, longitude }) => {
         const params = {
@@ -32,13 +26,11 @@ function MapModal({visible, setShow, setValue}) {
                 { params }
             )
             setAddress(data.data[0]?.label)
-            setCoordinates({latitude, longitude})
-
+            setCoordinates({ latitude, longitude })
         } catch (error) {
             console.error(error)
         }
     }
-
 
     return (
         <Modal
@@ -75,30 +67,42 @@ function MapModal({visible, setShow, setValue}) {
                     draggable={true}
                     coordinate={coords}
                     image={require('../../assets/marker_map_icon.png')}
-                >
-                </Marker>
+                />
             </MapView>
-            <View style={{backgroundColor: Colors.white, borderRadius: 3, bottom: 130, zIndex: 1, width: '95%', alignSelf: 'center', borderWidth: 0.3 }}>
-                <Text style={{color: Colors.gray, padding: 5}}>
-                    {address || 'Выберите место на карте'}
+            <View
+                style={{
+                    backgroundColor: Colors.white,
+                    borderRadius: 3,
+                    bottom: 130,
+                    zIndex: 1,
+                    width: '95%',
+                    alignSelf: 'center',
+                    borderWidth: 0.3,
+                }}
+            >
+                <Text style={{ color: Colors.gray, padding: 5 }}>
+                    {address || strings.cart.select_place}
                 </Text>
             </View>
-            <TouchableOpacity onPress={() => {
-                setValue(address)
-                setShow(false)
-            }} style={{
-                ...cartStyle.btn,
-                marginTop: 20,
-                width: '95%',
-                alignSelf: 'center',
-                position: 'absolute',
-                bottom: 100
-            }}
-                              activeOpacity={0.8}>
+            <TouchableOpacity
+                onPress={() => {
+                    setValue(address)
+                    setShow(false)
+                }}
+                style={{
+                    ...cartStyle.btn,
+                    marginTop: 20,
+                    width: '95%',
+                    alignSelf: 'center',
+                    position: 'absolute',
+                    bottom: 100,
+                }}
+                activeOpacity={0.8}
+            >
                 <Text style={cartStyle.btnText}>{strings.cart.choose}</Text>
             </TouchableOpacity>
         </Modal>
-    );
+    )
 }
 
-export default MapModal;
+export default MapModal
