@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
-    SafeAreaView,
     StyleSheet,
     Dimensions,
     View,
     Text,
-    Image,
-    TouchableOpacity,
-    Pressable, Platform,
+    TouchableOpacity
 } from 'react-native'
-import MapView, { Marker, CalloutSubview, Callout } from 'react-native-maps'
+import { Marker, Callout } from 'react-native-maps'
 import MarkerSvg from './../assets/marker2.svg'
 import PhoneSvg from './../assets/phoneIcon.svg'
 import ClockIcon from './../assets/clockIcon.svg'
 
 const CustomMarker = ({ item, navigation }) => {
-    const [descStatus, setDescStatus] = useState(false)
-
-    const changeStatus = () => setDescStatus(!descStatus)
 
     if(!item?.location?.longitude || !item?.location?.latitude) return null
     return (
@@ -26,7 +20,6 @@ const CustomMarker = ({ item, navigation }) => {
                 latitude: item?.location?.latitude,
                 longitude: item?.location?.longitude,
             }}
-            onPress={changeStatus}
             key={item.id}
             anchor={{x: 1, y: 1}}
             pointerEvents='auto'

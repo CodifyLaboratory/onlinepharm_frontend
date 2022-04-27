@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { Marker, Callout } from 'react-native-maps'
 import MarkerSvg from './../assets/marker2.svg'
 import PhoneSvg from './../assets/phoneIcon.svg'
 import ClockIcon from './../assets/clockIcon.svg'
 
 const PharmMapMarker = ({ item, navigation }) => {
-    const [descStatus, setDescStatus] = useState(false)
-
-    const changeStatus = () => setDescStatus(true)
 
     const { basket_medications, store_medications } = item
 
@@ -26,12 +23,10 @@ const PharmMapMarker = ({ item, navigation }) => {
                 latitude: item?.location?.latitude,
                 longitude: item?.location?.longitude,
             }}
-            onPress={changeStatus}
-            style={styles.marker}
             key={item.id}
-            // icon={require('./../assets/marker.png')}
+            anchor={{x: 1, y: 1}}
+            pointerEvents='auto'
         >
-            {descStatus ? (
                 <Callout
                     onPress={() =>
                         navigation.push('Ordering', {
@@ -40,6 +35,7 @@ const PharmMapMarker = ({ item, navigation }) => {
                         })
                     }
                     tooltip={true}
+                    style={{flex: 1, position: 'absolute'}}
                 >
                     <TouchableOpacity style={styles.description}>
                         <View style={styles.box}>
@@ -61,17 +57,6 @@ const PharmMapMarker = ({ item, navigation }) => {
                         </View>
                     </TouchableOpacity>
                 </Callout>
-            ) : (
-                <Image
-                    source={require('./../assets/marker.png')}
-                    style={{
-                        height: 35,
-                        width: 35,
-                        position: 'absolute',
-                        bottom: 0,
-                    }}
-                />
-            )}
         </Marker>
     )
 }
