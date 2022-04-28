@@ -37,12 +37,12 @@ const CustomMarker = ({ item, navigation }) => {
                             </View>
                             <View style={styles.box}>
                                 <PhoneSvg />
-                                <Text style={styles.text}>{'fds'}</Text>
+                                <Text style={styles.text}>{' - '}</Text>
                             </View>
 
                             <View style={styles.box}>
                                 <ClockIcon />
-                                <Text style={styles.text}>Сегодня 08:00 - 18:00</Text>
+                                <Text style={styles.text}>{' - '}</Text>
                             </View>
 
                             <TouchableOpacity
