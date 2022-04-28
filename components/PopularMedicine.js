@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { View, Image, TouchableOpacity, StyleSheet, Text } from 'react-native'
 import Stars from 'react-native-stars'
 import { Colors } from '../constants/colors'
-import CountDecrement from '../assets/cart/counter_d.svg'
-import CountIncrement from '../assets/cart/counter_i.svg'
+import DefaultLogo from '../assets/medicine/default-medecation-logo-without-border.svg'
 import {addToBasket, deleteFromBasket, updateBasket} from "../api";
 import {setAuthorization} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
@@ -49,7 +48,8 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
             />
             <View style={styles.container}>
                 <View style={styles.top}>
-                    <Image style={styles.image} source={{ uri: data?.image }} />
+                    {data?.image ?  <Image style={styles.image} source={{ uri: data?.image }} /> : <DefaultLogo />}
+
                 </View>
                 <View style={styles.bottom}>
                     <Text style={styles.title}>{data?.title?.length > 14 ? data?.title.substring(0, 14).concat('...') : data?.title}</Text>

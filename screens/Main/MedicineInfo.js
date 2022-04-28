@@ -13,6 +13,7 @@ import Api from '../../API-old'
 import Stars from 'react-native-stars'
 import Faq from '../../components/Faq'
 import { Colors } from '../../constants/colors'
+import DefaultLogo from '../../assets/farms/default-pharmacy-logo.svg'
 import Loader from '../../components/Loader'
 import { useDispatch, useSelector } from 'react-redux'
 import Counter from '../../components/Counter'
@@ -20,6 +21,7 @@ import { addToBasket, getAllBasket, updateBasket } from '../../api'
 import { loadCart, setAuthorization } from '../../store/actions'
 import { strings } from '../../localization'
 import { getMedication } from '../../api'
+
 
 export default function MedicineInfo({ navigation, route }) {
     const { medId } = route.params
@@ -32,8 +34,6 @@ export default function MedicineInfo({ navigation, route }) {
     const { cart = [], is_guest } = useSelector((state) => state.data)
 
     const find_basket = cart.find((item) => item.medication?.id === medId)
-
-    console.log('MED DATA', medData)
 
     useEffect(() => {
         getData().then((r) => setMedData(r))
@@ -83,10 +83,11 @@ export default function MedicineInfo({ navigation, route }) {
         <ScrollView style={{paddingLeft: 16, paddingRight: 16, backgroundColor: Colors.white}}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.imageBox}>
-                    <Image
+                    {medData?.image ?  <Image
                         style={styles.image}
                         source={{ uri: medData?.image }}
-                    />
+                    /> : <DefaultLogo />}
+
                 </View>
                 <Text style={styles.title}>{medData?.title}</Text>
                 <Text style={styles.price}>
@@ -388,6 +389,8 @@ const styles = StyleSheet.create({
         borderColor: '#ECEEEF',
         borderRadius: 13,
         marginBottom: 22,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     image: {
         width: '100%',
