@@ -49,7 +49,6 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
             <View style={styles.container}>
                 <View style={styles.top}>
                     {data?.image ?  <Image style={styles.image} source={{ uri: data?.image }} /> : <DefaultLogo />}
-
                 </View>
                 <View style={styles.bottom}>
                     <Text style={styles.title}>{data?.title?.length > 14 ? data?.title.substring(0, 14).concat('...') : data?.title}</Text>
