@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useDeferredValue } from 'react'
+import React, { useState } from 'react'
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 
 import { myMedicine } from '../styles/components/myMedicine'
@@ -13,19 +13,27 @@ import {
     createProductFavorite,
     deleteFromBasket,
     deleteProductFavorite,
-    updateBasket
-} from "../api";
-import DeleteProductModal from "./Modals";
-import {useDispatch, useSelector} from "react-redux";
-import {setAuthorization} from "../store/actions";
-import {strings} from "../localization";
+    updateBasket,
+} from '../api'
+import DeleteProductModal from './Modals'
+import { useDispatch, useSelector } from 'react-redux'
+import { setAuthorization } from '../store/actions'
+import { strings } from '../localization'
+import BasketCounter from './BasketCounter'
 
-function MedicineCard({ navigation, data, isSelected, setChanged, changed, basketObj, type }) {
-  
+function MedicineCard({
+    navigation,
+    data,
+    isSelected,
+    setChanged,
+    changed,
+    basketObj,
+    type,
+}) {
     const dispatch = useDispatch()
     const [modalVisible, setVisible] = useState(false)
 
-    const {is_guest} = useSelector((state) => state.data)
+    const { is_guest } = useSelector((state) => state.data)
 
     const handleChange = async () => {
         if (is_guest) dispatch(setAuthorization(false))
@@ -36,7 +44,7 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
             } else {
                 await createProductFavorite(data.id)
             }
-        } catch(e) {
+        } catch (e) {
             throw new Error(e)
         } finally {
             setChanged(!changed)
@@ -44,47 +52,68 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
     }
 
     async function _increment() {
-            await updateBasket(basketObj.id, basketObj.count + 1)
-            setChanged(!changed)
+        await updateBasket(basketObj.id, basketObj.count + 1)
+        setChanged(!changed)
     }
 
     async function _decrement() {
-            await updateBasket(basketObj.id, basketObj.count - 1)
-            setChanged(!changed)
+        await updateBasket(basketObj.id, basketObj.count - 1)
+        setChanged(!changed)
     }
 
     async function _create() {
-            if(is_guest) dispatch(setAuthorization(false))
-            await addToBasket(data.id, 1)
-            setChanged(!changed)
+        if (is_guest) dispatch(setAuthorization(false))
+        await addToBasket(data.id, 1)
+        setChanged(!changed)
     }
     async function _delete() {
-            await deleteFromBasket(basketObj.id)
-            setChanged(!changed)
+        await deleteFromBasket(basketObj.id)
+        setChanged(!changed)
     }
-
 
     return (
         <>
-            <DeleteProductModal visible={modalVisible} setVisible={(e)=>setVisible(e)} handleChange={_delete} />
+            <DeleteProductModal
+                visible={modalVisible}
+                setVisible={(e) => setVisible(e)}
+                handleChange={_delete}
+            />
             <View activeOpacity={0.85} style={myMedicine.medicineCard}>
                 <Image style={myMedicine.img} source={{ uri: data.image }} />
-                {type === 'cart' ? <TouchableOpacity onPress={()=>setVisible(true)} style={myMedicine.basketIcon}>
-                    <Basket />
-                </TouchableOpacity> : null }
+                {type === 'cart' ? (
+                    <TouchableOpacity
+                        onPress={() => setVisible(true)}
+                        style={myMedicine.basketIcon}
+                    >
+                        <Basket />
+                    </TouchableOpacity>
+                ) : null}
                 <View>
-                    <View style={{ flexDirection: 'row', display: 'flex', justifyContent: 'space-between'}}>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                        }}
+                    >
                         <View>
                             <Text style={myMedicine.name}>{data?.title}</Text>
                             <Text style={myMedicine.category}>
                                 {strings.cart.price}:{' '}
-                                <Text style={myMedicine.price}>{data.price} <Text style={myMedicine.kg_symbol}>c̲</Text></Text>{' '}
+                                {data?.available ? (
+                                    <Text style={myMedicine.price}>
+                                        {data.price}{' '}
+                                        <Text style={myMedicine.kg_symbol}>
+                                            c
+                                        </Text>
+                                    </Text>
+                                ) : (
+                                    <Text>{' - '}</Text>
+                                )}
                             </Text>
                         </View>
-                        <View style={{position: 'absolute', right: 0}}>
-                            <TouchableOpacity
-                                onPress={handleChange}
-                            >
+                        <View style={{ position: 'absolute', right: 0 }}>
+                            <TouchableOpacity onPress={handleChange}>
                                 <Image
                                     style={myMedicine.heart}
                                     source={
@@ -95,7 +124,6 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                                 />
                             </TouchableOpacity>
                         </View>
-
                     </View>
 
                     <View style={{ flexDirection: 'row' }}>
@@ -103,48 +131,28 @@ function MedicineCard({ navigation, data, isSelected, setChanged, changed, baske
                             activeOpacity={0.6}
                             style={myMedicine.find}
                             onPress={() =>
-                                navigation.navigate('MedicineInfo', {medId: data?.id})
+                                navigation.navigate('MedicineInfo', {
+                                    medId: data?.id,
+                                })
                             }
                         >
-                            <Text style={myMedicine.findText}>{strings.main.more}</Text>
+                            <Text style={myMedicine.findText}>
+                                {strings.main.more}
+                            </Text>
                         </TouchableOpacity>
 
-                        {basketObj?.count ? (
-                            <View style={cartItem.counter}>
-                                <TouchableOpacity
-                                    style={cartItem.btn}
-                                    onPress={() => (basketObj.count <= 1) ? setVisible(true) : _decrement()}
-                                    activeOpacity={0.7}
-                                >
-                                   <CountDecrement />
-                                </TouchableOpacity>
-
-                                <Text style={cartItem.counterText}>{basketObj?.count} {strings.main.pcs}</Text>
-
-                                <TouchableOpacity
-                                    style={cartItem.btn}
-                                    onPress={_increment}
-                                    activeOpacity={0.7}
-                                >
-                                    <CountIncrement />
-                                </TouchableOpacity>
-                            </View>
-                        ) : (
-                            <TouchableOpacity
-                                activeOpacity={0.6}
-                                style={myMedicine.favorite}
-                                onPress={_create}
-                            >
-                                <Text style={myMedicine.favoriteText}>
-                                    {strings.main.add_to_cart}
-                                </Text>
-                            </TouchableOpacity>
-                        )}
+                        <BasketCounter
+                            _create={_create}
+                            _decrement={_decrement}
+                            _increment={_increment}
+                            basketObj={basketObj}
+                            data={data}
+                            setVisible={setVisible}
+                        />
                     </View>
                 </View>
             </View>
         </>
-
     )
 }
 

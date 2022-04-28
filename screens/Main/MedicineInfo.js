@@ -33,6 +33,8 @@ export default function MedicineInfo({ navigation, route }) {
 
     const find_basket = cart.find((item) => item.medication?.id === medId)
 
+    console.log('MED DATA', medData)
+
     useEffect(() => {
         getData().then((r) => setMedData(r))
     }, [])
@@ -88,7 +90,7 @@ export default function MedicineInfo({ navigation, route }) {
                 </View>
                 <Text style={styles.title}>{medData?.title}</Text>
                 <Text style={styles.price}>
-                    Цена от: <Text style={styles.soms}>{medData?.price} с</Text>
+                    Цена от: <Text style={styles.soms}>{medData?.available ? medData?.price : strings.product.out_of_stock}</Text>
                 </Text>
                 <View
                     style={{
@@ -358,12 +360,13 @@ export default function MedicineInfo({ navigation, route }) {
                     />
                 ) : (
                     <TouchableOpacity
-                        style={styles.reviewBtn}
+                        disabled={!medData?.available}
+                        style={{...styles.reviewBtn, backgroundColor: !medData?.available && '#ccc'}}
                         activeOpacity={0.8}
                         onPress={() => _create()}
                     >
                         <Text style={styles.reviewBtnText}>
-                            {strings.main.add_to_cart}
+                            {medData?.available ? strings.main.add_to_cart : strings.product.out_of_stock}
                         </Text>
                     </TouchableOpacity>
                 )}

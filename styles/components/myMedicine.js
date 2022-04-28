@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import {Colors} from "../../constants/colors";
 
 export const myMedicine = StyleSheet.create({
     container: {
@@ -105,4 +106,11 @@ export const myMedicine = StyleSheet.create({
         width: 21,
         height: 18,
     },
+    out_of_stock: {
+        color: Colors.gray_light,
+        marginBottom: 15,
+        fontFamily: 'SF-Pro-Medium',
+        fontSize: 14,
+        lineHeight: 17
+    }
 })

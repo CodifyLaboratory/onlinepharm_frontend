@@ -8,9 +8,12 @@ import {addToBasket, deleteFromBasket, updateBasket} from "../api";
 import {setAuthorization} from "../store/actions";
 import {useDispatch, useSelector} from "react-redux";
 import {strings} from "../localization";
+import BasketCounter from "./BasketCounter";
+import DeleteProductModal from "./Modals";
 
 const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) => {
 
+    const [modalVisible, setVisible] = useState(false)
     const dispatch = useDispatch()
 
     const { is_guest } = useSelector(state => state.data)
@@ -38,63 +41,59 @@ const PopularMedicine = ({ data, navigation, basketObj, setChanged, changed }) =
 
 
     return (
-        <View style={styles.container}>
-            <View style={styles.top}>
-                <Image style={styles.image} source={{ uri: data?.image }} />
-            </View>
-            <View style={styles.bottom}>
-                <Text style={styles.title}>{data?.title?.length > 14 ? data?.title.substring(0, 14).concat('...') : data?.title}</Text>
-                <View
-                    style={{
-                        alignItems: 'flex-start',
-                        marginLeft: -5,
-                        marginBottom: 8,
-                    }}
-                >
-                    <Stars
-                        display={data?.middle_star}
-                        spacing={8}
-                        count={5}
-                        starSize={15}
-                        fullStar={require('./../assets/icons/fullStar.png')}
-                        emptyStar={require('./../assets/icons/emptyStar.png')}
+        <>
+            <DeleteProductModal
+                visible={modalVisible}
+                setVisible={(e) => setVisible(e)}
+                handleChange={_delete}
+            />
+            <View style={styles.container}>
+                <View style={styles.top}>
+                    <Image style={styles.image} source={{ uri: data?.image }} />
+                </View>
+                <View style={styles.bottom}>
+                    <Text style={styles.title}>{data?.title?.length > 14 ? data?.title.substring(0, 14).concat('...') : data?.title}</Text>
+                    <View
+                        style={{
+                            alignItems: 'flex-start',
+                            marginLeft: -5,
+                            marginBottom: 8,
+                        }}
+                    >
+                        <Stars
+                            display={data?.middle_star}
+                            spacing={8}
+                            count={5}
+                            starSize={15}
+                            fullStar={require('./../assets/icons/fullStar.png')}
+                            emptyStar={require('./../assets/icons/emptyStar.png')}
+                        />
+                    </View>
+                    <Text style={styles.price}>
+                        {strings.cart.price}: {data?.available ? <Text style={styles.soms}>{data?.price} c</Text> : <Text>{" - "}</Text>}
+                    </Text>
+
+                    <TouchableOpacity
+                        style={styles.detailsBtn}
+                        onPress={() => {
+                            navigation.navigate('MedicineInfo', {medId: data.id})
+                        }}
+                    >
+                        <Text style={styles.detailsBtnText}>{strings.main.more}</Text>
+                    </TouchableOpacity>
+                    <BasketCounter
+                        _create={_create}
+                        _decrement={_decrement}
+                        _increment={_increment}
+                        basketObj={basketObj}
+                        data={data}
+                        setVisible={setVisible}
+                        customStyle={{width: 140}}
                     />
                 </View>
-                <Text style={styles.price}>
-                    {strings.cart.price}: <Text style={styles.soms}>{data?.price} c</Text>
-                </Text>
-
-                <TouchableOpacity
-                    style={styles.detailsBtn}
-                    onPress={() => {
-                        navigation.navigate('MedicineInfo', {medId: data.id})
-                    }}
-                >
-                    <Text style={styles.detailsBtnText}>{strings.main.more}</Text>
-                </TouchableOpacity>
-                {!basketObj ? (
-                    <TouchableOpacity
-
-                        onPress={_create}
-                        style={styles.cartBtn}
-                    >
-                        <Text style={styles.cartBtnText}>{strings.main.add_to_cart}</Text>
-                    </TouchableOpacity>
-                ) : (
-                    <View style={styles.counter_btn_wrap}>
-                        <TouchableOpacity onPress={basketObj.count === 1 ? _delete : _decrement}>
-                            <CountDecrement />
-                        </TouchableOpacity>
-                        <View>
-                            <Text>{basketObj.count} {strings.main.pcs}</Text>
-                        </View>
-                        <TouchableOpacity onPress={_increment}>
-                            <CountIncrement />
-                        </TouchableOpacity>
-                    </View>
-                )}
             </View>
-        </View>
+        </>
+
     )
 }
 

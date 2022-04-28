@@ -206,6 +206,7 @@ export let strings = new LocalizedStrings({
             overdose: 'Передозировка',
             drug_interaction: 'Лекарственное взаимодействие',
             storage_conditions: 'Условия хранения',
+            out_of_stock: 'Нет в наличии'
         }
     },
     kg: {
@@ -413,6 +414,7 @@ export let strings = new LocalizedStrings({
             overdose: 'Ашыкча доза',
             drug_interaction: 'Дары өз ара аракеттенүү',
             storage_conditions: 'Сактоо шарттары',
+            out_of_stock: 'Кампада жок'
         }
     },
     en: {
@@ -620,6 +622,7 @@ export let strings = new LocalizedStrings({
             overdose: 'Overdose',
             drug_interaction: 'Drug interaction',
             storage_conditions: 'Storage conditions',
+            out_of_stock: 'Out of stock'
         }
     },
 });

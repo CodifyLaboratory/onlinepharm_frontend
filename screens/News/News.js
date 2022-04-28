@@ -14,7 +14,6 @@ import NewsCard from '../../components/NewsCard'
 
 import { getNews, getNewsCategories } from '../../api.js'
 import Loader from '../../components/Loader'
-import center from "native-base/src/theme/components/center";
 
 export default function News({ navigation }) {
     const [categoryDataId, setCategoryDataId] = useState([])
@@ -23,7 +22,7 @@ export default function News({ navigation }) {
     const [more, setMore] = useState(false)
 
     const [filters, setFilters] = useState({
-        filterCategory: 1,
+        category: 1,
         page: 1,
     })
 
@@ -32,7 +31,7 @@ export default function News({ navigation }) {
         getNews({ ...filters, page: 1 }).then((r) => {
             setNewsItems((prevState) => ({ ...prevState, ...r }))
         })
-    }, [filters.filterCategory])
+    }, [filters.category])
 
     useEffect(() => {
         getNewsItems().then((r) => r)
@@ -57,8 +56,8 @@ export default function News({ navigation }) {
         setLoading(true)
         try {
             const res = await getNewsCategories()
-            !filters.filterCategory &&
-                setFilters({ ...filters, filterCategory: res[0]?.id })
+            !filters.category &&
+                setFilters({ ...filters, category: res[0]?.id })
             return res
         } catch (e) {
             throw new Error(e)
@@ -67,7 +66,7 @@ export default function News({ navigation }) {
         }
     }
     const changeCategory = (id) => {
-        setFilters({ ...filters, filterCategory: id, page: 1 })
+        setFilters({ ...filters, category: id, page: 1 })
     }
 
     const fetchMoreData = () => {
@@ -100,14 +99,14 @@ export default function News({ navigation }) {
                             activeOpacity={0.5}
                             key={item.id}
                             style={
-                                filters.filterCategory === item.id
+                                filters.category === item.id
                                     ? news.newsItemActive
                                     : news.newsItem
                             }
                         >
                             <Text
                                 style={
-                                    filters.filterCategory === item.id
+                                    filters.category === item.id
                                         ? news.newsNavTextActive
                                         : news.newsNavText
                                 }
