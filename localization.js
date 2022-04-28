@@ -99,7 +99,8 @@ export let strings = new LocalizedStrings({
             stocks: 'Акции',
             discounts: 'Скидки',
             new_products: 'Новинки',
-            title: 'Новости'
+            title: 'Новости',
+            no_more_articles: 'На данный момент больше никаких статей нет'
         },
         cart: {
             cart: 'Корзина',
@@ -308,6 +309,7 @@ export let strings = new LocalizedStrings({
             discounts: 'Арзандатуулар',
             new_products: 'Жаңылар',
             title: 'Жаңылыктар',
+            no_more_articles: 'Учурда макалалар жок'
         },
         cart: {
             cart: 'Себет',
@@ -516,6 +518,7 @@ export let strings = new LocalizedStrings({
             discounts: 'Discounts',
             new_products: 'New products',
             title: 'News',
+            no_more_articles: 'No more articles at the moment'
         },
         cart: {
             cart: 'Basket',

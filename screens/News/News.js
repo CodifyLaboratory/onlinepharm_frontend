@@ -14,6 +14,7 @@ import NewsCard from '../../components/NewsCard'
 
 import { getNews, getNewsCategories } from '../../api.js'
 import Loader from '../../components/Loader'
+import {strings} from "../../localization";
 
 export default function News({ navigation }) {
     const [categoryDataId, setCategoryDataId] = useState([])
@@ -79,7 +80,7 @@ export default function News({ navigation }) {
         <View style={{ paddingBottom: 20, ...news.footerText }}>
             {more && <ActivityIndicator size="large" color="#1F8BA7" />}
             {newsItems?.total_pages === filters.page && (
-                <Text>No more articles at the moment</Text>
+                <Text>{strings.news.no_more_articles}</Text>
             )}
         </View>
     )
