@@ -80,7 +80,7 @@ export const farms = StyleSheet.create({
         borderRadius: 20,
         borderWidth: 1,
         borderColor: '#F3F3F3',
-        resizeMode: 'contain',
+        resizeMode: 'cover',
     },
     farmName: {
         color: '#1F8BA7',

@@ -2,10 +2,7 @@ import React, { useState } from 'react'
 import { View, TouchableOpacity, Image, Text } from 'react-native'
 
 import { myMedicine } from '../styles/components/myMedicine'
-import { cartItem } from '../styles/components/cartItem'
-
-import CountDecrement from '../assets/cart/counter_d.svg'
-import CountIncrement from '../assets/cart/counter_i.svg'
+import DefaultLogo from '../assets/medicine/medecines-logo.svg'
 import Basket from '../assets/cart/basket.svg'
 
 import {
@@ -79,7 +76,7 @@ function MedicineCard({
                 handleChange={_delete}
             />
             <View activeOpacity={0.85} style={myMedicine.medicineCard}>
-                <Image style={myMedicine.img} source={{ uri: data.image }} />
+                {data?.image ? <Image style={myMedicine.img} source={{ uri: data.image }} /> : <DefaultLogo /> }
                 {type === 'cart' ? (
                     <TouchableOpacity
                         onPress={() => setVisible(true)}

@@ -8,6 +8,7 @@ import {setAuthorization, setPharmacyFavorite} from "../store/actions";
 import Tag from '../assets/farms/tag.svg'
 import {farm} from "../styles/farm";
 import Location from "../assets/farms/location.svg";
+import LogoPharm from '../assets/farms/pharmacy-logo.svg'
 import {strings} from "../localization";
 import CalculateDistance from "./CalculateDistance";
 
@@ -50,10 +51,11 @@ const FarmsCard = ({ navigation, data, favorites }) => {
 
     return (
         <View style={farms.farmCard}>
-            <Image
+            {data?.pharmacy_profile?.logo ?  <Image
                 style={farms.farmImg}
                 source={{ uri: data?.pharmacy_profile?.logo }}
-            />
+            /> : <LogoPharm />}
+
             <View style={{ marginLeft: 16 }}>
                 <Text style={farms.farmName}>
                     {data?.pharmacy_profile?.title}

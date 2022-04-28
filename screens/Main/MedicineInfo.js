@@ -361,7 +361,7 @@ export default function MedicineInfo({ navigation, route }) {
                 ) : (
                     <TouchableOpacity
                         disabled={!medData?.available}
-                        style={{...styles.reviewBtn, backgroundColor: !medData?.available && '#ccc'}}
+                        style={{...styles.reviewBtn, backgroundColor: !medData?.available ? '#ccc' : Colors.light}}
                         activeOpacity={0.8}
                         onPress={() => _create()}
                     >
