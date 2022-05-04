@@ -29,6 +29,8 @@ function OrderDetails({ route }) {
 
     const { order_status, created_date, order_medications, pharmacy } = order
 
+    console.log('ORDER', order)
+
     useEffect(() => {
         getOrderDetails().then((r) => setOrder(r))
     }, [])

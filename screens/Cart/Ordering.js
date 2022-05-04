@@ -67,7 +67,7 @@ function Ordering({ navigation, route }) {
                 count: item?.count,
             })),
         }
-        console.log('form', form)
+
         try {
             const res = await createOrder(form)
             if (res) {
@@ -92,13 +92,15 @@ function Ordering({ navigation, route }) {
     const sumTotal = (arr) =>
         arr
             ? arr.reduce(
-                  (sum, { medication, count }) =>
-                      sum + medication?.price * count,
+                  (sum, { count, price }) =>
+                      sum + price * count,
                   0
               )
             : 0
 
     const total = sumTotal(basket)
+
+    console.log('baslet+++++++', basket)
 
     return (
         <ScrollView style={{ backgroundColor: '#fff' }}>
@@ -314,7 +316,7 @@ function Ordering({ navigation, route }) {
                     {strings.cart.list_of_products}
                 </Text>
                 <View style={ordering.productList}>
-                    {basket?.map(({ medication, count }) => (
+                    {basket?.map(({ medication, count, price }) => (
                         <View style={ordering.productRow}>
                             <Text
                                 style={{ ...ordering.listCount, width: '70%' }}
@@ -326,7 +328,7 @@ function Ordering({ navigation, route }) {
                                     {count} {strings.main.pcs}
                                 </Text>
                                 <Text style={ordering.listPrice}>
-                                    {medication?.price} c
+                                    {price} c
                                 </Text>
                             </View>
                         </View>

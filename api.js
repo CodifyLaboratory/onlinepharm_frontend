@@ -150,7 +150,9 @@ export async function getOrders() {
 }
 
 export async function getOrdersById(id) {
-    return request(`/api/orders/${id}/`, 'GET')
+    const res = await request(`/api/orders/${id}/`, 'GET')
+    console.log('getOrdersById +++', res)
+    return res
 }
 
 export async function getAllMedication() {
@@ -167,7 +169,6 @@ export async function getMedication(id) {
 }
 
 export async function getNews(filters) {
-    console.log('filters', filters)
     return await request(`/api/news/`, 'GET', null, null, filters)
 }
 

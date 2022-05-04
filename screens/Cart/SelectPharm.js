@@ -36,7 +36,6 @@ const SelectPharmacy = ({ navigation, route }) => {
         setLoading(true)
         try {
             const res = await getDeliveryPharmacy()
-            console.log('res++++++++++++++++++', res)
             return res
         } catch (e) {
             console.log('error++++++++++++++++++', e)
