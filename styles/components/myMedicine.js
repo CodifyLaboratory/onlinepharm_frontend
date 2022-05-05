@@ -15,7 +15,7 @@ export const myMedicine = StyleSheet.create({
         height: 32,
         justifyContent: 'center',
         alignItems: 'center',
-        bottom: 10,
+        bottom: 6,
         left: 10
     },
     medicineCard: {
@@ -38,11 +38,11 @@ export const myMedicine = StyleSheet.create({
         padding: 16
     },
     img: {
-        height: 70,
-        width: 70,
+        height: 60,
+        width: 60,
         borderRadius: 20,
-        // borderWidth: 1,
-        // borderColor: '#F3F3F3',
+        borderWidth: 1,
+        borderColor: '#EEEEEE',
     },
     name: {
         color: '#1F8BA7',

@@ -42,10 +42,9 @@ export const farms = StyleSheet.create({
     },
     farmCard: {
         width: '100%',
-        height: 135,
         backgroundColor: '#fff',
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'space-evenly',
         borderRadius: 10,
         marginBottom: 16,
@@ -95,7 +94,7 @@ export const farms = StyleSheet.create({
         color: '#1F8BA7',
         fontSize: 11,
         marginBottom: 10,
-        width: 90,
+        width: 100,
         fontFamily: 'SF-Pro-Regular',
         lineHeight: 14.3
     },

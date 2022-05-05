@@ -49,25 +49,28 @@ export const orderDetails = StyleSheet.create({
         fontFamily: 'SF-Pro-Medium',
         fontSize: 13,
         lineHeight: 16,
-        color: Colors.primary
+        color: Colors.primary,
+        width: '70%',
     },
     address: {
         fontFamily: 'SF-Pro-Regular',
         fontSize: 13,
         lineHeight: 16,
         color: Colors.primary,
-
+        display: 'flex',
+        width: '70%'
     },
     medicineName: {
         fontFamily: 'SF-Pro-Regular',
         fontSize: 15,
         lineHeight: 18,
-        color: Colors.gray
+        color: Colors.gray,
+        width: '60%'
     },
     productRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         width: '100%',
         marginBottom: 12
     },
@@ -75,13 +78,14 @@ export const orderDetails = StyleSheet.create({
         fontFamily: 'SF-Pro-Regular',
         fontSize: 15,
         lineHeight: 18,
-        color: Colors.gray
+        color: Colors.gray,
+        // width: '20%'
     },
     price: {
         fontFamily: 'SF-Pro-Medium',
         fontSize: 15,
         lineHeight: 18,
-        color: Colors.gray
+        color: Colors.gray,
     },
     row: {
         flexDirection: 'row',

@@ -27,7 +27,7 @@ function OrderDetails({ route }) {
     const [order, setOrder] = useState({})
     const [loading, setLoading] = useState(false)
 
-    const { order_status, created_date, order_medications, pharmacy } = order
+    const { order_status, created_date, created_time, order_medications, pharmacy } = order
 
     console.log('ORDER', order)
 
@@ -54,7 +54,7 @@ function OrderDetails({ route }) {
                 <View style={orderDetails.cardContainer}>
                     <View>
                         <Text style={orderDetails.orderDate}>
-                            Заказ создан {moment(created_date).format('DD MM YYYY HH:mm:ss')}
+                            Заказ создан {moment(created_date).format('DD MM YYYY')} {created_time?.slice(0, 8)}
                         </Text>
                         <Text style={{...orderDetails.status, color: statusColor[order_status?.id]}}>
                             {order_status?.title}
@@ -78,10 +78,10 @@ function OrderDetails({ route }) {
                             }}
                         >
                             <Text style={orderDetails.where}>Где: </Text>
-                            <Text style={orderDetails.pharmName}>Фармамир</Text>
+                            <Text style={orderDetails.pharmName}>{order?.pharmacy?.pharmacy_profile?.title}</Text>
                         </View>
                         <Text style={orderDetails.address}>
-                            ул.Советская 233 9 мкрн д.10
+                            {order?.pharmacy?.location?.address}
                         </Text>
                     </View>
                 </View>
@@ -94,7 +94,7 @@ function OrderDetails({ route }) {
                             <Text style={orderDetails.medicineName}>
                                 {item.medication.title}
                             </Text>
-                            <View style={{ flexDirection: 'row' }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginRight: 8, width: '25%'}}>
                                 <Text
                                     style={{
                                         ...orderDetails.pcs,
@@ -131,7 +131,7 @@ function OrderDetails({ route }) {
                 </View>
                 <View style={orderDetails.row}>
                     <Text style={orderDetails.name}>{strings.cart.delivery_type}</Text>
-                    <Text style={orderDetails.name}>Доставка</Text>
+                    <Text style={orderDetails.name}>{strings.cart.delivery}</Text>
                 </View>
                 <View style={orderDetails.row}>
                     <Text style={orderDetails.name}>{strings.cart.payment_methods}</Text>

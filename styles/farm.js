@@ -50,7 +50,9 @@ export const farm = StyleSheet.create({
     },
     farmLocation: {
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-end',
+        position: 'absolute',
+        bottom: 6
     },
     farmClose: {
         color: '#999',

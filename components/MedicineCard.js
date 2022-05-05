@@ -76,7 +76,9 @@ function MedicineCard({
                 handleChange={_delete}
             />
             <View activeOpacity={0.85} style={myMedicine.medicineCard}>
-                {data?.image ? <Image style={myMedicine.img} source={{ uri: data.image }} /> : <DefaultLogo /> }
+                {data?.image
+                    ? <Image style={myMedicine.img} source={{ uri: data.image }} />
+                    : <DefaultLogo width={64} height={64} />}
                 {type === 'cart' ? (
                     <TouchableOpacity
                         onPress={() => setVisible(true)}

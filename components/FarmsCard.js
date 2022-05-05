@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { farms } from '../styles/farms'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import { createPharmFavorite, getFavorites, deletePharmFavorite } from '../api'
@@ -7,29 +7,15 @@ import {setAuthorization, setPharmacyFavorite} from "../store/actions";
 
 import Tag from '../assets/farms/tag.svg'
 import {farm} from "../styles/farm";
-import Location from "../assets/farms/location.svg";
 import LogoPharm from '../assets/farms/pharmacy-logo.svg'
 import {strings} from "../localization";
 import CalculateDistance from "./CalculateDistance";
 
-const FarmsCard = ({ navigation, data, favorites }) => {
+const FarmsCard = ({ navigation, data }) => {
 
     const dispatch = useDispatch()
 
     const {is_guest, favorites_pharmacy} = useSelector(state => state.data)
-
-    const [isChecked, setChecked] = useState(null)
-
-
-    // const getAllFavorites = async () => {
-    //     try {
-    //         const res = await getFavorites()
-    //         dispatch(setPharmacyFavorite(res))
-    //         setChecked(isSelected())
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
 
     const isSelected = () => {
         return favorites_pharmacy.some((item) => item.pharmacy.id === data.id)
@@ -56,11 +42,13 @@ const FarmsCard = ({ navigation, data, favorites }) => {
                 source={{ uri: data?.pharmacy_profile?.logo }}
             /> : <LogoPharm />}
 
-            <View style={{ marginLeft: 16 }}>
-                <Text style={farms.farmName}>
-                    {data?.pharmacy_profile?.title}
-                </Text>
-                <Text style={farms.farmAdress}>{data?.location?.address}</Text>
+            <View style={{ marginLeft: 16, height: '100%' }}>
+                <View>
+                    <Text style={farms.farmName}>
+                        {data?.pharmacy_profile?.title}
+                    </Text>
+                    <Text style={farms.farmAdress}>{data?.location?.address}</Text>
+                </View>
                 <View style={farm.farmLocation}>
                     <Tag style={{marginRight: 6}} />
                     <CalculateDistance data={data} />
