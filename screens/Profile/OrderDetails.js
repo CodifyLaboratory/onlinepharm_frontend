@@ -101,7 +101,7 @@ function OrderDetails({ route }) {
                                         marginRight: 20,
                                     }}
                                 >
-                                    1 шт
+                                    {item?.count} шт
                                 </Text>
                                 <Text style={orderDetails.price}>
                                     {item.medication.price} c
