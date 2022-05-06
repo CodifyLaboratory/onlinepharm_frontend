@@ -207,7 +207,10 @@ export let strings = new LocalizedStrings({
             overdose: 'Передозировка',
             drug_interaction: 'Лекарственное взаимодействие',
             storage_conditions: 'Условия хранения',
-            out_of_stock: 'Нет в наличии'
+            out_of_stock: 'Нет в наличии',
+            order_has_created: 'Заказ создан',
+            order_cost: 'Стоимость заказа',
+            where: 'Где'
         }
     },
     kg: {
@@ -416,7 +419,10 @@ export let strings = new LocalizedStrings({
             overdose: 'Ашыкча доза',
             drug_interaction: 'Дары өз ара аракеттенүү',
             storage_conditions: 'Сактоо шарттары',
-            out_of_stock: 'Кампада жок'
+            out_of_stock: 'Кампада жок',
+            order_has_created: 'Буйрутма түзүлдү',
+            order_cost: 'Буйрутманын наркы',
+            where: 'Кайда'
         }
     },
     en: {
@@ -625,7 +631,10 @@ export let strings = new LocalizedStrings({
             overdose: 'Overdose',
             drug_interaction: 'Drug interaction',
             storage_conditions: 'Storage conditions',
-            out_of_stock: 'Out of stock'
+            out_of_stock: 'Out of stock',
+            order_has_created: 'The order has been created',
+            order_cost: 'Order cost',
+            where: 'Where'
         }
     },
 });

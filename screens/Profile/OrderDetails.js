@@ -29,8 +29,6 @@ function OrderDetails({ route }) {
 
     const { order_status, created_date, created_time, order_medications, pharmacy } = order
 
-    console.log('ORDER', order)
-
     useEffect(() => {
         getOrderDetails().then((r) => setOrder(r))
     }, [])
@@ -54,7 +52,7 @@ function OrderDetails({ route }) {
                 <View style={orderDetails.cardContainer}>
                     <View>
                         <Text style={orderDetails.orderDate}>
-                            Заказ создан {moment(created_date).format('DD MM YYYY')} {created_time?.slice(0, 8)}
+                            {strings.product.order_has_created} {moment(created_date).format('DD MM YYYY')} {created_time?.slice(0, 8)}
                         </Text>
                         <Text style={{...orderDetails.status, color: statusColor[order_status?.id]}}>
                             {order_status?.title}
@@ -77,7 +75,7 @@ function OrderDetails({ route }) {
                                 marginBottom: 8,
                             }}
                         >
-                            <Text style={orderDetails.where}>Где: </Text>
+                            <Text style={orderDetails.where}>{strings.product.where}: </Text>
                             <Text style={orderDetails.pharmName}>{order?.pharmacy?.pharmacy_profile?.title}</Text>
                         </View>
                         <Text style={orderDetails.address}>
@@ -101,7 +99,7 @@ function OrderDetails({ route }) {
                                         marginRight: 20,
                                     }}
                                 >
-                                    {item?.count} шт
+                                    {item?.count} {strings.main.pcs}
                                 </Text>
                                 <Text style={orderDetails.price}>
                                     {item.medication.price} c
@@ -112,7 +110,7 @@ function OrderDetails({ route }) {
                 </View>
 
                 <View style={orderDetails.row}>
-                    <Text style={orderDetails.name}>Стоимость заказа</Text>
+                    <Text style={orderDetails.name}>{strings.product.order_cost}</Text>
                     <Text style={orderDetails.price}>
                         {order?.total_price} с
                     </Text>
@@ -136,7 +134,8 @@ function OrderDetails({ route }) {
                 <View style={orderDetails.row}>
                     <Text style={orderDetails.name}>{strings.cart.payment_methods}</Text>
                     <Text style={orderDetails.name}>
-                        {order?.payment_method}
+                        {/*{order?.payment_method}*/}
+                        {strings.cart.cash_payment}
                     </Text>
                 </View>
             </View>
