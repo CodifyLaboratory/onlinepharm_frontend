@@ -10,7 +10,7 @@ export const request = async (url, method, payload, formData, params) => {
 
     const lang = strings.getLanguage() || 'ru'
 
-    const api = `http://164.90.192.245/${lang}`
+    const api = `https://www.mymed.kg/${lang}`
     try {
         const res = await axios({
             url: `${api}${url}`,
