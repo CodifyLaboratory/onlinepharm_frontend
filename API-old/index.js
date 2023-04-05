@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 const lang = strings.getLanguage()
 
 
-const baseUrl = `http://164.90.192.245/${lang}/api/`
+const baseUrl = `https://www.mymed.kg/${lang}/api/`
 
 const http = axios.create({
     baseURL: baseUrl,
