@@ -2,7 +2,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import * as Location from 'expo-location'
 import React, { useEffect, useRef, useState } from 'react'
-import { Platform, StatusBar, View } from 'react-native'
+import { Platform, StatusBar, View, LogBox } from 'react-native'
 
 import { NavigationContainer } from '@react-navigation/native'
 
@@ -23,6 +23,11 @@ import { strings } from './localization'
 
 import { Colors } from './constants/colors'
 import { getProfile } from './api'
+
+LogBox.ignoreLogs([
+    "ViewPropTypes will be removed",
+    "ColorPropType will be removed",
+])
 
 import { StatusBarHeight } from './constants/statusbarHeigth'
 

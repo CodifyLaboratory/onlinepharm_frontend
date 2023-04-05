@@ -8,14 +8,14 @@ import {
     Dimensions,
 } from 'react-native'
 
-import Carousel from 'react-native-snap-carousel'
+// import Carousel from 'react-native-snap-carousel'
 
 import BannerCard from '../../components/BannerCard'
 import PopularMedicine from '../../components/PopularMedicine'
 
 import { main } from '../../styles/main'
 import { categories } from '../../styles/categories'
-import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
+// import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 import {
     getAllBasket,
     getBanners,
@@ -76,26 +76,26 @@ function Categories({ navigation, route }) {
                         paddingBottom: bannerData.length < 2 ? 20 : 0,
                     }}
                 >
-                    <Carousel
-                        onBeforeSnapToItem={(e) => setCurrent(e)}
-                        sliderWidth={Dimensions.get('screen').width}
-                        itemWidth={375}
-                        data={bannerData}
-                        renderItem={(item) => (
-                            <BannerCard
-                                data={item}
-                                key={item.id}
-                                navigation={navigation}
-                            />
-                        )}
-                        layout={'default'}
-                    />
-                    <Pagination
-                        inactiveDotStyle={main.inactiveBullet}
-                        dotStyle={main.dotStyle}
-                        dotsLength={bannerData.length}
-                        activeDotIndex={current}
-                    />
+                    {/*<Carousel*/}
+                    {/*    onBeforeSnapToItem={(e) => setCurrent(e)}*/}
+                    {/*    sliderWidth={Dimensions.get('screen').width}*/}
+                    {/*    itemWidth={375}*/}
+                    {/*    data={bannerData}*/}
+                    {/*    renderItem={(item) => (*/}
+                    {/*        <BannerCard*/}
+                    {/*            data={item}*/}
+                    {/*            key={item.id}*/}
+                    {/*            navigation={navigation}*/}
+                    {/*        />*/}
+                    {/*    )}*/}
+                    {/*    layout={'default'}*/}
+                    {/*/>*/}
+                    {/*<Pagination*/}
+                    {/*    inactiveDotStyle={main.inactiveBullet}*/}
+                    {/*    dotStyle={main.dotStyle}*/}
+                    {/*    dotsLength={bannerData.length}*/}
+                    {/*    activeDotIndex={current}*/}
+                    {/*/>*/}
                 </View>
 
                 <View style={categories.pillsContainer}>
@@ -126,47 +126,47 @@ function Categories({ navigation, route }) {
                     >
                         <View>
                             <View>
-                                <Carousel
-                                    slideStyle={{ margin: 4.5 }}
-                                    activeSlideAlignment="start"
-                                    contentContainerCustomStyle={{
-                                        paddingLeft: 8,
-                                    }}
-                                    inactiveSlideScale={1}
-                                    inactiveSlideOpacity={1}
-                                    onBeforeSnapToItem={(e) =>
-                                        setPopularIndex(e)
-                                    }
-                                    sliderWidth={Dimensions.get('window').width}
-                                    itemWidth={167}
-                                    data={popularData?.slice(0, 10)}
-                                    renderItem={(item) => {
-                                        const basketObj = findBasketProduct(
-                                            item.item.id
-                                        )
-                                        return (
-                                            <PopularMedicine
-                                                setChanged={(e) =>
-                                                    setChanged(e)
-                                                }
-                                                changed={changed}
-                                                basketObj={basketObj}
-                                                navigation={navigation}
-                                                key={item.id}
-                                                data={item.item}
-                                            />
-                                        )
-                                    }}
-                                    layout={'default'}
-                                />
+                                {/*<Carousel*/}
+                                {/*    slideStyle={{ margin: 4.5 }}*/}
+                                {/*    activeSlideAlignment="start"*/}
+                                {/*    contentContainerCustomStyle={{*/}
+                                {/*        paddingLeft: 8,*/}
+                                {/*    }}*/}
+                                {/*    inactiveSlideScale={1}*/}
+                                {/*    inactiveSlideOpacity={1}*/}
+                                {/*    onBeforeSnapToItem={(e) =>*/}
+                                {/*        setPopularIndex(e)*/}
+                                {/*    }*/}
+                                {/*    sliderWidth={Dimensions.get('window').width}*/}
+                                {/*    itemWidth={167}*/}
+                                {/*    data={popularData?.slice(0, 10)}*/}
+                                {/*    renderItem={(item) => {*/}
+                                {/*        const basketObj = findBasketProduct(*/}
+                                {/*            item.item.id*/}
+                                {/*        )*/}
+                                {/*        return (*/}
+                                {/*            <PopularMedicine*/}
+                                {/*                setChanged={(e) =>*/}
+                                {/*                    setChanged(e)*/}
+                                {/*                }*/}
+                                {/*                changed={changed}*/}
+                                {/*                basketObj={basketObj}*/}
+                                {/*                navigation={navigation}*/}
+                                {/*                key={item.id}*/}
+                                {/*                data={item.item}*/}
+                                {/*            />*/}
+                                {/*        )*/}
+                                {/*    }}*/}
+                                {/*    layout={'default'}*/}
+                                {/*/>*/}
                             </View>
 
-                            <Pagination
-                                inactiveDotStyle={main.inactiveBullet}
-                                dotStyle={main.dotStyle}
-                                dotsLength={10}
-                                activeDotIndex={popularIndex}
-                            />
+                            {/*<Pagination*/}
+                            {/*    inactiveDotStyle={main.inactiveBullet}*/}
+                            {/*    dotStyle={main.dotStyle}*/}
+                            {/*    dotsLength={10}*/}
+                            {/*    activeDotIndex={popularIndex}*/}
+                            {/*/>*/}
                         </View>
                     </View>
                 </View>

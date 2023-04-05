@@ -7,7 +7,7 @@ import {
     SafeAreaView,
     Dimensions,
 } from 'react-native'
-import Carousel from 'react-native-snap-carousel'
+// import Carousel from 'react-native-snap-carousel'
 
 import Logo from '../../assets/header/logo.svg'
 
@@ -18,7 +18,7 @@ import MainSymptomsCard from '../../components/MainSymptomsCard'
 import BannerCard from '../../components/BannerCard'
 import CategoryCard from '../../components/CategoryCard'
 import NewsCard from '../../components/NewsCard'
-import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
+// import Pagination from 'react-native-snap-carousel/src/pagination/Pagination'
 
 import { useDispatch } from 'react-redux'
 import { loadCart } from '../../store/actions'
@@ -30,7 +30,7 @@ import {
     getPharmBrands,
     getSelections,
 } from '../../api'
-import SkeletonContent from 'react-native-skeleton-content'
+// import SkeletonContent from 'react-native-skeleton-content'
 import { strings } from '../../localization'
 
 export default function Main({ navigation }) {
@@ -119,38 +119,38 @@ export default function Main({ navigation }) {
                             paddingBottom: bannerData.length < 2 ? 20 : 0,
                         }}
                     >
-                        <SkeletonContent
-                            containerStyle={{ width: '100%', justifyContent: 'center', alignItems: 'center'}}
-                            isLoading={!bannerData?.length}
-                            layout={[
-                                {
-                                    key: 'someId',
-                                    width: '90%',
-                                    height: 150
-                                },
-                            ]}
-                        >
-                            <Carousel
-                                onBeforeSnapToItem={(e) => setCurrent(e)}
-                                sliderWidth={Dimensions.get('screen').width}
-                                itemWidth={375}
-                                data={bannerData}
-                                renderItem={(item) => (
-                                    <BannerCard
-                                        data={item}
-                                        key={item.id}
-                                        navigation={navigation}
-                                    />
-                                )}
-                                layout={'default'}
-                            />
-                        </SkeletonContent>
-                        <Pagination
-                            inactiveDotStyle={main.inactiveBullet}
-                            dotStyle={main.dotStyle}
-                            dotsLength={bannerData.length}
-                            activeDotIndex={current}
-                        />
+                        {/*<SkeletonContent*/}
+                        {/*    containerStyle={{ width: '100%', justifyContent: 'center', alignItems: 'center'}}*/}
+                        {/*    isLoading={!bannerData?.length}*/}
+                        {/*    layout={[*/}
+                        {/*        {*/}
+                        {/*            key: 'banner',*/}
+                        {/*            width: '90%',*/}
+                        {/*            height: 150*/}
+                        {/*        },*/}
+                        {/*    ]}*/}
+                        {/*>*/}
+                            {/*<Carousel*/}
+                            {/*    onBeforeSnapToItem={(e) => setCurrent(e)}*/}
+                            {/*    sliderWidth={Dimensions.get('screen').width}*/}
+                            {/*    itemWidth={375}*/}
+                            {/*    data={bannerData}*/}
+                            {/*    renderItem={(item) => (*/}
+                            {/*        <BannerCard*/}
+                            {/*            data={item}*/}
+                            {/*            key={item.id}*/}
+                            {/*            navigation={navigation}*/}
+                            {/*        />*/}
+                            {/*    )}*/}
+                            {/*    layout={'default'}*/}
+                            {/*/>*/}
+                        {/*</SkeletonContent>*/}
+                        {/*<Pagination*/}
+                        {/*    inactiveDotStyle={main.inactiveBullet}*/}
+                        {/*    dotStyle={main.dotStyle}*/}
+                        {/*    dotsLength={bannerData.length}*/}
+                        {/*    activeDotIndex={current}*/}
+                        {/*/>*/}
                     </View>
 
                     <View>
@@ -166,34 +166,34 @@ export default function Main({ navigation }) {
                                 </Text>
                             </TouchableWithoutFeedback>
                         </View>
-                        <SkeletonContent
-                            isLoading={!farmCardData?.length}
-                            containerStyle={{
-                                width: '100%',
-                                flexDirection: 'row',
-                            }}
-                            layout={[
-                                {
-                                    key: '1',
-                                    width: 132,
-                                    height: 132,
-                                    marginRight: 8,
-                                    marginLeft: 8
-                                },
-                                {
-                                    key: '2',
-                                    width: 132,
-                                    height: 132,
-                                    marginRight: 8,
-                                },
-                                {
-                                    key: '3',
-                                    width: 132,
-                                    height: 132,
-                                    marginRight: 8,
-                                },
-                            ]}
-                        >
+                        {/*<SkeletonContent*/}
+                        {/*    isLoading={!farmCardData?.length}*/}
+                        {/*    containerStyle={{*/}
+                        {/*        width: '100%',*/}
+                        {/*        flexDirection: 'row',*/}
+                        {/*    }}*/}
+                        {/*    layout={[*/}
+                        {/*        {*/}
+                        {/*            key: '1',*/}
+                        {/*            width: 132,*/}
+                        {/*            height: 132,*/}
+                        {/*            marginRight: 8,*/}
+                        {/*            marginLeft: 8*/}
+                        {/*        },*/}
+                        {/*        {*/}
+                        {/*            key: '2',*/}
+                        {/*            width: 132,*/}
+                        {/*            height: 132,*/}
+                        {/*            marginRight: 8,*/}
+                        {/*        },*/}
+                        {/*        {*/}
+                        {/*            key: '3',*/}
+                        {/*            width: 132,*/}
+                        {/*            height: 132,*/}
+                        {/*            marginRight: 8,*/}
+                        {/*        },*/}
+                        {/*    ]}*/}
+                        {/*>*/}
                             <View style={{ height: 132 }}>
                                 <ScrollView
                                     horizontal={true}
@@ -202,63 +202,65 @@ export default function Main({ navigation }) {
                                     {farmCardList}
                                 </ScrollView>
                             </View>
-                        </SkeletonContent>
+                        {/*</SkeletonContent>*/}
 
                         <View style={main.title}>
                             <Text style={main.title_text}>
                                 {strings.main.product_categories}
                             </Text>
                         </View>
-                        <SkeletonContent
-                            containerStyle={{
-                                flexDirection: 'row',
-                                justifyContent: 'space-between'
-                            }}
-                            isLoading={!categoryData?.length}
-                            layout={[
-                                {
-                                    key: '1',
-                                    width: '47%',
-                                    height: 131,
-                                    marginLeft: 8
-                                },
-                                {
-                                    key: '2',
-                                    width: '47%',
-                                    height: 131,
-                                    marginRight: 8
-                                },
-                            ]}
-                        >
+                        {/*<SkeletonContent*/}
+                        {/*    id='11'*/}
+                        {/*    key='55'*/}
+                        {/*    containerStyle={{*/}
+                        {/*        flexDirection: 'row',*/}
+                        {/*        justifyContent: 'space-between'*/}
+                        {/*    }}*/}
+                        {/*    isLoading={!categoryData?.length}*/}
+                        {/*    layout={[*/}
+                        {/*        {*/}
+                        {/*            key: '4',*/}
+                        {/*            width: '47%',*/}
+                        {/*            height: 131,*/}
+                        {/*            marginLeft: 8*/}
+                        {/*        },*/}
+                        {/*        {*/}
+                        {/*            key: '5',*/}
+                        {/*            width: '47%',*/}
+                        {/*            height: 131,*/}
+                        {/*            marginRight: 8*/}
+                        {/*        },*/}
+                        {/*    ]}*/}
+                        {/*>*/}
                             <View style={main.categories}>{categoryList}</View>
-                        </SkeletonContent>
+                        {/*</SkeletonContent>*/}
 
                         <View style={main.title}>
                             <Text style={main.title_text}>
                                 {strings.main.collections}
                             </Text>
                         </View>
-                        <SkeletonContent
-                            containerStyle={{
-                                width: '100%',
-                                flexDirection: 'row',
-                            }}
-                            isLoading={!selectionsData?.length}
-                            layout={[
-                                {
-                                    key: '1',
-                                    width: 100,
-                                    height: 100,
-                                    marginLeft: 8,
-                                },
-                                {
-                                    key: '2',
-                                    width: 100,
-                                    height: 100,
-                                    marginLeft: 8,
-                                },
-                            ]}
-                        >
+                        {/*<SkeletonContent*/}
+                        {/*    containerStyle={{*/}
+                        {/*        width: '100%',*/}
+                        {/*        flexDirection: 'row',*/}
+                        {/*    }}*/}
+                        {/*    isLoading={!selectionsData?.length}*/}
+                        {/*    layout={[*/}
+                        {/*        {*/}
+                        {/*            key: '6',*/}
+                        {/*            width: 100,*/}
+                        {/*            height: 100,*/}
+                        {/*            marginLeft: 8,*/}
+                        {/*        },*/}
+                        {/*        {*/}
+                        {/*            key: '7',*/}
+                        {/*            width: 100,*/}
+                        {/*            height: 100,*/}
+                        {/*            marginLeft: 8,*/}
+                        {/*        },*/}
+                        {/*    ]}*/}
+                        {/*>*/}
                             {selectionsData?.length ? (
                                 <>
                                     <View style={{ height: 100 }}>
@@ -273,7 +275,7 @@ export default function Main({ navigation }) {
                                     </View>
                                 </>
                             ) : null}
-                        </SkeletonContent>
+                        {/*</SkeletonContent>*/}
 
                         <View style={main.title}>
                             <Text style={main.title_text}>
